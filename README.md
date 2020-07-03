@@ -1,9 +1,11 @@
 # My macOS dotfiles
 
-## Vim plugins
+## Current Vim plugins
 
-- [fugitive.vim](https://github.com/tpope/vim-fugitive)
-- [lightline.vim](https://github.com/itchyny/lightline.vim)
+- [commentary](https://github.com/tpope/vim-commentary)
+- [fugitive](https://github.com/tpope/vim-fugitive)
+- [nord](https://github.com/arcticicestudio/nord)
+- [startify](https://github.com/mhinz/vim-startify)
 
 ## Firefox theme
 
