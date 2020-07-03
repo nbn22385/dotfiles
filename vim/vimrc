@@ -1,0 +1,159 @@
+"        ________ ++     ________
+"       /VVVVVVVV\++++  /VVVVVVVV\
+"       \VVVVVVVV/++++++\VVVVVVVV/
+"        |VVVVVV|++++++++/VVVVV/'
+"        |VVVVVV|++++++/VVVVV/'
+"       +|VVVVVV|++++/VVVVV/'+
+"     +++|VVVVVV|++/VVVVV/'+++++
+"   +++++|VVVVVV|/VVV___++++++++++
+"     +++|VVVVVVVVVV/##/ +_+_+_+_    ____   ____
+"       +|VVVVVVVVV___ +/#_#,#_#,\  /####\ /####\
+"        |VVVVVVV//##/+/#/+/#/'/#/ /#/ /#//#/ /#/
+"        |VVVVV/'+/#/+/#/+/#/ /#/ /#/    /#/   
+"        |VVV/'++/#/+/#/ /#/ /#/ /#/    /#/ /#/
+"        'V/'  /##//##//##//###//##/   /#####/
+"                 ++
+
+" {{{ General
+autocmd FileType vim setlocal foldmethod=marker  " Fold vim files on markers automatically
+set nocompatible                " Not compatible with vi
+filetype plugin indent on       " Load plugins according to detected filetype
+set backspace=indent,eol,start  " Make backspace work as you would expect.
+set hidden                      " Switch between buffers without having to save first.
+set laststatus=2                " Always show statusline.
+set display=lastline            " Show as much as possible of the last line.
+set noshowmode                  " Don't show current mode in command-line.
+set showcmd                     " Show already typed keys when more are expected.
+" }}}
+
+" {{{ Colorscheme
+set background=dark
+" let g:gruvbox_contrast_dark='soft'
+colorscheme nord
+" }}}
+
+" {{{ Editor Formatting
+syntax on                       " Enable syntax highlighting.
+set autoindent                  " Indent according to previous line.
+set number                      " Show line numbers.
+set expandtab                   " Use spaces instead of tabs.
+set softtabstop=2               " Tab key indents by 4 spaces.
+set shiftwidth=2                " >> indents by 2 spaces.
+set shiftround                  " >> indents to next multiple of 'shiftwidth'.
+set nowrap                      " do not automatically wrap on load
+set formatoptions-=t            " do not automatically wrap text when typing
+set textwidth=0                 " disable maximum text width
+
+" Show cursorline only in active window
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
+highlight clear CursorLine      " Highlight current line number rather than entire line
+" }}}
+
+" {{{ Searching
+set incsearch                   " Highlight while searching with / or ?.
+set hlsearch                    " Keep matches highlighted.
+set path=$PWD/**                " Find all files under this directory
+set wildmenu wildmode=full      " show auto-complete suggestions in command line
+
+" Turn off search highlighting
+nnoremap <leader>\ :nohls<CR>
+" Vertical split find command
+command! -nargs=1 -complete=file_in_path Vsf vertical sfind <args>
+" }}}
+
+" {{{ Netrw
+let g:netrw_banner=0              " Disable netrw banner
+let g:netrw_dirhistmax=0          " Disable netrw history
+let g:netrw_liststyle=3           " netrw liststyle as tree
+let g:netrw_altv=1                " Open files on right
+let g:netrw_preview=1             " Open previews vertically
+let g:netrw_list_hide= '.*\.swp$' " Ignore swp files in tree
+" }}}
+
+" {{{ Sessions
+set ssop-=options               " do not store global and local values in a session
+command! SaveSession if v:this_session == "" | echo "No session to save." | else | execute "mks!".v:this_session | echo "Saved session ".v:this_session | endif
+" }}}
+
+" {{{ Splits
+set splitbelow splitright       " Open new split panes to right and bottom
+set fillchars+=vert:│           " Vertical split separator
+
+" Quicker window switching
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" Quicker window movement
+nnoremap <C-w>j <C-w>J
+nnoremap <C-w>k <C-w>K
+nnoremap <C-w>h <C-w>H
+nnoremap <C-w>l <C-w>L
+
+" Quicker split resizing
+noremap <silent> <C-Left> :vertical resize -3<CR>
+noremap <silent> <C-Right> :vertical resize +3<CR>
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :resize -3<CR>
+" }}}
+
+" {{{ Leader Remaps
+" Open a terminal on the bottom
+nnoremap <leader>t :botright terminal<CR><C-W>:resize 20<CR>
+" }}}
+
+" {{{ C++ Specific
+" custom make commands for c++ projects
+let &makeprg='make -j3 -C build --no-print-directory'
+command! Cmake let &makeprg = 'make -j3 -C build --no-print-directory'    <bar> make
+command! Ctest let &makeprg = 'cd build && ctest --output-on-failure' <bar> make
+" }}}
+
+" {{{ Plugin settings
+
+" vim-clang-format settings
+" autocmd FileType c,cpp,cs ClangFormatAutoEnable               " format on write
+
+" vim-commentary settings
+autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s  " C++ comments
+
+" ale
+" let g:ale_linters_explicit = 1
+" let g:ale_linters = { 'cpp': ['clang','clang-tidy'],}
+" let g:ale_fixers  = { 'cpp': ['clang-format'],}
+" let g:ale_fix_on_save = 1
+" let g:ale_cpp_clang_options = '-std=c++98'
+" let g:ale_cpp_gcc_options   = '-std=gnu++98'
+" let g:ale_sign_error = '✗'
+" let g:ale_sign_warning = '--'
+" let g:ale_c_parse_compile_commands = 1
+
+" startify
+let g:startify_session_persistence = 1
+let g:startify_session_number = 5 " Maximum number of sessions to display
+let g:startify_session_sort = 1 " Sort sessions by modification time 
+let g:header_ascii = [
+      \' ██╗   ██╗██╗███╗   ███╗', 
+      \' ██║   ██║██║████╗ ████║',
+      \' ██║   ██║██║██╔████╔██║',
+      \' ╚██╗ ██╔╝██║██║╚██╔╝██║',
+      \'  ╚████╔╝ ██║██║ ╚═╝ ██║',
+      \'   ╚═══╝  ╚═╝╚═╝     ╚═╝',
+      \]
+let g:startify_custom_header = 'startify#pad(g:header_ascii)'
+let g:startify_enable_special = 0
+let g:startify_lists = [
+      \ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+      \ { 'type': 'files',     'header': ['   Recent Files']            },
+      \ { 'type': 'dir',       'header': ['   Recent Files in '. getcwd()] },
+      \ { 'type': 'commands',  'header': ['   Commands']       },
+      \ ]
+autocmd User StartifyAllBuffersOpened let &path = getcwd() . '/**'
+let g:startify_bookmarks = [ {'c': '~/.vimrc'}, {'d': '~/dev/dotfiles'} ]
+
