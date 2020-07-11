@@ -27,7 +27,7 @@ let g:currentmode={
       \ 'rm' : 'More ',
       \ 'r?' : 'Confirm ',
       \ '!'  : 'Shell ',
-      \ 't'  : 'Terminal '}
+      \ 't'  : 'Terminal'}
 
 function! ProtLineCurrentMode() abort
   let l:modecurrent = mode()
