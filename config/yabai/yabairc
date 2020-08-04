@@ -1,0 +1,69 @@
+#!/usr/bin/env sh
+
+alias yc='yabai -m config'
+alias yr='yabai -m rule --add' 
+
+# bar settings - now handled by spacebar app
+# yc status_bar                      on
+# yc status_bar_text_font            "JetBrainsMono Nerd Font:Bold:12.0"
+# yc status_bar_icon_font            "JetBrainsMono Nerd Font:Bold:12.0"
+# yc status_bar_background_color     0xff2e3440
+# yc status_bar_foreground_color     0xffa8a8a8
+# yc status_bar_power_icon_strip      ﮣ
+# yc status_bar_space_icon_strip     WWW DEV 3 4 5 6
+# yc status_bar_space_icon           x
+# yc status_bar_clock_icon           ""
+
+# global settings
+yc layout                          bsp
+yc mouse_follows_focus             off
+yc focus_follows_mouse             off
+yc window_placement                second_child
+yc window_topmost                  off
+yc window_opacity                  off
+yc window_shadow                   float
+
+yc split_ratio                     0.50
+yc auto_balance                    on
+yc mouse_modifier                  fn
+yc mouse_action1                   move
+yc mouse_action2                   resize
+
+# window borders
+yc window_border                   on
+yc window_border_placement         inset
+yc window_border_width             2 
+yc window_border_radius            4 
+yc active_window_border_topmost    off
+yc active_window_border_color      0xffa3be8c
+yc normal_window_border_color      0xff4c566a
+yc insert_window_border_color      0xB2EBDBB2
+
+# space-specific settings
+yc --space 1 layout                float
+
+yc --space 2 bottom_padding        4
+yc --space 2 left_padding          4
+yc --space 2 right_padding         4
+yc --space 2 window_gap            4
+
+yc --space 3 bottom_padding        4
+yc --space 3 left_padding          4
+yc --space 3 right_padding         4
+yc --space 3 window_gap            4
+
+# extra padding for spacebar app
+yc top_padding 30 
+
+# rules
+yr app=Alacritty border=on
+yr app=Finder border=off
+yr app=Firefox space=1 border=off
+yr app=iTerm border=on
+yr app=Preview manage=off border=off
+yr app=Spark manage=off border=off
+yr app=Spotify manage=off border=off
+yr app="System Preferences" manage=off border=off
+yr app="Sublime Text" manage=off border=off
+yr app=Telegram border=off
+

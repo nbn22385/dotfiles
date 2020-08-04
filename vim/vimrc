@@ -20,12 +20,38 @@ set nocompatible                " Not compatible with vi
 filetype plugin indent on       " Load plugins according to detected filetype
 set backspace=indent,eol,start  " Make backspace work as you would expect.
 set hidden                      " Switch between buffers without having to save first.
+set ignorecase
+set smartcase
 set laststatus=2                " Always show statusline.
 set display=lastline            " Show as much as possible of the last line.
 set noshowmode                  " Don't show current mode in command-line.
 set showcmd                     " Show already typed keys when more are expected.
+" }}}
+
+" {{{ Remaps
+let mapleader = " "
+
+" Exit insert mode faster
 inoremap jk <esc>
 inoremap kj <esc>
+inoremap <C-c> <esc>
+
+" Open a terminal on the bottom
+nnoremap <leader>t :botright terminal<CR><C-W>:resize 20<CR>
+
+" Center next/previous search matches
+noremap n nzz
+noremap N Nzz
+
+" Yank to the end of line
+map Y y$
+
+" Make navigation into and out of Neovim terminal splits nicer.
+" tnoremap <C-h> <C-\><C-N><C-w>h
+" tnoremap <C-j> <C-\><C-N><C-w>j
+" tnoremap <C-k> <C-\><C-N><C-w>k
+" tnoremap <C-l> <C-\><C-N><C-w>l
+
 " }}}
 
 " {{{ Colorscheme
@@ -46,6 +72,20 @@ set nowrap                      " do not automatically wrap on load
 set formatoptions-=t            " do not automatically wrap text when typing
 set textwidth=0                 " disable maximum text width
 
+" disble automatic comments on new line
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Change cursor based on mode
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
 " Show cursorline only in active window
 augroup CursorLineOnlyInActiveWindow
   autocmd!
@@ -58,13 +98,23 @@ highlight clear CursorLine      " Highlight current line number rather than enti
 " {{{ Searching
 set incsearch                   " Highlight while searching with / or ?.
 set hlsearch                    " Keep matches highlighted.
+set gdefault                    " Global substitution by default
 set path=$PWD/**                " Find all files under this directory
 set wildmenu wildmode=full      " show auto-complete suggestions in command line
 
+" Use wildmenu to quickly switch buffers
+set wildcharm=<Tab>
+nnoremap <Leader><Tab> :buffer<Space><Tab>
+
 " Turn off search highlighting
 nnoremap <leader>\ :nohls<CR>
+
 " Vertical split find command
 command! -nargs=1 -complete=file_in_path Vsf vertical sfind <args>
+
+" Automatically equalize splits when Vim is resized
+autocmd VimResized * wincmd =
+
 " }}}
 
 " {{{ Netrw
@@ -104,11 +154,6 @@ noremap <silent> <C-Up> :resize +3<CR>
 noremap <silent> <C-Down> :resize -3<CR>
 " }}}
 
-" {{{ Leader Remaps
-" Open a terminal on the bottom
-nnoremap <leader>t :botright terminal<CR><C-W>:resize 20<CR>
-" }}}
-
 " {{{ C++ Specific
 " custom make commands for c++ projects
 let &makeprg='make -j3 -C build --no-print-directory'
@@ -117,6 +162,20 @@ command! Ctest let &makeprg = 'cd build && ctest --output-on-failure' <bar> make
 " }}}
 
 " {{{ Plugin settings
+
+" fzf settings
+set rtp+=/usr/local/opt/fzf
+nnoremap <silent> <leader>f :Files<CR>
+
+if has('nvim-0.4.0') || has("patch-8.2.0191")
+    let g:fzf_layout = { 'window': {
+                \ 'width': 0.9,
+                \ 'height': 0.7,
+                \ 'highlight': 'Comment',
+                \ 'rounded': v:false } }
+else
+    let g:fzf_layout = { "window": "silent botright 16split enew" }
+endif
 
 " vim-clang-format settings
 " autocmd FileType c,cpp,cs ClangFormatAutoEnable               " format on write
@@ -159,3 +218,8 @@ let g:startify_lists = [
 autocmd User StartifyAllBuffersOpened let &path = getcwd() . '/**'
 let g:startify_bookmarks = [ {'c': '~/.vimrc'}, {'d': '~/dev/dotfiles'} ]
 
+let g:gitgutter_sign_added              = '▎'
+let g:gitgutter_sign_modified           = '▎'
+let g:gitgutter_sign_modified_removed   = '▌'
+let g:gitgutter_sign_removed            = '▎'
+let g:gitgutter_sign_removed_first_line = '▎'

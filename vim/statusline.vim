@@ -68,7 +68,7 @@ function! ProtLineActiveStatus()
   let statusline.="%#StatusLineNC#"       " line number color
   let statusline.="%=" 
   let statusline.="\ %3l:%c\ %3p%%\ "
-  let statusline.="%#StatusLine#"         " branch color
+  let statusline.="%#StatusLineNC#"         " branch color
   let statusline.="%{GetCurrentBranch()}"
   let statusline.="%r%h"
   let statusline.="%#DiffDelete#"           " linter error color

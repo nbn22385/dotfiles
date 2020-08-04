@@ -9,10 +9,8 @@ plugins=(
 )
 
 # set up vim plugin folders
-plugin_root=~/.vim/pack/plugins/start
-after_plugin=~/.vim/after/plugin
-mkdir -p $plugin_root
-mkdir -p $after_plugin
+plugin_root=~/.vim/pack/plugins/start && mkdir -p $plugin_root
+after_plugin=~/.vim/after/plugin      && mkdir -p $after_plugin
 
 # helper function to clone a vim plugin from a url
 get_plugin() {
@@ -38,5 +36,7 @@ ln -sf $dotfiles_dir/vim/statusline.vim ~/.vim/after/plugin
 ln -sf $dotfiles_dir/vim/tabline.vim    ~/.vim/after/plugin
 ln -sf $dotfiles_dir/zsh/zshrc          ~/.zshrc
 ln -sf $dotfiles_dir/zsh/p10k.zsh       ~/.p10k.zsh
+ln -sf $dotfiles_dir/config/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+ln -sf $dotfiles_dir/config/yabai/yabairc          ~/.yabairc
 
 echo "Done setting up dotfiles"
