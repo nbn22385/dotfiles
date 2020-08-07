@@ -29,8 +29,11 @@ set showcmd                     " Show already typed keys when more are expected
 " }}}
 
 " {{{ Remaps
-let mapleader = " "
+let mapleader = "\<Space>"
 
+nmap <leader>w :w<CR>
+
+nnoremap <leader>/ :nohls<CR>
 " Exit insert mode faster
 inoremap jk <esc>
 inoremap kj <esc>
@@ -40,8 +43,8 @@ inoremap <C-c> <esc>
 nnoremap <leader>t :botright terminal<CR><C-W>:resize 20<CR>
 
 " Center next/previous search matches
-noremap n nzz
-noremap N Nzz
+" noremap n nzz
+" noremap N Nzz
 
 " Yank to the end of line
 map Y y$
@@ -71,6 +74,9 @@ set shiftround                  " >> indents to next multiple of 'shiftwidth'.
 set nowrap                      " do not automatically wrap on load
 set formatoptions-=t            " do not automatically wrap text when typing
 set textwidth=0                 " disable maximum text width
+
+" <leader> = -> format entire file
+nnoremap <leader>= gg=G<C-o><C-o>
 
 " disble automatic comments on new line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -164,17 +170,30 @@ command! Ctest let &makeprg = 'cd build && ctest --output-on-failure' <bar> make
 " {{{ Plugin settings
 
 " fzf settings
-set rtp+=/usr/local/opt/fzf
-nnoremap <silent> <leader>f :Files<CR>
+if executable('fzf')
+  set rtp+=/usr/local/opt/fzf
+  " Empty value to disable preview window altogether
+  " let g:fzf_preview_window = ''
 
-if has('nvim-0.4.0') || has("patch-8.2.0191")
-    let g:fzf_layout = { 'window': {
-                \ 'width': 0.9,
-                \ 'height': 0.7,
-                \ 'highlight': 'Comment',
-                \ 'rounded': v:false } }
-else
-    let g:fzf_layout = { "window": "silent botright 16split enew" }
+  " Command to generate tags file
+  let g:fzf_tags_command = 'ctags -R --languages=C++ --exclude="build" --exclude=".git"'
+
+  " Use floating window if supported
+  if v:version >= 802
+    let g:fzf_layout = { 'window': { 'width': 0.7, 'height': 0.5, 'border': 'sharp'} }
+  else
+    let g:fzf_layout = { 'window': '10new' }
+  endif
+
+  " custom Files command with bat preview (taken from :h fzf-vim-example-customizing-files-command)
+  command! -bang -nargs=? -complete=dir Files
+        \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+  " <leader>f -> open file list
+  nnoremap <expr> <leader>f (len(system('git rev-parse')) ? ':Files' : ':GFiles')."\<cr>"
+
+  nnoremap <leader>b :Buffers<CR>
+  nnoremap <leader>t :Tags<CR>
 endif
 
 " vim-clang-format settings
@@ -192,6 +211,8 @@ autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s  " C++ comments
 " let g:ale_cpp_gcc_options   = '-std=gnu++98'
 " let g:ale_sign_error = '✗'
 " let g:ale_sign_warning = '--'
+" let g:ale_sign_error = '✖'
+" let g:ale_sign_warning = '⚠'
 " let g:ale_c_parse_compile_commands = 1
 
 " startify
