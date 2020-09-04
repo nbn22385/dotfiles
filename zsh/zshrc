@@ -1,3 +1,9 @@
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 alias openelec='ssh root@192.168.29.140'
@@ -108,24 +114,34 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# CUSTOMIZATIONS
-
-export EDITOR='vim'
-export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files -g !".git"'
-export FZF_DEFAULT_OPTS='--height 40% --layout reverse --info inline --border'
-export FZF_CTRL_T_COMMAND='$FZF_DEFAULT_COMMAND'
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
+# CUSTOMIZATIONS
+
+unalias fd # remove oh-my-zsh alias
+export EDITOR='vim'
+export FZF_DEFAULT_COMMAND='fd --type f --color=never'
+export FZF_DEFAULT_OPTS='--height 40% --layout reverse --info inline --border'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS='--preview "bat --color=always --line-range :500 {}"'
+export FZF_ALT_C_COMMAND='fd --type d . --color=never'
+export FZF_ALT_C_OPTS='--preview "tree -C {} | head -100"'
+
+setopt correct
+# setopt correctall
+setopt ignoreeof
+setopt globdots
+setopt histignoredups
+
 alias weather="curl wttr.in/\?0nq"
-alias vimrc="vim +17 ~/.vimrc"
+alias vimrc="vim ~/.vimrc"
 alias zshrc="vim ~/.zshrc"
+alias rg='rg --smart-case'
+alias g='_f() { if [[ $# == 0 ]]; then git status -sb; else git "$@"; fi }; _f'
 
 alias cf='fzf_change_directory'
 alias vf='fzf_find_edit'
-alias rg='rg --smart-case'
-alias g='_f() { if [[ $# == 0 ]]; then git status -sb; else git "$@"; fi }; _f'
 
 fzf_change_directory() {
   local directory=$(

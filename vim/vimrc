@@ -1,26 +1,10 @@
-"        ________ ++     ________
-"       /VVVVVVVV\++++  /VVVVVVVV\
-"       \VVVVVVVV/++++++\VVVVVVVV/
-"        |VVVVVV|++++++++/VVVVV/'
-"        |VVVVVV|++++++/VVVVV/'
-"       +|VVVVVV|++++/VVVVV/'+
-"     +++|VVVVVV|++/VVVVV/'+++++
-"   +++++|VVVVVV|/VVV___++++++++++
-"     +++|VVVVVVVVVV/##/ +_+_+_+_    ____   ____
-"       +|VVVVVVVVV___ +/#_#,#_#,\  /####\ /####\
-"        |VVVVVVV//##/+/#/+/#/'/#/ /#/ /#//#/ /#/
-"        |VVVVV/'+/#/+/#/+/#/ /#/ /#/    /#/   
-"        |VVV/'++/#/+/#/ /#/ /#/ /#/    /#/ /#/
-"        'V/'  /##//##//##//###//##/   /#####/
-"                 ++
-
 " {{{ General
-autocmd FileType vim setlocal foldmethod=marker  " Fold vim files on markers automatically
-set nocompatible                " Not compatible with vi
+" vim:fdm=marker
+if &cp | set nocp | endif       " Not compatible with vi
 filetype plugin indent on       " Load plugins according to detected filetype
 set backspace=indent,eol,start  " Make backspace work as you would expect.
 set hidden                      " Switch between buffers without having to save first.
-set ignorecase
+set ignorecase                  " Case insensitive search by default
 set smartcase
 set laststatus=2                " Always show statusline.
 set display=lastline            " Show as much as possible of the last line.
@@ -58,9 +42,15 @@ map Y y$
 " }}}
 
 " {{{ Colorscheme
+" set background=dark
+" " let g:gruvbox_contrast_dark='soft'
+" colorscheme nord
+
+set termguicolors
 set background=dark
-" let g:gruvbox_contrast_dark='soft'
-colorscheme nord
+" let g:quantum_black=1
+" colorscheme quantum
+
 " }}}
 
 " {{{ Editor Formatting
@@ -72,7 +62,7 @@ set softtabstop=2               " Tab key indents by 4 spaces.
 set shiftwidth=2                " >> indents by 2 spaces.
 set shiftround                  " >> indents to next multiple of 'shiftwidth'.
 set nowrap                      " do not automatically wrap on load
-set formatoptions-=t            " do not automatically wrap text when typing
+set formatoptions-=tcro         " do not automatically wrap text when typing
 set textwidth=0                 " disable maximum text width
 
 " <leader> = -> format entire file
@@ -180,7 +170,7 @@ if executable('fzf')
 
   " Use floating window if supported
   if v:version >= 802
-    let g:fzf_layout = { 'window': { 'width': 0.7, 'height': 0.5, 'border': 'sharp'} }
+    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7, 'border': 'sharp'} }
   else
     let g:fzf_layout = { 'window': '10new' }
   endif
@@ -239,8 +229,9 @@ let g:startify_lists = [
 autocmd User StartifyAllBuffersOpened let &path = getcwd() . '/**'
 let g:startify_bookmarks = [ {'c': '~/.vimrc'}, {'d': '~/dev/dotfiles'} ]
 
-let g:gitgutter_sign_added              = '▎'
-let g:gitgutter_sign_modified           = '▎'
-let g:gitgutter_sign_modified_removed   = '▌'
-let g:gitgutter_sign_removed            = '▎'
-let g:gitgutter_sign_removed_first_line = '▎'
+let g:signify_sign_add               = '▎'
+let g:signify_sign_delete            = '▌'
+let g:signify_sign_delete_first_line = '▎'
+let g:signify_sign_change            = '▎'
+
+" }}}
