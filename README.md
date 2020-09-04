@@ -1,4 +1,4 @@
-# My macOS dotfiles
+# dotfiles
 
 ## Dependencies
 

@@ -33,7 +33,7 @@ call minpac#add('christoomey/vim-tmux-navigator')
 call minpac#add('dense-analysis/ale')               " additional settings: ~/.vim/plugin/ale.vim
 
 " Fuzzy finder
-set rtp+=$HOME/.fzf
+set rtp+=$HOME/.fzf,/usr/local/opt/fzf
 call minpac#add('junegunn/fzf.vim')                 " additional settings: ~/.vim/plugin/fzf.vim
 
 " Git information in the sign column
