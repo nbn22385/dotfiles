@@ -1,11 +1,15 @@
 # My macOS dotfiles
 
-## Current Vim plugins
+## Dependencies
 
-- [commentary](https://github.com/tpope/vim-commentary)
-- [fugitive](https://github.com/tpope/vim-fugitive)
-- [nord](https://github.com/arcticicestudio/nord)
-- [startify](https://github.com/mhinz/vim-startify)
+* base16-shell
+* bat
+* fd
+* fzf
+* ripgrep
+* tmux
+* vim
+* zsh/omz/p10k
 
 ## Firefox theme
 
