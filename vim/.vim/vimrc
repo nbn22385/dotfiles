@@ -187,6 +187,9 @@ vnoremap - g<C-x>gv
 " Use wildmenu to quickly switch buffers
 set wildcharm=<Tab>
 nnoremap <Leader><Tab> :buffer<Space><Tab>
+
+" Format entire file
+map <leader>= gg=G<C-o><C-o>≤
   
 " }}}
 
