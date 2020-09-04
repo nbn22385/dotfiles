@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+# launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
+
 alias yc='yabai -m config'
 alias yr='yabai -m rule --add' 
 
@@ -30,12 +32,12 @@ yc mouse_action1                   move
 yc mouse_action2                   resize
 
 # window borders
-yc window_border                   on
+yc window_border                   off
 yc window_border_placement         inset
 yc window_border_width             2 
 yc window_border_radius            4 
 yc active_window_border_topmost    off
-yc active_window_border_color      0xffa3be8c
+yc active_window_border_color      0xff87bb7c
 yc normal_window_border_color      0xff4c566a
 yc insert_window_border_color      0xB2EBDBB2
 
@@ -59,11 +61,18 @@ yc top_padding 30
 yr app=Alacritty border=on
 yr app=Finder border=off
 yr app=Firefox space=1 border=off
-yr app=iTerm border=on
+# yr app=iTerm border=on
 yr app=Preview manage=off border=off
-yr app=Spark manage=off border=off
+yr app=Spark space=2 border=off
 yr app=Spotify manage=off border=off
 yr app="System Preferences" manage=off border=off
 yr app="Sublime Text" manage=off border=off
-yr app=Telegram border=off
+yr app=Mail space=2 border=off
+yr app=Telegram space=2 border=off
 
+# ubersicht nibar space widget
+yabai -m signal --add event=space_changed \
+    action="osascript -e 'tell application id \"tracesOf.Uebersicht\" to refresh widget id \"nibar-spaces-primary-jsx\"'"
+
+yabai -m signal --add event=application_front_switched \
+    action="osascript -e 'tell application id \"tracesOf.Uebersicht\" to refresh widget id \"nibar-spaces-primary-jsx\"'"
