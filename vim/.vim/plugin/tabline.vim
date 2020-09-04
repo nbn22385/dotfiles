@@ -7,17 +7,19 @@ if exists("+showtabline")
     let s = ''
     let t = tabpagenr()
     let i = 1
+
     while i <= tabpagenr('$')
       let buflist = tabpagebuflist(i)
       let winnr = tabpagewinnr(i)
-      
+
       " let s .= '%' . i . 'T'
+      let s .= '%#TabLineFill# ' " spacer
 
       " Set the active/inactive tab colors
-      let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
+      let s .= (i == t ? '%#TablineSel#' : '%#Tabline#')
 
-      " Tab left padding
-      let s .= '  '
+      " 1 space margin before tab contents
+      let s .= ' '
 
       " Show the tab number as a superscript
       let s .="%{GetSuperscript(".i.")}"
@@ -40,25 +42,33 @@ if exists("+showtabline")
       else
         " Set the filename (no path)
         let file = pathshorten(fnamemodify(file, ':t'))
-
-        " Set the modified flag (with color)
-        if getbufvar(bufnr, '&modified')
-          let file = file . '  ⚡'
-          " let file = file . '%#CursorLineN#' . '  ⚡'
-        endif
-
       endif
 
       if file == ''
         let file = '[No Name]'
       endif
 
+      " Set the modified flag if any buffer on the tab is modified
+      for buf in tabpagebuflist(i)
+        if getbufvar(buf, '&modified')
+          let file = file .'  ⚡'
+          break
+        endif
+      endfor
+
       " Display the filename
       let s .= ' ' . file
 
-      " Tab right padding
-      let s .= '  '
-      
+      " A divider after each tab (except for last)
+      " if i < tabpagenr('$')
+      "   let s .= ' %#TabLine#│' " |
+      " else
+      "   let s .= ' '
+      " endif
+
+      " 1 space margin after tab contents
+      let s .= ' '
+
       let i = i + 1
 
     endwhile
@@ -86,4 +96,3 @@ function! GetSuperscript(number)
 
   return unicode_number
 endfunction
-

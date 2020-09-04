@@ -1,0 +1,198 @@
+" {{{ General
+" vim:fdm=marker
+if &cp |set nocp | endif        " Set nocompatible if -u option is used, default is off
+filetype plugin indent on       " Load plugins according to detected filetype
+set encoding=utf-8              " Properly display UTF-8 symbols
+set backspace=indent,eol,start  " Make backspace work as you would expect
+set hidden                      " Switch between buffers without having to save first
+set laststatus=2                " Always show statusline
+set display=lastline            " Show as much as possible of the last line
+set noshowmode                  " Don't show current mode in command-line
+set showcmd                     " Show already typed keys when more are expected
+set sessionoptions-=options     " Do not store global and local values in a session
+set backupdir=/tmp//            " Location of the backup file
+set directory=/tmp//            " Location of the swap file
+set undodir=/tmp//              " Location of the undo file
+set pastetoggle=<F2>            " Toggle paste mode on/off
+" }}}
+
+" {{{ Plugins
+packadd minpac
+call minpac#init()
+
+" Plugin manager
+call minpac#add('k-takata/minpac', {'type': 'opt'})
+
+" Color themes
+call minpac#add('chriskempson/base16-vim')          " additional settings: ~/.vim/plugin/base16.vim
+
+" Navigation between tmux panes and vim splits
+call minpac#add('christoomey/vim-tmux-navigator')
+
+" Syntax and semantic error checking
+call minpac#add('dense-analysis/ale')               " additional settings: ~/.vim/plugin/ale.vim
+
+" Fuzzy finder
+set rtp+=$HOME/.fzf
+call minpac#add('junegunn/fzf.vim')                 " additional settings: ~/.vim/plugin/fzf.vim
+
+" Git information in the sign column
+call minpac#add('mhinz/vim-signify')                " additional settings: ~/.vim/plugin/signify.vim
+
+" Start page with recently used files
+call minpac#add('mhinz/vim-startify')               " additional settings: ~/.vim/plugin/startify.vim
+
+" Code commenting shortcuts
+call minpac#add('tpope/vim-commentary')             " additional settings: ~/.vim/plugin/commentary.vim
+
+" Git shortcuts
+call minpac#add('tpope/vim-fugitive')
+
+" Session shortcuts
+call minpac#add('tpope/vim-obsession')
+
+" Better paste behavior
+call minpac#add('ConradIrwin/vim-bracketed-paste')
+
+packloadall
+" }}}
+
+" {{{ Colorscheme
+" True color support
+if exists('$TMUX')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+set termguicolors
+
+" Colorscheme is loaded from Base16-shell via
+" ~/.vim/plugin/base16.vim
+" }}}
+
+" {{{ Editor Formatting
+syntax on                       " Enable syntax highlighting
+set autoindent                  " Indent according to previous line
+set number                      " Show line numbers
+set expandtab                   " Use spaces instead of tabs
+set softtabstop=2               " Tab key indents by 4 spaces
+set shiftwidth=2                " >> indents by 2 spaces
+set shiftround                  " >> indents to next multiple of 'shiftwidth'
+set nowrap                      " do not automatically wrap on load
+set textwidth=0                 " disable maximum text width
+
+autocmd FileType * set fo-=c fo-=r fo-=o " Disable auto-commenting on new lines
+
+" Show cursorline in active window (line number only)
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
+highlight clear CursorLine  " Highlight current line number rather than entire line
+
+" Format cursor based on mode
+let &t_SI = "\e[6 q"
+let &t_SR = "\e[4 q"
+let &t_EI = "\e[2 q"
+
+" Change cursor based on mode - Mac version
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+  
+" }}}
+
+" {{{ Searching
+set ignorecase                  " case insensitive search
+set smartcase                   " case sensitive search when using capital letter
+set incsearch                   " Highlight while searching with / or ?
+set hlsearch                    " Keep matches highlighted
+set gdefault                    " Global substitution by default
+set path=$PWD/**                " Find all files under this directory
+set wildmenu wildmode=full      " show auto-complete suggestions in command line
+" }}}
+
+" {{{ Netrw
+let g:netrw_banner=0              " Disable netrw banner
+let g:netrw_dirhistmax=0          " Disable netrw history
+let g:netrw_liststyle=3           " netrw liststyle as tree
+let g:netrw_altv=1                " Open files on right
+let g:netrw_preview=1             " Open previews vertically
+let g:netrw_list_hide= '.*\.swp$' " Ignore swp files in tree
+" }}}
+
+" {{{ Splits
+set splitbelow splitright       " Open new split panes to right and bottom
+set fillchars+=vert:│           " Vertical split separator
+
+" Automatically equalize splits when Vim is resized
+autocmd VimResized * wincmd =
+
+" :Vsf <filename> -> open file in vertical split
+command! -nargs=1 -complete=file_in_path Vsf vertical sfind <args>
+" }}}
+
+" {{{ Remaps
+nnoremap <Space> <Nop>
+let mapleader = "\<Space>"
+
+" <leader>w -> write file
+nmap <leader>w :w<CR>
+
+" <leader>/ -> Turn off search highlighting
+nnoremap <silent> <leader>/ :let @/ = ""<esc>
+
+" jk / kj -> Exit insert mode faster
+inoremap jk <esc>
+inoremap kj <esc>
+inoremap <C-c> <esc>
+
+" Center next/previous search matches
+noremap n nzz
+noremap N Nzz
+
+" Yank to the end of line
+map Y y$
+
+" <CTRL>h/j/k/l -> Switch between buffers - superceded by vim-tmux-navigator
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-l> <C-w>l
+
+" <CTRL-W>h/j/k/l -> Move windows left/up/down/right
+nnoremap <C-w>j <C-w>J
+nnoremap <C-w>k <C-w>K
+nnoremap <C-w>h <C-w>H
+nnoremap <C-w>l <C-w>L
+
+" <CTRL>up/down/left/right -> Quicker split resizing
+noremap <silent> <C-Left> :vertical resize -3<CR>
+noremap <silent> <C-Right> :vertical resize +3<CR>
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :resize -3<CR>
+
+" +/- -> Increment/decrement numbers in normal or visual mode
+nnoremap + <C-a>
+nnoremap - <C-x>
+vnoremap + g<C-a>gv
+vnoremap - g<C-x>gv
+
+" Use wildmenu to quickly switch buffers
+set wildcharm=<Tab>
+nnoremap <Leader><Tab> :buffer<Space><Tab>
+  
+" }}}
+
+" {{{ C++ Specific
+" custom make commands for c++ projects
+let &makeprg='make -j3 -C build --no-print-directory'
+command! Cmake let &makeprg = 'make -j3 -C build --no-print-directory' <bar> make
+command! Ctest let &makeprg = 'cd build && ctest --output-on-failure'  <bar> make
+" }}}
