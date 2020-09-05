@@ -1,7 +1,5 @@
 " fzf settings
 if executable('fzf')
-  "set rtp+=/usr/local/opt/fzf
-  
   " Empty value to disable preview window altogether
   " let g:fzf_preview_window = ''
 

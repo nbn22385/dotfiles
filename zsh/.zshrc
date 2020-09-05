@@ -115,6 +115,7 @@ setopt correct
 setopt ignoreeof
 setopt globdots
 setopt histignoredups
+zstyle ':completion:*' special-dirs false
 
 ##########
 # EXPORTS
@@ -141,12 +142,12 @@ export FZF_ALT_C_OPTS='--preview "tree -C {} | head -100"'
 # ALIASES
 ##########
 
-# bat aliases
-alias bat='batcat'
+# bat alias, create if batcat is the executable
+[[ -x "$(command -v batcat)" ]] && alias bat='batcat'
 
 # fd aliases
 unalias fd
-alias fd='fdfind'
+[[ -x "$(command -v fdfind)" ]] && alias fd='fdfind'
 
 # git aliases
 alias g='_f() { if [[ $# == 0 ]]; then git status -sb; else git "$@"; fi }; _f'
@@ -194,8 +195,7 @@ fzf_change_directory() {
 fzf_find_edit() {
   local file=$(
   fzf --query="$1" --no-multi --select-1 --exit-0 \
-    --preview 'batcat --style=numbers --color=always {}'
-      # --preview 'bat --color=always --line-range :500 {}'
+    --preview 'bat --style=numbers --color=always {}'
     )
     if [[ -n $file ]]; then
       $EDITOR "$file"
