@@ -17,44 +17,52 @@ set pastetoggle=<F2>            " Toggle paste mode on/off
 " }}}
 
 " {{{ Plugins
-packadd minpac
-call minpac#init()
+function! PackInit() abort
+  packadd minpac
+  call minpac#init()
 
-" Plugin manager
-call minpac#add('k-takata/minpac', {'type': 'opt'})
+  " Plugin manager
+  call minpac#add('k-takata/minpac', {'type': 'opt'})
 
-" Color themes
-call minpac#add('chriskempson/base16-vim')          " additional settings: ~/.vim/plugin/base16.vim
+  " Color themes
+  call minpac#add('chriskempson/base16-vim')          " additional settings: ~/.vim/plugin/base16.vim
 
-" Navigation between tmux panes and vim splits
-call minpac#add('christoomey/vim-tmux-navigator')
+  " Navigation between tmux panes and vim splits
+  call minpac#add('christoomey/vim-tmux-navigator')
 
-" Syntax and semantic error checking
-call minpac#add('dense-analysis/ale')               " additional settings: ~/.vim/plugin/ale.vim
+  " Syntax and semantic error checking
+  call minpac#add('dense-analysis/ale')               " additional settings: ~/.vim/plugin/ale.vim
 
-" Fuzzy finder
+  " Fuzzy finder
+  call minpac#add('junegunn/fzf.vim')                 " additional settings: ~/.vim/plugin/fzf.vim
+
+  " Git information in the sign column
+  call minpac#add('mhinz/vim-signify')                " additional settings: ~/.vim/plugin/signify.vim
+
+  " Start page with recently used files
+  call minpac#add('mhinz/vim-startify')               " additional settings: ~/.vim/plugin/startify.vim
+
+  " Code commenting shortcuts
+  call minpac#add('tpope/vim-commentary')             " additional settings: ~/.vim/plugin/commentary.vim
+
+  " Git shortcuts
+  call minpac#add('tpope/vim-fugitive')
+
+  " Session shortcuts
+  call minpac#add('tpope/vim-obsession')
+
+  " Better paste behavior
+  call minpac#add('ConradIrwin/vim-bracketed-paste')
+
+"   packloadall
+endfunction
+
+command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
+command! PackClean  call PackInit() | call minpac#clean()
+command! PackStatus call PackInit() | call minpac#status()
+command! PackUpdateAndQuit call PackInit() | call minpac#update('', {'do': 'qall'})
+
 set rtp+=$HOME/.fzf,/usr/local/opt/fzf
-call minpac#add('junegunn/fzf.vim')                 " additional settings: ~/.vim/plugin/fzf.vim
-
-" Git information in the sign column
-call minpac#add('mhinz/vim-signify')                " additional settings: ~/.vim/plugin/signify.vim
-
-" Start page with recently used files
-call minpac#add('mhinz/vim-startify')               " additional settings: ~/.vim/plugin/startify.vim
-
-" Code commenting shortcuts
-call minpac#add('tpope/vim-commentary')             " additional settings: ~/.vim/plugin/commentary.vim
-
-" Git shortcuts
-call minpac#add('tpope/vim-fugitive')
-
-" Session shortcuts
-call minpac#add('tpope/vim-obsession')
-
-" Better paste behavior
-call minpac#add('ConradIrwin/vim-bracketed-paste')
-
-packloadall
 " }}}
 
 " {{{ Colorscheme
@@ -95,17 +103,6 @@ let &t_SI = "\e[6 q"
 let &t_SR = "\e[4 q"
 let &t_EI = "\e[2 q"
 
-" Change cursor based on mode - Mac version
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-  
 " }}}
 
 " {{{ Searching
@@ -190,7 +187,7 @@ nnoremap <Leader><Tab> :buffer<Space><Tab>
 
 " Format entire file
 map <leader>= gg=G<C-o><C-o>≤
-  
+
 " }}}
 
 " {{{ C++ Specific
