@@ -160,7 +160,7 @@ alias vf='fzf_find_edit'
 alias rg='rg --smart-case'
 
 # tmux aliases
-alias tmux='tmux -2 -u'
+alias tmux='export SHELL=$(which zsh); tmux -2 -u'
 
 # vim aliases
 alias v='vim'

@@ -1,4 +1,4 @@
- fzf settings
+" fzf settings
 if executable('fzf')
   "set rtp+=/usr/local/opt/fzf
   
