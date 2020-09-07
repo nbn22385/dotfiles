@@ -81,7 +81,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git common-aliases)
+plugins=(common-aliases fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -142,15 +142,21 @@ export FZF_ALT_C_OPTS='--preview "tree -C {} | head -100"'
 # ALIASES
 ##########
 
-# bat alias, create if batcat is the executable
+# bat, a cat alternative with syntax highlighting and git integration 
+# create alias if batcat is the executable name (ubuntu)
 [[ -x "$(command -v batcat)" ]] && alias bat='batcat'
 
-# fd aliases
+# fd, a find alternative with sensible defaults
+# remove oh-my-zsh alias of the same name
 unalias fd
+# create alias if fdfind is the executable name (ubuntu)
 [[ -x "$(command -v fdfind)" ]] && alias fd='fdfind'
 
 # git aliases
 alias g='_f() { if [[ $# == 0 ]]; then git status -sb; else git "$@"; fi }; _f'
+alias gcmsg='git commit -m'
+alias glog='git log --oneline --decorate --graph'
+alias gdt='git difftool'
 alias lg='lazygit'
 
 # fzf aliases
@@ -169,7 +175,6 @@ alias vs='v -S '
 
 # file shortcuts
 alias vimrc='vim ~/.vim/vimrc'
-alias zshrc='vim ~/.zshrc'
 
 # htpc
 alias openelec='ssh root@192.168.29.140'

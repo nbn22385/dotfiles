@@ -1,5 +1,5 @@
 #!/bin/bash
- 
+
 # Install dotfiles as symbolic links using 'stow'
 if ! type stow > /dev/null; then echo "ERROR: gnu 'stow' package not installed" && exit 1; fi
 stow --no-folding vim tmux zsh --target "$HOME"
