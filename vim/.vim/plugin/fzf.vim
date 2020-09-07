@@ -20,6 +20,7 @@ if executable('fzf')
   " <leader>f -> open file list
   nnoremap <expr> <leader>f (len(system('git rev-parse')) ? ':Files' : ':GFiles')."\<cr>"
 
-  nnoremap <leader>b :Buffers<CR>
-  nnoremap <leader>t :Tags<CR>
+  nnoremap <silent> <leader>b :Buffers<CR>
+  nnoremap <silent> <leader>t :Tags<CR>
+  nnoremap <silent> <Leader>C :Colors<CR>
 endif
