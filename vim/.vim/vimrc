@@ -215,6 +215,12 @@ nnoremap <Leader><Tab> :buffer<Space><Tab>
 " Format entire file
 map <leader>= gg=G<C-o><C-o>≤
 
+" Open lazygit in a new tab
+noremap <leader>G :tab term ++close lazygit<CR>
+
+" Tab navigation from a terminal window
+tmap <C-h> <C-w>:tabp<CR>
+tmap <C-l> <C-w>:tabn<CR>
 " }}}
 
 " {{{ C++ Specific
