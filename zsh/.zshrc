@@ -118,39 +118,20 @@ setopt histignoredups
 zstyle ':completion:*' special-dirs false
 
 ##########
-# EXPORTS
-##########
-
-export EDITOR='vim'
-export LS_COLORS="ow=01;36"
-export TZ='America/New_York'
-
-export FZF_DEFAULT_COMMAND='fd --type f --color=never'
-export FZF_DEFAULT_OPTS='--height 40% --layout reverse --info inline --border'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_OPTS='--preview "bat --color=always --line-range :500 {}"'
-export FZF_ALT_C_COMMAND='fd --type d . --color=never'
-export FZF_ALT_C_OPTS='--preview "tree -C {} | head -100"'
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# Fzf shell support
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-##########
 # ALIASES
 ##########
 
 # bat, a cat alternative with syntax highlighting and git integration 
 # create alias if batcat is the executable name (ubuntu)
-[[ -x "$(command -v batcat)" ]] && alias bat='batcat'
+# [[ -x "$(command -v batcat)" ]] && alias bat='$(which batcat)'
+[[ -x "$(command -v batcat)" ]] && ln -sf $(which batcat) /usr/local/bin/bat 
 
 # fd, a find alternative with sensible defaults
 # remove oh-my-zsh alias of the same name
 unalias fd
 # create alias if fdfind is the executable name (ubuntu)
-[[ -x "$(command -v fdfind)" ]] && alias fd='fdfind'
+# [[ -x "$(command -v fdfind)" ]] && alias fd='$(which fdfind)'
+[[ -x "$(command -v fdfind)" ]] && ln -sf $(which fdfind) /usr/local/bin/fd
 
 # git aliases
 alias g='_f() { if [[ $# == 0 ]]; then git status -sb; else git "$@"; fi }; _f'
@@ -180,6 +161,27 @@ alias vimrc='vim ~/.vim/vimrc'
 alias openelec='ssh root@192.168.29.140'
 alias wake='wakeonlan -i 192.168.29.255  90:FB:A6:8A:73:42'
 
+##########
+# EXPORTS
+##########
+
+export EDITOR='vim'
+export LS_COLORS="ow=01;36"
+export TZ='America/New_York'
+
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
+export FZF_DEFAULT_OPTS='--height 40% --layout reverse --info inline --border'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS='--preview "bat --color=always --line-range :500 {}"'
+export FZF_ALT_C_COMMAND='fd --type d . --color=never'
+export FZF_ALT_C_OPTS='--preview "tree -C {} | head -100"'
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Fzf shell support
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 ############
 # FUNCTIONS
 ############
@@ -197,13 +199,22 @@ fzf_change_directory() {
 }
 
 # edit a file selected via fzf
+# fzf_find_edit() {
+#   local file=$(
+#   fzf --query="$1" --no-multi --select-1 --exit-0 \
+#     --preview 'bat --style=numbers --color=always {}'
+#     )
+#     if [[ -n $file ]]; then
+#       $EDITOR "$file"
+#     fi
+#   }
 fzf_find_edit() {
-  local file=$(
-  fzf --query="$1" --no-multi --select-1 --exit-0 \
-    --preview 'bat --style=numbers --color=always {}'
-    )
+    local file=$(
+      fzf --query="$1" --no-multi --select-1 --exit-0 \
+          --preview 'bat --color=always --line-range :500 {}'
+      )
     if [[ -n $file ]]; then
-      $EDITOR "$file"
+        $EDITOR "$file"
     fi
   }
 
