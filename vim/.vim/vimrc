@@ -137,6 +137,7 @@ command! -nargs=1 -complete=file_in_path Vsf vertical sfind <args>
 " }}}
 
 " {{{ Remaps
+" Set the leader key to Space
 nnoremap <Space> <Nop>
 let mapleader = "\<Space>"
 
@@ -144,11 +145,13 @@ let mapleader = "\<Space>"
 inoremap kj <esc>
 inoremap <C-c> <esc>
 
-" Save
+" Save a file
 inoremap <C-s>     <C-O>:update<cr>
 nnoremap <C-s>     :update<cr>
-nnoremap <leader>s :update<cr>
 nnoremap <leader>w :update<cr>
+
+" Replace all occurrences of word under cursor
+nnoremap <leader>h :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " Movement in insert mode
 inoremap <C-h> <C-o>h
@@ -157,7 +160,7 @@ inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
 inoremap <C-^> <C-o><C-^>
 
-" Moving lines in normal, insert, and visual mode
+" Move lines in normal, insert, and visual mode
 if has('mac')
   nnoremap ∆ :m .+1<CR>==
   nnoremap ˚ :m .-2<CR>==
