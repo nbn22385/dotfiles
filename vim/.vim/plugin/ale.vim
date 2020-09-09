@@ -8,9 +8,14 @@ let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 set completeopt=menu,menuone,preview,noselect,noinsert
 autocmd FileType cpp setlocal omnifunc=ale#completion#OmniFunc
-autocmd FileType cpp setlocal signcolumn=yes 
+autocmd FileType cpp setlocal signcolumn=yes
 
 " c++ linting/fixing
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_insert_leave = 0
+
 let g:ale_linters_explicit = 1
 let g:ale_linters = { 'cpp': ['clangd'],}
 let g:ale_fixers  = { 'cpp': ['clang-format'], 'vim': ['trim_whitespace'],}
