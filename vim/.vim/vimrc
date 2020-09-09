@@ -16,14 +16,15 @@ set directory=/tmp//            " Location of the swap file
 set undodir=/tmp//              " Location of the undo file
 set pastetoggle=<F2>            " Toggle paste mode on/off
 set shortmess=aIT               " Customize vim messages
+set foldopen+=jump              " Open a fold if we jump inside it
 " }}}
 
 " {{{ Plugins
 function! PackInit() abort
-  packadd minpac
-  call minpac#init()
 
   " Plugin manager
+  packadd minpac
+  call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
   " Color themes
@@ -55,8 +56,10 @@ function! PackInit() abort
 
   " Better paste behavior
   call minpac#add('ConradIrwin/vim-bracketed-paste')
+
+  " Highlight yanked text
   call minpac#add('machakann/vim-highlightedyank')
-  "   packloadall
+
 endfunction
 
 command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
@@ -114,6 +117,7 @@ set hlsearch                " Keep matches highlighted
 set gdefault                " Global substitution by default
 set path=$PWD/**            " Find all files under this directory
 set wildmenu wildmode=full  " Show auto-complete suggestions in command line
+
 " }}}
 
 " {{{ Netrw
@@ -126,8 +130,8 @@ let g:netrw_list_hide= '.*\.swp$' " Ignore swp files in tree
 " }}}
 
 " {{{ Splits
-set splitbelow splitright       " Open new split panes to right and bottom
-set fillchars+=vert:│           " Vertical split separator
+set splitbelow splitright     " Open new split panes to right and bottom
+set fillchars+=vert:│,fold:\  " Vertical split and fold separators
 
 " Automatically equalize splits when Vim is resized
 autocmd VimResized * wincmd =
@@ -184,8 +188,15 @@ nnoremap <silent> <leader>/ :let @/ = ""<esc>
 noremap n nzz
 noremap N Nzz
 
+" Don't jump to next match on *
+nnoremap * *<c-o>
+
 " Yank to the end of line
 map Y y$
+
+" Jump to first or last character on a line
+nnoremap H ^
+nnoremap L $
 
 " <CTRL>h/j/k/l -> Switch between buffers - superceded by vim-tmux-navigator
 " nnoremap <C-j> <C-w>j
@@ -224,6 +235,11 @@ noremap <leader>G :tab term ++close lazygit<CR>
 " Tab navigation from a terminal window
 tmap <C-h> <C-w>:tabp<CR>
 tmap <C-l> <C-w>:tabn<CR>
+
+" Command begin/end line remaps
+cnoremap <c-b> <home>
+cnoremap <c-e> <end>
+
 " }}}
 
 " {{{ C++ Specific
