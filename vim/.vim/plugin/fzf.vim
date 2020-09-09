@@ -17,10 +17,15 @@ if executable('fzf')
   command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
-  " <leader>f -> open file list
-  nnoremap <expr> <leader>f (len(system('git rev-parse')) ? ':Files' : ':GFiles')."\<cr>"
+  " custom Rg command to search hidden files
+  command! -bang -nargs=* Rg
+        \ call fzf#vim#grep("rg --hidden --column --line-number --no-heading --color=always --smart-case -- ".shellescape(<q-args>), 1)
 
-  nnoremap <silent> <leader>b :Buffers<CR>
-  nnoremap <silent> <leader>t :Tags<CR>
-  nnoremap <silent> <Leader>C :Colors<CR>
+  " Mappings
+  nnoremap <silent> <expr> <leader>f (len(system('git rev-parse')) ? ':Files' : ':GFiles')."\<cr>"
+  nnoremap <silent> <leader>B :Buffers<cr>
+  nnoremap <silent> <leader>C :Colors<cr>
+  nnoremap <silent> <leader>F :Files<cr>
+  nnoremap <silent> <leader>R :Rg<cr>
+  nnoremap <silent> <leader>T :Tags<cr>
 endif
