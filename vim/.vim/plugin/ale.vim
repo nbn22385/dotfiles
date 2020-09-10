@@ -24,3 +24,10 @@ let g:ale_cpp_clangd_options = '--clang-tidy --clang-tidy-checks="-*"'
 " fixing
 let g:ale_fixers  = { 'cpp': ['clang-format'], 'vim': ['trim_whitespace'],}
 let g:ale_fix_on_save = 1
+
+" custom colors
+hi link ALEError Error
+hi link ALEErrorSign ErrorMsg
+
+" mappings
+nnoremap K :ALEGoToDefinition<cr>
