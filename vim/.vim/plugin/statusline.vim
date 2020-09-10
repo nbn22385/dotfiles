@@ -39,12 +39,7 @@ function! CurrentMode() abort
 endfunction
 
 function! PasteMode()
-  let paste_status = &paste
-  if paste_status == 1
-    return "-PASTE"
-  else
-    return ""
-  endif
+  return &paste == 1 ? "-PASTE" : ""
 endfunction
 
 function! GetCurrentBranch()
@@ -64,10 +59,11 @@ function! LinterStatus() abort
 endfunction
 
 function! ActiveStatus()
-  let statusline=""
+  let statusline=" "
   let statusline.="%#Visual#"               " NORMAL mode color
-  let statusline.="\ %{CurrentMode()}\%-6{PasteMode()}"
-  let statusline.="\ %<"
+  let statusline.="\ %{CurrentMode()}\%-6{PasteMode()}\ "
+  let statusline.="%#Todo#"                 " modified flag color
+  let statusline.="%{&modified=='nomodified' ? '' : ' ⚡'}"
   let statusline.="%#StatusLineNC#"         " filename color
   let statusline.="\ %f\ "
   let statusline.="%#StatusLineNC#"         " line info color
@@ -77,18 +73,17 @@ function! ActiveStatus()
   let statusline.="%r%h"
   let statusline.="%{ObsessionStatus()} "
   let statusline.="%{GetCurrentBranch()} "
-  let statusline.="%#DiffDelete#"           " linter error color
+  let statusline.="%#Error#"                " linter error color
   let statusline.="%{LinterStatus()}"
-  let statusline.="%#Visual#"               " modified flag color
-  let statusline.="%{&modified=='nomodified' ? '' : ' ⚡'}"
   return statusline
 endfunction
 
 function! ActiveStatusInsertMode()
-  let statusline=""
+  let statusline=" "
   let statusline.="%#PmenuSel#"             " INSERT mode color
-  let statusline.="\ %{CurrentMode()}\%-6{PasteMode()}"
-  let statusline.="\ %<"
+  let statusline.="\ %{CurrentMode()}\%-6{PasteMode()}\ "
+  let statusline.="%#Todo#"                 " modified flag color
+  let statusline.="%{&modified=='nomodified' ? '' : ' ⚡'}"
   let statusline.="%#StatusLineNC#"         " filename color
   let statusline.="\ %f\ "
   let statusline.="%#StatusLineNC#"         " line info color
@@ -98,23 +93,21 @@ function! ActiveStatusInsertMode()
   let statusline.="%r%h"
   let statusline.="%{ObsessionStatus()} "
   let statusline.="%{GetCurrentBranch()} "
-  let statusline.="%#DiffDelete#"           " linter error color
+  let statusline.="%#Error#"                " linter error color
   let statusline.="%{LinterStatus()}"
-  let statusline.="%#PmenuSel#"             " modified flag color
-  let statusline.="%{&modified=='nomodified' ? '' : ' ⚡'}"
   return statusline
 endfunction
 
 function! InactiveStatus()
-  let statusline=""
-  let statusline.="\ %<"
+  let statusline="    "
+  let statusline.="%#Todo#"                 " modified flag color
+  let statusline.="%{&modified=='nomodified' ? '' : ' ⚡'}"
   let statusline.="%#StatusLineNC#"         " filename color
   let statusline.="%f"
   let statusline.="%="                      " spacer
   let statusline.="%r%h"
   let statusline.="%{ObsessionStatus()} "
   let statusline.="%{GetCurrentBranch()} "
-  let statusline.="%{&modified=='nomodified' ? '' : ' ⚡'}"
   return statusline
 endfunction
 
