@@ -1,4 +1,5 @@
 " startify
+let g:startify_session_autoload = 0
 let g:startify_session_persistence = 1
 let g:startify_session_sort = 1 " Sort sessions by modification time
 let g:header_ascii = [
