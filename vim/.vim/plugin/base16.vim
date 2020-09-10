@@ -6,6 +6,8 @@ function! s:base16_customize() abort
   call Base16hi("ColorColumn", "", g:base16_gui01, "", g:base16_cterm01, "", "")
   " disable custom cursorline since vimrc controls it
   " call Base16hi("CursorLine", "", g:base16_gui02, "", g:base16_cterm02, "", "")
+  " this overrides the cursorline to have no background
+  call Base16hi("CursorLine", "", g:base16_gui00, "", g:base16_cterm00, "", "")
   " the following line removes an underline from the line number
   call Base16hi("CursorLineNr", "", g:base16_gui02, "", g:base16_cterm02, "bold", "")
   call Base16hi("Pmenu", "", g:base16_gui02, "", g:base16_cterm02, "", "")
