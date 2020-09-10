@@ -26,6 +26,7 @@ if executable('fzf')
   nnoremap <silent> <leader>B :Buffers<cr>
   nnoremap <silent> <leader>C :Colors<cr>
   nnoremap <silent> <leader>F :Files<cr>
+  nnoremap <silent> <leader>H :History<cr>
   nnoremap <silent> <leader>R :Rg<cr>
   nnoremap <silent> <leader>T :Tags<cr>
 endif
