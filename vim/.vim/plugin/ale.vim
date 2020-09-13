@@ -2,6 +2,7 @@
 let g:ale_enabled = 1
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '●'
+let g:ale_set_balloons = 1
 
 " completion
 let g:ale_completion_enabled = 0
@@ -31,3 +32,8 @@ hi link ALEErrorSign ErrorMsg
 
 " mappings
 nnoremap K :ALEGoToDefinition<cr>
+" Ctrl-Space to open omnicomplete popup
+inoremap <C-@> <c-x><c-o>
+" Enter will select the highlighted popup item
+" source: https://vim.fandom.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
