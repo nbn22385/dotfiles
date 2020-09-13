@@ -2,9 +2,10 @@
 " https://github.com/protesilaos/dotfiles/blob/master/vim/.vim/vimrc_modules/protline.vimrc
 " https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/
 " https://hackernoon.com/the-last-statusline-for-vim-a613048959b2
-"
-" date function source:
-" https://cromwell-intl.com/open-source/vim-word-count.html
+
+set laststatus=2
+set noshowmode
+set statusline=%!ActiveStatus()
 
 " Dictionary: take mode() input -> longer notation of current mode
 " mode() is defined by Vim
@@ -110,10 +111,6 @@ function! InactiveStatus()
   let statusline.="%{GetCurrentBranch()} "
   return statusline
 endfunction
-
-set laststatus=2
-set noshowmode
-set statusline=%!ActiveStatus()
 
 augroup status
   autocmd!
