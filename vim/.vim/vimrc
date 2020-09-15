@@ -175,12 +175,12 @@ if has('mac')
   vnoremap ∆ :move '>+1<CR>gv=gv
   vnoremap ˚ :move '<-2<CR>gv=gv
 else
-  nnoremap <A-j> m`:move .+1<CR>==i``
-  nnoremap <A-k> m`:move .-2<CR>==i``
-  inoremap <A-j> <Esc>m`:move .+1<CR>==``gi
-  inoremap <A-k> <Esc>m`:move .-2<CR>==``gi
-  vnoremap <A-j> :move '>+1<CR>gv=gv
-  vnoremap <A-k> :move '<-2<CR>gv=gv
+  nnoremap <Esc>j m`:move .+1<CR>==``
+  nnoremap <Esc>k m`:move .-2<CR>==``
+  inoremap <Esc>j <Esc>m`:move .+1<CR>==``gi
+  inoremap <Esc>k <Esc>m`:move .-2<CR>==``gi
+  vnoremap <Esc>j :move '>+1<CR>gv=gv
+  vnoremap <Esc>k :move '<-2<CR>gv=gv
 endif
 
 " <leader>/ -> Turn off search highlighting
@@ -228,7 +228,7 @@ nnoremap <Leader><Tab> :buffer<Space><Tab>
 map <leader>= gg=G<C-o><C-o>≤
 
 " Open lazygit in a new tab
-noremap <leader>G :tab term ++close lazygit<CR>
+noremap <silent> <leader>G :tab term ++close lazygit<CR>
 
 " Tab navigation from a terminal window
 tmap <C-h> <C-w>:tabp<CR>
