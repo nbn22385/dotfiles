@@ -53,6 +53,9 @@ function! PackInit() abort
   " Session shortcuts
   call minpac#add('tpope/vim-obsession')              " additional settings: ~/.vim/plugin/obsession.vim
 
+  " Add, change, delete surroundings in pairs
+  call minpac#add('tpope/vim-surround')
+
   " Better paste behavior
   call minpac#add('ConradIrwin/vim-bracketed-paste')
 
@@ -61,11 +64,12 @@ function! PackInit() abort
 
   " Automatically change to file's project directory
   call minpac#add('airblade/vim-rooter')
+
 endfunction
 
-command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
 command! PackClean  call PackInit() | call minpac#clean()
 command! PackStatus call PackInit() | call minpac#status()
+command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
 command! PackUpdateAndQuit call PackInit() | call minpac#update('', {'do': 'qall'})
 
 set rtp+=$HOME/.fzf,/usr/local/opt/fzf
