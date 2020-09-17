@@ -3,8 +3,6 @@
 " https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/
 " https://hackernoon.com/the-last-statusline-for-vim-a613048959b2
 
-set laststatus=2
-set noshowmode
 set statusline=%!ActiveStatus()
 
 " Dictionary: take mode() input -> longer notation of current mode
