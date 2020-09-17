@@ -67,25 +67,25 @@ function! PackInit() abort
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
   " Color themes
-  call minpac#add('chriskempson/base16-vim')          " additional settings: ~/.vim/plugin/base16.vim
+  call minpac#add('chriskempson/base16-vim')  " custom settings: ~/.vim/plugin/base16.vim
 
   " Syntax and semantic error checking
-  call minpac#add('dense-analysis/ale')               " additional settings: ~/.vim/plugin/ale.vim
+  call minpac#add('dense-analysis/ale')       " custom settings: ~/.vim/plugin/ale.vim
 
   " Fuzzy finder
-  call minpac#add('junegunn/fzf.vim')                 " additional settings: ~/.vim/plugin/fzf.vim
+  call minpac#add('junegunn/fzf.vim')         " custom settings: ~/.vim/plugin/fzf.vim
 
   " Git information in the sign column
-  call minpac#add('mhinz/vim-signify')                " additional settings: ~/.vim/plugin/signify.vim
+  call minpac#add('mhinz/vim-signify')        " custom settings: ~/.vim/plugin/signify.vim
 
   " Code commenting shortcuts
-  call minpac#add('tpope/vim-commentary')             " additional settings: ~/.vim/plugin/commentary.vim
+  call minpac#add('tpope/vim-commentary')     " custom settings: ~/.vim/plugin/commentary.vim
 
   " Git shortcuts
   call minpac#add('tpope/vim-fugitive')
 
   " Session shortcuts
-  call minpac#add('tpope/vim-obsession')              " additional settings: ~/.vim/plugin/obsession.vim
+  call minpac#add('tpope/vim-obsession')      " custom settings: ~/.vim/plugin/obsession.vim
 
   " Add, change, delete surroundings in pairs
   call minpac#add('tpope/vim-surround')
