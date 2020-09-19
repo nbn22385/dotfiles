@@ -168,6 +168,8 @@ alias wake='wakeonlan -i 192.168.29.255  90:FB:A6:8A:73:42'
 export EDITOR='vim'
 export LS_COLORS="ow=01;36"
 export TZ='America/New_York'
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
 
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
 export FZF_DEFAULT_OPTS='--height 40% --layout reverse --info inline --border'
