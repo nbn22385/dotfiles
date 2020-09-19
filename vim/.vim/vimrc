@@ -191,13 +191,6 @@ nnoremap * *<c-o>
 inoremap kj <esc>
 inoremap <C-c> <esc>
 
-" Movement in insert mode
-inoremap <C-h> <C-o>h
-inoremap <C-l> <C-o>a
-inoremap <C-j> <C-o>j
-inoremap <C-k> <C-o>k
-inoremap <C-^> <C-o><C-^>
-
 " Move lines in normal, insert, and visual with alt+j/k
 if has('mac')
   nnoremap ∆ m`:move .+1<CR>==``
@@ -214,6 +207,13 @@ else
   vnoremap <Esc>j :move '>+1<CR>gv=gv
   vnoremap <Esc>k :move '<-2<CR>gv=gv
 endif
+
+" Movement in insert mode
+inoremap <C-h> <C-o>h
+inoremap <C-l> <C-o>a
+inoremap <C-j> <C-o>j
+inoremap <C-k> <C-o>k
+inoremap <C-^> <C-o><C-^>
 
 " <CTRL>h/j/k/l -> Switch between buffers - superceded by vim-tmux-navigator
 " nnoremap <C-j> <C-w>j
