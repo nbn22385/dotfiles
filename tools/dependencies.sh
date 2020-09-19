@@ -12,11 +12,15 @@ if [ "$(uname)" == "Darwin" ]; then
     bat                           \
     fd                            \
     fzf                           \
+    pandoc                        \
     ripgrep                       \
     tmux                          \
     vim --with-override-system-vi
-      # Remove outdated versions from the cellar.
-      brew cleanup
+  # install casks
+  brew cask install               \
+    basictex
+  # Remove outdated versions from the cellar.
+  brew cleanup
 fi
 
 # Ubuntu support
