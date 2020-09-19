@@ -54,21 +54,21 @@ yc --space 3 left_padding          4
 yc --space 3 right_padding         4
 yc --space 3 window_gap            4
 
-# extra padding for spacebar app
-yc top_padding 30 
+# extra padding for ubersicht bar 
+yc top_padding 32 
 
 # rules
-yr app=Alacritty border=on
-yr app=Finder border=off
-yr app=Firefox space=1 border=off
-# yr app=iTerm border=on
-yr app=Preview manage=off border=off
-yr app=Spark space=2 border=off
-yr app=Spotify manage=off border=off
-yr app="System Preferences" manage=off border=off
-yr app="Sublime Text" manage=off border=off
-yr app=Mail space=2 border=off
-yr app=Telegram space=2 border=off
+yr app=Alacritty border=on  space=2
+yr app=Finder    border=off manage=off
+yr app=Firefox   border=off space=1
+yr app=iTerm     border=off space=2
+yr app=Mail      border=off space=3
+yr app=Preview   border=off manage=off 
+yr app=Spark     border=off space=2 
+yr app=Spotify   border=off manage=off
+yr app=Telegram  border=off space=3
+yr app="Sublime Text"       border=off manage=off 
+yr app="System Preferences" border=off manage=off
 
 # ubersicht nibar space widget
 # yabai -m signal --add event=space_changed \
