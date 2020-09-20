@@ -51,7 +51,7 @@ if exists("+showtabline")
       " Set the modified flag if any buffer on the tab is modified
       for buf in tabpagebuflist(i)
         if getbufvar(buf, '&modified')
-          let file = file .'  ⚡'
+          let file = file .' ●'
           break
         endif
       endfor

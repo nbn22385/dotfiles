@@ -125,6 +125,7 @@ function! InactiveStatus()
   let statusline.="%f "
   let statusline.="%#TabLineSel#"           " modified flag color
   let statusline.="%{&modified=='nomodified' ? '' : '●'}"
+  let statusline.="%#StatusLineNC#"         " branch/flags color
   let statusline.="%="                      " spacer
   let statusline.="%r%h"
   let statusline.="%{ObsessionStatus()} "

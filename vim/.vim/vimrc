@@ -114,6 +114,12 @@ set rtp+=$HOME/.fzf,/usr/local/opt/fzf
 " }}}
 
 " {{{ Autocmds
+" Save modified buffer during idle after 'updatetime' has elapsed (default 4 sec)
+augroup AutoSave
+  autocmd!
+  autocmd CursorHoldI,CursorHold * silent! :update
+augroup END
+
 " Disable auto-commenting on new lines
 augroup DisableAutoCommenting
   autocmd!
@@ -132,12 +138,6 @@ highlight clear CursorLine  " Highlight current line number rather than entire l
 augroup AutoResizePanesOnVimResize
   autocmd!
   autocmd VimResized * wincmd =
-augroup END
-
-" Save modified buffer during idle after 'updatetime' has elapsed (default 4 sec)
-augroup AutoSave
-  autocmd!
-  autocmd CursorHoldI,CursorHold * silent! :update
 augroup END
 " }}}
 
