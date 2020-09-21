@@ -15,7 +15,7 @@ let g:modecolors = {
       \ 's'      : '%#WildMenu#',
       \ 'S'      : '%#WildMenu#',
       \ "\<C-S>" : '%#WildMenu#',
-      \ 'i'      : '%#Search#',
+      \ 'i'      : '%#PmenuSel#',
       \ 'R'      : '%#DiffDelete#',
       \ 'Rv'     : '%#DiffDelete#',
       \ 'c'      : '%#Search#',
@@ -82,7 +82,7 @@ endfunction
 function! ActiveStatus() abort
   let statusline=" "
   let statusline.=get(g:modecolors, mode(), '%#ErrorMsg#')
-  let statusline.=" %{CurrentMode()} "
+  let statusline.=" %{CurrentMode()} %<"
   let statusline.="%#StatusLineNC#"         " filename color
   let statusline.="\ %f\ "
   let statusline.="%#TabLineSel#"           " modified flag color
@@ -102,7 +102,7 @@ endfunction
 function! ActiveStatusInsertMode()
   let statusline=" "
   let statusline.=get(g:modecolors, mode(), '%#ErrorMsg#')
-  let statusline.=" %{CurrentMode()} "
+  let statusline.=" %{CurrentMode()} %<"
   let statusline.="%#StatusLineNC#"         " filename color
   let statusline.="\ %f\ "
   let statusline.="%#TabLineSel#"           " modified flag color
