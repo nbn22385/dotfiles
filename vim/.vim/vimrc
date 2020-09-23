@@ -44,9 +44,9 @@ set wildcharm=<Tab>             " Allow wildmenu expansion from macros/remaps
 set wildmenu wildmode=full      " Show auto-complete suggestions in command line
 
 " Various
-let &t_SI = "\e[6 q"  " INSERT mode - beam cursor
-let &t_SR = "\e[4 q"  " REPLACE mode - underline cursor
-let &t_EI = "\e[2 q"  " NORMAL mode - block cursor
+let &t_SI = "\e[6 q"            " INSERT mode - beam cursor
+let &t_EI = "\e[2 q"            " NORMAL mode - block cursor
+let &t_SR = "\e[4 q"            " REPLACE mode - underline cursor
 
 " True color support
 if exists('$TMUX')
@@ -147,7 +147,7 @@ nnoremap <Space> <Nop>
 let mapleader = "\<Space>"
 
 " Save a file
-nnoremap <Leader>w :write<CR>
+nnoremap <Leader>w :update<CR>
 
 " Turn off search highlighting
 nnoremap <silent> <Leader>/ :let @/ = ""<esc>
@@ -173,9 +173,9 @@ noremap <Leader><Down>  :resize -3<CR>
 " Joining lines will keep cursor position
 nnoremap J mzJ`z
 
-" Next/previous search matches centered on screen
-noremap n nzz
-noremap N Nzz
+" Next/previous search matches unfolded and centered on screen
+noremap n nzvzz
+noremap N Nzvzz
 
 " Open new line and stay in normal mode
 nnoremap o o<esc>
