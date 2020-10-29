@@ -102,6 +102,9 @@ function! PackInit() abort
   " Automatically change to file's project directory
   call minpac#add('airblade/vim-rooter')
 
+  " File browser
+  call minpac#add('lambdalisue/fern.vim')     " custom settings: ~/.vim/plugin/fern.vim
+
 endfunction
 
 command! PackClean  call PackInit() | call minpac#clean()
