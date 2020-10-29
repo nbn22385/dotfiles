@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # MacOS support
-if [ "$(uname)" == "Darwin" ]; then
+if [ -x "$(command -v brew)" ]; then
   echo "Installing dependencies using homebrew..."
   # Make sure we’re using the latest Homebrew
   brew update
