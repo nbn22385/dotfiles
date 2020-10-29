@@ -8,7 +8,7 @@ let g:ale_set_balloons = 1
 let g:ale_completion_enabled = 0
 let g:ale_completion_autoimport = 1
 let g:ale_completion_max_suggestions = 10
-set completeopt=menu,menuone,preview,noselect,noinsert
+set completeopt=menu,menuone,preview,noinsert
 autocmd FileType cpp setlocal omnifunc=ale#completion#OmniFunc
 autocmd FileType cpp setlocal signcolumn=yes
 
