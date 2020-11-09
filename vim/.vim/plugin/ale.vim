@@ -5,12 +5,16 @@ let g:ale_sign_warning = '●'
 let g:ale_set_balloons = 1
 
 " completion
-let g:ale_completion_enabled = 0
+let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 let g:ale_completion_max_suggestions = 10
 set completeopt=menu,menuone,preview,noinsert
-autocmd FileType cpp setlocal omnifunc=ale#completion#OmniFunc
-autocmd FileType cpp setlocal signcolumn=yes
+
+augroup AleCompletion
+  autocmd!
+  autocmd FileType cpp,vim setlocal omnifunc=ale#completion#OmniFunc
+  autocmd FileType cpp setlocal signcolumn=yes
+augroup END
 
 " linting
 let g:ale_lint_on_enter = 1
@@ -18,7 +22,7 @@ let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_insert_leave = 0
 let g:ale_linters_explicit = 1
-let g:ale_linters = { 'cpp': ['clangd'],}
+let g:ale_linters = { 'cpp': ['clangd'], 'vim': ['vimls', 'vint']}
 let g:ale_c_parse_compile_commands = 1
 let g:ale_cpp_clangd_options = '--clang-tidy --clang-tidy-checks="-*"'
 
