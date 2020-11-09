@@ -53,9 +53,13 @@ function! CurrentMode() abort
   return toupper(get(g:currentmode, mode(), '???')) . (&paste == 1 ? "-PASTE" : "")
 endfunction
 
-function! GetCurrentBranch()
-  " if winwidth < 100, truncate to 15 characters, else show full branch name
-  return fugitive#head() != '' ? (winwidth(0) < 100 ? '  '.fugitive#head()[0:15] : '  '.fugitive#head()) : ''
+function! CurrentBranch()
+  if exists('g:loaded_fugitive')
+    let l:branch = fugitive#head()
+    return fugitive#head() != '' ? (winwidth(0) < 100 ? '  ' . l:branch[0:15] : '  ' . l:branch) : ''
+  else
+    return ""
+  endif
 endfunction
 
 function! LinterStatus() abort
@@ -83,7 +87,7 @@ function! ActiveStatus() abort
   let statusline.="%#StatusLine#"           " branch/flags color
   let statusline.="%r%h"
   let statusline.="%{ObsessionStatus()} "
-  let statusline.="%{GetCurrentBranch()} "
+  let statusline.="%{CurrentBranch()} "
   let statusline.="%#Error#"                " linter error color
   let statusline.="%{LinterStatus()}"
   return statusline
@@ -99,7 +103,7 @@ function! InactiveStatus()
   let statusline.="%="                      " spacer
   let statusline.="%r%h"
   let statusline.="%{ObsessionStatus()} "
-  let statusline.="%{GetCurrentBranch()} "
+  let statusline.="%{CurrentBranch()} "
   return statusline
 endfunction
 
