@@ -1,7 +1,7 @@
 " fzf settings
 if executable('fzf')
   " Empty value to disable preview window altogether
-  " let g:fzf_preview_window = ''
+  let g:fzf_preview_window = ''
 
   " Command to generate tags file
   let g:fzf_tags_command = 'ctags -R --languages=C++ --exclude="build" --exclude=".git"'
@@ -44,5 +44,20 @@ if executable('fzf')
         \ 'ctrl-v': 'vsplit' }
 
   let $FZF_DEFAULT_OPTS .= ' --bind ctrl-a:select-all'
+
+  let g:fzf_colors = {
+        \ 'fg':      ['fg', 'Normal'],
+        \ 'bg':      ['bg', 'Normal'],
+        \ 'hl':      ['fg', 'Comment'],
+        \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+        \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+        \ 'hl+':     ['fg', 'Statement'],
+        \ 'info':    ['fg', 'PreProc'],
+        \ 'border':  ['fg', 'StatusLine'],
+        \ 'prompt':  ['fg', 'Conditional'],
+        \ 'pointer': ['fg', 'Exception'],
+        \ 'marker':  ['fg', 'Keyword'],
+        \ 'spinner': ['fg', 'Label'],
+        \ 'header':  ['fg', 'Comment'] }
 
 endif
