@@ -1,8 +1,14 @@
 " general settings
+scriptencoding utf-8
+
 let g:ale_enabled = 1
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '●'
+
+" style
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '○'
 let g:ale_set_balloons = 1
+hi link ALEError Error
+hi link ALEErrorSign ErrorMsg
 
 " completion
 let g:ale_completion_enabled = 1
@@ -13,7 +19,7 @@ set completeopt=menu,menuone,preview,noinsert
 augroup AleCompletion
   autocmd!
   autocmd FileType cpp,vim setlocal omnifunc=ale#completion#OmniFunc
-  autocmd FileType cpp setlocal signcolumn=yes
+  autocmd FileType cpp,vim setlocal signcolumn=yes
 augroup END
 
 " linting
@@ -29,10 +35,6 @@ let g:ale_cpp_clangd_options = '--clang-tidy --clang-tidy-checks="-*"'
 " fixing
 let g:ale_fixers  = { 'cpp': ['clang-format'], 'vim': ['trim_whitespace','remove_trailing_lines'],}
 let g:ale_fix_on_save = 1
-
-" custom colors
-hi link ALEError Error
-hi link ALEErrorSign ErrorMsg
 
 " mappings
 nnoremap K :ALEGoToDefinition<cr>
