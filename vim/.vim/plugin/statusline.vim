@@ -3,6 +3,7 @@
 " https://hackernoon.com/the-last-statusline-for-vim-a613048959b2
 " https://github.com/sunaku/vim-modusline/blob/master/plugin/modusline.vim
 
+scriptencoding utf-8            " Specify character encoding used in this file
 set statusline=%!ActiveStatus()
 
 let g:modecolors = {
@@ -50,60 +51,62 @@ let g:currentmode = {
       \ 't'      : 'Terminal'}
 
 function! CurrentMode() abort
-  return toupper(get(g:currentmode, mode(), '???')) . (&paste == 1 ? "-PASTE" : "")
+  return toupper(get(g:currentmode, mode(), '???')) . (&paste == 1 ? '-PASTE' : '')
 endfunction
 
 function! CurrentBranch()
   if exists('g:loaded_fugitive')
     let l:branch = fugitive#head()
-    return fugitive#head() != '' ? (winwidth(0) < 100 ? '  ' . l:branch[0:15] : '  ' . l:branch) : ''
+    return fugitive#head() !=? '' ? (winwidth(0) < 100 ? '  ' . l:branch[0:15] : '  ' . l:branch) : ''
   else
-    return ""
+    return ''
   endif
 endfunction
 
 function! LinterStatus() abort
-  if exists("g:ale_enabled")
+  if exists('g:ale_enabled')
+let l:a = ""
     let l:counts = ale#statusline#Count(bufnr(''))
     let l:all_errors = l:counts.error + l:counts.style_error
     let l:all_non_errors = l:counts.total - l:all_errors
-    return l:counts.total == 0 ? '' : printf(' ✗%d ', all_errors)
+    return l:counts.total == 0 ? '' : printf(' %dW %dE ', all_non_errors, all_errors)
+    " return l:counts.total == 0 ? '' : printf(' ✗%d ', all_errors)
   else
-    return ""
+    return ''
   endif
 endfunction
 
 function! ActiveStatus() abort
-  let statusline=""
+  let statusline=''
   let statusline.=get(g:modecolors, mode(), '%#ErrorMsg#')
-  let statusline.=" %{CurrentMode()} %<"
-  let statusline.="%#StatusLine#"           " filename color
-  let statusline.="\ %f\ "
-  let statusline.="%#TabLineSel#"           " modified flag color
+  let statusline.=' %{CurrentMode()} %<'
+  let statusline.='%#StatusLine#'           " filename color
+  let statusline.=' %f '
+  let statusline.='%#TabLineSel#'           " modified flag color
   let statusline.="%{&modified=='nomodified' ? '' : '●'}"
-  let statusline.="%#StatusLine#"           " line info color
-  let statusline.="%="                      " spacer
-  let statusline.="\ %3l:%c\ %-p%%\ "
-  let statusline.="%#StatusLine#"           " branch/flags color
-  let statusline.="%r%h"
-  let statusline.="%{ObsessionStatus()} "
-  let statusline.="%{CurrentBranch()} "
-  let statusline.="%#Error#"                " linter error color
-  let statusline.="%{LinterStatus()}"
+  let statusline.='%#StatusLine#'           " line info color
+  let statusline.='%='                      " spacer
+  let statusline.=' %3l:%c %-p%% '
+  let statusline.='%#StatusLine#'           " branch/flags color
+  let statusline.='%r%h'
+  let statusline.='%{ObsessionStatus()} '
+  let statusline.='%{CurrentBranch()} '
+  let statusline.='%#Substitute#'                " linter error color
+  let statusline.='%{LinterStatus()}'
   return statusline
 endfunction
 
 function! InactiveStatus()
-  let statusline="    "
-  let statusline.="%#StatusLineNC#"         " filename color
-  let statusline.="%f "
-  let statusline.="%#TabLineSel#"           " modified flag color
+  let statusline='    '
+  let statusline.='%#StatusLineNC#'         " filename color
+  let statusline.='%f '
+  let statusline.='%#TabLineSel#'           " modified flag color
   let statusline.="%{&modified=='nomodified' ? '' : '●'}"
-  let statusline.="%#StatusLineNC#"         " branch/flags color
-  let statusline.="%="                      " spacer
-  let statusline.="%r%h"
-  let statusline.="%{ObsessionStatus()} "
-  let statusline.="%{CurrentBranch()} "
+  let statusline.='%#StatusLineNC#'         " branch/flags color
+  let statusline.='%='                      " spacer
+  let statusline.='%r%h'
+  let statusline.='%{ObsessionStatus()} '
+  let statusline.='%{CurrentBranch()} '
   return statusline
 endfunction
 

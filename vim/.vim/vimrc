@@ -50,9 +50,9 @@ function! PackInit() abort
 
   " CMake commands
   call minpac#add('nbn22385/cmake4vim')       " custom settings: ~/.vim/plugin/cmake4vim.vim
-  call minpac#add('junegunn/vader.vim')       " custom settings: ~/.vim/plugin/cmake4vim.vim
-  " call minpac#add('tpope/vim-dispatch')       " custom settings: ~/.vim/plugin/cmake4vim.vim
   " call minpac#add('ilyachur/cmake4vim')       " custom settings: ~/.vim/plugin/cmake4vim.vim
+  " call minpac#add('junegunn/vader.vim')
+  " call minpac#add('tpope/vim-dispatch')
 endfunction
 
 command! PackClean  call PackInit() | call minpac#clean()
