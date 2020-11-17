@@ -4,11 +4,8 @@ scriptencoding utf-8
 let g:ale_enabled = 1
 
 " style
-let g:ale_sign_error = '●'
-let g:ale_sign_warning = '○'
-let g:ale_set_balloons = 1
-hi link ALEError Error
-hi link ALEErrorSign ErrorMsg
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '◬'
 
 " completion
 let g:ale_completion_enabled = 1

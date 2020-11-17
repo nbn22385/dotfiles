@@ -6,6 +6,9 @@ function! PackInit() abort
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
+  call minpac#add('itchyny/lightline.vim')
+  call minpac#add('daviesjamie/vim-base16-lightline')
+
   " Color themes
   call minpac#add('chriskempson/base16-vim')  " custom settings: ~/.vim/plugin/base16.vim
 
@@ -166,7 +169,7 @@ nnoremap <tab> gt
 " Command line begin/end line
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
-
+15
 " Visual mode search word under cursor with */#
 function! s:VSetSearch()
   let temp = @@

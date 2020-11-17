@@ -1,4 +1,5 @@
 " Base16 highlight group customization
+" vint: -ProhibitUnnecessaryDoubleQuote
 " source: https://www.reddit.com/r/vimporn/comments/ewqdgc/neovim_as_an_ide_with_no_clutter_at_all
 " Format: function! g:Base16hi(group, guifg, guibg, ctermfg, ctermbg, ...)
 
@@ -39,3 +40,10 @@ if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
+
+" fixes for highlight groups
+hi! ALEErrorSign ctermbg=NONE ctermfg=red
+hi! ALEWarningSign ctermbg=NONE ctermfg=yellow
+hi! link SignifySignAdd DiffAdded
+hi! link SignifySignChange DiffLine
+hi! link SignifySignDelete DiffRemoved
