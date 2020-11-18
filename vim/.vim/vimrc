@@ -6,11 +6,14 @@ function! PackInit() abort
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
-  call minpac#add('itchyny/lightline.vim')
-  call minpac#add('daviesjamie/vim-base16-lightline')
+  " Status line
+  call minpac#add('itchyny/lightline.vim')    " custom settings: ~/.vim/plugin/lightline.vim
 
   " Color themes
   call minpac#add('chriskempson/base16-vim')  " custom settings: ~/.vim/plugin/base16.vim
+
+  " Lightline color themes
+  call minpac#add('mike-hearn/base16-vim-lightline')
 
   " Syntax and semantic error checking
   call minpac#add('dense-analysis/ale')       " custom settings: ~/.vim/plugin/ale.vim
