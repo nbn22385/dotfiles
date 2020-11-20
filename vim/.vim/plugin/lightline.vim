@@ -1,20 +1,38 @@
-scriptencoding utf-8
-
+"==============================================================================
+" Lightline configuration
+"------------------------------------------------------------------------------
 let g:lightline = {}
 
-" extract the current base16 theme and set the corresponding lightline theme
-let s:base16_shell_theme = substitute(substitute(system("grep colorscheme ~/.vimrc_background | awk -F ' ' '{print $2}'"), '\n', '', 'g'), '-', '_', 'g')
-let g:lightline.colorscheme = s:base16_shell_theme
-
+"==============================================================================
+" Component layout
+"------------------------------------------------------------------------------
+let g:lightline.active = {
+      \ 'left':  [ [ 'mode', 'paste' ],
+      \            [ 'readonly', 'relativepath', 'modified' ] ],
+      \ 'right': [ [ 'linterstatus' ],
+      \            [ 'gitbranch' ],
+      \            [ 'obsessionstatus' ],
+      \            [ 'lineinfo', 'percent' ] ] }
+let g:lightline.inactive = {
+      \ 'left':  [ [ 'relativepath' ] ],
+      \ 'right': [ [ 'linterstatus' ],
+      \            [ 'gitbranch' ],
+      \            [ 'obsessionstatus' ] ] }
+let g:lightline.tabline = {
+      \ 'left':  [ [ 'tabs' ] ],
+      \ 'right': [ ] }
 let g:lightline.enable = {
       \ 'statusline': 1,
       \ 'tabline': 0
       \ }
 
+"==============================================================================
+" Component functions
+"------------------------------------------------------------------------------
 function! CurrentBranch()
   if exists('g:loaded_fugitive')
     let l:branch = fugitive#head()
-    return fugitive#head() !=? '' ? (winwidth(0) < 100 ? '  ' . l:branch[0:15] : '  ' . l:branch) : ''
+    return fugitive#head() !=? '' ? (winwidth(0) < 100 ? ' ' . l:branch[0:15] : ' ' . l:branch) : ''
   else
     return ''
   endif
@@ -33,29 +51,10 @@ function! LinterStatus() abort
   endif
 endfunction
 
-function! ModifiedFlag()
-  return &modified ? '●' : ''
-endfunction
-
 let g:lightline.component_function = {
       \ 'gitbranch': 'CurrentBranch',
       \ 'linterstatus' : 'LinterStatus',
-      \ 'modifiedflag': 'ModifiedFlag',
       \ 'obsessionstatus' : 'ObsessionStatus'
-      \ }
-
-let g:lightline.mode_map = {
-      \ 'n' : 'N',
-      \ 'i' : 'I',
-      \ 'R' : 'R',
-      \ 'v' : 'V',
-      \ 'V' : 'V-LINE',
-      \ "\<C-v>": 'V-BLOCK',
-      \ 'c' : 'COMMAND',
-      \ 's' : 'SELECT',
-      \ 'S' : 'S-LINE',
-      \ "\<C-s>": 'S-BLOCK',
-      \ 't': 'TERMINAL',
       \ }
 
 let g:lightline.component = {
@@ -63,7 +62,7 @@ let g:lightline.component = {
       \ 'absolutepath': '%F',
       \ 'relativepath': '%<%f',
       \ 'filename': '%t',
-      \ 'modified': '%M',
+      \ 'modified': '%{&modified?"●":""}',
       \ 'bufnum': '%n',
       \ 'paste': '%{&paste?"PASTE":""}',
       \ 'readonly': '%R',
@@ -81,18 +80,34 @@ let g:lightline.component = {
       \ 'close': '%999X X ',
       \ 'winnr': '%{winnr()}' }
 
+"==============================================================================
+" Mode display names
+"------------------------------------------------------------------------------
+let g:lightline.mode_map = {
+      \ 'n' : 'N',
+      \ 'i' : 'I',
+      \ 'R' : 'R',
+      \ 'v' : 'V',
+      \ 'V' : 'V-LINE',
+      \ "\<C-v>": 'V-BLOCK',
+      \ 'c' : 'COMMAND',
+      \ 's' : 'SELECT',
+      \ 'S' : 'S-LINE',
+      \ "\<C-s>": 'S-BLOCK',
+      \ 't': 'TERMINAL',
+      \ }
+
+"==============================================================================
+" Separators
+"------------------------------------------------------------------------------
 let g:lightline.separator = { 'left': '', 'right': '' }
 let g:lightline.subseparator = { 'left': '', 'right': '' }
 
-let g:lightline.active = {
-      \ 'left': [ [ 'mode', 'paste' ],
-      \           [ 'readonly', 'relativepath', 'modifiedflag' ] ],
-      \ 'right': [ ['linterstatus'], ['gitbranch'], ['obsessionstatus'],
-      \            [ 'lineinfo' ,
-      \             'percent' ] ] }
-let g:lightline.inactive = {
-      \ 'left': [ [ 'relativepath' ] ],
-      \ 'right': [ ['linterstatus'], ['gitbranch'], ['obsessionstatus'] ] }
-let g:lightline.tabline = {
-      \ 'left': [ [ 'tabs' ] ],
-      \ 'right': [ ] }
+"==============================================================================
+" Color scheme
+"------------------------------------------------------------------------------
+" extract the current base16 theme and set the corresponding lightline theme
+let s:base16_shell_theme = substitute(substitute(system("grep colorscheme ~/.vimrc_background | awk -F ' ' '{print $2}'"), '\n', '', 'g'), '-', '_', 'g')
+let g:lightline.colorscheme = s:base16_shell_theme
+
+scriptencoding utf-8
