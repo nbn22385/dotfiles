@@ -42,6 +42,7 @@ if filereadable(expand("~/.vimrc_background"))
 endif
 
 " fixes for highlight groups
+hi! link ALEError Error
 hi! ALEErrorSign ctermbg=NONE ctermfg=red
 hi! ALEWarningSign ctermbg=NONE ctermfg=yellow
 hi! link SignifySignAdd DiffAdded
