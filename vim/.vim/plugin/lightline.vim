@@ -13,14 +13,17 @@ let g:lightline.active = {
       \            [ 'gitbranch' ],
       \            [ 'obsessionstatus' ],
       \            [ 'lineinfo', 'percent' ] ] }
+
 let g:lightline.inactive = {
       \ 'left':  [ [ 'relativepath' ] ],
       \ 'right': [ [ 'linterstatus' ],
       \            [ 'gitbranch' ],
       \            [ 'obsessionstatus' ] ] }
+
 let g:lightline.tabline = {
       \ 'left':  [ [ 'tabs' ] ],
       \ 'right': [ ] }
+
 let g:lightline.enable = {
       \ 'statusline': 1,
       \ 'tabline': 0
@@ -40,22 +43,25 @@ endfunction
 
 function! LinterStatus() abort
   if exists('g:ale_enabled')
-    let l:a = ''
     let l:counts = ale#statusline#Count(bufnr(''))
     let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-    return l:counts.total == 0 ? '' : printf(' %dW %dE ', all_non_errors, all_errors)
-    " return l:counts.total == 0 ? '' : printf(' ✗%d ', all_errors)
+    let l:all_warnings = l:counts.total - l:all_errors
+    return
+          \ (l:all_errors > 0 ? printf('%dE', l:all_errors) : '') .
+          \ (l:all_warnings > 0 ? printf('%dW', l:all_warnings) : '')
   else
     return ''
   endif
 endfunction
 
 let g:lightline.component_function = {
-      \ 'gitbranch': 'CurrentBranch',
+      \ 'gitbranch' : 'CurrentBranch',
       \ 'linterstatus' : 'LinterStatus',
       \ 'obsessionstatus' : 'ObsessionStatus'
       \ }
+
+let g:lightline.component_type = {
+      \ 'linterstatus' : 'error' }
 
 let g:lightline.component = {
       \ 'mode': '%{lightline#mode()}',
@@ -106,8 +112,6 @@ let g:lightline.subseparator = { 'left': '', 'right': '' }
 "==============================================================================
 " Color scheme
 "------------------------------------------------------------------------------
-" extract the current base16 theme and set the corresponding lightline theme
-let s:base16_shell_theme = substitute(substitute(system("grep colorscheme ~/.vimrc_background | awk -F ' ' '{print $2}'"), '\n', '', 'g'), '-', '_', 'g')
-let g:lightline.colorscheme = s:base16_shell_theme
+let g:lightline.colorscheme = 'base16'
 
 scriptencoding utf-8
