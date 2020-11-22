@@ -13,7 +13,8 @@ function! PackInit() abort
   call minpac#add('chriskempson/base16-vim')  " custom settings: ~/.vim/plugin/base16.vim
 
   " Lightline color themes
-  call minpac#add('mike-hearn/base16-vim-lightline')
+  " call minpac#add('mike-hearn/base16-vim-lightline')
+  call minpac#add('daviesjamie/vim-base16-lightline')
 
   " Syntax and semantic error checking
   call minpac#add('dense-analysis/ale')       " custom settings: ~/.vim/plugin/ale.vim
