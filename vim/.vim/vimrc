@@ -6,14 +6,13 @@ function! PackInit() abort
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
-  " Status line
-  call minpac#add('itchyny/lightline.vim')    " custom settings: ~/.vim/plugin/lightline.vim
-
   " Color themes
   call minpac#add('chriskempson/base16-vim')  " custom settings: ~/.vim/plugin/base16.vim
 
+  " Status line
+  call minpac#add('itchyny/lightline.vim')    " custom settings: ~/.vim/plugin/lightline.vim
+
   " Lightline color themes
-  " call minpac#add('mike-hearn/base16-vim-lightline')
   call minpac#add('daviesjamie/vim-base16-lightline')
 
   " Syntax and semantic error checking
@@ -56,10 +55,8 @@ function! PackInit() abort
   call minpac#add('wellle/targets.vim')
 
   " CMake commands
-  call minpac#add('nbn22385/cmake4vim')       " custom settings: ~/.vim/plugin/cmake4vim.vim
-  " call minpac#add('ilyachur/cmake4vim')       " custom settings: ~/.vim/plugin/cmake4vim.vim
-  " call minpac#add('junegunn/vader.vim')
-  " call minpac#add('tpope/vim-dispatch')
+  call minpac#add('ilyachur/cmake4vim')       " custom settings: ~/.vim/plugin/cmake4vim.vim
+
 endfunction
 
 command! PackClean  call PackInit() | call minpac#clean()
