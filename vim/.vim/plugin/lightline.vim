@@ -35,9 +35,7 @@ let g:lightline.enable = {
 function! CurrentBranch()
   if exists('g:loaded_fugitive')
     let l:branch = fugitive#head()
-    return fugitive#head() !=? '' ? (winwidth(0) < 100 ? ' ' . l:branch[0:15] : ' ' . l:branch) : ''
-  else
-    return ''
+    return fugitive#head() !=? '' ? (winwidth(0) < 100 ? ' ' . l:branch[0:15] : ' ' . l:branch) : ''
   endif
 endfunction
 
@@ -49,15 +47,20 @@ function! LinterStatus() abort
     return
           \ (l:all_errors > 0 ? printf('%dE', l:all_errors) : '') .
           \ (l:all_warnings > 0 ? printf('%dW', l:all_warnings) : '')
-  else
-    return ''
+  endif
+endfunction
+
+function! SessionStatus() abort
+  if exists('g:loaded_obsession')
+    let l:status = ObsessionStatus()
+    return l:status !=? '' ? (l:status ==? '[$]' ? '' : 'ﭸ') : ''
   endif
 endfunction
 
 let g:lightline.component_function = {
       \ 'gitbranch' : 'CurrentBranch',
       \ 'linterstatus' : 'LinterStatus',
-      \ 'obsessionstatus' : 'ObsessionStatus'
+      \ 'obsessionstatus' : 'SessionStatus'
       \ }
 
 let g:lightline.component_type = {
@@ -68,7 +71,7 @@ let g:lightline.component = {
       \ 'absolutepath': '%F',
       \ 'relativepath': '%<%f',
       \ 'filename': '%t',
-      \ 'modified': '%{&modified?"●":""}',
+      \ 'modified': '%{&modified?"":""}',
       \ 'bufnum': '%n',
       \ 'paste': '%{&paste?"PASTE":""}',
       \ 'readonly': '%R',
