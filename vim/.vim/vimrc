@@ -142,7 +142,7 @@ inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
 inoremap <C-^> <C-o><C-^>
 
-" <CTRL>h/j/k/l -> Switch between buffers - superceded by vim-tmux-navigator
+" <CTRL>h/j/k/l -> Switch between buffers - superseded by vim-tmux-navigator
 " nnoremap <C-j> <C-w>j
 " nnoremap <C-k> <C-w>k
 " nnoremap <C-h> <C-w>h
@@ -237,6 +237,7 @@ set noshowmode                  " Don't show current mode in command-line
 set pastetoggle=<F2>            " Toggle paste mode on/off
 set shortmess=aFIT              " Customize vim messages
 set showcmd                     " Show already typed keys when more are expected
+set spelllang=en_us             " Set language for spell checking
 
 " Editing
 syntax on                       " Enable syntax highlighting
@@ -260,7 +261,8 @@ set incsearch                   " Highlight while searching with / or ?
 set path=$PWD/**                " Find all files under this directory
 set smartcase                   " Case sensitive search when using capital letter
 set wildcharm=<Tab>             " Allow wildmenu expansion from macros/remaps
-set wildmenu wildmode=full      " Show auto-complete suggestions in command line
+set wildignorecase              " Case-insensitive completion of commands, filenames
+set wildmenu                    " Enhanced command-line completion
 
 " Various
 let &t_SI = "\e[6 q"            " INSERT mode - beam cursor
