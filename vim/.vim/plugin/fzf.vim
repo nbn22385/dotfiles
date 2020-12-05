@@ -1,5 +1,7 @@
-" fzf settings
 if executable('fzf')
+  "==============================================================================
+  " Layout
+  "------------------------------------------------------------------------------
   " Empty value to disable preview window altogether
   let g:fzf_preview_window = ''
 
@@ -13,6 +15,9 @@ if executable('fzf')
     let g:fzf_layout = { 'window': '10new' }
   endif
 
+  "==============================================================================
+  " Command overrides
+  "------------------------------------------------------------------------------
   " custom Files command with bat preview (taken from :h fzf-vim-example-customizing-files-command)
   command! -bang -nargs=? -complete=dir Files
         \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
@@ -21,7 +26,9 @@ if executable('fzf')
   command! -bang -nargs=* Rg
         \ call fzf#vim#grep("rg --hidden --column --line-number --no-heading --color=always --smart-case -- ".shellescape(<q-args>), 1)
 
+  "==============================================================================
   " Mappings
+  "------------------------------------------------------------------------------
   nnoremap <silent> <expr> <leader>f (len(system('git rev-parse')) ? ':Files' : ':GFiles')."\<cr>"
   nnoremap <silent> <leader>B :Buffers<cr>
   nnoremap <silent> <leader>C :Colors<cr>
@@ -45,6 +52,9 @@ if executable('fzf')
 
   let $FZF_DEFAULT_OPTS .= ' --bind ctrl-a:select-all'
 
+  "==============================================================================
+  " Custom colors
+  "------------------------------------------------------------------------------
   let g:fzf_colors = {
         \ 'fg':      ['fg', 'Normal'],
         \ 'bg':      ['bg', 'Normal'],

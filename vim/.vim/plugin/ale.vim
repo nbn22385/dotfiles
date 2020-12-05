@@ -1,13 +1,19 @@
-" general settings
+"==============================================================================
+" General settings
+"------------------------------------------------------------------------------
 scriptencoding utf-8
 
 let g:ale_enabled = 1
 
-" style
+"==============================================================================
+" Style
+"------------------------------------------------------------------------------
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '◬'
 
-" completion
+"==============================================================================
+" Completion
+"------------------------------------------------------------------------------
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 let g:ale_completion_max_suggestions = 10
@@ -19,7 +25,9 @@ augroup AleCompletion
   autocmd FileType cpp,vim setlocal signcolumn=yes
 augroup END
 
-" linting
+"==============================================================================
+" Linting
+"------------------------------------------------------------------------------
 let g:ale_lint_on_enter = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
@@ -29,11 +37,15 @@ let g:ale_linters = { 'cpp': ['clangd'], 'vim': ['vimls', 'vint']}
 let g:ale_c_parse_compile_commands = 1
 let g:ale_cpp_clangd_options = '--clang-tidy --clang-tidy-checks="-*"'
 
-" fixing
+"==============================================================================
+" Fixing
+"------------------------------------------------------------------------------
 let g:ale_fixers  = { 'cpp': ['clang-format'], 'vim': ['trim_whitespace','remove_trailing_lines'],}
 let g:ale_fix_on_save = 1
 
-" mappings
+"==============================================================================
+" Mappings
+"------------------------------------------------------------------------------
 nnoremap K :ALEGoToDefinition<cr>
 " Ctrl-Space to open omnicomplete popup
 inoremap <C-@> <c-x><c-o>
