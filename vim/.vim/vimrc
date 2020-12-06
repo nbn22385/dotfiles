@@ -27,6 +27,9 @@ function! PackInit() abort
   " Code commenting shortcuts
   call minpac#add('tpope/vim-commentary')
 
+  " Asynchronous build jobs
+  call minpac#add('tpope/vim-dispatch')
+
   " Git shortcuts
   call minpac#add('tpope/vim-fugitive')
 
