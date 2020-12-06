@@ -14,6 +14,7 @@ if [ -x "$(command -v brew)" ]; then
     fzf                           \
     pandoc                        \
     ripgrep                       \
+    starship                      \
     tmux                          \
     vim --with-override-system-vi
   # install casks
