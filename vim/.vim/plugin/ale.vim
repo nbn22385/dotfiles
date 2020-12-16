@@ -14,10 +14,10 @@ let g:ale_sign_warning = '◬'
 "==============================================================================
 " Completion
 "------------------------------------------------------------------------------
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
 let g:ale_completion_autoimport = 1
 let g:ale_completion_max_suggestions = 10
-set completeopt=menu,menuone,preview,noinsert
+set completeopt=menu,menuone,noinsert
 
 augroup AleCompletion
   autocmd!
@@ -46,9 +46,11 @@ let g:ale_fix_on_save = 1
 "==============================================================================
 " Mappings
 "------------------------------------------------------------------------------
-nnoremap K :ALEGoToDefinition<cr>
-" Ctrl-Space to open omnicomplete popup
-inoremap <C-@> <c-x><c-o>
+imap <buffer> <LocalLeader><Space> <Plug>(ale_complete)
+nmap <buffer> <LocalLeader>gd <Plug>(ale_go_to_definition)
+nmap <buffer> <LocalLeader>fr <Plug>(ale_find_references)
+nmap <buffer> <LocalLeader>re <Plug>(ale_rename)
+
 " Enter will select the highlighted popup item
 " source: https://vim.fandom.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
