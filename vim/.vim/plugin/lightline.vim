@@ -12,10 +12,10 @@ let g:lightline.active = {
       \ 'right': [ [ 'linterstatus' ],
       \            [ 'gitbranch' ],
       \            [ 'obsessionstatus' ],
-      \            [ 'lineinfo', 'percent' ] ] }
+      \            [ 'filetypesymbol', 'lineinfo', 'percent' ] ] }
 
 let g:lightline.inactive = {
-      \ 'left':  [ [ 'relativepath' ] ],
+      \ 'left':  [ [ 'readonly', 'relativepath', 'modified' ] ],
       \ 'right': [ [ 'linterstatus' ],
       \            [ 'gitbranch' ],
       \            [ 'obsessionstatus' ] ] }
@@ -32,7 +32,11 @@ let g:lightline.enable = {
 "==============================================================================
 " Component functions
 "------------------------------------------------------------------------------
-function! CurrentBranch()
+function! FiletypeSymbol()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() : '') : ''
+endfunction
+
+function! GitBranch()
   if exists('g:loaded_fugitive')
     let l:branch = fugitive#head()
     return fugitive#head() !=? '' ? (winwidth(0) < 100 ? ' ' . l:branch[0:15] : ' ' . l:branch) : ''
@@ -58,7 +62,8 @@ function! SessionStatus() abort
 endfunction
 
 let g:lightline.component_function = {
-      \ 'gitbranch' : 'CurrentBranch',
+      \ 'filetypesymbol' : 'FiletypeSymbol',
+      \ 'gitbranch' : 'GitBranch',
       \ 'linterstatus' : 'LinterStatus',
       \ 'obsessionstatus' : 'SessionStatus'
       \ }
@@ -74,7 +79,7 @@ let g:lightline.component = {
       \ 'modified': '%{&modified?"":""}',
       \ 'bufnum': '%n',
       \ 'paste': '%{&paste?"PASTE":""}',
-      \ 'readonly': '%R',
+      \ 'readonly': '%{&readonly?"":""}',
       \ 'charvalue': '%b',
       \ 'charvaluehex': '%B',
       \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',

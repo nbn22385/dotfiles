@@ -60,6 +60,9 @@ function! PackInit() abort
   " CMake commands
   call minpac#add('ilyachur/cmake4vim')       " custom settings: ~/.vim/plugin/cmake4vim.vim
 
+  " Filetype icons
+  call minpac#add('ryanoasis/vim-devicons')
+
 endfunction
 
 command! PackClean  call PackInit() | call minpac#clean()
