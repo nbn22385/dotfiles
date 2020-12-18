@@ -58,8 +58,4 @@ nmap <buffer> <LocalLeader>gd <Plug>(ale_go_to_definition)
 nmap <buffer> <LocalLeader>fr <Plug>(ale_find_references)
 nmap <buffer> <LocalLeader>re <Plug>(ale_rename)
 
-" Enter will select the highlighted popup item
-" source: https://vim.fandom.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
 scriptencoding utf-8

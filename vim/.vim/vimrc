@@ -177,7 +177,7 @@ nnoremap <tab> gt
 " Command line begin/end line
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
-15
+
 " Visual mode search word under cursor with */#
 function! s:VSetSearch()
   let temp = @@
@@ -187,6 +187,13 @@ function! s:VSetSearch()
 endfunction
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
 vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
+
+" Highlight the first match in the auto-complete popup menu
+" source: https://vim.fandom.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+      \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+      \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 " }}}
 
 " {{{ Autocommands
