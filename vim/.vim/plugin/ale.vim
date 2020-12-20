@@ -50,12 +50,4 @@ let g:ale_fixers  = {
       \ 'vim': ['remove_trailing_lines', 'trim_whitespace']
       \ }
 
-"==============================================================================
-" Mappings
-"------------------------------------------------------------------------------
-imap <buffer> <LocalLeader><Space> <Plug>(ale_complete)
-nmap <buffer> <LocalLeader>gd <Plug>(ale_go_to_definition)
-nmap <buffer> <LocalLeader>fr <Plug>(ale_find_references)
-nmap <buffer> <LocalLeader>re <Plug>(ale_rename)
-
 scriptencoding utf-8
