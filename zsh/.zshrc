@@ -143,6 +143,7 @@ alias lg='lazygit'
 # fzf aliases
 alias cf='fzf_change_directory'
 alias vf='fzf_find_edit'
+alias btheme='fzf_base16_theme'
 
 # ripgrep aliases
 alias rg='rg --smart-case'
@@ -153,6 +154,7 @@ alias tmux='export SHELL=$(which zsh); tmux -2 -u'
 # vim aliases
 alias v='vim'
 alias vs='v -S '
+alias vp="cd /workspaces/\$(ls -l /workspaces | grep '^d' | awk '{print \$9}' | fzf) && vim"
 
 # file shortcuts
 alias vimrc='vim ~/.vim/vimrc'
@@ -201,15 +203,6 @@ fzf_change_directory() {
 }
 
 # edit a file selected via fzf
-# fzf_find_edit() {
-#   local file=$(
-#   fzf --query="$1" --no-multi --select-1 --exit-0 \
-#     --preview 'bat --style=numbers --color=always {}'
-#     )
-#     if [[ -n $file ]]; then
-#       $EDITOR "$file"
-#     fi
-#   }
 fzf_find_edit() {
     local file=$(
       fzf --query="$1" --no-multi --select-1 --exit-0 \
@@ -219,6 +212,12 @@ fzf_find_edit() {
         $EDITOR "$file"
     fi
   }
+
+# change the base16-shell theme selected via fzf
+fzf_base16_theme() {
+  local selection=$(alias | awk -F'base16_|=' '/base16_/ {print $2}' | fzf)
+  eval base16_$selection
+}
 
 # create a new directory and enter it
 function mcd() {
