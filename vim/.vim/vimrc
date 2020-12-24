@@ -21,6 +21,9 @@ function! PackInit() abort
   " Fuzzy finder
   call minpac#add('junegunn/fzf.vim')         " custom settings: ~/.vim/plugin/fzf.vim
 
+  " Improved in-buffer search experience
+  call minpac#add('junegunn/vim-slash')
+
   " Git information in the sign column
   call minpac#add('mhinz/vim-signify')        " custom settings: ~/.vim/plugin/signify.vim
 
@@ -84,7 +87,7 @@ let maplocalleader = ','
 nnoremap <Leader>w :update<CR>
 
 " Turn off search highlighting
-nnoremap <silent> <Leader>/ :let @/ = ""<esc>
+" nnoremap <silent> <Leader>/ :let @/ = ""<esc>
 
 " Replace all occurrences of word under cursor
 nnoremap <Leader>h :%s/\<<C-r><C-w>\>//g<Left><Left>
@@ -108,8 +111,8 @@ noremap <Leader><Down>  :resize -3<CR>
 nnoremap J mzJ`z
 
 " Next/previous search matches unfolded and centered on screen
-noremap n nzvzz
-noremap N Nzvzz
+" noremap n nzvzz
+" noremap N Nzvzz
 
 " Open new line and stay in normal mode
 nnoremap o o<esc>
@@ -122,8 +125,9 @@ map Y y$
 nnoremap * *<c-o>
 
 " Exit insert mode faster
-inoremap kj <esc>
-inoremap <C-c> <esc>
+inoremap <esc> <esc>l
+inoremap kj <esc>l
+inoremap <C-c> <esc>l
 
 " Move lines in normal, insert, and visual with alt+j/k
 if has('mac')
@@ -213,12 +217,6 @@ augroup AutoSourceSession
         \ endif
 augroup END
 
-" Disable auto-commenting on new lines
-augroup DisableAutoCommenting
-  autocmd!
-  autocmd FileType * set fo-=c fo-=r fo-=o fo-=j
-augroup END
-
 " Show cursorline in active window (line number only)
 augroup CursorLineOnlyInActiveWindow
   autocmd!
@@ -270,10 +268,10 @@ set textwidth=0                  " Disable maximum text width
 
 " Searching
 set gdefault                     " Global substitution by default
-set hlsearch                     " Keep matches highlighted
+" set hlsearch                     " Keep matches highlighted
 set ignorecase                   " Case insensitive search
 set incsearch                    " Highlight while searching with / or ?
-set path=$PWD/**                 " Find all files under this directory
+" set path=$PWD/**                 " Find all files under this directory
 set smartcase                    " Case sensitive search when using capital letter
 set wildcharm=<Tab>              " Allow wildmenu expansion from macros/remaps
 set wildignorecase               " Case-insensitive completion of commands, filenames
