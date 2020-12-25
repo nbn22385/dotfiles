@@ -5,75 +5,50 @@
 alias yc='yabai -m config'
 alias yr='yabai -m rule --add' 
 
-# bar settings - now handled by spacebar app
-# yc status_bar                      on
-# yc status_bar_text_font            "JetBrainsMono Nerd Font:Bold:12.0"
-# yc status_bar_icon_font            "JetBrainsMono Nerd Font:Bold:12.0"
-# yc status_bar_background_color     0xff2e3440
-# yc status_bar_foreground_color     0xffa8a8a8
-# yc status_bar_power_icon_strip      ﮣ
-# yc status_bar_space_icon_strip     WWW DEV 3 4 5 6
-# yc status_bar_space_icon           x
-# yc status_bar_clock_icon           ""
-
 # global settings
-yc layout                          bsp
-yc mouse_follows_focus             off
-yc focus_follows_mouse             off
-yc window_placement                second_child
-yc window_topmost                  off
-yc window_opacity                  off
-yc window_shadow                   float
+yc layout                    bsp
+yc mouse_follows_focus       off
+yc focus_follows_mouse       off
+yc window_border             off
+yc window_placement          second_child
+yc window_topmost            off
+yc window_opacity            off
+yc window_shadow             float
 
-yc split_ratio                     0.50
-yc auto_balance                    on
-yc mouse_modifier                  fn
-yc mouse_action1                   move
-yc mouse_action2                   resize
+yc split_ratio               0.50
+yc auto_balance              off
+yc mouse_modifier            fn
+yc mouse_action1             move
+yc mouse_action2             resize
 
-# window borders
-yc window_border                   off
-yc window_border_placement         inset
-yc window_border_width             2 
-yc window_border_radius            4 
-yc active_window_border_topmost    off
-yc active_window_border_color      0xff87bb7c
-yc normal_window_border_color      0xff4c566a
-yc insert_window_border_color      0xB2EBDBB2
+# padding settings
+yc external_bar              all:28:0 
+yc top_padding               6
+yc bottom_padding            6
+yc left_padding              6
+yc right_padding             6
+yc window_gap                6
 
 # space-specific settings
-yc --space 1 layout                float
-
-yc --space 2 bottom_padding        4
-yc --space 2 left_padding          4
-yc --space 2 right_padding         4
-yc --space 2 window_gap            4
-
-yc --space 3 bottom_padding        4
-yc --space 3 left_padding          4
-yc --space 3 right_padding         4
-yc --space 3 window_gap            4
-
-# extra padding for ubersicht bar 
-yc top_padding 32 
+# yc --space 1 layout          float
 
 # rules
-yr app=Alacritty border=on  space=2
-yr app=Finder    border=off manage=off
-yr app=Firefox   border=off space=1
-yr app=iTerm     border=off space=2
-yr app=Mail      border=off space=3
-yr app=Preview   border=off manage=off 
-yr app=Spark     border=off space=2 
-yr app=Spotify   border=off manage=off
-yr app=Telegram  border=off space=3
-yr app="Sublime Text"       border=off manage=off 
-yr app="System Preferences" border=off manage=off
+yr app=Firefox               space=1 # manage=off
+yr app=Alacritty             space=2
+yr app=iTerm                 space=2
+yr app=Mail                  space=3
+yr app=Spark                 space=3 
+yr app=Telegram              space=3
+yr app=Finder                manage=off
+yr app=MacPass               manage=off
+yr app=Preview               manage=off 
+yr app=Spotify               manage=off
+yr app="Sublime Text"        manage=off 
+yr app="System Preferences"  manage=off
 
 # ubersicht nibar space widget
 # yabai -m signal --add event=space_changed \
 #     action="osascript -e 'tell application id \"tracesOf.Uebersicht\" to refresh widget id \"nibar-spaces-primary-jsx\"'"
-
 # yabai -m signal --add event=application_front_switched \
 #     action="osascript -e 'tell application id \"tracesOf.Uebersicht\" to refresh widget id \"nibar-spaces-primary-jsx\"'"
 
@@ -102,3 +77,4 @@ yabai -m signal --add event=window_destroyed action="osascript -e 'tell applicat
 
 # Refresh process widget when current window title changes
 yabai -m signal --add event=window_title_changed action="osascript -e 'tell application id \"tracesOf.Uebersicht\" to refresh widget id \"simple-bar-process-jsx\"'"
+
