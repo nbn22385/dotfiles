@@ -6,26 +6,26 @@ function! PackInit() abort
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
-  " Color themes
-  call minpac#add('chriskempson/base16-vim')  " custom settings: ~/.vim/plugin/base16.vim
+  " Color themes (plugin/base16.vim)
+  call minpac#add('chriskempson/base16-vim')
 
-  " Status line
-  call minpac#add('itchyny/lightline.vim')    " custom settings: ~/.vim/plugin/lightline.vim
+  " Status line (plugin/lightline.vim)
+  call minpac#add('itchyny/lightline.vim')
 
   " Lightline color themes
   call minpac#add('daviesjamie/vim-base16-lightline')
 
-  " Syntax and semantic error checking
-  call minpac#add('dense-analysis/ale')       " custom settings: ~/.vim/plugin/ale.vim
+  " Syntax and semantic error checking (plugin/ale.vim)
+  call minpac#add('dense-analysis/ale')
 
-  " Fuzzy finder
-  call minpac#add('junegunn/fzf.vim')         " custom settings: ~/.vim/plugin/fzf.vim
+  " Fuzzy finder (plugin/fzf.vim)
+  call minpac#add('junegunn/fzf.vim')
 
-  " Improved in-buffer search experience
+  " Improved in-buffer search experience (plugin/slash.vim)
   call minpac#add('junegunn/vim-slash')
 
-  " Git information in the sign column
-  call minpac#add('mhinz/vim-signify')        " custom settings: ~/.vim/plugin/signify.vim
+  " Git information in the sign column (plugin/signify.vim)
+  call minpac#add('mhinz/vim-signify')
 
   " Code commenting shortcuts
   call minpac#add('tpope/vim-commentary')
@@ -54,14 +54,14 @@ function! PackInit() abort
   " Automatically change to file's project directory
   call minpac#add('airblade/vim-rooter')
 
-  " File browser
-  call minpac#add('lambdalisue/fern.vim')     " custom settings: ~/.vim/plugin/fern.vim
+  " File browser (plugin/fern.vim)
+  call minpac#add('lambdalisue/fern.vim')
 
   " More text objects
   call minpac#add('wellle/targets.vim')
 
-  " CMake commands
-  call minpac#add('ilyachur/cmake4vim')       " custom settings: ~/.vim/plugin/cmake4vim.vim
+  " CMake commands (plugin/cmake4vim.vim)
+  call minpac#add('ilyachur/cmake4vim')
 
   " Filetype icons
   call minpac#add('ryanoasis/vim-devicons')
