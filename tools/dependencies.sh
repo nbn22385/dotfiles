@@ -9,14 +9,17 @@ if [ -x "$(command -v brew)" ]; then
   brew upgrade
   # Install dependencies
   brew install                    \
+    bash                          \
     bat                           \
     fd                            \
     fzf                           \
     pandoc                        \
     ripgrep                       \
+    skhd                          \
     starship                      \
     tmux                          \
-    vim --with-override-system-vi
+    vim --with-override-system-vi \
+    yabai
   # install casks
   brew cask install               \
     basictex
