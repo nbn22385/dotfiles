@@ -116,6 +116,10 @@ alt - 1 : yabai -m space --focus 1
 alt - 2 : yabai -m space --focus 2
 alt - 3 : yabai -m space --focus 3
 
+# next/previous space
+alt - tab : yabai -m space --focus next || yabai -m space --focus first
+alt + shift - tab : yabai -m space --focus prev || yabai -m space --focus last
+
 # send window to desktop and follow focus
 # shift + cmd - z : yabai -m window --space next; yabai -m space --focus next
 # shift + cmd - 2 : yabai -m window --space  2; yabai -m space --focus 2
