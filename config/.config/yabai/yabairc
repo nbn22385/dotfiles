@@ -14,7 +14,6 @@ yc window_placement          second_child
 yc window_topmost            off
 yc window_opacity            off
 yc window_shadow             float
-
 yc split_ratio               0.50
 yc auto_balance              off
 yc mouse_modifier            fn
@@ -43,7 +42,6 @@ yr app=Finder                manage=off
 yr app=MacPass               manage=off
 yr app=Preview               manage=off 
 yr app=Spotify               manage=off
-yr app="Sublime Text"        manage=off 
 yr app="System Preferences"  manage=off
 
 # ubersicht nibar space widget
