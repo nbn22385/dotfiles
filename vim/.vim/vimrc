@@ -19,6 +19,7 @@ function! PackInit() abort
   call minpac#add('dense-analysis/ale')
 
   " Fuzzy finder (plugin/fzf.vim)
+  call minpac#add('junegunn/fzf', { 'do': { -> fzf#install() }})
   call minpac#add('junegunn/fzf.vim')
 
   " Improved in-buffer search experience (plugin/slash.vim)
@@ -72,9 +73,6 @@ command! PackClean  call PackInit() | call minpac#clean()
 command! PackStatus call PackInit() | call minpac#status()
 command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
 command! PackUpdateAndQuit call PackInit() | call minpac#update('', {'do': 'qall'})
-
-" Add FZF to the runtime path
-set runtimepath+=$HOME/.fzf,/usr/local/opt/fzf
 " }}}
 
 " {{{ Key Mappings
@@ -193,11 +191,15 @@ vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
 vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
 
 " Highlight the first match in the auto-complete popup menu
-" source: https://vim.fandom.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
       \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
-      \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+" Tab will cycle through auto-complete menu items
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Enter will select the highlighted auto-complete menu item
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " }}}
 
 " {{{ Autocommands
