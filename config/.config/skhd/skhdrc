@@ -115,6 +115,7 @@ shift + alt - right  : yabai -m window --grid 1:2:1:0:1:1
 alt - 1 : yabai -m space --focus 1
 alt - 2 : yabai -m space --focus 2
 alt - 3 : yabai -m space --focus 3
+alt - 4 : yabai -m space --focus 4
 
 # next/previous space
 alt - tab : yabai -m space --focus next || yabai -m space --focus first
