@@ -200,6 +200,9 @@ inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Enter will select the highlighted auto-complete menu item
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Apply last edit to visual selection
+vnoremap . :norm .<CR>
 " }}}
 
 " {{{ Autocommands
