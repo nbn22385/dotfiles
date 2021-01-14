@@ -17,6 +17,7 @@ function! PackInit() abort
 
   " Syntax and semantic error checking (plugin/ale.vim)
   call minpac#add('dense-analysis/ale')
+  call minpac#add('neoclide/coc.nvim', { 'branch': 'release'} )
 
   " Fuzzy finder (plugin/fzf.vim)
   call minpac#add('junegunn/fzf', { 'do': { -> fzf#install() }})
@@ -56,7 +57,7 @@ function! PackInit() abort
   call minpac#add('airblade/vim-rooter')
 
   " File browser (plugin/fern.vim)
-  call minpac#add('lambdalisue/fern.vim')
+  " call minpac#add('lambdalisue/fern.vim')
 
   " More text objects
   call minpac#add('wellle/targets.vim')
@@ -113,8 +114,8 @@ nnoremap J mzJ`z
 " noremap N Nzvzz
 
 " Open new line and stay in normal mode
-nnoremap o o<esc>
-nnoremap O O<esc>
+" nnoremap o o<esc>
+" nnoremap O O<esc>
 
 " Yank to the end of line
 map Y y$
@@ -191,15 +192,15 @@ vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
 vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
 
 " Highlight the first match in the auto-complete popup menu
-inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-      \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+" inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+"       \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
-" Tab will cycle through auto-complete menu items
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" " Tab will cycle through auto-complete menu items
+" inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" Enter will select the highlighted auto-complete menu item
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" " Enter will select the highlighted auto-complete menu item
+" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Apply last edit to visual selection
 vnoremap . :norm .<CR>
@@ -225,8 +226,8 @@ augroup END
 " Show cursorline in active window (line number only)
 augroup CursorLineOnlyInActiveWindow
   autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline relativenumber
-  autocmd WinLeave * setlocal nocursorline norelativenumber
+  " autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline relativenumber
+  " autocmd WinLeave * setlocal nocursorline norelativenumber
 augroup END
 highlight clear CursorLine  " Highlight current line number rather than entire line
 
