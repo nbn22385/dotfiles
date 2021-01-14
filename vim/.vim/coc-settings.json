@@ -1,0 +1,28 @@
+{
+  // general settings
+  "coc.preferences.formatOnSaveFiletypes": [
+    "cpp",
+    "vim"
+  ],
+
+  // diagnostic
+  "diagnostic.enable": true,
+  "diagnostic.errorSign": "✘ ",
+  "diagnostic.hintSign": " ",
+  "diagnostic.infoSign": "",
+  "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.warningSign": "◬ ",
+
+  // clangd
+  "clangd.arguments": [
+    "--clang-tidy"
+  ],
+  "clangd.compilationDatabasePath": "build",
+
+  // coc-explorer
+  "explorer.file.showHiddenFiles": true,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.icon.enableVimDevicons": true,
+  "explorer.openAction.strategy":"vsplit",
+  "explorer.width": 30
+}
