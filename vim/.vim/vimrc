@@ -83,7 +83,7 @@ let mapleader = "\<Space>"
 let maplocalleader = ','
 
 " Save a file
-nnoremap <Leader>w :update<CR>
+nnoremap <Leader>w :w<CR>
 
 " Turn off search highlighting
 " nnoremap <silent> <Leader>/ :let @/ = ""<esc>
