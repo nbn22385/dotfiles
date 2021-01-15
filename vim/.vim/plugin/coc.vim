@@ -1,3 +1,6 @@
+"==============================================================================
+" General settings
+"------------------------------------------------------------------------------
 " Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
@@ -14,6 +17,9 @@ set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
 
+"==============================================================================
+" Remaps
+"------------------------------------------------------------------------------
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
@@ -45,6 +51,12 @@ nmap <silent> <LocalLeader>gy <Plug>(coc-type-definition)
 nmap <silent> <LocalLeader>gi <Plug>(coc-implementation)
 nmap <silent> <LocalLeader>gr <Plug>(coc-references)
 
+" Remap for rename current word
+nmap <silent> <LocalLeader>rn <Plug>(coc-rename)
+
+" Toggle coc-explorer
+nmap <silent> <Leader>e :CocCommand explorer<CR>
+
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
@@ -56,11 +68,8 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" Toggle coc-explorer
-nmap <space>e :CocCommand explorer<CR>
+"==============================================================================
+" Custom highlights
+"------------------------------------------------------------------------------
+hi CocErrorSign guifg=LightRed
+hi CocWarningSign guifg=Orange
