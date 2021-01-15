@@ -24,6 +24,12 @@ function! PackInit() abort
   call minpac#add('junegunn/fzf', { 'do': { -> fzf#install() }})
   call minpac#add('junegunn/fzf.vim')
 
+  " CMake commands (plugin/cmake4vim.vim)
+  call minpac#add('ilyachur/cmake4vim')
+
+  " Filetype icons
+  call minpac#add('ryanoasis/vim-devicons')
+
   " Improved in-buffer search experience (plugin/slash.vim)
   call minpac#add('junegunn/vim-slash')
 
@@ -57,17 +63,8 @@ function! PackInit() abort
   " Automatically change to file's project directory
   call minpac#add('airblade/vim-rooter')
 
-  " File browser (plugin/fern.vim)
-  " call minpac#add('lambdalisue/fern.vim')
-
   " More text objects
   call minpac#add('wellle/targets.vim')
-
-  " CMake commands (plugin/cmake4vim.vim)
-  call minpac#add('ilyachur/cmake4vim')
-
-  " Filetype icons
-  call minpac#add('ryanoasis/vim-devicons')
 
 endfunction
 
