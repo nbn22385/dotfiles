@@ -1,5 +1,6 @@
 {
   // general settings
+  "suggest.autoTrigger": "none",
   "coc.preferences.formatOnSaveFiletypes": [
     "cpp",
     "vim"
@@ -10,7 +11,6 @@
   "diagnostic.errorSign": "✘ ",
   "diagnostic.hintSign": " ",
   "diagnostic.infoSign": "",
-  "diagnostic.refreshOnInsertMode": true,
   "diagnostic.warningSign": "◬ ",
 
   // clangd
@@ -19,10 +19,18 @@
   ],
   "clangd.compilationDatabasePath": "build",
 
-  // coc-explorer
+  // explorer
+  "explorer.file.root.template": "[icon & 1] PROJECT ([root])",
   "explorer.file.showHiddenFiles": true,
+  "explorer.git.enable": true,
   "explorer.icon.enableNerdfont": true,
   "explorer.icon.enableVimDevicons": true,
-  "explorer.openAction.strategy":"vsplit",
-  "explorer.width": 30
+  "explorer.openAction.strategy": "vsplit",
+  "explorer.width": 30,
+  "explorer.sources": [
+    {
+      "name": "file",
+      "expand": true
+    }
+  ]
 }
