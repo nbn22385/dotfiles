@@ -18,6 +18,7 @@ function! PackInit() abort
   " Syntax and semantic error checking (plugin/ale.vim)
   call minpac#add('dense-analysis/ale')
   call minpac#add('neoclide/coc.nvim', { 'branch': 'release'} )
+  call minpac#add('josa42/vim-lightline-coc')
 
   " Fuzzy finder (plugin/fzf.vim)
   call minpac#add('junegunn/fzf', { 'do': { -> fzf#install() }})
@@ -226,8 +227,8 @@ augroup END
 " Show cursorline in active window (line number only)
 augroup CursorLineOnlyInActiveWindow
   autocmd!
-  " autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline relativenumber
-  " autocmd WinLeave * setlocal nocursorline norelativenumber
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
 augroup END
 highlight clear CursorLine  " Highlight current line number rather than entire line
 
