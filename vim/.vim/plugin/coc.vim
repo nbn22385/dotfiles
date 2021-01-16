@@ -51,6 +51,9 @@ nmap <silent> <LocalLeader>gy <Plug>(coc-type-definition)
 nmap <silent> <LocalLeader>gi <Plug>(coc-implementation)
 nmap <silent> <LocalLeader>gr <Plug>(coc-references)
 
+" Try first quickfix action for diagnostics on the current line.
+nmap <silent> <LocalLeader>gx <Plug>(coc-fix-current)
+
 " Remap for rename current word
 nmap <silent> <LocalLeader>rn <Plug>(coc-rename)
 
