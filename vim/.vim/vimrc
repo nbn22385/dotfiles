@@ -126,6 +126,12 @@ inoremap <esc> <esc>l
 inoremap kj <esc>l
 inoremap <C-c> <esc>l
 
+" Fix arrow keys in insert mode
+inoremap <silent> <Esc>OA <Up>
+inoremap <silent> <Esc>OB <Down>
+inoremap <silent> <Esc>OC <Right>
+inoremap <silent> <Esc>OD <Left>
+
 " Move lines in normal, insert, and visual with alt+j/k
 if has('mac')
   nnoremap ∆ m`:move .+1<CR>==``
