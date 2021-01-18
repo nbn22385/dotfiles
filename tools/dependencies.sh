@@ -17,6 +17,7 @@ if [ -x "$(command -v brew)" ]; then
     ripgrep                       \
     skhd                          \
     starship                      \
+    stow                          \
     tmux                          \
     vim --with-override-system-vi \
     yabai
