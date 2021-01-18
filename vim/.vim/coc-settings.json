@@ -1,13 +1,15 @@
 {
   // general settings
-  "suggest.autoTrigger": "none",
-  "suggest.enablePreview": false,
-  "suggest.disableMenu": true,
-  "suggest.noselect": false,
   "coc.preferences.formatOnSaveFiletypes": [
     "cpp",
     "vim"
   ],
+  "http.proxy": "",
+  "http.proxyStrictSSL": false,
+  "suggest.autoTrigger": "none",
+  "suggest.enablePreview": false,
+  "suggest.disableMenu": true,
+  "suggest.noselect": false,
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
     "variable": "\ue79b",
@@ -55,7 +57,6 @@
   "explorer.git.enable": true,
   "explorer.icon.enableNerdfont": true,
   "explorer.icon.enableVimDevicons": true,
-  "explorer.openAction.strategy": "vsplit",
   "explorer.width": 30,
   "explorer.sources": [
     {
