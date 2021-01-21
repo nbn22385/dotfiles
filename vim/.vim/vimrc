@@ -281,7 +281,7 @@ set gdefault                     " Global substitution by default
 " set hlsearch                     " Keep matches highlighted
 set ignorecase                   " Case insensitive search
 set incsearch                    " Highlight while searching with / or ?
-" set path=$PWD/**                 " Find all files under this directory
+set path=$PWD/**                 " Find all files under this directory
 set smartcase                    " Case sensitive search when using capital letter
 set wildcharm=<Tab>              " Allow wildmenu expansion from macros/remaps
 set wildignorecase               " Case-insensitive completion of commands, filenames
