@@ -174,10 +174,6 @@ nnoremap - <C-x>
 vnoremap + g<C-a>gv
 vnoremap - g<C-x>gv
 
-" Tab navigation from a terminal window
-tmap <C-h> <C-w>:tabp<CR>
-tmap <C-l> <C-w>:tabn<CR>
-
 " Tab navigation in normal mode
 nnoremap <tab> gt
 
@@ -217,6 +213,12 @@ augroup AutoSave
   autocmd CursorHoldI,CursorHold * silent! :update
 augroup END
 
+" Automatically equalize splits when Vim is resized
+augroup AutoResizePanesOnVimResize
+  autocmd!
+  autocmd VimResized * wincmd =
+augroup END
+
 " Automatically source Session.vim if it exists
 let s:autoload_session = 1
 augroup AutoSourceSession
@@ -235,11 +237,14 @@ augroup CursorLineOnlyInActiveWindow
 augroup END
 highlight clear CursorLine  " Highlight current line number rather than entire line
 
-" Automatically equalize splits when Vim is resized
-augroup AutoResizePanesOnVimResize
-  autocmd!
-  autocmd VimResized * wincmd =
-augroup END
+" WSL yank support
+let s:clip = '/mnt/c/Windows/System32/clip.exe'
+if executable(s:clip)
+  augroup WSLYank
+    autocmd!
+    autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+  augroup END
+endif
 " }}}
 
 " {{{ Options
