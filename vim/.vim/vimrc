@@ -272,6 +272,7 @@ syntax on                        " Enable syntax highlighting
 set autoindent                   " Indent according to previous line
 set expandtab                    " Use spaces instead of tabs
 set fillchars+=vert:│,fold:\     " Vertical split and fold separators
+set matchpairs+=<:>              " Add angle brackets to list of matching pairs
 set nowrap                       " Do not automatically wrap on load
 set number                       " Show line numbers
 set shiftround                   " >> indents to next multiple of 'shiftwidth'
