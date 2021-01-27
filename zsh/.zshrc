@@ -128,9 +128,8 @@ zstyle ':completion:*' special-dirs false
 
 # fd, a find alternative with sensible defaults
 # remove oh-my-zsh alias of the same name
-unalias fd
+unalias fd 2>/dev/null
 # create alias if fdfind is the executable name (ubuntu)
-# [[ -x "$(command -v fdfind)" ]] && alias fd='$(which fdfind)'
 [[ -x "$(command -v fdfind)" ]] && ln -sf $(which fdfind) /usr/local/bin/fd
 
 # git aliases
