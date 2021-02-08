@@ -39,17 +39,18 @@
     "default": "\uf29c"
   },
 
-  // diagnostic
-  "diagnostic.errorSign": "✘ ",
-  "diagnostic.hintSign": " ",
-  "diagnostic.infoSign": "",
-  "diagnostic.warningSign": "◬ ",
-
   // clangd
   "clangd.arguments": [
     "--clang-tidy"
   ],
   "clangd.compilationDatabasePath": "build",
+  "clangd.semanticHighlighting": true,
+
+  // diagnostic
+  "diagnostic.errorSign": "✘",
+  "diagnostic.hintSign": " ",
+  "diagnostic.infoSign": "",
+  "diagnostic.warningSign": "‼",
 
   // explorer
   "explorer.file.root.template": "[icon & 1] PROJECT ([root])",
@@ -63,5 +64,18 @@
       "name": "file",
       "expand": true
     }
-  ]
+  ],
+
+  // git
+  "git.addedSign.text": "▎",
+  "git.addedSign.hlGroup": "CocListFgGreen",
+  "git.changedSign.text": "▎",
+  "git.changedSign.hlGroup": "CocListFgBlue",
+  "git.removedSign.text": "▌",
+  "git.removedSign.hlGroup": "CocListFgRed",
+  "git.changeRemovedSign.text": "▌",
+  "git.topRemovedSign.text": "▔",
+  "git.enableGutters": true,
+  "git.realtimeGutters": true,
+  "git.branchCharacter": ""
 }
