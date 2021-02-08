@@ -11,17 +11,15 @@ function! PackInit() abort
 
   " Status line (plugin/lightline.vim)
   call minpac#add('itchyny/lightline.vim')
-
-  " Lightline color themes
   call minpac#add('daviesjamie/vim-base16-lightline')
-
-  " Syntax and semantic error checking (plugin/ale.vim)
-  call minpac#add('dense-analysis/ale')
-  call minpac#add('neoclide/coc.nvim', { 'branch': 'release'} )
   call minpac#add('josa42/vim-lightline-coc')
 
+  " Syntax and semantic error checking (plugin/ale.vim)
+  call minpac#add('neoclide/coc.nvim', { 'branch': 'release'} )
+  call minpac#add('jackguo380/vim-lsp-cxx-highlight')
+
   " Fuzzy finder (plugin/fzf.vim)
-  call minpac#add('junegunn/fzf', { 'do': { -> fzf#install() }})
+  call minpac#add('junegunn/fzf')
   call minpac#add('junegunn/fzf.vim')
 
   " CMake commands (plugin/cmake4vim.vim)
@@ -34,7 +32,7 @@ function! PackInit() abort
   call minpac#add('junegunn/vim-slash')
 
   " Git information in the sign column (plugin/signify.vim)
-  call minpac#add('mhinz/vim-signify')
+  " call minpac#add('mhinz/vim-signify')
 
   " Code commenting shortcuts
   call minpac#add('tpope/vim-commentary')
@@ -112,8 +110,8 @@ nnoremap J mzJ`z
 " noremap N Nzvzz
 
 " Open new line and stay in normal mode
-" nnoremap o o<esc>
-" nnoremap O O<esc>
+nnoremap <Leader>o o<esc>
+nnoremap <Leader>O O<esc>
 
 " Yank to the end of line
 map Y y$
