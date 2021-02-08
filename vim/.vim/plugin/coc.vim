@@ -1,6 +1,12 @@
 "==============================================================================
 " General settings
 "------------------------------------------------------------------------------
+let g:coc_global_extensions = [
+      \ 'coc-clangd',
+      \ 'coc-explorer',
+      \ 'coc-git',
+      \ 'coc-json']
+
 " Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
@@ -70,6 +76,13 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+" Toggle get gutter info
+nmap <silent> <Leader>g :CocCommand git.toggleGutters<CR>
+
+" Navigate hunks of current buffer
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
 
 "==============================================================================
 " Custom highlights
