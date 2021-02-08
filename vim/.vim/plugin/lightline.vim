@@ -52,7 +52,7 @@ function! GitBranch()
   endif
   if exists('g:loaded_fugitive')
     let l:branch = fugitive#head()
-    return fugitive#head() !=? '' ? (winwidth(0) < 100 ? ' ' . l:branch[0:15] : ' ' . l:branch) : ''
+    return l:branch !=? '' ? (winwidth(0) < 100 ? ' ' . l:branch[0:15] : ' ' . l:branch) : ''
   endif
 endfunction
 
@@ -70,12 +70,8 @@ let g:lightline.component_function = {
       \ 'mode' : 'LightlineMode',
       \ 'filetypesymbol' : 'FiletypeSymbol',
       \ 'gitbranch' : 'GitBranch',
-      \ 'linterstatus' : 'LinterStatus',
       \ 'obsessionstatus' : 'SessionStatus'
       \ }
-
-let g:lightline.component_type = {
-      \ 'linterstatus' : 'error' }
 
 let g:lightline.component = {
       \ 'mode': '%{lightline#mode()}',
