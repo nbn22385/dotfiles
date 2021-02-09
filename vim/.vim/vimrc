@@ -31,9 +31,6 @@ function! PackInit() abort
   " Improved in-buffer search experience (plugin/slash.vim)
   call minpac#add('junegunn/vim-slash')
 
-  " Git information in the sign column (plugin/signify.vim)
-  " call minpac#add('mhinz/vim-signify')
-
   " Code commenting shortcuts
   call minpac#add('tpope/vim-commentary')
 
