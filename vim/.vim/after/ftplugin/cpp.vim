@@ -20,5 +20,9 @@ setlocal commentstring=//\ %s
 " CTest + googletest
 setlocal errorformat^=%>%f:%l:%c:\ %m
 
+" CTest + catch2
+setlocal errorformat^=%.%#:\ %f:%l:\ %m
+
 " CTest + gcc
-setlocal errorformat+=%m\\,\ file\ %f\\,\ line\ %l%.
+setlocal errorformat^=%m\\,\ file\ %f\\,\ line\ %l%.
+
