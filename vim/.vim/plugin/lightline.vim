@@ -9,14 +9,14 @@ let g:lightline = {}
 let g:lightline.active = {
       \ 'left':  [ [ 'mode', 'paste' ],
       \            [ 'readonly', 'relativepath', 'modified' ] ],
-      \ 'right': [ [ 'linterstatus' ],
+      \ 'right': [ [ 'coc_errors', 'coc_warnings', 'coc_ok' ],
       \            [ 'gitbranch' ],
       \            [ 'obsessionstatus' ],
       \            [ 'filetypesymbol', 'lineinfo', 'percent' ] ] }
 
 let g:lightline.inactive = {
       \ 'left':  [ [ 'readonly', 'relativepath', 'modified' ] ],
-      \ 'right': [ [ 'linterstatus' ],
+      \ 'right': [ [ 'coc_errors', 'coc_warnings', 'coc_ok' ],
       \            [ 'gitbranch' ],
       \            [ 'obsessionstatus' ] ] }
 
@@ -32,29 +32,34 @@ let g:lightline.enable = {
 "==============================================================================
 " Component functions
 "------------------------------------------------------------------------------
+call lightline#coc#register()
+
+function! LightlineMode() abort
+  let ftmap = {
+        \ 'coc-explorer': 'EXPLORER',
+        \ 'fugitive': 'FUGITIVE'
+        \ }
+  return get(ftmap, &filetype, lightline#mode())
+endfunction
+
 function! FiletypeSymbol()
   return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() : '') : ''
 endfunction
 
 function! GitBranch()
+  if winwidth(0) <= 30
+    return ''
+  endif
   if exists('g:loaded_fugitive')
     let l:branch = fugitive#head()
-    return fugitive#head() !=? '' ? (winwidth(0) < 100 ? ' ' . l:branch[0:15] : ' ' . l:branch) : ''
-  endif
-endfunction
-
-function! LinterStatus() abort
-  if exists('g:ale_enabled')
-    let l:counts = ale#statusline#Count(bufnr(''))
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_warnings = l:counts.total - l:all_errors
-    return
-          \ (l:all_errors > 0 ? printf('%dE', l:all_errors) : '') .
-          \ (l:all_warnings > 0 ? printf('%dW', l:all_warnings) : '')
+    return l:branch !=? '' ? (winwidth(0) < 100 ? ' ' . l:branch[0:15] : ' ' . l:branch) : ''
   endif
 endfunction
 
 function! SessionStatus() abort
+  if winwidth(0) <= 30
+    return ''
+  endif
   if exists('g:loaded_obsession')
     let l:status = ObsessionStatus()
     return l:status !=? '' ? (l:status ==? '[$]' ? '' : 'ﭸ') : ''
@@ -62,14 +67,11 @@ function! SessionStatus() abort
 endfunction
 
 let g:lightline.component_function = {
+      \ 'mode' : 'LightlineMode',
       \ 'filetypesymbol' : 'FiletypeSymbol',
       \ 'gitbranch' : 'GitBranch',
-      \ 'linterstatus' : 'LinterStatus',
       \ 'obsessionstatus' : 'SessionStatus'
       \ }
-
-let g:lightline.component_type = {
-      \ 'linterstatus' : 'error' }
 
 let g:lightline.component = {
       \ 'mode': '%{lightline#mode()}',

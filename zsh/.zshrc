@@ -1,5 +1,5 @@
-# Base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/"
+# Base16 Shell
 [ -n "$PS1" ] && \
   [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
   eval "$("$BASE16_SHELL/profile_helper.sh")"
@@ -17,11 +17,25 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+SPACESHIP_DIR_COLOR=blue
+SPACESHIP_GIT_PREFIX=""
+SPACESHIP_GIT_STATUS_COLOR=green
+SPACESHIP_GIT_SYMBOL=" "
+SPACESHIP_PROMPT_ORDER=(
+  time          # Time stamps section
+  dir           # Current directory section
+  git           # Git section (git_branch + git_status)
+  line_sep      # Line break
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="spaceship"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -128,9 +142,8 @@ zstyle ':completion:*' special-dirs false
 
 # fd, a find alternative with sensible defaults
 # remove oh-my-zsh alias of the same name
-unalias fd
+unalias fd 2>/dev/null
 # create alias if fdfind is the executable name (ubuntu)
-# [[ -x "$(command -v fdfind)" ]] && alias fd='$(which fdfind)'
 [[ -x "$(command -v fdfind)" ]] && ln -sf $(which fdfind) /usr/local/bin/fd
 
 # git aliases

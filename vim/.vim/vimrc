@@ -11,22 +11,25 @@ function! PackInit() abort
 
   " Status line (plugin/lightline.vim)
   call minpac#add('itchyny/lightline.vim')
-
-  " Lightline color themes
   call minpac#add('daviesjamie/vim-base16-lightline')
+  call minpac#add('josa42/vim-lightline-coc')
 
-  " Syntax and semantic error checking (plugin/ale.vim)
-  call minpac#add('dense-analysis/ale')
+  " Syntax and semantic error checking (plugin/coc.vim)
+  call minpac#add('neoclide/coc.nvim', { 'branch': 'release'} )
+  " call minpac#add('jackguo380/vim-lsp-cxx-highlight')
 
   " Fuzzy finder (plugin/fzf.vim)
-  call minpac#add('junegunn/fzf', { 'do': { -> fzf#install() }})
+  call minpac#add('junegunn/fzf')
   call minpac#add('junegunn/fzf.vim')
+
+  " CMake commands (plugin/cmake4vim.vim)
+  call minpac#add('ilyachur/cmake4vim')
+
+  " Filetype icons
+  call minpac#add('ryanoasis/vim-devicons')
 
   " Improved in-buffer search experience (plugin/slash.vim)
   call minpac#add('junegunn/vim-slash')
-
-  " Git information in the sign column (plugin/signify.vim)
-  call minpac#add('mhinz/vim-signify')
 
   " Code commenting shortcuts
   call minpac#add('tpope/vim-commentary')
@@ -55,17 +58,8 @@ function! PackInit() abort
   " Automatically change to file's project directory
   call minpac#add('airblade/vim-rooter')
 
-  " File browser (plugin/fern.vim)
-  call minpac#add('lambdalisue/fern.vim')
-
   " More text objects
   call minpac#add('wellle/targets.vim')
-
-  " CMake commands (plugin/cmake4vim.vim)
-  call minpac#add('ilyachur/cmake4vim')
-
-  " Filetype icons
-  call minpac#add('ryanoasis/vim-devicons')
 
 endfunction
 
@@ -82,7 +76,7 @@ let mapleader = "\<Space>"
 let maplocalleader = ','
 
 " Save a file
-nnoremap <Leader>w :update<CR>
+nnoremap <Leader>w :w<CR>
 
 " Turn off search highlighting
 " nnoremap <silent> <Leader>/ :let @/ = ""<esc>
@@ -113,8 +107,8 @@ nnoremap J mzJ`z
 " noremap N Nzvzz
 
 " Open new line and stay in normal mode
-nnoremap o o<esc>
-nnoremap O O<esc>
+nnoremap <Leader>o o<esc>
+nnoremap <Leader>O O<esc>
 
 " Yank to the end of line
 map Y y$
@@ -126,6 +120,12 @@ nnoremap * *<c-o>
 inoremap <esc> <esc>l
 inoremap kj <esc>l
 inoremap <C-c> <esc>l
+
+" Fix arrow keys in insert mode
+inoremap <silent> <Esc>OA <Up>
+inoremap <silent> <Esc>OB <Down>
+inoremap <silent> <Esc>OC <Right>
+inoremap <silent> <Esc>OD <Left>
 
 " Move lines in normal, insert, and visual with alt+j/k
 if has('mac')
@@ -169,10 +169,6 @@ nnoremap - <C-x>
 vnoremap + g<C-a>gv
 vnoremap - g<C-x>gv
 
-" Tab navigation from a terminal window
-tmap <C-h> <C-w>:tabp<CR>
-tmap <C-l> <C-w>:tabn<CR>
-
 " Tab navigation in normal mode
 nnoremap <tab> gt
 
@@ -191,15 +187,15 @@ vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
 vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
 
 " Highlight the first match in the auto-complete popup menu
-inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-      \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+" inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+"       \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
-" Tab will cycle through auto-complete menu items
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" " Tab will cycle through auto-complete menu items
+" inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" Enter will select the highlighted auto-complete menu item
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" " Enter will select the highlighted auto-complete menu item
+" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Apply last edit to visual selection
 vnoremap . :norm .<CR>
@@ -210,6 +206,12 @@ vnoremap . :norm .<CR>
 augroup AutoSave
   autocmd!
   autocmd CursorHoldI,CursorHold * silent! :update
+augroup END
+
+" Automatically equalize splits when Vim is resized
+augroup AutoResizePanesOnVimResize
+  autocmd!
+  autocmd VimResized * wincmd =
 augroup END
 
 " Automatically source Session.vim if it exists
@@ -225,16 +227,19 @@ augroup END
 " Show cursorline in active window (line number only)
 augroup CursorLineOnlyInActiveWindow
   autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline relativenumber
-  autocmd WinLeave * setlocal nocursorline norelativenumber
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
 augroup END
 highlight clear CursorLine  " Highlight current line number rather than entire line
 
-" Automatically equalize splits when Vim is resized
-augroup AutoResizePanesOnVimResize
-  autocmd!
-  autocmd VimResized * wincmd =
-augroup END
+" WSL yank support
+let s:clip = '/mnt/c/Windows/System32/clip.exe'
+if executable(s:clip)
+  augroup WSLYank
+    autocmd!
+    autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+  augroup END
+endif
 " }}}
 
 " {{{ Options
@@ -262,6 +267,7 @@ syntax on                        " Enable syntax highlighting
 set autoindent                   " Indent according to previous line
 set expandtab                    " Use spaces instead of tabs
 set fillchars+=vert:│,fold:\     " Vertical split and fold separators
+set matchpairs+=<:>              " Add angle brackets to list of matching pairs
 set nowrap                       " Do not automatically wrap on load
 set number                       " Show line numbers
 set shiftround                   " >> indents to next multiple of 'shiftwidth'
@@ -276,7 +282,7 @@ set gdefault                     " Global substitution by default
 " set hlsearch                     " Keep matches highlighted
 set ignorecase                   " Case insensitive search
 set incsearch                    " Highlight while searching with / or ?
-" set path=$PWD/**                 " Find all files under this directory
+set path=$PWD/**                 " Find all files under this directory
 set smartcase                    " Case sensitive search when using capital letter
 set wildcharm=<Tab>              " Allow wildmenu expansion from macros/remaps
 set wildignorecase               " Case-insensitive completion of commands, filenames
