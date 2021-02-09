@@ -14,9 +14,9 @@ function! PackInit() abort
   call minpac#add('daviesjamie/vim-base16-lightline')
   call minpac#add('josa42/vim-lightline-coc')
 
-  " Syntax and semantic error checking (plugin/ale.vim)
+  " Syntax and semantic error checking (plugin/coc.vim)
   call minpac#add('neoclide/coc.nvim', { 'branch': 'release'} )
-  call minpac#add('jackguo380/vim-lsp-cxx-highlight')
+  " call minpac#add('jackguo380/vim-lsp-cxx-highlight')
 
   " Fuzzy finder (plugin/fzf.vim)
   call minpac#add('junegunn/fzf')
