@@ -288,8 +288,6 @@ set termguicolors                " Use 24-bit colors
 set textwidth=0                  " Disable maximum text width
 
 " Searching
-set gdefault                     " Global substitution by default
-" set hlsearch                     " Keep matches highlighted
 set ignorecase                   " Case insensitive search
 set incsearch                    " Highlight while searching with / or ?
 set path=$PWD/**                 " Find all files under this directory
