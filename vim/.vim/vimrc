@@ -202,6 +202,17 @@ vnoremap . :norm .<CR>
 " }}}
 
 " {{{ Autocommands
+
+" When editing a file, always jump to the last known cursor position.
+" from $VIMRUNTIME/defaults.vim
+augroup vimStartup
+  autocmd!
+  autocmd BufReadPost *
+        \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+        \ |   exe "normal! g`\""
+        \ | endif
+augroup END
+
 " Save modified buffer during idle after 'updatetime' has elapsed (default 4 sec)
 augroup AutoSave
   autocmd!
