@@ -12,7 +12,7 @@ let g:lightline.active = {
       \ 'right': [ [ 'coc_errors', 'coc_warnings', 'coc_ok' ],
       \            [ 'gitbranch' ],
       \            [ 'obsessionstatus' ],
-      \            [ 'filetypesymbol', 'lineinfo', 'percent' ] ] }
+      \            [ 'lineinfo', 'percent' ] ] }
 
 let g:lightline.inactive = {
       \ 'left':  [ [ 'readonly', 'relativepath', 'modified' ] ],
@@ -40,10 +40,6 @@ function! LightlineMode() abort
         \ 'fugitive': 'FUGITIVE'
         \ }
   return get(ftmap, &filetype, lightline#mode())
-endfunction
-
-function! FiletypeSymbol()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() : '') : ''
 endfunction
 
 function! GitBranch()
