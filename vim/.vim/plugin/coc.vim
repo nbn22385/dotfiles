@@ -77,7 +77,7 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Toggle get gutter info
+" Toggle git gutter info
 nmap <silent> <Leader>g :CocCommand git.toggleGutters<CR>
 
 " Navigate hunks of current buffer
