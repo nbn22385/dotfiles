@@ -4,7 +4,7 @@
     "cpp",
     "vim"
   ],
-  "http.proxy": "",
+  "http.proxy": "http://proxy-lmi.global.lmco.com:80",
   "http.proxyStrictSSL": false,
   "suggest.autoTrigger": "none",
   "suggest.enablePreview": false,
@@ -68,13 +68,15 @@
 
   // git
   "git.addedSign.text": "▎",
-  "git.addedSign.hlGroup": "CocListFgGreen",
+  "git.addedSign.hlGroup": "CocDiffAdd",
   "git.changedSign.text": "▎",
-  "git.changedSign.hlGroup": "CocListFgBlue",
+  "git.changedSign.hlGroup": "CocDiffChange", 
   "git.removedSign.text": "▌",
-  "git.removedSign.hlGroup": "CocListFgRed",
+  "git.removedSign.hlGroup": "CocDiffDelete",
   "git.changeRemovedSign.text": "▌",
+  "git.changeRemovedSign.hlGroup": "CocDiffDelete",
   "git.topRemovedSign.text": "▔",
+  "git.topRemovedSign.hlGroup": "CocDiffDelete",
   "git.enableGutters": true,
   "git.realtimeGutters": true,
   "git.branchCharacter": ""
