@@ -226,13 +226,12 @@ augroup AutoResizePanesOnVimResize
 augroup END
 
 " Automatically source Session.vim if it exists
-let s:autoload_session = 1
 augroup AutoSourceSession
   autocmd!
   autocmd VimEnter * nested
-        \ if get(s:, 'autoload_session', 0) && !argc() && empty(v:this_session) && filereadable('Session.vim') |
-        \   source Session.vim |
-        \ endif
+        \ if !argc() && empty(v:this_session) && filereadable('Session.vim')
+        \ | source Session.vim
+        \ | endif
 augroup END
 
 " Show cursorline in active window (line number only)
