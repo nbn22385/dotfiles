@@ -131,6 +131,7 @@ alias g='_f() { if [[ $# == 0 ]]; then git status -sb; else git "$@"; fi }; _f'
 alias gcmsg='git commit -m'
 alias glog='git log --oneline --decorate --graph'
 alias gdt='git difftool'
+alias gdu='git diff ..@{upstream}'
 alias lg='lazygit'
 
 # fzf aliases
