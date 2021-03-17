@@ -16,8 +16,7 @@ let g:lightline.active = {
 
 let g:lightline.inactive = {
       \ 'left':  [ [ 'readonly', 'relativepath', 'modified' ] ],
-      \ 'right': [ [ 'coc_errors', 'coc_warnings', 'coc_ok' ],
-      \            [ 'gitbranch' ],
+      \ 'right': [ [ 'gitbranch' ],
       \            [ 'obsessionstatus' ] ] }
 
 let g:lightline.tabline = {
@@ -118,6 +117,6 @@ let g:lightline.subseparator = { 'left': '', 'right': '' }
 "==============================================================================
 " Color scheme
 "------------------------------------------------------------------------------
-let g:lightline.colorscheme = 'base16'
+let g:lightline.colorscheme = 'gruvbox8'
 
 scriptencoding utf-8
