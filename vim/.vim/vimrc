@@ -6,17 +6,17 @@ function! PackInit() abort
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
-  " Color themes (plugin/base16.vim)
-  call minpac#add('chriskempson/base16-vim')
+  " Color themes
+  call minpac#add('lifepillar/vim-gruvbox8')
+  call minpac#add('rakr/vim-one')
+  call minpac#add('ulwlu/elly.vim')
 
   " Status line (plugin/lightline.vim)
   call minpac#add('itchyny/lightline.vim')
-  call minpac#add('daviesjamie/vim-base16-lightline')
   call minpac#add('josa42/vim-lightline-coc')
 
   " Syntax and semantic error checking (plugin/coc.vim)
   call minpac#add('neoclide/coc.nvim', { 'branch': 'release'} )
-  " call minpac#add('jackguo380/vim-lsp-cxx-highlight')
 
   " Fuzzy finder (plugin/fzf.vim)
   call minpac#add('junegunn/fzf')
@@ -151,7 +151,8 @@ inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
 inoremap <C-^> <C-o><C-^>
 
-" <CTRL>h/j/k/l -> Switch between buffers - superseded by vim-tmux-navigator
+" <CTRL>h/j/k/l -> Switch between buffers 
+" NOTE: superseded by vim-tmux-navigator
 " nnoremap <C-j> <C-w>j
 " nnoremap <C-k> <C-w>k
 " nnoremap <C-h> <C-w>h
@@ -186,16 +187,9 @@ endfunction
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
 vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
 
-" Highlight the first match in the auto-complete popup menu
-" inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-"       \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
-" " Tab will cycle through auto-complete menu items
-" inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" " Enter will select the highlighted auto-complete menu item
-" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Navigate through partial search matches with tab/s-tab
+cnoremap <expr> <tab> getcmdtype() =~ '[/?]' ? "<c-g>" : "<tab>"
+cnoremap <expr> <s-tab> getcmdtype() =~ '[/?]' ? "<c-t>" : "<s-tab>"
 
 " Apply last edit to visual selection
 vnoremap . :norm .<CR>
@@ -276,7 +270,7 @@ set spelllang=en_us              " Set language for spell checking
 syntax on                        " Enable syntax highlighting
 set autoindent                   " Indent according to previous line
 set expandtab                    " Use spaces instead of tabs
-set fillchars+=vert:│,fold:\     " Vertical split and fold separators
+set fillchars+=vert:\│,fold:\     " Vertical split and fold separators
 set matchpairs+=<:>              " Add angle brackets to list of matching pairs
 set nowrap                       " Do not automatically wrap on load
 set number                       " Show line numbers
@@ -301,22 +295,33 @@ let &t_SI = "\e[6 q"             " INSERT mode - beam cursor
 let &t_EI = "\e[2 q"             " NORMAL mode - block cursor
 let &t_SR = "\e[4 q"             " REPLACE mode - underline cursor
 
+" Yank to system clipboard, X11 support
+if has('clipboard')
+  set clipboard=unnamed
+  if has('unnamedplus')
+    set clipboard+=unnamedplus
+  endif
+endif
+
 " True color support
 if exists('$TMUX')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
-" Colorscheme is loaded from Base16-shell via
-" ~/.vim/plugin/base16.vim
-
-" Yank to system clipboard
-if has('clipboard')
-  set clipboard=unnamed " copy to the system clipboard
-  if has('unnamedplus') " X11 support
-    set clipboard+=unnamedplus
-  endif
-endif
+" Colorscheme settings
+" colorscheme one
+set background=dark
+let g:gruvbox_filetype_hi_groups = 1
+let g:gruvbox_italics = 0
+let g:gruvbox_italicize_strings = 0
+let g:gruvbox_plugin_hi_groups = 1
+colorscheme gruvbox8_hard
+highlight! link SignColumn LineNr
+highlight! link CocDiffAdd Directory
+highlight! link CocDiffChange Conceal
+highlight! link CocDiffDelete WarningMsg
+highlight clear CursorLine
 
 " vim:fdm=marker
 " }}}
