@@ -46,9 +46,6 @@ function! PackInit() abort
   " Add, change, delete surroundings in pairs
   call minpac#add('tpope/vim-surround')
 
-  " Better paste behavior
-  call minpac#add('ConradIrwin/vim-bracketed-paste')
-
   " Navigation between tmux panes and vim splits
   call minpac#add('christoomey/vim-tmux-navigator')
 
@@ -310,7 +307,6 @@ if exists('$TMUX')
 endif
 
 " Colorscheme settings
-" colorscheme one
 set background=dark
 let g:gruvbox_filetype_hi_groups = 1
 let g:gruvbox_italics = 0
