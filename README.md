@@ -2,14 +2,15 @@
 
 ## Dependencies
 
-* base16-shell
 * bat
 * fd
 * fzf
+* lazygit
+* nodejs/yarnpkg
 * ripgrep
 * tmux
 * vim
-* zsh/omz/p10k
+* zsh/ohmyzsh/powerlevel10k
 
 ## Firefox theme
 

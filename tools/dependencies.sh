@@ -29,7 +29,8 @@ if [ -x "$(command -v brew)" ]; then
 fi
 
 # Ubuntu support
-if [ -x "$(command -v apt-get)" ]; then
+if [ -x "$(command -v apt)" ]; then
+  echo "Installing dependencies using apt..."
   apt-get update && apt-get install -y \
     bat             \
     clang-format    \
@@ -39,9 +40,11 @@ if [ -x "$(command -v apt-get)" ]; then
     fd-find         \
     g++             \
     llvm            \
+    nodejs          \
     ripgrep         \
     tree            \
     universal-ctags \
     vim             \
+    yarnpkg         \
     zsh
 fi
