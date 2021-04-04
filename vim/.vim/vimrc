@@ -8,6 +8,7 @@ function! PackInit() abort
 
   " Color themes
   call minpac#add('lifepillar/vim-gruvbox8')
+  call minpac#add('sainnhe/gruvbox-material')
   call minpac#add('rakr/vim-one')
   call minpac#add('ulwlu/elly.vim')
 
@@ -17,6 +18,7 @@ function! PackInit() abort
 
   " Syntax and semantic error checking (plugin/coc.vim)
   call minpac#add('neoclide/coc.nvim', { 'branch': 'release'} )
+  call minpac#add('jackguo380/vim-lsp-cxx-highlight')
 
   " Fuzzy finder (plugin/fzf.vim)
   call minpac#add('junegunn/fzf')
@@ -231,7 +233,6 @@ augroup CursorLineOnlyInActiveWindow
   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
 augroup END
-highlight clear CursorLine  " Highlight current line number rather than entire line
 
 " WSL yank support
 let s:clip = '/mnt/c/Windows/System32/clip.exe'
@@ -308,16 +309,26 @@ endif
 
 " Colorscheme settings
 set background=dark
-let g:gruvbox_filetype_hi_groups = 1
-let g:gruvbox_italics = 0
-let g:gruvbox_italicize_strings = 0
-let g:gruvbox_plugin_hi_groups = 1
-colorscheme gruvbox8_hard
-highlight! link SignColumn LineNr
-highlight! link CocDiffAdd Directory
-highlight! link CocDiffChange Conceal
-highlight! link CocDiffDelete WarningMsg
-highlight clear CursorLine
+" " {{{ gruvbox8
+" let g:gruvbox_filetype_hi_groups = 1
+" let g:gruvbox_italics = 0
+" let g:gruvbox_italicize_strings = 0
+" let g:gruvbox_plugin_hi_groups = 1
+" colorscheme gruvbox8
+" highlight! link SignColumn LineNr
+" highlight! link CocDiffAdd Directory
+" highlight! link CocDiffChange Conceal
+" highlight! link CocDiffDelete WarningMsg
+" " }}}
+" {{{ gruvbox-material
+let g:gruvbox_material_background = 'hard'
+let g:gruvbox_material_disable_italic_comment = 1
+let g:gruvbox_material_sign_column_background = 'none'
+let g:gruvbox_material_better_performance = 1
+packadd! gruvbox-material
+colorscheme gruvbox-material
+" }}}
+highlight clear CursorLine  " Highlight current line number rather than entire line
 
 " vim:fdm=marker
 " }}}
