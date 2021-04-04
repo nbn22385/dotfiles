@@ -9,8 +9,11 @@ function! PackInit() abort
   " Color themes
   call minpac#add('lifepillar/vim-gruvbox8')
   call minpac#add('sainnhe/gruvbox-material')
-  call minpac#add('rakr/vim-one')
   call minpac#add('ulwlu/elly.vim')
+
+  " Base16 themes (plugin/base16.vim)
+  call minpac#add('chriskempson/base16-vim')
+  call minpac#add('daviesjamie/vim-base16-lightline')
 
   " Status line (plugin/lightline.vim)
   call minpac#add('itchyny/lightline.vim')
@@ -320,14 +323,14 @@ set background=dark
 " highlight! link CocDiffChange Conceal
 " highlight! link CocDiffDelete WarningMsg
 " " }}}
-" {{{ gruvbox-material
-let g:gruvbox_material_background = 'hard'
-let g:gruvbox_material_disable_italic_comment = 1
-let g:gruvbox_material_sign_column_background = 'none'
-let g:gruvbox_material_better_performance = 1
-packadd! gruvbox-material
-colorscheme gruvbox-material
-" }}}
+" " {{{ gruvbox-material
+" let g:gruvbox_material_background = 'hard'
+" let g:gruvbox_material_disable_italic_comment = 1
+" let g:gruvbox_material_sign_column_background = 'none'
+" let g:gruvbox_material_better_performance = 1
+" packadd! gruvbox-material
+" colorscheme gruvbox-material
+" " }}}
 highlight clear CursorLine  " Highlight current line number rather than entire line
 
 " vim:fdm=marker
