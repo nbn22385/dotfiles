@@ -117,6 +117,6 @@ let g:lightline.subseparator = { 'left': '', 'right': '' }
 "==============================================================================
 " Color scheme
 "------------------------------------------------------------------------------
-let g:lightline.colorscheme = 'gruvbox8'
+let g:lightline.colorscheme = 'gruvbox_material'
 
 scriptencoding utf-8
