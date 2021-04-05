@@ -41,7 +41,7 @@
 
   // clangd
   "clangd.arguments": [
-    "--clang-tidy"
+    "-clang-tidy=0", "-background-index=0"
   ],
   "clangd.compilationDatabasePath": "build",
   "clangd.semanticHighlighting": true,
