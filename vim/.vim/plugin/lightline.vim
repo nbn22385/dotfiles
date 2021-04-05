@@ -16,8 +16,7 @@ let g:lightline.active = {
 
 let g:lightline.inactive = {
       \ 'left':  [ [ 'readonly', 'relativepath', 'modified' ] ],
-      \ 'right': [ [ 'gitbranch' ],
-      \            [ 'obsessionstatus' ] ] }
+      \ 'right': [ ] }
 
 let g:lightline.tabline = {
       \ 'left':  [ [ 'tabs' ] ],
