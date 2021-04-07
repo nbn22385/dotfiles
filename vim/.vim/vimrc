@@ -11,11 +11,11 @@ function! PackInit() abort
   call minpac#add('sainnhe/gruvbox-material')
   call minpac#add('ulwlu/elly.vim')
 
-  " Base16 themes (plugin/base16.vim)
+  " Base16 themes ($HOME/.vim/plugin/base16.vim)
   call minpac#add('chriskempson/base16-vim')
   call minpac#add('daviesjamie/vim-base16-lightline')
 
-  " Status line (plugin/lightline.vim)
+  " Status line ($HOME/.vim/plugin/lightline.vim)
   call minpac#add('itchyny/lightline.vim')
   call minpac#add('josa42/vim-lightline-coc')
 
@@ -23,17 +23,17 @@ function! PackInit() abort
   call minpac#add('neoclide/coc.nvim', { 'branch': 'release'} )
   call minpac#add('jackguo380/vim-lsp-cxx-highlight')
 
-  " Fuzzy finder (plugin/fzf.vim)
+  " Fuzzy finder ($HOME/.vim/plugin/fzf.vim)
   call minpac#add('junegunn/fzf')
   call minpac#add('junegunn/fzf.vim')
 
-  " CMake commands (plugin/cmake4vim.vim)
+  " CMake commands ($HOME/.vim/plugin/cmake4vim.vim)
   call minpac#add('ilyachur/cmake4vim')
 
   " Filetype icons
   call minpac#add('ryanoasis/vim-devicons')
 
-  " Improved in-buffer search experience (plugin/slash.vim)
+  " Improved in-buffer search experience ($HOME/.vim/plugin/slash.vim)
   call minpac#add('junegunn/vim-slash')
 
   " Code commenting shortcuts
@@ -79,6 +79,9 @@ let maplocalleader = ','
 
 " Save a file
 nnoremap <Leader>w :w<CR>
+
+" Go to first file on the line
+nnoremap <leader>gf ^f/gf
 
 " Turn off search highlighting
 " nnoremap <silent> <Leader>/ :let @/ = ""<esc>
@@ -195,6 +198,9 @@ cnoremap <expr> <s-tab> getcmdtype() =~ '[/?]' ? "<c-t>" : "<s-tab>"
 
 " Apply last edit to visual selection
 vnoremap . :norm .<CR>
+
+" Enter normal mode while in terminal mode
+tnoremap <esc> <C-\><C-N>
 " }}}
 
 " {{{ Autocommands
