@@ -198,6 +198,9 @@ cnoremap <expr> <s-tab> getcmdtype() =~ '[/?]' ? "<c-t>" : "<s-tab>"
 
 " Apply last edit to visual selection
 vnoremap . :norm .<CR>
+
+" Enter normal mode while in terminal mode
+tnoremap <esc> <C-\><C-N>
 " }}}
 
 " {{{ Autocommands
