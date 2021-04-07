@@ -55,8 +55,7 @@ function! SessionStatus() abort
     return ''
   endif
   if exists('g:loaded_obsession')
-    let l:status = ObsessionStatus()
-    return l:status !=? '' ? (l:status ==? '[$]' ? '' : 'ﭸ') : ''
+    return ObsessionStatus('', 'ﭸ')
   endif
 endfunction
 
