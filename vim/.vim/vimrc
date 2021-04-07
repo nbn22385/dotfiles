@@ -231,9 +231,9 @@ augroup END
 augroup AutoSourceSession
   autocmd!
   autocmd VimEnter * nested
-        \ if !argc() && empty(v:this_session) && filereadable('Session.vim')
-        \ | source Session.vim
-        \ | endif
+        \ if !argc() && empty(v:this_session) && filereadable('Session.vim') && !&modified |
+        \   source Session.vim |
+        \ endif
 augroup END
 
 " Show cursorline in active window (line number only)
@@ -272,12 +272,13 @@ set pastetoggle=<F2>             " Toggle paste mode on/off
 set shortmess=aFIT               " Customize vim messages
 set showcmd                      " Show already typed keys when more are expected
 set spelllang=en_us              " Set language for spell checking
+set termguicolors                " Use 24-bit colors
 
 " Editing
 syntax on                        " Enable syntax highlighting
 set autoindent                   " Indent according to previous line
 set expandtab                    " Use spaces instead of tabs
-set fillchars+=vert:\│,fold:\     " Vertical split and fold separators
+set fillchars+=vert:\│,fold:\    " Vertical split and fold separators
 set matchpairs+=<:>              " Add angle brackets to list of matching pairs
 set nowrap                       " Do not automatically wrap on load
 set number                       " Show line numbers
@@ -285,7 +286,6 @@ set shiftround                   " >> indents to next multiple of 'shiftwidth'
 set shiftwidth=2                 " >> indents by 2 spaces
 set softtabstop=2                " Tab key indents by 4 spaces
 set splitbelow splitright        " Open new split panes to right and bottom
-set termguicolors                " Use 24-bit colors
 set textwidth=0                  " Disable maximum text width
 
 " Searching
