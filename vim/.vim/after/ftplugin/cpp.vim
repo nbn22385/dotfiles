@@ -15,6 +15,13 @@ setlocal formatoptions-=j " when joining lines
 setlocal commentstring=//\ %s
 
 "==============================================================================
+" Mappings
+"------------------------------------------------------------------------------
+" Comment out the current WORD under cursor
+nnoremap <localleader>cc :norm ysiW*./<cr>
+nnoremap <localleader>cd :norm ds/<cr>
+
+"==============================================================================
 " Errorformat strings
 "------------------------------------------------------------------------------
 " CTest + googletest
