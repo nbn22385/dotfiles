@@ -177,6 +177,7 @@ vnoremap - g<C-x>gv
 
 " Tab navigation in normal mode
 nnoremap <tab> gt
+nnoremap <s-tab> gT
 
 " Command line begin/end line
 cnoremap <c-a> <home>
@@ -232,7 +233,10 @@ augroup AutoSourceSession
   autocmd!
   autocmd VimEnter * nested
         \ if !argc() && empty(v:this_session) && filereadable('Session.vim') && !&modified |
-        \   source Session.vim |
+        \   silent execute 'source Session.vim' |
+        \   if exists('g:loaded_obsession') |
+        \     silent execute 'Obsession' |
+        \   endif |
         \ endif
 augroup END
 
