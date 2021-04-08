@@ -1,4 +1,4 @@
-nnoremap <Leader>h :helpclose<CR>
+nnoremap <silent> <Leader>h :helpclose<CR>
 
 " navigate help tags with up/down/enter
 nnoremap <buffer> <silent> <down> :call search('\|\S\{-}\|')<cr>
