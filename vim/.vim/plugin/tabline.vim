@@ -13,16 +13,16 @@ if exists("+showtabline")
       let winnr = tabpagewinnr(i)
 
       " let s .= '%' . i . 'T'
-      let s .= '%#TabLineFill# ' " spacer
+      " let s .= '%#TabLineFill# ' " spacer
 
       " Set the active/inactive tab colors
-      let s .= (i == t ? '%#TablineSel#' : '%#Tabline#')
+      let s .= (i == t ? '%#Normal#' : '%#Tabline#')
 
-      " 1 space margin before tab contents
-      let s .= ' '
+      " padding before tab contents
+      let s .= '  '
 
       " Show the tab number as a superscript
-      let s .="%{GetSuperscript(".i.")}"
+      " let s .="%{GetSuperscript(".i.")} "
 
       let bufnr = buflist[winnr - 1]
       let file = bufname(bufnr)
@@ -57,7 +57,7 @@ if exists("+showtabline")
       endfor
 
       " Display the filename
-      let s .= ' ' . file
+      let s .= file
 
       " A divider after each tab (except for last)
       " if i < tabpagenr('$')
@@ -66,8 +66,8 @@ if exists("+showtabline")
       "   let s .= ' '
       " endif
 
-      " 1 space margin after tab contents
-      let s .= ' '
+      " padding after tab contents
+      let s .= '  '
 
       let i = i + 1
 
@@ -84,7 +84,7 @@ if exists("+showtabline")
 endif " exists("+showtabline")
 
 " Borrowed from taboo.vim: https://github.com/gcmt/taboo.vim/blob/master/plugin/taboo.vim
-function! GetSuperscript(number)
+function! GetSuperscript(number) abort
   let unicode_number = ""
 
   let small_numbers = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"]
