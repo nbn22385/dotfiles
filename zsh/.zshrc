@@ -40,6 +40,21 @@ zstyle ':completion:*' special-dirs false
 # create 'fd' symlink if fdfind is the executable name (ubuntu)
 [[ -x "$(command -v fdfind)" ]] && ln -sf $(which fdfind) /usr/local/bin/fd
 
+# cd aliases
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# ls aliases
+alias l='ls -lFh'       # long list, classify, human readable
+alias la='ls -lAFh'     # long list, almost all, classify, human readable
+alias lr='ls -tRFh'     # newest first, recursive, classify, human readable
+alias lt='ls -ltFh'     # long list, newest first, classify, human readable
+alias lrt='ls -lrtFh'   # long list, oldest first, classify, human readable
+alias ll='ls -l'        # long list
+alias ldot='ls -ld .*'  # long list, non-recursive
+alias lS='ls -1FSsh'    # 1 file per line, classify, largest size first
+
 # fzf aliases
 alias cf='fzf_change_directory'
 alias vf='fzf_find_edit'
@@ -53,17 +68,6 @@ alias gdt='git difftool'
 alias gdu='git diff ..@{upstream}'
 alias lg='lazygit'
 
-# ls aliases
-alias l='ls -lFh'     #size,show type,human readable
-alias la='ls -lAFh'   #long list,show almost all,show type,human readable
-alias lr='ls -tRFh'   #sorted by date,recursive,show type,human readable
-alias lt='ls -ltFh'   #long list,sorted by date,show type,human readable
-alias ll='ls -l'      #long list
-alias ldot='ls -ld .*'
-alias lS='ls -1FSsh'
-alias lart='ls -1Fcart'
-alias lrt='ls -1Fcrt'
-
 # ripgrep aliases
 alias rg='rg --smart-case'
 
@@ -73,7 +77,7 @@ alias tmux='export SHELL=$(which zsh); tmux -2 -u'
 # vim aliases
 alias v='vim'
 alias vs='v -S '
-alias vp="cd /workspaces/\$(ls -l /workspaces | grep '^d' | awk '{print \$9}' | fzf) && vim"
+alias vp="cd $HOME/workspaces/\$(ls -lL $HOME/workspaces | grep '^d' | awk '{print \$9}' | fzf) && vim"
 
 # file shortcuts
 alias vimrc='vim ~/.vim/vimrc'
