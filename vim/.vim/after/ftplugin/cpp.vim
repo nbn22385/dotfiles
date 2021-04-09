@@ -11,15 +11,21 @@ setlocal formatoptions-=r " when pressing Enter
 setlocal formatoptions-=o " when using o or O command
 setlocal formatoptions-=j " when joining lines
 
-" Prefer // instead of /**/ comments (vim-commentary)
+"==============================================================================
+" Commenting
+"------------------------------------------------------------------------------
+" Prefer // instead of /**/ for line comments (vim-commentary)
 setlocal commentstring=//\ %s
 
-"==============================================================================
-" Mappings
-"------------------------------------------------------------------------------
-" Comment out the current WORD under cursor
-nnoremap <localleader>cc :norm ysiW*./<cr>
-nnoremap <localleader>cd :norm ds/<cr>
+" Use '/' to comment out text objects with /**/ (vim-surround)
+" see h: surround-customizing
+let g:surround_47 = "/* \r */"
+
+" Comment out the current word under cursor
+nnoremap <localleader>/ ciw/* <c-r>" */<esc>
+
+" Comment out the current visual selection
+xnoremap <localleader>/ c/* <c-r>" */<esc>
 
 "==============================================================================
 " Errorformat strings
