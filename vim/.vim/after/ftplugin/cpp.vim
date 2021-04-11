@@ -14,10 +14,10 @@ setlocal formatoptions-=j " when joining lines
 "==============================================================================
 " Commenting
 "------------------------------------------------------------------------------
-" Prefer // instead of /**/ for line comments (vim-commentary)
+" Use // instead of /**/ for line comments (vim-commentary)
 setlocal commentstring=//\ %s
 
-" Use '/' to comment out text objects with /**/ (vim-surround)
+" Use / to comment out text objects with /**/ (vim-surround)
 " see h: surround-customizing
 let g:surround_47 = "/* \r */"
 
