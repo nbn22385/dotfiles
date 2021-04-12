@@ -58,7 +58,7 @@ endfunction
 function! CurrentBranch()
   if exists('g:loaded_fugitive')
     let l:branch = fugitive#head() . ' '
-    return fugitive#head() !=? '' ? (winwidth(0) < 100 ? '   ' . l:branch[0:15] : '   ' . l:branch) : ''
+    return fugitive#head() !=? '' ? (winwidth(0) < 100 ? '  ' . l:branch[0:15] : '  ' . l:branch) : ''
   else
     return ''
   endif
@@ -77,7 +77,6 @@ function! CocStatus() abort
     else
       return {'total': l:total, 'str': '  '}
     endif
-    " let l:space = (l:total > 0 ? ' ' : '')
   else
     return {'total': -1, 'str': ''}
   endif
@@ -93,7 +92,7 @@ endfunction
 
 function! SessionStatus() abort
   if exists('g:loaded_obsession')
-    let l:status = ObsessionStatus(' ', 'ﭸ ')
+    let l:status = ObsessionStatus('  ', ' ﭸ ')
     return l:status != '' ? l:status : ''
   else
     return ''
@@ -111,8 +110,8 @@ function! ActiveStatus() abort
   let statusline.='%{ModifiedStatus()}'     "   modified flag
   let statusline.='%#StatusLineNC#'         " - section 3 
   let statusline.='%='                      "   blank space
-  let statusline.=' %3l:%c  %-p%%  '        "   lineinfo, percent
-  let statusline.='%{SessionStatus()}'      "   session status
+  let statusline.=' %3l:%c  %-p%% '         "   lineinfo, percent
+  let statusline.='%{SessionStatus()} '     "   session status
   let statusline.='%#Pmenu#'                " - section 4
   let statusline.='%{CurrentBranch()}'      "   git branch
   let l:coc_result = CocStatus()            "   coc status
