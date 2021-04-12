@@ -16,7 +16,7 @@ function! PackInit() abort
   call minpac#add('daviesjamie/vim-base16-lightline')
 
   " Status line ($HOME/.vim/plugin/lightline.vim)
-  call minpac#add('itchyny/lightline.vim')
+  " call minpac#add('itchyny/lightline.vim')
   call minpac#add('josa42/vim-lightline-coc')
 
   " Syntax and semantic error checking (plugin/coc.vim)
@@ -225,13 +225,13 @@ augroup AutoResizePanesOnVimResize
   autocmd VimResized * wincmd =
 augroup END
 
-" Automatically source Session.vim if it exists
+" " Automatically source Session.vim if it exists
 augroup AutoSourceSession
   autocmd!
   autocmd VimEnter * nested
         \ if !argc() && empty(v:this_session) && filereadable('Session.vim') && !&modified |
         \   silent execute 'source Session.vim' |
-        \   if exists('g:loaded_obsession') |
+        \   if exists('*Obsession') |
         \     silent execute 'Obsession' |
         \   endif |
         \ endif
