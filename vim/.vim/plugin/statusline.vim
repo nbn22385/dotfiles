@@ -34,13 +34,13 @@ let g:currentmode = {
       \ 'n'      : 'N',
       \ 'no'     : 'N·Operator Pending',
       \ 'v'      : 'V',
-      \ 'V'      : 'V·Line',
-      \ "\<C-V>" : 'V·Block',
+      \ 'V'      : 'L',
+      \ "\<C-V>" : 'B',
       \ 's'      : 'Select',
       \ 'S'      : 'S·Line',
       \ "\<C-S>" : 'S·Block',
       \ 'i'      : 'I',
-      \ 'R'      : 'Replace',
+      \ 'R'      : 'R',
       \ 'Rv'     : 'V·Replace',
       \ 'c'      : 'CMD',
       \ 'cv'     : 'Vim Ex',
@@ -92,7 +92,7 @@ endfunction
 
 function! SessionStatus() abort
   if exists('g:loaded_obsession')
-    let l:status = ObsessionStatus('  ', ' ﭸ ')
+    let l:status = ObsessionStatus('   ', ' ﭸ  ')
     return l:status != '' ? l:status : ''
   else
     return ''
@@ -101,9 +101,9 @@ endfunction
 
 function! ActiveStatus() abort
   let statusline=''                         " - section 0
-  let statusline.=get(g:modecolors, mode(), '%#ErrorMsg#')
+  let statusline.=get(g:modecolors, mode(), '')
   let statusline.=' %{CurrentMode()} %<'    "   mode
-  let statusline.='%#Pmenu#'                " - section 1
+  let statusline.='%#StatusLineNC#'         " - section 1
   let statusline.=' %f '                    "   filename
   let statusline.='%{ReadOnlyStatus()}'     "   readonly flag
   let statusline.='%#StatusLineNC#'         " - section 2
@@ -111,8 +111,8 @@ function! ActiveStatus() abort
   let statusline.='%#StatusLineNC#'         " - section 3 
   let statusline.='%='                      "   blank space
   let statusline.=' %3l:%c  %-p%% '         "   lineinfo, percent
-  let statusline.='%{SessionStatus()} '     "   session status
-  let statusline.='%#Pmenu#'                " - section 4
+  let statusline.='%{SessionStatus()}'      "   session status
+  let statusline.='%#StatusLineNC#'         " - section 4
   let statusline.='%{CurrentBranch()}'      "   git branch
   let l:coc_result = CocStatus()            "   coc status
   let statusline.= 
