@@ -49,7 +49,7 @@ let g:currentmode = {
       \ 'rm'     : 'more',
       \ 'r?'     : 'Confirm',
       \ '!'      : 'Shell',
-      \ 't'      : 'Terminal'}
+      \ 't'      : 'T'}
 
 function! CurrentMode() abort
   return toupper(get(g:currentmode, mode(), '???')) . (&paste == 1 ? '-PASTE' : '')
