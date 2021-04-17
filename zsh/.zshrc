@@ -24,14 +24,31 @@ source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 # Shell Options
 ################
 
+setopt autocd autopushd pushdignoredups
 setopt correct
-setopt ignoreeof
 setopt globdots
 setopt histignoredups
-zstyle ':completion:*' special-dirs false
+setopt ignoreeof
+
+#############
+# Completion
+#############
+
+# enable completion
+autoload -U compinit && compinit
+
+# case insensitive path-completion 
+zstyle ':completion:*' matcher-list \
+  'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
+  'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' \
+  'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' \
+  'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
+
+# partial completion suggestions
+zstyle ':completion:*' list-suffixes expand prefix suffix 
 
 ##########
-# ALIASES
+# Aliases
 ##########
 
 # create 'bat' symlink if batcat is the executable name (ubuntu)
@@ -88,7 +105,7 @@ alias openelec='ssh root@192.168.29.140'
 alias wake='wakeonlan -i 192.168.29.255  90:FB:A6:8A:73:42'
 
 ##########
-# EXPORTS
+# Exports
 ##########
 
 export EDITOR='vim'
@@ -111,7 +128,7 @@ export FZF_ALT_C_OPTS='--preview "tree -C {} | head -100"'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ############
-# FUNCTIONS
+# Functions
 ############
 
 # cd into a directory selected via fzf
