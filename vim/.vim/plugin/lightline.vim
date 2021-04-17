@@ -17,8 +17,7 @@ let g:lightline.active = {
       \            [ 'readonly', 'relativepath', 'modified' ] ],
       \ 'right': [ [ 'coc_errors', 'coc_warnings', 'coc_ok' ],
       \            [ 'gitbranch' ],
-      \            [ 'obsessionstatus' ],
-      \            [ 'lineinfo', 'percent' ] ] }
+      \            [ 'lineinfo', 'percent', 'obsessionstatus'] ] }
 
 let g:lightline.inactive = {
       \ 'left':  [ [ 'readonly', 'relativepath', 'modified' ] ],
