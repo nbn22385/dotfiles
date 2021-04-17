@@ -4,19 +4,19 @@ if 1
 " https://hackernoon.com/the-last-statusline-for-vim-a613048959b2
 " https://github.com/sunaku/vim-modusline/blob/master/plugin/modusline.vim
 
-scriptencoding utf-8            " Specify character encoding used in this file
 set statusline=%!ActiveStatus()
 
 let g:modecolors = {
-      \ 'n'      : '%#MatchParen#',
+      \ 'n'      : '%#StatusLineNC#',
+      \ 'i'      : '%#DiffAdd#',
+      \ 'v'      : '%#DiffChange#',
+      \ 'V'      : '%#DiffChange#',
+      \ "\<C-V>" : '%#DiffChange#',
+      \ 't'      : '%#StatusLineTerm#',
       \ 'no'     : '%#DiffChange#',
-      \ 'v'      : '%#DiffAdd#',
-      \ 'V'      : '%#DiffAdd#',
-      \ "\<C-V>" : '%#DiffAdd#',
       \ 's'      : '%#WildMenu#',
       \ 'S'      : '%#WildMenu#',
       \ "\<C-S>" : '%#WildMenu#',
-      \ 'i'      : '%#PmenuSel#',
       \ 'R'      : '%#Error#',
       \ 'Rv'     : '%#Error#',
       \ 'c'      : '%#Search#',
@@ -26,20 +26,20 @@ let g:modecolors = {
       \ 'rm'     : '%#Todo#',
       \ 'r?'     : '%#Todo#',
       \ '!'      : '%#IncSearch#',
-      \ 't'      : '%#StatusLineTerm#',
       \ 'ic'     : '%#DiffChange#',
       \ 'Rc'     : '%#DiffChange#'}
 
 let g:currentmode = {
       \ 'n'      : 'N',
-      \ 'no'     : 'N·Operator Pending',
+      \ 'i'      : 'I',
       \ 'v'      : 'V',
-      \ 'V'      : 'L',
-      \ "\<C-V>" : 'B',
+      \ 'V'      : 'VL',
+      \ "\<C-V>" : 'VB',
+      \ 't'     : 'terminal',
+      \ 'no'     : 'N·Operator Pending',
       \ 's'      : 'Select',
       \ 'S'      : 'S·Line',
       \ "\<C-S>" : 'S·Block',
-      \ 'i'      : 'I',
       \ 'R'      : 'R',
       \ 'Rv'     : 'V·Replace',
       \ 'c'      : 'CMD',
@@ -48,8 +48,7 @@ let g:currentmode = {
       \ 'r'      : 'Prompt',
       \ 'rm'     : 'more',
       \ 'r?'     : 'Confirm',
-      \ '!'      : 'Shell',
-      \ 't'      : 'T'}
+      \ '!'      : 'Shell'}
 
 function! CurrentMode() abort
   return toupper(get(g:currentmode, mode(), '???')) . (&paste == 1 ? '-PASTE' : '')
@@ -83,7 +82,7 @@ function! CocStatus() abort
 endfunction
 
 function! ModifiedStatus() abort
-  return &modified == 'nmodified' ? '' : ' ● '
+  return &modified == 'nmodified' ? '' : '  '
 endfunction
 
 function! ReadOnlyStatus() abort
@@ -100,40 +99,40 @@ function! SessionStatus() abort
 endfunction
 
 function! ActiveStatus() abort
-  let statusline=''                         " - section 0
-  let statusline.=get(g:modecolors, mode(), '')
-  let statusline.=' %{CurrentMode()} %<'    "   mode
-  let statusline.='%#StatusLineNC#'         " - section 1
-  let statusline.=' %f '                    "   filename
-  let statusline.='%{ReadOnlyStatus()}'     "   readonly flag
-  let statusline.='%#StatusLineNC#'         " - section 2
-  let statusline.='%{ModifiedStatus()}'     "   modified flag
-  let statusline.='%#StatusLineNC#'         " - section 3 
-  let statusline.='%='                      "   blank space
-  let statusline.=' %3l:%c  %-p%% '         "   lineinfo, percent
-  let statusline.='%{SessionStatus()}'      "   session status
-  let statusline.='%#StatusLineNC#'         " - section 4
-  let statusline.='%{CurrentBranch()}'      "   git branch
-  let l:coc_result = CocStatus()            "   coc status
-  let statusline.= 
-        \ (l:coc_result['total'] > 0 ? '%#Error#' : '%#MatchParen#') 
+  let s=''                         " - section 0
+  let s.=get(g:modecolors, mode(), '')
+  let s.=' %{CurrentMode()} %<'    "   mode
+  let s.='%#StatusLineNC#'         " - section 1
+  let s.=' %f'                     "   filename
+  let s.='%{ReadOnlyStatus()}'     "   readonly flag
+  let s.='%#TabLineSel#'           " - section 2
+  let s.='%{ModifiedStatus()}'     "   modified flag
+  let s.='%#StatusLineNC#'         " - section 3 
+  let s.='%='                      "   blank space
+  let s.=' %3l:%c  %-p%% '         "   lineinfo, percent
+  let s.='%{SessionStatus()}'      "   session status
+  let s.='%#StatusLineNC#'         " - section 4
+  let s.='%{CurrentBranch()}'      "   git branch
+  let l:coc_result = CocStatus()   "   coc status
+  let s.= 
+        \ (l:coc_result['total'] > 0 ? '%#Error#' : '%#StatusLineNC#') 
         \ . l:coc_result['str']
-  return statusline
+  return s
 endfunction
 
 function! InactiveStatus()
-  let statusline='%#VertSplit#    '         " - section 0
-  let statusline.='%f '                     "   filename
-  let statusline.='%{ReadOnlyStatus()}'     "   readonly flag
-  let statusline.='%{ModifiedStatus()}'     "   modified flag
-  let statusline.='%='                      " - section 1
-  let statusline.='%{SessionStatus()}'      "   session status
-  let statusline.='%{CurrentBranch()}'      "   git branch
-  let l:coc_result = CocStatus()            "   coc status
-  let statusline.= 
+  let s='%#VertSplit#    '         " - section 0
+  let s.='%f'                      "   filename
+  let s.='%{ReadOnlyStatus()}'     "   readonly flag
+  let s.='%{ModifiedStatus()}'     "   modified flag
+  let s.='%='                      " - section 1
+  let s.='%{SessionStatus()}'      "   session status
+  let s.='%{CurrentBranch()}'      "   git branch
+  let l:coc_result = CocStatus()   "   coc status
+  let s.= 
         \ (l:coc_result['total'] > 0 ? '%#ErrorMsg#' : '%#VertSplit#') 
         \ . l:coc_result['str']
-  return statusline
+  return s
 endfunction
 
 augroup status
@@ -142,3 +141,5 @@ augroup status
   autocmd BufLeave,WinLeave * setlocal statusline=%!InactiveStatus()
 augroup END
 endif
+
+scriptencoding utf-8
