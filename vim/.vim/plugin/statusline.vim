@@ -55,6 +55,9 @@ function! CurrentMode() abort
 endfunction
 
 function! CurrentBranch()
+  if winwidth(0) <= 50
+    return ''
+  endif
   if exists('g:loaded_fugitive')
     let l:branch = fugitive#head() . ' '
     return fugitive#head() !=? '' ? (winwidth(0) < 100 ? '  ' . l:branch[0:15] : '  ' . l:branch) : ''
@@ -90,6 +93,9 @@ function! ReadOnlyStatus() abort
 endfunction
 
 function! SessionStatus() abort
+  if winwidth(0) <= 50
+    return ''
+  endif
   if exists('g:loaded_obsession')
     let l:status = ObsessionStatus('   ', ' ﭸ  ')
     return l:status != '' ? l:status : ''
