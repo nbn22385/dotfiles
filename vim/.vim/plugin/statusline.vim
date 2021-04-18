@@ -35,7 +35,7 @@ let g:currentmode = {
       \ 'v'      : 'V',
       \ 'V'      : 'VL',
       \ "\<C-V>" : 'VB',
-      \ 't'     : 'terminal',
+      \ 't'      : 'T',
       \ 'no'     : 'N·Operator Pending',
       \ 's'      : 'Select',
       \ 'S'      : 'S·Line',
