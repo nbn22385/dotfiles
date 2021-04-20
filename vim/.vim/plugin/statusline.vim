@@ -50,7 +50,7 @@ function! CurrentMode() abort
   return toupper(get(g:currentmode, mode(), '???')) . (&paste == 1 ? '-PASTE' : '')
 endfunction
 
-function! CurrentBranch()
+function! CurrentBranch() abort
   if winwidth(0) <= 50
     return ''
   endif
@@ -122,7 +122,7 @@ function! ActiveStatus() abort
   return s
 endfunction
 
-function! InactiveStatus()
+function! InactiveStatus() abort
   let s='%#VertSplit#    '         " - section 0
   let s.='%f'                      "   filename
   let s.='%{ReadOnlyStatus()}'     "   readonly flag
