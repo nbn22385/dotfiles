@@ -62,7 +62,23 @@ function! CurrentBranch() abort
   endif
 endfunction
 
-function! CocStatus() abort
+function! CocGitStatus() abort
+  let l:dict = {'added':'','changed':'','deleted':'',}
+  if winwidth(0) <= 50
+    return l:dict
+  endif
+  if exists('b:coc_git_status')
+    let l:status = b:coc_git_status
+    let l:dict.added = substitute(matchstr(l:status, '\v\+\d+\s'), '+', ' ', '')
+    let l:dict.changed = substitute(matchstr(l:status, '\v\~\d+\s'), '\~', ' ', '')
+    let l:dict.deleted = substitute(matchstr(l:status, '\v\-\d+\s'), '-', ' ', '')
+    return l:dict
+  else
+    return l:dict
+  endif
+endfunction
+
+function! CocErrors() abort
   if exists('b:coc_diagnostic_info')
     let l:errors = get(b:coc_diagnostic_info, 'error', 0)
     let l:warnings = get(b:coc_diagnostic_info, 'warning', 0)
@@ -114,8 +130,12 @@ function! ActiveStatus() abort
   let s.=' %3l:%c  %-p%% '         "   lineinfo, percent
   let s.='%{SessionStatus()}'      "   session status
   let s.='%#StatusLine#'           " - section 4
-  let s.='%{CurrentBranch()}'      "   git branch
-  let l:coc_result = CocStatus()   "   coc status
+  let s.='%#GitGutterChangeDelete#%{CurrentBranch()}'  " git branch
+  let s.='%#GitGutterAdd#%{CocGitStatus().added}'      " git status (added)
+  let s.='%#GitGutterChange#%{CocGitStatus().changed}' " git status (changed)
+  let s.='%#GitGutterDelete#%{CocGitStatus().deleted}' " git status (deleted)
+  let s.='%#StatusLine#'           " - section 4
+  let l:coc_result = CocErrors()   "   coc diagnostic info
   let s.= 
         \ (l:coc_result['total'] > 0 ? '%#Error#' : '%#TabLineSel#') 
         \ . l:coc_result['str']
@@ -130,7 +150,7 @@ function! InactiveStatus() abort
   let s.='%='                      " - section 1
   let s.='%{SessionStatus()}'      "   session status
   let s.='%{CurrentBranch()}'      "   git branch
-  let l:coc_result = CocStatus()   "   coc status
+  let l:coc_result = CocErrors()   "   coc diagnostic info
   let s.= 
         \ (l:coc_result['total'] > 0 ? '%#ErrorMsg#' : '%#VertSplit#') 
         \ . l:coc_result['str']
