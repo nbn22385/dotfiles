@@ -2,13 +2,22 @@ if 1
 
 set statusline=%!ActiveStatus()
 
+" colors with bg of statusline but color text
+" FoldColumn (blue)
+" TablineSel (green)
+" Todo (orange)
+" GitGutterAdd (green)
+" GitGutterChange (blue)
+" GitGutterDelete (red)
+" GitGutterChangeDelete (purple)
+
 let g:modecolors = {
-      \ 'n'      : '%#StatusLine#',
-      \ 'i'      : '%#CocListBlackWhite#',
-      \ 'v'      : '%#CocListBlackBlue#',
-      \ 'V'      : '%#CocListBlackYellow#',
-      \ "\<C-V>" : '%#CocListBlackMagenta#',
-      \ 't'      : '%#CocListBlackCyan#',
+      \ 'n'      : '%#GitGutterChange#',
+      \ 'i'      : '%#GitGutterChangeDelete#',
+      \ 'v'      : '%#Todo#',
+      \ 'V'      : '%#Todo#',
+      \ "\<C-V>" : '%#Todo#',
+      \ 't'      : '%#GitGutterAdd#',
       \ 'no'     : '%#DiffChange#',
       \ 's'      : '%#WildMenu#',
       \ 'S'      : '%#WildMenu#',
@@ -55,8 +64,8 @@ function! CurrentBranch() abort
     return ''
   endif
   if exists('g:loaded_fugitive')
-    let l:branch = fugitive#head() . ' '
-    return fugitive#head() !=? '' ? (winwidth(0) < 100 ? '  ' . l:branch[0:15] : '  ' . l:branch) : ''
+    let l:branch = fugitive#head()
+    return fugitive#head() !=? '' ? (winwidth(0) < 100 ? '  ' . l:branch[0:15] . ' ' : '  ' . l:branch . ' ') : ''
   else
     return ''
   endif
@@ -137,7 +146,7 @@ function! ActiveStatus() abort
   let s.='%#StatusLine#'           " - section 4
   let l:coc_result = CocErrors()   "   coc diagnostic info
   let s.= 
-        \ (l:coc_result['total'] > 0 ? '%#Error#' : '%#TabLineSel#') 
+        \ (l:coc_result['total'] > 0 ? '%#GitGutterDelete#' : '%#TabLineSel#') 
         \ . l:coc_result['str']
   return s
 endfunction
@@ -149,11 +158,11 @@ function! InactiveStatus() abort
   let s.='%{ModifiedStatus()}'     "   modified flag
   let s.='%='                      " - section 1
   let s.='%{SessionStatus()}'      "   session status
-  let s.='%{CurrentBranch()}'      "   git branch
-  let l:coc_result = CocErrors()   "   coc diagnostic info
-  let s.= 
-        \ (l:coc_result['total'] > 0 ? '%#ErrorMsg#' : '%#VertSplit#') 
-        \ . l:coc_result['str']
+  " let s.='%{CurrentBranch()}'      "   git branch
+  " let l:coc_result = CocErrors()   "   coc diagnostic info
+  " let s.= 
+  "       \ (l:coc_result['total'] > 0 ? '%#ErrorMsg#' : '%#VertSplit#') 
+  "       \ . l:coc_result['str']
   return s
 endfunction
 
