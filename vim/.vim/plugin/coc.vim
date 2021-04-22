@@ -83,9 +83,3 @@ nmap <silent> <Leader>g :CocCommand git.toggleGutters<CR>
 " Navigate hunks of current buffer
 nmap [g <Plug>(coc-git-prevchunk)
 nmap ]g <Plug>(coc-git-nextchunk)
-
-"==============================================================================
-" Custom highlights
-"------------------------------------------------------------------------------
-hi CocErrorSign guifg=LightRed
-hi CocWarningSign guifg=Orange

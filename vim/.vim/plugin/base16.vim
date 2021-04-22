@@ -26,6 +26,8 @@ function! s:base16_customize() abort
   call Base16hi("VertSplit", g:base16_gui01, g:base16_gui00, g:base16_cterm00, g:base16_cterm00, "", "")
   call Base16hi("htmlBold", g:base16_gui05, "", g:base16_cterm05, "", "bold", "")
   call Base16hi("htmlItalic", g:base16_gui05, "", g:base16_cterm05, "", "italic", "")
+  call Base16hi("CocErrorSign", g:base16_gui08, "", g:base16_cterm08, "", "", "")
+  call Base16hi("CocWarningSign", g:base16_gui09, "", g:base16_cterm09, "", "", "")
 endfunction
 
 augroup on_change_colorscheme
