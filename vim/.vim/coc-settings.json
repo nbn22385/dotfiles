@@ -47,7 +47,7 @@
   "clangd.semanticHighlighting": true,
 
   // diagnostic
-  "diagnostic.errorSign": "✘",
+  "diagnostic.errorSign": "×",
   "diagnostic.hintSign": " ",
   "diagnostic.infoSign": "",
   "diagnostic.warningSign": "‼",
