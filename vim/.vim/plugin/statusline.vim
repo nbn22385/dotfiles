@@ -65,7 +65,7 @@ function! CurrentBranch() abort
   endif
   if exists('g:loaded_fugitive')
     let l:branch = fugitive#head()
-    return fugitive#head() !=? '' ? (winwidth(0) < 100 ? '  ' . l:branch[0:15] . ' ' : '  ' . l:branch . ' ') : ''
+    return fugitive#head() !=? '' ? (winwidth(0) < 80 ? '  ' . l:branch[0:15] . ' ' : '  ' . l:branch . ' ') : ''
   else
     return ''
   endif
