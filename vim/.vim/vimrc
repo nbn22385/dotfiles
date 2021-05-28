@@ -33,7 +33,7 @@ function! PackInit() abort
   " Filetype icons
   call minpac#add('ryanoasis/vim-devicons')
 
-  " Improved in-buffer search experience ($HOME/.vim/plugin/slash.vim)
+  " Improved in-buffer search experience
   call minpac#add('junegunn/vim-slash')
 
   " Code commenting shortcuts
@@ -205,7 +205,7 @@ vnoremap . :norm .<CR>
 
 " When editing a file, always jump to the last known cursor position.
 " from $VIMRUNTIME/defaults.vim
-augroup vimStartup
+augroup VimStartup
   autocmd!
   autocmd BufReadPost *
         \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
