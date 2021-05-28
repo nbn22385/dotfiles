@@ -1,25 +1,14 @@
 " {{{ Plugins
 function! PackInit() abort
-
   " Plugin manager
   packadd minpac
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})
 
-  " Color themes
-  call minpac#add('lifepillar/vim-gruvbox8')
-  call minpac#add('sainnhe/gruvbox-material')
-  call minpac#add('ulwlu/elly.vim')
-
   " Base16 themes ($HOME/.vim/plugin/base16.vim)
   call minpac#add('chriskempson/base16-vim')
-  call minpac#add('daviesjamie/vim-base16-lightline')
 
-  " Status line ($HOME/.vim/plugin/lightline.vim)
-  " call minpac#add('itchyny/lightline.vim')
-  call minpac#add('josa42/vim-lightline-coc')
-
-  " Syntax and semantic error checking (plugin/coc.vim)
+  " Syntax and semantic error checking ($HOME/.vim/plugin/coc.vim)
   call minpac#add('neoclide/coc.nvim', { 'branch': 'release'} )
   call minpac#add('jackguo380/vim-lsp-cxx-highlight')
 
@@ -27,23 +16,11 @@ function! PackInit() abort
   call minpac#add('junegunn/fzf')
   call minpac#add('junegunn/fzf.vim')
 
-  " CMake commands ($HOME/.vim/plugin/cmake4vim.vim)
-  call minpac#add('ilyachur/cmake4vim')
-
-  " Filetype icons
-  call minpac#add('ryanoasis/vim-devicons')
-
   " Improved in-buffer search experience
   call minpac#add('junegunn/vim-slash')
 
   " Code commenting shortcuts
   call minpac#add('tpope/vim-commentary')
-
-  " Asynchronous build jobs
-  call minpac#add('tpope/vim-dispatch')
-
-  " Git shortcuts
-  call minpac#add('tpope/vim-fugitive')
 
   " Continuously updated session files
   call minpac#add('tpope/vim-obsession')
@@ -63,6 +40,21 @@ function! PackInit() abort
   " More text objects
   call minpac#add('wellle/targets.vim')
 
+  " Inactive plugins {{{
+  " call minpac#add('lifepillar/vim-gruvbox8')
+  " call minpac#add('sainnhe/gruvbox-material')
+  " call minpac#add('ulwlu/elly.vim')
+  " call minpac#add('ryanoasis/vim-devicons')
+  " call minpac#add('daviesjamie/vim-base16-lightline')
+  " call minpac#add('itchyny/lightline.vim')
+  " call minpac#add('josa42/vim-lightline-coc') 
+  " CMake commands ($HOME/.vim/plugin/cmake4vim.vim)
+  " call minpac#add('ilyachur/cmake4vim')
+  " Asynchronous build jobs
+  " call minpac#add('tpope/vim-dispatch')
+  " Git shortcuts
+  " call minpac#add('tpope/vim-fugitive')
+  " }}}
 endfunction
 
 command! PackClean  call PackInit() | call minpac#clean()
@@ -71,7 +63,7 @@ command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac
 command! PackUpdateAndQuit call PackInit() | call minpac#update('', {'do': 'qall'})
 " }}}
 
-" {{{ Key Mappings
+" {{{ Mappings
 " Set the Leader key to Space
 nnoremap <Space> <Nop>
 let mapleader = "\<Space>"
@@ -202,32 +194,21 @@ vnoremap . :norm .<CR>
 " }}}
 
 " {{{ Autocommands
-
-" When editing a file, always jump to the last known cursor position.
-" from $VIMRUNTIME/defaults.vim
-augroup VimStartup
+augroup Vimrc
   autocmd!
+  " Jump to the last known cursor position. See $VIMRUNTIME/defaults.vim
   autocmd BufReadPost *
         \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
         \ |   exe "normal! g`\""
         \ | endif
-augroup END
 
-" Save modified buffer during idle after 'updatetime' has elapsed (default 4 sec)
-augroup AutoSave
-  autocmd!
+  " Save modified buffer during idle after 'updatetime' has elapsed (default 4 sec)
   autocmd CursorHoldI,CursorHold * silent! :update
-augroup END
 
-" Automatically equalize splits when Vim is resized
-augroup AutoResizePanesOnVimResize
-  autocmd!
+  " Automatically equalize splits when Vim is resized
   autocmd VimResized * wincmd =
-augroup END
 
-" " Automatically source Session.vim if it exists
-augroup AutoSourceSession
-  autocmd!
+  " Automatically source Session.vim if it exists
   autocmd VimEnter * nested
         \ if !argc() && empty(v:this_session) && filereadable('Session.vim') && !&modified |
         \   silent execute 'source Session.vim' |
@@ -235,29 +216,24 @@ augroup AutoSourceSession
         \     silent execute 'Obsession' |
         \   endif |
         \ endif
-augroup END
 
-" Show cursorline in active window (line number only)
-augroup CursorLineOnlyInActiveWindow
-  autocmd!
+  " Show cursorline in active window (line number only)
   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
-augroup END
 
-" WSL yank support
-let s:clip = '/mnt/c/Windows/System32/clip.exe'
-if executable(s:clip)
-  augroup WSLYank
-    autocmd!
+  " WSL yank support
+  let s:clip = '/mnt/c/Windows/System32/clip.exe'
+  if executable(s:clip)
     autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
-  augroup END
-endif
+  endif
+augroup END
 " }}}
 
 " {{{ Options
 " General
 if !&modeline|set modeline|endif " Enable modeline which may be off by default
 filetype plugin indent on        " Load plugins according to detected filetype
+set background=dark              " Dark background for dark theme support
 set backspace=indent,eol,start   " Make backspace work as you would expect
 set directory=/tmp//             " Location of the swap file
 set display=lastline             " Show as much as possible of the last line
@@ -316,29 +292,6 @@ if exists('$TMUX')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
-
-" Colorscheme settings
-set background=dark
-" " {{{ gruvbox8
-" let g:gruvbox_filetype_hi_groups = 1
-" let g:gruvbox_italics = 0
-" let g:gruvbox_italicize_strings = 0
-" let g:gruvbox_plugin_hi_groups = 1
-" colorscheme gruvbox8
-" highlight! link SignColumn LineNr
-" highlight! link CocDiffAdd Directory
-" highlight! link CocDiffChange Conceal
-" highlight! link CocDiffDelete WarningMsg
-" " }}}
-" " {{{ gruvbox-material
-" let g:gruvbox_material_background = 'hard'
-" let g:gruvbox_material_disable_italic_comment = 1
-" let g:gruvbox_material_sign_column_background = 'none'
-" let g:gruvbox_material_better_performance = 1
-" packadd! gruvbox-material
-" colorscheme gruvbox-material
-" " }}}
-highlight clear CursorLine  " Highlight current line number rather than entire line
 
 " vim:fdm=marker
 " }}}
