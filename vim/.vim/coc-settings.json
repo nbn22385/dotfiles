@@ -56,8 +56,8 @@
   "explorer.file.root.template": "[icon & 1] PROJECT ([root])",
   "explorer.file.showHiddenFiles": true,
   "explorer.git.enable": true,
-  "explorer.icon.enableNerdfont": true,
-  "explorer.icon.enableVimDevicons": true,
+  "explorer.icon.enableNerdfont": false,
+  "explorer.icon.enableVimDevicons": false,
   "explorer.width": 30,
   "explorer.sources": [
     {
