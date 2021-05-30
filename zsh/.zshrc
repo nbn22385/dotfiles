@@ -18,7 +18,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
 
-source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 ################
 # Shell Options
@@ -115,7 +115,7 @@ alias zshrc='${=EDITOR} ${HOME}/.zshrc'
 
 # htpc
 alias openelec='ssh root@192.168.29.140'
-alias wake='wakeonlan -i 192.168.29.255  90:FB:A6:8A:73:42'
+alias wake='wakeonlan -i 192.168.29.255 90:FB:A6:8A:73:42'
 
 ##########
 # Exports
