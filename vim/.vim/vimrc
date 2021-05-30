@@ -22,6 +22,9 @@ function! PackInit() abort
   " Code commenting shortcuts
   call minpac#add('tpope/vim-commentary')
 
+  " Git shortcuts
+  call minpac#add('tpope/vim-fugitive')
+
   " Continuously updated session files
   call minpac#add('tpope/vim-obsession')
 
@@ -33,9 +36,6 @@ function! PackInit() abort
 
   " Highlight yanked text
   call minpac#add('machakann/vim-highlightedyank')
-
-  " Automatically change to file's project directory
-  call minpac#add('airblade/vim-rooter')
 
   " More text objects
   call minpac#add('wellle/targets.vim')
@@ -52,8 +52,9 @@ function! PackInit() abort
   " call minpac#add('ilyachur/cmake4vim')
   " Asynchronous build jobs
   " call minpac#add('tpope/vim-dispatch')
-  " Git shortcuts
-  " call minpac#add('tpope/vim-fugitive')
+  " Automatically change to file's project directory
+  " call minpac#add('airblade/vim-rooter')
+
   " }}}
 endfunction
 
@@ -226,6 +227,14 @@ augroup Vimrc
   if executable(s:clip)
     autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
   endif
+
+  " Change the working directory to the git project root (uses fugitive)
+  autocmd BufLeave * let b:last_cwd = getcwd()
+  autocmd BufEnter * if exists('b:last_cwd')
+        \|   execute 'lcd' b:last_cwd
+        \| else
+          \|   silent! Glcd
+          \| endif
 augroup END
 " }}}
 
