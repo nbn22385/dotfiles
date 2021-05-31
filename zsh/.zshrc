@@ -13,9 +13,9 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 autoload -U promptinit; promptinit
 
 SPACESHIP_GIT_PREFIX=''
-SPACESHIP_GIT_STATUS_PREFIX=''
-SPACESHIP_GIT_STATUS_SUFFIX=''
 SPACESHIP_GIT_SYMBOL=' '
+SPACESHIP_GIT_STATUS_PREFIX=' '
+SPACESHIP_GIT_STATUS_SUFFIX=''
 SPACESHIP_PROMPT_ORDER=(
   dir           # Current directory section
   git           # Git section (git_branch + git_status)
