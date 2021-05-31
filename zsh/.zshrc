@@ -3,22 +3,32 @@
 ###############
 
 BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && \
-  [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+[ -n "$PS1" ] && [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
   eval "$("$BASE16_SHELL/profile_helper.sh")"
 
-######################
-# Powerlevel10k Theme
-######################
+###################
+# Spaceship Prompt
+###################
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
+autoload -U promptinit; promptinit
 
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+SPACESHIP_GIT_PREFIX=''
+SPACESHIP_GIT_STATUS_PREFIX=''
+SPACESHIP_GIT_STATUS_SUFFIX=''
+SPACESHIP_GIT_SYMBOL=' '
+SPACESHIP_PROMPT_ORDER=(
+  dir           # Current directory section
+  git           # Git section (git_branch + git_status)
+  line_sep      # Line break
+  jobs          # Background jobs indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+
+prompt spaceship
+
+# disable bold prompt
+() { local z=$'\0' && PROMPT='${${${$(spaceship_prompt)//\%\%/'$z'}//\%B}//'$z'/%%}' }
 
 ################
 # Shell Options
@@ -35,7 +45,7 @@ setopt ignoreeof
 #############
 
 # enable completion
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit
 
 # case insensitive path-completion 
 zstyle ':completion:*' matcher-list \
@@ -122,10 +132,10 @@ alias wake='wakeonlan -i 192.168.29.255 90:FB:A6:8A:73:42'
 ##########
 
 export EDITOR='vim'
-export LS_COLORS="ow=01;36"
-export TZ='America/New_York'
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
+export LS_COLORS="ow=01;36"
+export TZ='America/New_York'
 
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
 export FZF_DEFAULT_OPTS='--height 40% --layout reverse --info inline --border'
@@ -133,9 +143,6 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS='--preview "bat --color=always --line-range :500 {}"'
 export FZF_ALT_C_COMMAND='fd --type d . --color=never'
 export FZF_ALT_C_OPTS='--preview "tree -C {} | head -100"'
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Fzf shell support
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -158,14 +165,14 @@ fzf_change_directory() {
 
 # edit a file selected via fzf
 fzf_find_edit() {
-    local file=$(
-      fzf --query="$1" --no-multi --select-1 --exit-0 \
-          --preview 'bat --color=always --line-range :500 {}'
-      )
-    if [[ -n $file ]]; then
-        $EDITOR "$file"
-    fi
-  }
+  local file=$(
+  fzf --query="$1" --no-multi --select-1 --exit-0 \
+    --preview 'bat --color=always --line-range :500 {}'
+  )
+  if [[ -n $file ]]; then
+    $EDITOR "$file"
+  fi
+}
 
 # change the base16-shell theme selected via fzf
 fzf_base16_theme() {
