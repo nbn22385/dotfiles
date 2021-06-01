@@ -40,6 +40,9 @@ setopt globdots
 setopt histignoredups
 setopt ignoreeof
 
+bindkey "^A" vi-beginning-of-line
+bindkey "^E" vi-end-of-line
+
 #############
 # Completion
 #############
