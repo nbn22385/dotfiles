@@ -1,59 +1,30 @@
 " {{{ Plugins
 function! PackInit() abort
-  " Plugin manager
   packadd minpac
   call minpac#init()
-  call minpac#add('k-takata/minpac', {'type': 'opt'})
-
-  " Base16 themes ($HOME/.vim/plugin/base16.vim)
-  call minpac#add('chriskempson/base16-vim')
-
-  " Syntax and semantic error checking ($HOME/.vim/plugin/coc.vim)
-  call minpac#add('neoclide/coc.nvim', { 'branch': 'release'} )
-  call minpac#add('jackguo380/vim-lsp-cxx-highlight')
-
-  " Fuzzy finder ($HOME/.vim/plugin/fzf.vim)
-  call minpac#add('junegunn/fzf')
-  call minpac#add('junegunn/fzf.vim')
-
-  " Improved in-buffer search experience
-  call minpac#add('junegunn/vim-slash')
-
-  " Code commenting shortcuts
-  call minpac#add('tpope/vim-commentary')
-
-  " Git shortcuts
-  call minpac#add('tpope/vim-fugitive')
-
-  " Continuously updated session files
-  call minpac#add('tpope/vim-obsession')
-
-  " Add, change, delete surroundings in pairs
-  call minpac#add('tpope/vim-surround')
-
-  " Navigation between tmux panes and vim splits
-  call minpac#add('christoomey/vim-tmux-navigator')
-
-  " Highlight yanked text
-  call minpac#add('machakann/vim-highlightedyank')
-
-  " More text objects
-  call minpac#add('wellle/targets.vim')
+  call minpac#add('k-takata/minpac', {'type': 'opt'})                  " Plugin manager
+  call minpac#add('chriskempson/base16-vim')                           " Base16 themes ($HOME/.vim/plugin/base16.vim)
+  call minpac#add('christoomey/vim-tmux-navigator')                    " Navigation between tmux panes and vim splits
+  call minpac#add('jackguo380/vim-lsp-cxx-highlight', {'type': 'opt'}) " Syntax highlighting for C++
+  call minpac#add('junegunn/fzf')                                      " Fuzzy finder ($HOME/.vim/plugin/fzf.vim)
+  call minpac#add('junegunn/fzf.vim')                                  " Additional commands for working with fzf
+  call minpac#add('junegunn/vim-slash')                                " Improved in-buffer search experience
+  call minpac#add('machakann/vim-highlightedyank')                     " Highlight yanked text
+  call minpac#add('neoclide/coc.nvim', {'branch': 'release'})          " LSP support ($HOME/.vim/plugin/coc.vim)
+  call minpac#add('tpope/vim-commentary')                              " Code commenting shortcuts
+  call minpac#add('tpope/vim-fugitive')                                " Git shortcuts
+  call minpac#add('tpope/vim-obsession')                               " Continuously updated session files
+  call minpac#add('tpope/vim-surround')                                " Add, change, delete surroundings in pairs
+  call minpac#add('wellle/targets.vim')                                " More text objects
 
   " Inactive plugins {{{
-  " call minpac#add('lifepillar/vim-gruvbox8')
-  " call minpac#add('sainnhe/gruvbox-material')
-  " call minpac#add('ulwlu/elly.vim')
   " call minpac#add('ryanoasis/vim-devicons')
   " call minpac#add('daviesjamie/vim-base16-lightline')
   " call minpac#add('itchyny/lightline.vim')
   " call minpac#add('josa42/vim-lightline-coc') 
-  " CMake commands ($HOME/.vim/plugin/cmake4vim.vim)
-  " call minpac#add('ilyachur/cmake4vim')
-  " Asynchronous build jobs
-  " call minpac#add('tpope/vim-dispatch')
-  " Automatically change to file's project directory
-  " call minpac#add('airblade/vim-rooter')
+  " call minpac#add('ilyachur/cmake4vim') " CMake commands ($HOME/.vim/plugin/cmake4vim.vim)
+  " call minpac#add('tpope/vim-dispatch') " Asynchronous build jobs
+  " call minpac#add('airblade/vim-rooter') " Automatically change to file's project directory
 
   " }}}
 endfunction
