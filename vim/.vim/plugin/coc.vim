@@ -51,10 +51,9 @@ nmap <silent> [d <Plug>(coc-diagnostic-prev)
 nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-nmap <silent> <LocalLeader>gf <Plug>(coc-format)
 nmap <silent> <LocalLeader>gd <Plug>(coc-definition)
-nmap <silent> <LocalLeader>gy <Plug>(coc-type-definition)
 nmap <silent> <LocalLeader>gi <Plug>(coc-implementation)
+nmap <silent> <LocalLeader>gq <Plug>(coc-format)
 nmap <silent> <LocalLeader>gr <Plug>(coc-references)
 
 " Try first quickfix action for diagnostics on the current line.
