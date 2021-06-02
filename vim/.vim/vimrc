@@ -163,6 +163,18 @@ cnoremap <expr> <s-tab> getcmdtype() =~ '[/?]' ? "<c-t>" : "<s-tab>"
 
 " Apply last edit to visual selection
 vnoremap . :norm .<CR>
+
+" Navigate buffers
+nmap <silent> [b :bprevious<CR>
+nmap <silent> ]b :bnext<CR>
+nmap <silent> [B :bfirst<CR>
+nmap <silent> ]B :blast<CR>
+
+" Navigate quickfix entries
+nmap <silent> [q :cprevious<CR>
+nmap <silent> ]q :cnext<CR>
+nmap <silent> [Q :cfirst<CR>
+nmap <silent> ]Q :clast<CR>
 " }}}
 
 " {{{ Autocommands
