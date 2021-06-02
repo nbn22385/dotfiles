@@ -285,5 +285,15 @@ if exists('$TMUX')
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
+" Use rg for grep and define a custom grep command
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --hidden\ --ignore-case
+  set grepformat^=%f:%l:%c:%m
+endif
+
+" Grep command opens the quickfix window with results
+command! -nargs=+ -complete=file Grep
+      \ execute 'silent grep! <args>' | redraw! | cwindow
+
 " vim:fdm=marker
 " }}}
