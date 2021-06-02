@@ -84,6 +84,7 @@ fi
 [[ -x "$(command -v fdfind)" ]] && ln -sf $(which fdfind) /usr/local/bin/fd
 
 # cd aliases
+alias -- -='cd -'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -105,6 +106,7 @@ alias btheme='fzf_base16_theme'
 
 # git aliases
 alias g='_f() { if [[ $# == 0 ]]; then git status -sb; else git "$@"; fi }; _f'
+alias gb='fzf_git_checkout_branch'
 alias gcmsg='git commit -m'
 alias glog='git log --oneline --decorate --graph'
 alias gdt='git difftool'
@@ -179,9 +181,22 @@ fzf_find_edit() {
 
 # change the base16-shell theme selected via fzf
 fzf_base16_theme() {
-  local selection=$(alias | awk -F'base16_|=' '/base16_/ {print $2}' | fzf)
-  eval base16_$selection
+  local theme=$(alias | awk -F'base16_|=' '/base16_/ {print $2}' | fzf --exit-0)
+  if [[ -n $theme ]]; then
+    eval base16_$theme
+  fi
 }
+
+# checkout git branch via fzf (https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236)
+fzf_git_checkout_branch() {
+  git rev-parse HEAD > /dev/null 2>&1 || return
+  git branch -a --color=always | grep -v '/HEAD\s' | sort |
+    fzf --height 50% --min-height 20 --border --bind ctrl-/:toggle-preview \
+    --ansi --multi --tac --preview-window right:70% \
+    --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1)' |
+    sed 's/^..//' | cut -d' ' -f1 |
+    sed 's#^remotes/##'
+  }
 
 # create a new directory and enter it
 mcd() {
