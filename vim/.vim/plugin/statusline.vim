@@ -118,7 +118,7 @@ function! SessionStatus() abort
     return ''
   endif
   if exists('g:loaded_obsession')
-    let l:status = ObsessionStatus('   ', ' ﭸ  ')
+    let l:status = ObsessionStatus('   ')
     return l:status != '' ? l:status : ''
   else
     return ''
@@ -137,7 +137,7 @@ function! ActiveStatus() abort
   let s.='%#StatusLineNC#'             " - section 3 
   let s.='%='                          "   blank space
   let s.=' %3l:%c  %-p%% '             "   lineinfo, percent
-  let s.='%{SessionStatus()}'          "   session status
+  let s.='%#Todo#%{SessionStatus()}'   "   session status
   let s.='%#StatusLine#'               " - section 4
   let s.='%#GitGutterChangeDelete#%{CurrentBranch()}'  " git branch
   let s.='%#GitGutterAdd#%{CocGitStatus().added}'      " git status (added)
