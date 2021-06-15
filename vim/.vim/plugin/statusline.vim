@@ -129,20 +129,20 @@ function! ActiveStatus() abort
   let s=''                             " - section 0
   let s.=get(g:modecolors, mode(), '') "   mode color
   let s.=' %{CurrentMode()} %<'        "   mode
-  let s.='%#StatusLineNC#'             " - section 1
+  let s.='%#StatusLine#'               " - section 1
   let s.=' %f'                         "   filename
   let s.='%{ReadOnlyStatus()}'         "   readonly flag
   let s.='%#TabLineSel#'               " - section 2
   let s.='%{ModifiedStatus()}'         "   modified flag
-  let s.='%#StatusLineNC#'             " - section 3 
+  let s.='%#StatusLine#'               " - section 3 
   let s.='%='                          "   blank space
   let s.=' %3l:%c  %-p%% '             "   lineinfo, percent
   let s.='%#Todo#%{SessionStatus()}'   "   session status
   let s.='%#StatusLine#'               " - section 4
   let s.='%#GitGutterChangeDelete#%{CurrentBranch()}'  " git branch
-  let s.='%#GitGutterAdd#%{CocGitStatus().added}'      " git status (added)
-  let s.='%#GitGutterChange#%{CocGitStatus().changed}' " git status (changed)
-  let s.='%#GitGutterDelete#%{CocGitStatus().deleted}' " git status (deleted)
+  " let s.='%#GitGutterAdd#%{CocGitStatus().added}'      " git status (added)
+  " let s.='%#GitGutterChange#%{CocGitStatus().changed}' " git status (changed)
+  " let s.='%#GitGutterDelete#%{CocGitStatus().deleted}' " git status (deleted)
   let s.='%#StatusLine#'               " - section 4
   let l:coc_result = CocErrors()       "   coc diagnostic info
   let s.= 
@@ -152,15 +152,15 @@ function! ActiveStatus() abort
 endfunction
 
 function! InactiveStatus() abort
-  let s='%#VertSplit#    '             " - section 0
+  let s='%#StatusLineNC#    '          " - section 0
   let s.='%f'                          "   filename
   let s.='%{ReadOnlyStatus()}'         "   readonly flag
   let s.='%{ModifiedStatus()}'         "   modified flag
   let s.='%='                          " - section 1
   let s.='%{CurrentBranch()}'          "   git branch
-  let s.='%{CocGitStatus().added}'     "   git status (added)
-  let s.='%{CocGitStatus().changed}'   "   git status (changed)
-  let s.='%{CocGitStatus().deleted}'   "   git status (deleted)
+  " let s.='%{CocGitStatus().added}'     "   git status (added)
+  " let s.='%{CocGitStatus().changed}'   "   git status (changed)
+  " let s.='%{CocGitStatus().deleted}'   "   git status (deleted)
   return s
 endfunction
 
