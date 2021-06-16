@@ -82,9 +82,6 @@ nnoremap <Leader>O O<esc>
 " Yank to the end of line
 map Y y$
 
-" Don't jump to next match on *
-nnoremap * *<c-o>
-
 " Exit insert mode faster
 inoremap <esc> <esc>l
 inoremap kj <esc>l
