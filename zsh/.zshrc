@@ -6,29 +6,12 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
   eval "$("$BASE16_SHELL/profile_helper.sh")"
 
-###################
-# Spaceship Prompt
-###################
+#########
+# Prompt
+#########
 
 autoload -U promptinit; promptinit
-
-SPACESHIP_GIT_PREFIX=''
-SPACESHIP_GIT_SYMBOL=' '
-SPACESHIP_GIT_STATUS_PREFIX=' '
-SPACESHIP_GIT_STATUS_SUFFIX=''
-SPACESHIP_PROMPT_ORDER=(
-  dir           # Current directory section
-  git           # Git section (git_branch + git_status)
-  line_sep      # Line break
-  jobs          # Background jobs indicator
-  exit_code     # Exit code section
-  char          # Prompt character
-)
-
-prompt spaceship
-
-# disable bold prompt
-() { local z=$'\0' && PROMPT='${${${$(spaceship_prompt)//\%\%/'$z'}//\%B}//'$z'/%%}' }
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 ################
 # Shell Options
@@ -208,3 +191,6 @@ fzf_git_checkout_branch() {
 mcd() {
   mkdir -p "$@" && cd "$_";
 }
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
