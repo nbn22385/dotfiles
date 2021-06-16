@@ -48,7 +48,13 @@ bindkey "^E" vi-end-of-line
 #############
 
 # enable completion
-autoload -Uz compinit && compinit
+autoload -Uz compinit
+
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+  compinit;
+else
+  compinit -C;
+fi;
 
 # case insensitive path-completion 
 zstyle ':completion:*' matcher-list \
@@ -202,4 +208,3 @@ fzf_git_checkout_branch() {
 mcd() {
   mkdir -p "$@" && cd "$_";
 }
-
