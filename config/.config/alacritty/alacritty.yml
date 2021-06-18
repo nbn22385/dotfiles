@@ -114,7 +114,7 @@ font:
     family: Iosevka Nerd Font Mono
 
     # The `style` can be specified to pick a specific face.
-    style: Regular
+    style: Light
 
   # Bold font face
   #bold:
