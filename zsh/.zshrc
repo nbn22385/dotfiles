@@ -11,7 +11,9 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 #########
 
 autoload -U promptinit; promptinit
+
 source ~/powerlevel10k/powerlevel10k.zsh-theme
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ################
 # Shell Options
@@ -30,7 +32,6 @@ bindkey "^E" vi-end-of-line
 # Completion
 #############
 
-# enable completion
 autoload -Uz compinit
 
 if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
@@ -192,5 +193,3 @@ mcd() {
   mkdir -p "$@" && cd "$_";
 }
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
