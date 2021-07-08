@@ -168,10 +168,10 @@ nmap <silent> [B :bfirst<CR>
 nmap <silent> ]B :blast<CR>
 
 " Navigate quickfix entries
-nmap <silent> [q :cprevious<CR>
-nmap <silent> ]q :cnext<CR>
-nmap <silent> [Q :cfirst<CR>
-nmap <silent> ]Q :clast<CR>
+nmap <silent> [q :cprevious<CR>zz
+nmap <silent> ]q :cnext<CR>zz
+nmap <silent> [Q :cfirst<CR>zz
+nmap <silent> ]Q :clast<CR>zz
 " }}}
 
 " {{{ Autocommands
