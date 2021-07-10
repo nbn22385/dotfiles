@@ -1,8 +1,9 @@
-packadd vim-lsp-cxx-highlight
-
 "==============================================================================
 " General Settings
 "------------------------------------------------------------------------------
+" Semantic highlighting via clangd lsp
+packadd vim-lsp-cxx-highlight
+
 " Folds are syntax specific
 setlocal foldmethod=syntax
 setlocal foldlevel=10
@@ -41,3 +42,10 @@ setlocal errorformat^=%.%#:\ %f:%l:\ %m
 " CTest + gcc
 setlocal errorformat^=%m\\,\ file\ %f\\,\ line\ %l%.
 
+"==============================================================================
+" Termdebug
+"------------------------------------------------------------------------------
+packadd termdebug
+let g:termdebug_wide=1
+hi! link debugPC IncSearch
+hi! link debugBreakpoint Error
