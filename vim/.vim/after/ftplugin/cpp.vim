@@ -25,10 +25,10 @@ setlocal commentstring=//\ %s
 let g:surround_47 = "/* \r */"
 
 " Comment out the current word under cursor
-nnoremap <localleader>/ ciw/* <c-r>" */<esc>
+nnoremap <buffer> <localleader>/ ciw/* <c-r>" */<esc>
 
 " Comment out the current visual selection
-xnoremap <localleader>/ c/* <c-r>" */<esc>
+xnoremap <buffer> <localleader>/ c/* <c-r>" */<esc>
 
 "==============================================================================
 " Errorformat strings
