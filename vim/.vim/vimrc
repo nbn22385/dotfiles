@@ -142,16 +142,6 @@ nnoremap <s-tab> gT
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
 
-" Visual mode search word under cursor with */#
-function! s:VSetSearch()
-  let temp = @@
-  norm! gvy
-  let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
-  let @@ = temp
-endfunction
-vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
-vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
-
 " Navigate through partial search matches with tab/s-tab
 cnoremap <expr> <tab> getcmdtype() =~ '[/?]' ? "<c-g>" : "<tab>"
 cnoremap <expr> <s-tab> getcmdtype() =~ '[/?]' ? "<c-t>" : "<s-tab>"
