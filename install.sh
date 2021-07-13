@@ -1,14 +1,17 @@
 #!/bin/bash
 
+STOW_FOLDERS="bash config tmux vim zsh"
+
 if [ "$1" = "--install-dependencies" ]; then ./tools/dependencies.sh; fi
 
-# Install dotfiles as symbolic links using 'stow'
+# Check that stow is installed on the system
 if ! type stow > /dev/null; then echo "ERROR: gnu 'stow' package not installed" && exit 1; fi
-stow --no-folding --target="$HOME" \
-  config vim tmux zsh 
 
-# Vim plugin management using minpac
-git clone --quiet https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
-vim --noplugin +PackUpdateAndQuit
+# Deploy the symlinks
+stow --target="$HOME" $STOW_FOLDERS
+
+# Install vim plugins
+git clone --quiet https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac > /dev/null 2>&1
+vim --noplugin -n +PackUpdateAndQuit
 
 echo "Done setting up dotfiles."
