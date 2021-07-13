@@ -41,7 +41,8 @@ if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
 
-" fixes for highlight groups
+" Modifications for highlight groups
+hi! link EndOfBuffer Ignore
 hi! link CocDiffAdd DiffAdded
 hi! link CocDiffChange DiffLine
 hi! link CocDiffDelete DiffRemoved
