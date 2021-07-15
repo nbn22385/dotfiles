@@ -213,6 +213,7 @@ set laststatus=2                 " Always show statusline
 set nobackup                     " Disable backup files
 set noshowmode                   " Don't show current mode in command-line
 set pastetoggle=<F2>             " Toggle paste mode on/off
+set scrolloff=5                  " Show at least 5 lines above and below the cursor
 set shortmess=aFIT               " Customize vim messages
 set showcmd                      " Show already typed keys when more are expected
 set spelllang=en_us              " Set language for spell checking
