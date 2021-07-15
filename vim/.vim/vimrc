@@ -43,13 +43,14 @@ let maplocalleader = ','
 nnoremap <Leader>w :w<CR>
 
 " Go to first file on the line
-nnoremap <leader>gf ^f/gf
-
-" Turn off search highlighting
-" nnoremap <silent> <Leader>/ :let @/ = ""<esc>
+nnoremap <Leader>gf ^f/gf
 
 " Replace all occurrences of word under cursor
 nnoremap <Leader>h :%s/\<<C-r><C-w>\>//g<Left><Left>
+
+" Open new line and stay in normal mode
+nnoremap <Leader>o o<esc>
+nnoremap <Leader>O O<esc>
 
 " Use wildmenu to quickly switch buffers
 nnoremap <Leader><Tab> :buffer<Space><Tab>
@@ -69,13 +70,53 @@ noremap <Leader><Down>  :resize -3<CR>
 " Joining lines will keep cursor position
 nnoremap J mzJ`z
 
-" Next/previous search matches unfolded and centered on screen
-" noremap n nzvzz
-" noremap N Nzvzz
+" Next/previous search matches centered and open folds
+noremap n nzvzz
+noremap N Nzvzz
 
-" Open new line and stay in normal mode
-nnoremap <Leader>o o<esc>
-nnoremap <Leader>O O<esc>
+" Tab navigation in normal mode
+nnoremap <Tab> gt
+nnoremap <S-Tab> gT
+
+" +/- -> Increment/decrement numbers in normal or visual mode
+nnoremap + <C-a>
+nnoremap - <C-x>
+vnoremap + g<C-a>gv
+vnoremap - g<C-x>gv
+
+" <CTRL-W>h/j/k/l -> Move windows left/up/down/right
+nnoremap <C-w>j <C-w>J
+nnoremap <C-w>k <C-w>K
+nnoremap <C-w>h <C-w>H
+nnoremap <C-w>l <C-w>L
+
+" Navigate buffers
+nmap <silent> [B :bfirst<CR>
+nmap <silent> ]b :bnext<CR>
+nmap <silent> [b :bprevious<CR>
+nmap <silent> ]B :blast<CR>
+
+" Navigate location list entries
+nmap <silent> [L :lfirst<CR>zz
+nmap <silent> ]l :lnext<CR>zz
+nmap <silent> [l :lprevious<CR>zz
+nmap <silent> ]L :llast<CR>zz
+
+" Navigate quickfix list entries
+nmap <silent> [Q :cfirst<CR>zz
+nmap <silent> ]q :cnext<CR>zz
+nmap <silent> [q :cprevious<CR>zz
+nmap <silent> ]Q :clast<CR>zz
+
+" <CTRL>h/j/k/l -> Switch between buffers 
+" NOTE: superseded by vim-tmux-navigator
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-l> <C-w>l
+
+" Turn off search highlighting
+" nnoremap <silent> <Leader>/ :let @/ = ""<esc>
 
 " Yank to the end of line
 map Y y$
@@ -91,23 +132,6 @@ inoremap <silent> <Esc>OB <Down>
 inoremap <silent> <Esc>OC <Right>
 inoremap <silent> <Esc>OD <Left>
 
-" Move lines in normal, insert, and visual with alt+j/k
-if has('mac')
-  nnoremap ∆ m`:move .+1<CR>==``
-  nnoremap ˚ m`:move .-2<CR>==``
-  inoremap ∆ <Esc>m`:move .+1<CR>==``gi
-  inoremap ˚ <Esc>m`:move .-2<CR>==``gi
-  vnoremap ∆ :move '>+1<CR>gv=gv
-  vnoremap ˚ :move '<-2<CR>gv=gv
-else
-  nnoremap <Esc>j m`:move .+1<CR>==``
-  nnoremap <Esc>k m`:move .-2<CR>==``
-  inoremap <Esc>j <Esc>m`:move .+1<CR>==``gi
-  inoremap <Esc>k <Esc>m`:move .-2<CR>==``gi
-  vnoremap <Esc>j :move '>+1<CR>gv=gv
-  vnoremap <Esc>k :move '<-2<CR>gv=gv
-endif
-
 " Movement in insert mode
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
@@ -115,51 +139,17 @@ inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
 inoremap <C-^> <C-o><C-^>
 
-" <CTRL>h/j/k/l -> Switch between buffers 
-" NOTE: superseded by vim-tmux-navigator
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-l> <C-w>l
-
-" <CTRL-W>h/j/k/l -> Move windows left/up/down/right
-nnoremap <C-w>j <C-w>J
-nnoremap <C-w>k <C-w>K
-nnoremap <C-w>h <C-w>H
-nnoremap <C-w>l <C-w>L
-
-" +/- -> Increment/decrement numbers in normal or visual mode
-nnoremap + <C-a>
-nnoremap - <C-x>
-vnoremap + g<C-a>gv
-vnoremap - g<C-x>gv
-
-" Tab navigation in normal mode
-nnoremap <tab> gt
-nnoremap <s-tab> gT
-
 " Command line begin/end line
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
 
-" Navigate through partial search matches with tab/s-tab
-cnoremap <expr> <tab> getcmdtype() =~ '[/?]' ? "<c-g>" : "<tab>"
-cnoremap <expr> <s-tab> getcmdtype() =~ '[/?]' ? "<c-t>" : "<s-tab>"
+" Navigate through partial search matches with Tab/S-Tab
+cnoremap <expr> <Tab> getcmdtype() =~ '[/?]' ? "<c-g>" : "<Tab>"
+cnoremap <expr> <S-Tab> getcmdtype() =~ '[/?]' ? "<c-t>" : "<S-Tab>"
 
 " Apply last edit to visual selection
 vnoremap . :norm .<CR>
 
-" Navigate buffers
-nmap <silent> [b :bprevious<CR>
-nmap <silent> ]b :bnext<CR>
-nmap <silent> [B :bfirst<CR>
-nmap <silent> ]B :blast<CR>
-
-" Navigate quickfix entries
-nmap <silent> [q :cprevious<CR>zz
-nmap <silent> ]q :cnext<CR>zz
-nmap <silent> [Q :cfirst<CR>zz
-nmap <silent> ]Q :clast<CR>zz
 " }}}
 
 " {{{ Autocommands
