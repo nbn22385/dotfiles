@@ -70,10 +70,6 @@ noremap <Leader><Down>  :resize -3<CR>
 " Joining lines will keep cursor position
 nnoremap J mzJ`z
 
-" Next/previous search matches centered and open folds
-noremap n nzvzz
-noremap N Nzvzz
-
 " Tab navigation in normal mode
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
@@ -114,6 +110,10 @@ nmap <silent> ]Q :clast<CR>zz
 " nnoremap <C-k> <C-w>k
 " nnoremap <C-h> <C-w>h
 " nnoremap <C-l> <C-w>l
+
+" Next/previous search matches centered and open folds
+" noremap n nzvzz
+" noremap N Nzvzz
 
 " Turn off search highlighting
 " nnoremap <silent> <Leader>/ :let @/ = ""<esc>
