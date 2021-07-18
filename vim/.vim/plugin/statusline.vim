@@ -118,8 +118,8 @@ function! SessionStatus() abort
     return ''
   endif
   if exists('g:loaded_obsession')
-    let l:status = ObsessionStatus('   ')
-    return l:status != '' ? l:status : ''
+    let l:status = ObsessionStatus('   ', 'OFF')
+    return l:status != 'OFF' ? l:status : ''
   else
     return ''
   endif

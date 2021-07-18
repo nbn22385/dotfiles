@@ -17,7 +17,6 @@ function! PackInit() abort
   call minpac#add('tpope/vim-surround')                                " Add, change, delete surroundings in pairs
   call minpac#add('wellle/targets.vim')                                " More text objects
   " Inactive plugins {{{
-  " call minpac#add('ryanoasis/vim-devicons')
   " call minpac#add('daviesjamie/vim-base16-lightline')
   " call minpac#add('itchyny/lightline.vim')
   " call minpac#add('josa42/vim-lightline-coc') 
@@ -155,44 +154,43 @@ vnoremap . :norm .<CR>
 " {{{ Autocommands
 augroup Vimrc
   autocmd!
+
   " Jump to the last known cursor position. See $VIMRUNTIME/defaults.vim
   autocmd BufReadPost *
         \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
         \ |   exe "normal! g`\""
         \ | endif
 
-  " Save modified buffer during idle after 'updatetime' has elapsed (default 4 sec)
-  autocmd CursorHoldI,CursorHold * silent! :update
-
-  " Automatically equalize splits when Vim is resized
-  autocmd VimResized * wincmd =
-
-  " Automatically source Session.vim if it exists
-  autocmd VimEnter * nested
-        \ if !argc() && empty(v:this_session) && filereadable('Session.vim') && !&modified |
-        \   silent execute 'source Session.vim' |
-        \   if exists('*Obsession') |
-        \     silent execute 'Obsession' |
-        \   endif |
-        \ endif
-
-  " Show cursorline in active window (line number only)
-  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  autocmd WinLeave * setlocal nocursorline
-
-  " WSL yank support
-  let s:clip = '/mnt/c/Windows/System32/clip.exe'
-  if executable(s:clip)
-    autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
-  endif
-
-  " Change the working directory to the git project root (uses fugitive)
+  " Change the working directory to the git project root (uses vim-fugitive)
   autocmd BufLeave * let b:last_cwd = getcwd()
   autocmd BufEnter * if exists('b:last_cwd')
         \|   execute 'lcd' b:last_cwd
         \| else
           \|   silent! Glcd
           \| endif
+
+  " Restore session if a Session.vim file exists
+  autocmd VimEnter * nested
+        \ if !argc() && empty(v:this_session) && filereadable('Session.vim') && !&modified |
+        \   silent execute 'source Session.vim' |
+        \ endif
+
+  " Save modified buffer during idle after 'updatetime' has elapsed (default 4 sec)
+  autocmd CursorHoldI,CursorHold * silent! :update
+
+  " Equalize splits when Vim is resized
+  autocmd VimResized * wincmd =
+
+  " Show cursorline in active window only 
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+
+  " Yank to system clipboard under WSL
+  let s:clip = '/mnt/c/Windows/System32/clip.exe'
+  if executable(s:clip)
+    autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+  endif
+
 augroup END
 " }}}
 
