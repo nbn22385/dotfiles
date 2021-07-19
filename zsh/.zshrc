@@ -25,8 +25,17 @@ setopt globdots
 setopt histignoredups
 setopt ignoreeof
 
+##########
+# Keymaps
+##########
+
+bindkey -v
+bindkey -v "kj" vi-cmd-mode
 bindkey "^A" vi-beginning-of-line
 bindkey "^E" vi-end-of-line
+bindkey '^R' history-incremental-search-backward
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
 
 #############
 # Completion
@@ -41,27 +50,13 @@ else
 fi;
 
 # case insensitive path-completion 
-zstyle ':completion:*' matcher-list \
-  'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' \
-  'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' \
-  'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' \
-  'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # partial completion suggestions
-zstyle ':completion:*' list-suffixes expand prefix suffix 
+zstyle ':completion:*' list-suffixes expand prefix suffix
 
-# start typing + [Up-Arrow] - fuzzy find history forward
-if [[ "${terminfo[kcuu1]}" != "" ]]; then
-  autoload -U up-line-or-beginning-search
-  zle -N up-line-or-beginning-search
-  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
-fi
-# start typing + [Down-Arrow] - fuzzy find history backward
-if [[ "${terminfo[kcud1]}" != "" ]]; then
-  autoload -U down-line-or-beginning-search
-  zle -N down-line-or-beginning-search
-  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
-fi
+# highlight tab completion options
+zstyle ':completion:*' menu select
 
 ##########
 # Aliases
