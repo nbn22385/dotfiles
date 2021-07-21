@@ -2,21 +2,21 @@
 function! PackInit() abort
   packadd minpac
   call minpac#init()
-  call minpac#add('k-takata/minpac', {'type': 'opt'})                  " Plugin manager
-  call minpac#add('chriskempson/base16-vim')                           " Base16 themes ($HOME/.vim/plugin/base16.vim)
-  call minpac#add('christoomey/vim-tmux-navigator')                    " Navigation between tmux panes and vim splits
-  call minpac#add('jackguo380/vim-lsp-cxx-highlight', {'type': 'opt'}) " Syntax highlighting for C++
-  call minpac#add('junegunn/fzf')                                      " Fuzzy finder ($HOME/.vim/plugin/fzf.vim)
-  call minpac#add('junegunn/fzf.vim')                                  " Additional commands for working with fzf
-  call minpac#add('junegunn/vim-slash')                                " Improved in-buffer search experience
-  call minpac#add('machakann/vim-highlightedyank')                     " Highlight yanked text
-  call minpac#add('neoclide/coc.nvim', {'branch': 'release'})          " LSP support ($HOME/.vim/plugin/coc.vim)
-  call minpac#add('tpope/vim-commentary')                              " Code commenting shortcuts
-  call minpac#add('tpope/vim-fugitive')                                " Git shortcuts
-  call minpac#add('tpope/vim-obsession')                               " Continuously updated session files
-  call minpac#add('tpope/vim-surround')                                " Add, change, delete surroundings in pairs
-  call minpac#add('wellle/targets.vim')                                " More text objects
+  call minpac#add('k-takata/minpac', {'type': 'opt'})          " Plugin manager
+  call minpac#add('chriskempson/base16-vim')                   " Base16 themes ($HOME/.vim/plugin/base16.vim)
+  call minpac#add('christoomey/vim-tmux-navigator')            " Navigation between tmux panes and vim splits
+  call minpac#add('junegunn/fzf')                              " Fuzzy finder ($HOME/.vim/plugin/fzf.vim)
+  call minpac#add('junegunn/fzf.vim')                          " Additional commands for working with fzf
+  call minpac#add('junegunn/vim-slash')                        " Improved in-buffer search experience
+  call minpac#add('machakann/vim-highlightedyank')             " Highlight yanked text
+  call minpac#add('neoclide/coc.nvim', {'branch': 'release'})  " LSP support ($HOME/.vim/plugin/coc.vim)
+  call minpac#add('tpope/vim-commentary')                      " Code commenting shortcuts
+  call minpac#add('tpope/vim-fugitive')                        " Git shortcuts
+  call minpac#add('tpope/vim-obsession')                       " Continuously updated session files
+  call minpac#add('tpope/vim-surround')                        " Add, change, delete surroundings in pairs
+  call minpac#add('wellle/targets.vim')                        " More text objects
   " Inactive plugins {{{
+  " call minpac#add('jackguo380/vim-lsp-cxx-highlight', {'type': 'opt'}) " Syntax highlighting for C++
   " call minpac#add('daviesjamie/vim-base16-lightline')
   " call minpac#add('itchyny/lightline.vim')
   " call minpac#add('josa42/vim-lightline-coc') 
@@ -239,6 +239,7 @@ set smartcase                    " Case sensitive search when using capital lett
 set wildcharm=<Tab>              " Allow wildmenu expansion from macros/remaps
 set wildignorecase               " Case-insensitive completion of commands, filenames
 set wildmenu                     " Enhanced command-line completion
+set wildmode=longest:full,full   " Wildmenu completion mode
 
 " Cursor shape
 let &t_SI = "\e[6 q"             " INSERT mode - beam cursor
