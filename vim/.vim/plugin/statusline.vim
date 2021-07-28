@@ -125,6 +125,10 @@ function! SessionStatus() abort
   endif
 endfunction
 
+function! SpellStatus() abort
+  return &spell ? 'SPELL' : ''
+endfunction
+
 function! ActiveStatus() abort
   let s=''                             " - section 0
   let s.=get(g:modecolors, mode(), '') "   mode color
@@ -136,6 +140,8 @@ function! ActiveStatus() abort
   let s.='%{ModifiedStatus()}'         "   modified flag
   let s.='%#StatusLine#'               " - section 3 
   let s.='%='                          "   blank space
+  let s.='%#Todo#%{SpellStatus()}'     "   spell checking status
+  let s.='%#StatusLine#'               " - section 4
   let s.=' %3l:%c  %-p%% '             "   lineinfo, percent
   let s.='%#Todo#%{SessionStatus()}'   "   session status
   let s.='%#StatusLine#'               " - section 4
