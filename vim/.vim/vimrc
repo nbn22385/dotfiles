@@ -208,6 +208,7 @@ set foldopen+=jump               " Open a fold if we jump inside it
 set hidden                       " Switch between buffers without having to save first
 set iskeyword+=-                 " Treat dash separated words as a word text object
 set laststatus=2                 " Always show statusline
+set mouse=a                      " Enable use of the mouse in all modes
 set nobackup                     " Disable backup files
 set noshowmode                   " Don't show current mode in command-line
 set pastetoggle=<F2>             " Toggle paste mode on/off
