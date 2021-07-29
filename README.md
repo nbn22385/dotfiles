@@ -1,16 +1,8 @@
 # dotfiles
 
-## Dependencies
+## Installation
 
-* bat
-* fd
-* fzf
-* lazygit
-* nodejs/yarnpkg
-* ripgrep
-* tmux
-* vim
-* zsh/ohmyzsh/powerlevel10k
+See the [wiki](https://github.com/nbn22385/dotfiles/wiki) for details.
 
 ## Firefox theme
 
