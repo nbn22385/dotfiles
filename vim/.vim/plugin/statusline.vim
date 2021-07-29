@@ -7,16 +7,16 @@ set statusline=%!ActiveStatus()
 " TablineSel (green)
 " Todo (orange)
 " GitGutterAdd (green)
-" GitGutterChange (blue)
-" GitGutterDelete (red)
-" GitGutterChangeDelete (purple)
+" StatusLineNormal (blue)
+" StatusLineInsert (magenta)
+" StatusLineVisual (yellow)
 
 let g:modecolors = {
-      \ 'n'      : '%#GitGutterChange#',
-      \ 'i'      : '%#GitGutterChangeDelete#',
-      \ 'v'      : '%#Todo#',
-      \ 'V'      : '%#Todo#',
-      \ "\<C-V>" : '%#Todo#',
+      \ 'n'      : '%#StatusLineBlue#',
+      \ 'i'      : '%#StatusLineMagenta#',
+      \ 'v'      : '%#StatusLineYellow#',
+      \ 'V'      : '%#StatusLineYellow#',
+      \ "\<C-V>" : '%#StatusLineYellow#',
       \ 't'      : '%#GitGutterAdd#',
       \ 'no'     : '%#DiffChange#',
       \ 's'      : '%#WildMenu#',
@@ -145,7 +145,7 @@ function! ActiveStatus() abort
   let s.=' %3l:%c  %-p%% '             "   lineinfo, percent
   let s.='%#Todo#%{SessionStatus()}'   "   session status
   let s.='%#StatusLine#'               " - section 4
-  let s.='%#GitGutterChangeDelete#%{CurrentBranch()}'  " git branch
+  let s.='%#StatusLineMagenta#%{CurrentBranch()}'  " git branch
   " let s.='%#GitGutterAdd#%{CocGitStatus().added}'      " git status (added)
   " let s.='%#GitGutterChange#%{CocGitStatus().changed}' " git status (changed)
   " let s.='%#GitGutterDelete#%{CocGitStatus().deleted}' " git status (deleted)

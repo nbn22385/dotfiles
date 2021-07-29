@@ -28,10 +28,11 @@ function! s:base16_customize() abort
   call Base16hi("htmlItalic", g:base16_gui05, "", g:base16_cterm05, "", "italic", "")
   call Base16hi("CocErrorSign", g:base16_gui08, "", g:base16_cterm08, "", "", "")
   call Base16hi("CocWarningSign", g:base16_gui09, "", g:base16_cterm09, "", "", "")
-  " change the GitGutter highlights back to the original base16-vim
-  call Base16hi("GitGutterChange", g:base16_gui0D, g:base16_gui01, g:base16_cterm0D, g:base16_cterm01, "", "")
-  call Base16hi("GitGutterDelete", g:base16_gui08, g:base16_gui01, g:base16_cterm08, g:base16_cterm01, "", "")
-  call Base16hi("GitGutterChangeDelete", g:base16_gui0E, g:base16_gui01, g:base16_cterm0E, g:base16_cterm01, "", "")
+  " custom highlight groups used in statusline.vim
+  call Base16hi("StatusLineBlue", g:base16_gui0D, g:base16_gui01, g:base16_cterm0D, g:base16_cterm01, "", "") " blue
+  call Base16hi("StatusLineMagenta", g:base16_gui0E, g:base16_gui01, g:base16_cterm0E, g:base16_cterm01, "", "") " magenta
+  call Base16hi("StatusLineYellow", g:base16_gui0A, g:base16_gui01, g:base16_cterm0A, g:base16_cterm01, "", "") " yellow
+  call Base16hi("StatusLineGreen", g:base16_gui0B, g:base16_gui01, g:base16_cterm0B, g:base16_cterm01, "", "") " green
 endfunction
 
 augroup on_change_colorscheme
@@ -50,4 +51,4 @@ hi! link EndOfBuffer Ignore
 hi! link CocDiffAdd DiffAdded
 hi! link CocDiffChange DiffLine
 hi! link CocDiffDelete DiffRemoved
-
+hi! link CocErrorHighlight Underlined
