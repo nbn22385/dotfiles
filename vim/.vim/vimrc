@@ -155,26 +155,6 @@ vnoremap . :norm .<CR>
 augroup Vimrc
   autocmd!
 
-  " Jump to the last known cursor position. See $VIMRUNTIME/defaults.vim
-  autocmd BufReadPost *
-        \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-        \ |   exe "normal! g`\""
-        \ | endif
-
-  " Change the working directory to the git project root (uses vim-fugitive)
-  autocmd BufLeave * let b:last_cwd = getcwd()
-  autocmd BufEnter * if exists('b:last_cwd')
-        \|   execute 'lcd' b:last_cwd
-        \| else
-          \|   silent! Glcd
-          \| endif
-
-  " Restore session if a Session.vim file exists
-  autocmd VimEnter * nested
-        \ if !argc() && empty(v:this_session) && filereadable('Session.vim') && !&modified |
-        \   silent execute 'source Session.vim' |
-        \ endif
-
   " Save modified buffer during idle after 'updatetime' has elapsed (default 4 sec)
   autocmd CursorHoldI,CursorHold * silent! :update
 
@@ -185,10 +165,34 @@ augroup Vimrc
   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
 
+  " Jump to the last known cursor position. See $VIMRUNTIME/defaults.vim
+  autocmd BufReadPost *
+        \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit' |
+        \   silent execute "normal! g`\"" |
+        \ endif
+
+  " Change the working directory to the git project root (uses vim-fugitive)
+  autocmd BufLeave * let b:last_cwd = getcwd()
+  autocmd BufEnter * 
+        \ if exists('b:last_cwd') |
+        \   silent execute 'lcd' b:last_cwd |
+        \ else |
+        \   silent! Glcd |
+        \ endif
+
+  " Restore session if a Session.vim file exists
+  autocmd VimEnter * nested
+        \ if !argc() && empty(v:this_session) && filereadable('Session.vim') && !&modified |
+        \   silent execute 'source Session.vim' |
+        \ endif
+
   " Yank to system clipboard under WSL
   let s:clip = '/mnt/c/Windows/System32/clip.exe'
   if executable(s:clip)
-    autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+    autocmd TextYankPost * 
+        \ if v:event.operator ==# 'y' | 
+        \   call system(s:clip, @0) | 
+        \ endif
   endif
 
 augroup END
