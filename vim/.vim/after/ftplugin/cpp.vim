@@ -1,10 +1,6 @@
 "==============================================================================
 " General Settings
 "------------------------------------------------------------------------------
-" Semantic highlighting via clangd lsp
-packadd vim-lsp-cxx-highlight
-
-" Folds are syntax specific
 setlocal foldmethod=syntax
 setlocal foldlevel=10
 
@@ -14,7 +10,7 @@ setlocal foldlevel=10
 " Use // instead of /**/ for line comments (vim-commentary)
 setlocal commentstring=//\ %s
 
-" Use / to comment out text objects with /**/ (vim-surround)
+" Use ys<textobj>/ to comment out text objects with /**/ (vim-surround)
 " see h: surround-customizing
 let g:surround_47 = "/* \r */"
 
