@@ -1,12 +1,11 @@
 if executable('fzf')
   "==============================================================================
-  " Layout
+  " General config
   "------------------------------------------------------------------------------
   " Empty value to disable preview window altogether
-  let g:fzf_preview_window = ''
-
-  " Command to generate tags file
-  let g:fzf_tags_command = 'ctags -R --languages=C++ --exclude="build" --exclude=".git"'
+  " let g:fzf_preview_window = ''
+  " Preview window on the right side, hidden by default, ctrl-p to toggle
+  let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-p']
 
   " Use floating window if supported
   if v:version >= 802
@@ -15,21 +14,26 @@ if executable('fzf')
     let g:fzf_layout = { 'window': '10new' }
   endif
 
+  " [Buffers] Jump to the existing window if possible
+  let g:fzf_buffers_jump = 1
+
+  " [Tags] Command to generate tags file
+  let g:fzf_tags_command = 'ctags -R --languages=C++ --exclude="build" --exclude=".git"'
+
   "==============================================================================
   " Command overrides
   "------------------------------------------------------------------------------
-  " custom Files command with bat preview (taken from :h fzf-vim-example-customizing-files-command)
-  command! -bang -nargs=? -complete=dir Files
-        \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-  " custom Rg command to search hidden files
+  " [Rg] search hidden files
   command! -bang -nargs=* Rg
-        \ call fzf#vim#grep("rg --hidden --column --line-number --no-heading --color=always --smart-case -- ".shellescape(<q-args>), 1)
+        \ call fzf#vim#grep(
+        \   'rg --hidden --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+        \   fzf#vim#with_preview(), <bang>0)
 
   "==============================================================================
   " Mappings
   "------------------------------------------------------------------------------
-  nnoremap <silent> <expr> <leader>f (len(system('git rev-parse')) ? ':Files' : ':GFiles')."\<cr>"
+  nnoremap <silent> <expr> <leader>f 
+        \ (len(system('git rev-parse')) ? ':Files' : ':GFiles')."\<cr>"
   nnoremap <silent> <leader>B :Buffers<cr>
   nnoremap <silent> <leader>C :Colors<cr>
   nnoremap <silent> <leader>F :Files<cr>

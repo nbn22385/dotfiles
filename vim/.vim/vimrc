@@ -69,6 +69,9 @@ noremap <Leader><Down>  :resize -3<CR>
 " Joining lines will keep cursor position
 nnoremap J mzJ`z
 
+" Yank to the end of line
+nnoremap Y y$
+
 " Tab navigation in normal mode
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
@@ -111,14 +114,12 @@ nmap <silent> ]Q :clast<CR>zz
 " nnoremap <C-l> <C-w>l
 
 " Next/previous search matches centered and open folds
+" NOTE: superceded by vim-slash
 " noremap n nzvzz
 " noremap N Nzvzz
 
 " Turn off search highlighting
 " nnoremap <silent> <Leader>/ :let @/ = ""<esc>
-
-" Yank to the end of line
-map Y y$
 
 " Exit insert mode faster
 inoremap <esc> <esc>l
