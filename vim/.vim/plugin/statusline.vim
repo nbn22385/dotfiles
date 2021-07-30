@@ -146,13 +146,13 @@ function! ActiveStatus() abort
   let s.='%#Todo#%{SessionStatus()}'   "   session status
   let s.='%#StatusLine#'               " - section 4
   let s.='%#StatusLineMagenta#%{CurrentBranch()}'  " git branch
-  " let s.='%#GitGutterAdd#%{CocGitStatus().added}'      " git status (added)
-  " let s.='%#GitGutterChange#%{CocGitStatus().changed}' " git status (changed)
-  " let s.='%#GitGutterDelete#%{CocGitStatus().deleted}' " git status (deleted)
+  " let s.='%#StatusLineGreen#%{CocGitStatus().added}'  " git status (added)
+  " let s.='%#StatusLineBlue#%{CocGitStatus().changed}' " git status (changed)
+  " let s.='%#StatusLineRed#%{CocGitStatus().deleted}'  " git status (deleted)
   let s.='%#StatusLine#'               " - section 4
   let l:coc_result = CocErrors()       "   coc diagnostic info
   let s.= 
-        \ (l:coc_result['total'] > 0 ? '%#GitGutterDelete#' : '%#TabLineSel#') 
+        \ (l:coc_result['total'] > 0 ? '%#StatusLineRed#' : '%#TabLineSel#') 
         \ . l:coc_result['str']
   return s
 endfunction

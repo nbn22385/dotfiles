@@ -29,10 +29,12 @@ function! s:base16_customize() abort
   call Base16hi("CocErrorSign", g:base16_gui08, "", g:base16_cterm08, "", "", "")
   call Base16hi("CocWarningSign", g:base16_gui09, "", g:base16_cterm09, "", "", "")
   " custom highlight groups used in statusline.vim
-  call Base16hi("StatusLineBlue", g:base16_gui0D, g:base16_gui01, g:base16_cterm0D, g:base16_cterm01, "", "") " blue
-  call Base16hi("StatusLineMagenta", g:base16_gui0E, g:base16_gui01, g:base16_cterm0E, g:base16_cterm01, "", "") " magenta
-  call Base16hi("StatusLineYellow", g:base16_gui0A, g:base16_gui01, g:base16_cterm0A, g:base16_cterm01, "", "") " yellow
-  call Base16hi("StatusLineGreen", g:base16_gui0B, g:base16_gui01, g:base16_cterm0B, g:base16_cterm01, "", "") " green
+  call Base16hi("StatusLineRed",     g:base16_gui08, g:base16_gui01, g:base16_cterm08, g:base16_cterm01, "", "")
+  call Base16hi("StatusLineYellow",  g:base16_gui0A, g:base16_gui01, g:base16_cterm0A, g:base16_cterm01, "", "")
+  call Base16hi("StatusLineGreen",   g:base16_gui0B, g:base16_gui01, g:base16_cterm0B, g:base16_cterm01, "", "")
+  call Base16hi("StatusLineCyan",    g:base16_gui0C, g:base16_gui01, g:base16_cterm0C, g:base16_cterm01, "", "")
+  call Base16hi("StatusLineBlue",    g:base16_gui0D, g:base16_gui01, g:base16_cterm0D, g:base16_cterm01, "", "")
+  call Base16hi("StatusLineMagenta", g:base16_gui0E, g:base16_gui01, g:base16_cterm0E, g:base16_cterm01, "", "")
 endfunction
 
 augroup on_change_colorscheme
