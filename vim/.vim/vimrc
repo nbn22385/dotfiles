@@ -119,6 +119,7 @@ nmap <silent> ]Q :clast<CR>zz
 " noremap N Nzvzz
 
 " Turn off search highlighting
+" NOTE: superceded by vim-slash
 " nnoremap <silent> <Leader>/ :let @/ = ""<esc>
 
 " Exit insert mode faster

@@ -1,31 +1,28 @@
 if 0
 "==============================================================================
-" Lightline configuration
+" Component layout
 "------------------------------------------------------------------------------
 let g:lightline = {}
 
-"==============================================================================
-" Color scheme
-"------------------------------------------------------------------------------
-let g:lightline.colorscheme = 'base16'
-
-"==============================================================================
-" Component layout
-"------------------------------------------------------------------------------
 let g:lightline.active = {
-      \ 'left':  [ [ 'mode', 'paste' ],
+      \ 'left':  [ [ 'mode', 'paste' ], 
+      \            [ ],
       \            [ 'readonly', 'relativepath', 'modified' ] ],
-      \ 'right': [ [ 'coc_errors', 'coc_warnings', 'coc_ok' ],
-      \            [ 'gitbranch' ],
-      \            [ 'lineinfo', 'percent', 'obsessionstatus'] ] }
+      \ 'right': [ [ ],
+      \            [ ],
+      \            [ 'coc_errors', 'coc_warnings', 'coc_ok', 
+      \              'lineinfo', 'percent', 'obsessionstatus', 'gitbranch' ] ] 
+      \ }
 
 let g:lightline.inactive = {
       \ 'left':  [ [ 'readonly', 'relativepath', 'modified' ] ],
-      \ 'right': [ ] }
+      \ 'right': [ ] 
+      \ }
 
 let g:lightline.tabline = {
       \ 'left':  [ [ 'tabs' ] ],
-      \ 'right': [ ] }
+      \ 'right': [ ] 
+      \ }
 
 let g:lightline.enable = {
       \ 'statusline': 1,
@@ -35,7 +32,24 @@ let g:lightline.enable = {
 "==============================================================================
 " Component functions
 "------------------------------------------------------------------------------
-call lightline#coc#register()
+" call lightline#coc#register()
+let g:lightline.component_expand = {
+      \   'coc_warnings': 'lightline#coc#warnings',
+      \   'coc_errors': 'lightline#coc#errors',
+      \   'coc_info': 'lightline#coc#info',
+      \   'coc_hints': 'lightline#coc#hints',
+      \   'coc_ok': 'lightline#coc#ok',
+      \   'status': 'lightline#coc#status',
+      \ }
+
+" Define all coc components to customize coc_ok color
+let g:lightline.component_type = {
+      \   'coc_warnings': 'warning',
+      \   'coc_errors': 'error',
+      \   'coc_info': 'info',
+      \   'coc_hints': 'hints',
+      \   'coc_ok': 'middle',
+      \ }
 
 function! LightlineMode() abort
   let ftmap = {
@@ -46,21 +60,27 @@ function! LightlineMode() abort
 endfunction
 
 function! GitBranch()
-  if winwidth(0) <= 30
+  if winwidth(0) <= 50
     return ''
   endif
-  if exists('g:loaded_fugitive')
+  if get(g:,'coc_enabled')
+    let l:branch = get(g:, 'coc_git_status', '')
+    return l:branch !=? '' ? (winwidth(0) < 100 ? l:branch[0:15] : l:branch) : ''
+  elseif exists('g:loaded_fugitive')
     let l:branch = fugitive#head()
     return l:branch !=? '' ? (winwidth(0) < 100 ? ' ' . l:branch[0:15] : ' ' . l:branch) : ''
   endif
 endfunction
 
 function! SessionStatus() abort
-  if winwidth(0) <= 30
+  if winwidth(0) <= 50
     return ''
   endif
   if exists('g:loaded_obsession')
-    return ObsessionStatus('', 'ﭸ')
+    let l:status = ObsessionStatus('', 'OFF')
+    return l:status != 'OFF' ? l:status : ''
+  else
+    return ''
   endif
 endfunction
 
@@ -117,5 +137,9 @@ let g:lightline.mode_map = {
 let g:lightline.separator = { 'left': '', 'right': '' }
 let g:lightline.subseparator = { 'left': '', 'right': '' }
 
-scriptencoding utf-8
+"==============================================================================
+" Colorscheme
+"------------------------------------------------------------------------------
+let g:lightline.colorscheme = 'base16'
+
 endif
