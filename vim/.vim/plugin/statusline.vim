@@ -2,14 +2,16 @@ if 1
 
 set statusline=%!ActiveStatus()
 
-" colors with bg of statusline but color text
+" Highlight groups that blend with StatusLine
 " FoldColumn (blue)
 " TablineSel (green)
 " Todo (orange)
-" GitGutterAdd (green)
-" StatusLineNormal (blue)
-" StatusLineInsert (magenta)
-" StatusLineVisual (yellow)
+" StatusLineRed
+" StatusLineYellow
+" StatusLineGreen
+" StatusLineCyan 
+" StatusLineBlue 
+" StatusLineMagenta
 
 let g:modecolors = {
       \ 'n'      : '%#StatusLineBlue#',
@@ -17,7 +19,7 @@ let g:modecolors = {
       \ 'v'      : '%#StatusLineYellow#',
       \ 'V'      : '%#StatusLineYellow#',
       \ "\<C-V>" : '%#StatusLineYellow#',
-      \ 't'      : '%#GitGutterAdd#',
+      \ 't'      : '%#StatusLineTerm#',
       \ 'no'     : '%#DiffChange#',
       \ 's'      : '%#WildMenu#',
       \ 'S'      : '%#WildMenu#',
@@ -71,22 +73,6 @@ function! CurrentBranch() abort
   endif
 endfunction
 
-function! CocGitStatus() abort
-  let l:dict = {'added':'','changed':'','deleted':'',}
-  if winwidth(0) <= 50
-    return l:dict
-  endif
-  if exists('b:coc_git_status')
-    let l:status = b:coc_git_status
-    let l:dict.added = substitute(matchstr(l:status, '\v\+\d+\s'), '+', ' ', '')
-    let l:dict.changed = substitute(matchstr(l:status, '\v\~\d+\s'), '\~', ' ', '')
-    let l:dict.deleted = substitute(matchstr(l:status, '\v\-\d+\s'), '-', ' ', '')
-    return l:dict
-  else
-    return l:dict
-  endif
-endfunction
-
 function! CocErrors() abort
   if exists('b:coc_diagnostic_info')
     let l:errors = get(b:coc_diagnostic_info, 'error', 0)
@@ -130,8 +116,7 @@ function! SpellStatus() abort
 endfunction
 
 function! ActiveStatus() abort
-  let s=''                             " - section 0
-  let s.=get(g:modecolors, mode(), '') "   mode color
+  let s =get(g:modecolors, mode(), '') " - section 0
   let s.=' %{CurrentMode()} %<'        "   mode
   let s.='%#StatusLine#'               " - section 1
   let s.=' %f'                         "   filename
@@ -144,12 +129,9 @@ function! ActiveStatus() abort
   let s.='%#StatusLine#'               " - section 4
   let s.=' %3l:%c  %-p%% '             "   lineinfo, percent
   let s.='%#Todo#%{SessionStatus()}'   "   session status
-  let s.='%#StatusLine#'               " - section 4
-  let s.='%#StatusLineMagenta#%{CurrentBranch()}'  " git branch
-  " let s.='%#StatusLineGreen#%{CocGitStatus().added}'  " git status (added)
-  " let s.='%#StatusLineBlue#%{CocGitStatus().changed}' " git status (changed)
-  " let s.='%#StatusLineRed#%{CocGitStatus().deleted}'  " git status (deleted)
-  let s.='%#StatusLine#'               " - section 4
+  let s.='%#StatusLineMagenta#'        " - section 5
+  let s.='%{CurrentBranch()}'          "   git branch
+  let s.='%#StatusLine#'               " - section 6
   let l:coc_result = CocErrors()       "   coc diagnostic info
   let s.= 
         \ (l:coc_result['total'] > 0 ? '%#StatusLineRed#' : '%#TabLineSel#') 
@@ -164,9 +146,6 @@ function! InactiveStatus() abort
   let s.='%{ModifiedStatus()}'         "   modified flag
   let s.='%='                          " - section 1
   let s.='%{CurrentBranch()}'          "   git branch
-  " let s.='%{CocGitStatus().added}'     "   git status (added)
-  " let s.='%{CocGitStatus().changed}'   "   git status (changed)
-  " let s.='%{CocGitStatus().deleted}'   "   git status (deleted)
   return s
 endfunction
 
@@ -177,8 +156,6 @@ augroup status
 augroup END
 
 endif
-
-scriptencoding utf-8
 
 " resources
 " https://github.com/protesilaos/dotfiles/blob/master/vim/.vim/vimrc_modules/protline.vimrc
