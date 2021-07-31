@@ -80,5 +80,9 @@
   "git.topRemovedSign.hlGroup": "CocDiffDelete",
   "git.enableGutters": true,
   "git.realtimeGutters": true,
-  "git.branchCharacter": ""
+  "git.branchCharacter": "",
+  "git.changedDecorator": "",
+  "git.conflictedDecorator": "",
+  "git.stagedDecorator": "",
+  "git.untrackedDecorator": ""
 }
