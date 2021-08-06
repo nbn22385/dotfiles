@@ -2,14 +2,14 @@
 function! PackInit() abort
   packadd minpac
   call minpac#init()
-  call minpac#add('k-takata/minpac', {'type': 'opt'})          " Plugin manager
-  call minpac#add('chriskempson/base16-vim')                   " Base16 themes ($HOME/.vim/plugin/base16.vim)
+  call minpac#add('k-takata/minpac', {'type': 'opt'})          " Plugin manager " 
   call minpac#add('christoomey/vim-tmux-navigator')            " Navigation between tmux panes and vim splits
-  call minpac#add('junegunn/fzf')                              " Fuzzy finder ($HOME/.vim/plugin/fzf.vim)
+  call minpac#add('fnune/base16-vim')                          " Base16 themes ($HOME/.vim/after/plugin/base16.vim)
+  call minpac#add('junegunn/fzf')                              " Fuzzy finder ($HOME/.vim/after/plugin/fzf.vim)
   call minpac#add('junegunn/fzf.vim')                          " Additional commands for working with fzf
   call minpac#add('junegunn/vim-slash')                        " Improved in-buffer search experience
   call minpac#add('machakann/vim-highlightedyank')             " Highlight yanked text
-  call minpac#add('neoclide/coc.nvim', {'branch': 'release'})  " LSP support ($HOME/.vim/plugin/coc.vim)
+  call minpac#add('neoclide/coc.nvim', {'branch': 'release'})  " LSP support ($HOME/.vim/after/plugin/coc.vim)
   call minpac#add('tpope/vim-commentary')                      " Code commenting shortcuts
   call minpac#add('tpope/vim-fugitive')                        " Git shortcuts
   call minpac#add('tpope/vim-obsession')                       " Continuously updated session files

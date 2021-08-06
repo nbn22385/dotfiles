@@ -10,7 +10,7 @@ function! s:base16_customize() abort
   call Base16hi("Cursor", "", "", "", "", "inverse", "")
   " overrides the cursorline to have no background
   call Base16hi("CursorLine", "", g:base16_gui00, "", g:base16_cterm00, "", "")
-  call Base16hi("CursorLineNr", "", g:base16_gui02, "", g:base16_cterm02, "bold", "")
+  call Base16hi("CursorLineNr", "","", "","", "bold", "")
   call Base16hi("DiffAdd", g:base16_gui00, g:base16_gui0B, "", g:base16_cterm00, "", "")
   call Base16hi("DiffChange", g:base16_gui00, g:base16_gui04, "", g:base16_cterm00, "", "")
   call Base16hi("DiffDelete", g:base16_gui08, g:base16_gui08, "", g:base16_cterm00, "", "")
@@ -24,8 +24,8 @@ function! s:base16_customize() abort
   call Base16hi("StatusLine", "", g:base16_gui01, "", g:base16_cterm01, "", "")
   call Base16hi("StatusLineNC", "", g:base16_gui01, "", g:base16_cterm01, "", "")
   call Base16hi("VertSplit", g:base16_gui01, g:base16_gui00, g:base16_cterm00, g:base16_cterm00, "", "")
-  call Base16hi("htmlBold", g:base16_gui05, "", g:base16_cterm05, "", "bold", "")
-  call Base16hi("htmlItalic", g:base16_gui05, "", g:base16_cterm05, "", "italic", "")
+  " call Base16hi("htmlBold", g:base16_gui05, "", g:base16_cterm05, "", "bold", "")
+  " call Base16hi("htmlItalic", g:base16_gui05, "", g:base16_cterm05, "", "italic", "")
   call Base16hi("CocErrorSign", g:base16_gui08, "", g:base16_cterm08, "", "", "")
   call Base16hi("CocWarningSign", g:base16_gui09, "", g:base16_cterm09, "", "", "")
   " custom highlight groups used in statusline.vim

@@ -86,3 +86,4 @@
   "git.stagedDecorator": "",
   "git.untrackedDecorator": ""
 }
+// vim:ft=jsonc
