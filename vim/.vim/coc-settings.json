@@ -4,7 +4,7 @@
     "cpp",
     "vim"
   ],
-  "coc.preferences.semanticTokensHighlights": true,
+  "coc.preferences.semanticTokensHighlights": false,
 
 //  "http.proxy": "http://proxy-lmi.global.lmco.com:80",
   "http.proxyStrictSSL": false,
