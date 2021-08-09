@@ -99,7 +99,7 @@ alias gdu='git diff ..@{upstream}'
 alias lg='lazygit'
 
 # ripgrep aliases
-alias rg='rg --smart-case'
+alias rg='rg --hidden --smart-case --glob "!**/.git/**"'
 
 # tmux aliases
 alias tmux='export SHELL=$(which zsh); tmux -2 -u'
