@@ -9,7 +9,7 @@ function! s:base16_customize() abort
   " remove an underline from the line number
   call Base16hi("Cursor", "", "", "", "", "inverse", "")
   " overrides the cursorline to have no background
-  call Base16hi("CursorLine", "", g:base16_gui00, "", g:base16_cterm00, "", "")
+  " call Base16hi("CursorLine", "", g:base16_gui00, "", g:base16_cterm00, "", "")
   call Base16hi("CursorLineNr", "","", "","", "bold", "")
   call Base16hi("DiffAdd", g:base16_gui00, g:base16_gui0B, "", g:base16_cterm00, "", "")
   call Base16hi("DiffChange", g:base16_gui00, g:base16_gui04, "", g:base16_cterm00, "", "")
