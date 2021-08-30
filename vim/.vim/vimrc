@@ -88,6 +88,9 @@ nnoremap <C-w>k <C-w>K
 nnoremap <C-w>h <C-w>H
 nnoremap <C-w>l <C-w>L
 
+" Disable vim's exit message when pressing C-c
+nnoremap <C-c> <silent> <C-c>
+
 " Navigate buffers
 nmap <silent> [B :bfirst<CR>
 nmap <silent> ]b :bnext<CR>
