@@ -15,18 +15,18 @@ set statusline=%!ActiveStatus()
 
 let g:modecolors = {
       \ 'n'      : '%#StatusLineBlue#',
-      \ 'i'      : '%#StatusLineMagenta#',
-      \ 'v'      : '%#StatusLineYellow#',
-      \ 'V'      : '%#StatusLineYellow#',
-      \ "\<C-V>" : '%#StatusLineYellow#',
-      \ 't'      : '%#StatusLineTerm#',
+      \ 'i'      : '%#StatusLineYellow#',
+      \ 'v'      : '%#StatusLineMagenta#',
+      \ 'V'      : '%#StatusLineMagenta#',
+      \ "\<C-V>" : '%#StatusLineMagenta#',
+      \ 't'      : '%#StatusLineGreen#',
       \ 'no'     : '%#DiffChange#',
       \ 's'      : '%#WildMenu#',
       \ 'S'      : '%#WildMenu#',
       \ "\<C-S>" : '%#WildMenu#',
       \ 'R'      : '%#Error#',
       \ 'Rv'     : '%#Error#',
-      \ 'c'      : '%#Search#',
+      \ 'c'      : '%#StatusLineGreen#',
       \ 'cv'     : '%#MatchParen#',
       \ 'ce'     : '%#MatchParen#',
       \ 'r'      : '%#Todo#',
@@ -57,8 +57,18 @@ let g:currentmode = {
       \ 'r?'     : 'Confirm',
       \ '!'      : 'Shell'}
 
+let g:cmdtypes = {
+      \ ':'      : '',
+      \ '/'      : '',
+      \ '?'      : ''}
+
 function! CurrentMode() abort
-  return toupper(get(g:currentmode, mode(), '???')) . (&paste == 1 ? '-PASTE' : '')
+  let l:cmd = getcmdtype()
+  if l:cmd == ''
+    return toupper(get(g:currentmode, mode(), '???')) . (&paste == 1 ? '-PASTE' : '')
+  else
+    return get(g:cmdtypes, l:cmd, '')
+  endif
 endfunction
 
 function! CurrentBranch() abort
@@ -134,7 +144,7 @@ function! ActiveStatus() abort
   let s.='%#StatusLine#'               " - section 6
   let l:coc_result = CocErrors()       "   coc diagnostic info
   let s.= 
-        \ (l:coc_result['total'] > 0 ? '%#StatusLineRed#' : '%#TabLineSel#') 
+        \ (l:coc_result['total'] > 0 ? '%#StatusLineRed#' : '%#StatusLineGreen#') 
         \ . l:coc_result['str']
   return s
 endfunction
