@@ -66,6 +66,10 @@ noremap <Leader><Right> :vertical resize +3<CR>
 noremap <Leader><Up>    :resize +3<CR>
 noremap <Leader><Down>  :resize -3<CR>
 
+" Change operations are directed to the black hole register
+nnoremap c "_c
+nnoremap C "_C
+
 " Joining lines will keep cursor position
 nnoremap J mzJ`z
 
@@ -220,7 +224,7 @@ set laststatus=2                 " Always show statusline
 set mouse=a                      " Enable use of the mouse in all modes
 set nobackup                     " Disable backup files
 set noshowmode                   " Don't show current mode in command-line
-set nrformats-=octal             " Do not recognize octal numbers for Ctrl-A and Ctrl-X
+set nrformats=                   " Only recognize decimal numbers for increment/decrement
 set pastetoggle=<F2>             " Toggle paste mode on/off
 set scrolloff=5                  " Show at least 5 lines above and below the cursor
 set shortmess=aFIT               " Customize vim messages
@@ -251,6 +255,13 @@ set wildcharm=<Tab>              " Allow wildmenu expansion from macros/remaps
 set wildignorecase               " Case-insensitive completion of commands, filenames
 set wildmenu                     " Enhanced command-line completion
 set wildmode=longest:full,full   " Wildmenu completion mode
+
+" Persistent undo
+set undodir=/tmp/.vim-undo
+if !isdirectory(&undodir)
+  call mkdir(&undodir, "p", 0700)
+endif
+set undofile
 
 " Cursor shape
 let &t_SI = "\e[6 q"             " INSERT mode - beam cursor
