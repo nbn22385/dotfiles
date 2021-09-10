@@ -1,33 +1,43 @@
 #!/usr/bin/env sh
 
-spacebar -m config position           top
-spacebar -m config height             26
-spacebar -m config spacing_left       25
-spacebar -m config spacing_right      15
-spacebar -m config text_font          "Iosevka Nerd Font:Medium:12.0"
-spacebar -m config icon_font          "JetBrainsMono Nerd Font:Regular:12.0"
-spacebar -m config background_color   0xff202020
-spacebar -m config foreground_color   0xffa8a8a8
-spacebar -m config space_icon_color   0xff458588
-spacebar -m config power_icon_color   0xffcd950c
-spacebar -m config battery_icon_color 0xffd75f5f
-spacebar -m config dnd_icon_color     0xffa8a8a8
-spacebar -m config clock_icon_color   0xffa8a8a8
-spacebar -m config space_icon_strip   I II III IV V VI VII VIII IX X
-spacebar -m config power_icon_strip    
-spacebar -m config space_icon         
-spacebar -m config clock_icon         
-spacebar -m config dnd_icon           
-spacebar -m config clock_format       "%d/%m/%y %R"
+alias config='spacebar -m config'
+
+# General
+config position               top
+config background_color       0xff1a1b26
+config foreground_color       0xffa8a8a8
+config text_font              "Iosevka Nerd Font:Medium:13.0"
+config icon_font              "Iosevka Nerd Font:Medium:13.0"
+config height                 28
+config padding_left           15 
+config padding_right          15
+config spacing_left           15
+config spacing_right          25
+
+# Widgets
+config spaces                 on
+config space_icon             
+config space_icon_color       0xff458588
+
+config title                  on
+
+config right_shell            on
+config right_shell_icon       
+config right_shell_icon_color 0xffd08770
+config right_shell_command    "curl -s 'wttr.in/Orlando?format=%t' | cut -c 2-"
+
+config power                  on
+config power_icon_strip        
+config battery_icon_color     0xffbf616a
+config power_icon_color       0xffebcb8b
+
+config clock                  on
+config clock_format           "%a %-m/%-d %-I:%M %p"
+config clock_icon             
+config clock_icon_color       0xffb48ead
+
+config dnd                    on
+config dnd_icon               
+config dnd_icon_color         0xffb48ead
 
 echo "spacebar configuration loaded.."
-
-# spacebar -m config status_bar                      on
-# spacebar -m config status_bar_text_font            "Iosevka Nerd Font:Medium:13.0"
-# spacebar -m config status_bar_icon_font            "JetBrainsMono Nerd Font:Regular:13.0"
-# spacebar -m config status_bar_background_color     0xff212120
-# spacebar -m config status_bar_foreground_color     0xffbbbebf
-# spacebar -m config status_bar_power_icon_strip      ﮣ
-# spacebar -m config status_bar_space_icon_strip     " " " " " " " " MAIN CHAT TERM
-# spacebar -m config status_bar_space_icon           x
-# spacebar -m config status_bar_clock_icon           ""
