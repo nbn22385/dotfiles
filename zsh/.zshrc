@@ -166,6 +166,7 @@ fzf_find_edit() {
 
 # change the base16-shell theme selected via fzf
 fzf_base16_theme() {
+  echo "Current theme:" $(grep '  colorscheme' ~/.vimrc_background | sed 's/  colorscheme base16-//g')
   local theme=$(alias | awk -F'base16_|=' '/base16_/ {print $2}' | fzf --exit-0)
   if [[ -n $theme ]]; then
     eval base16_$theme
