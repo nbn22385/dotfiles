@@ -2,10 +2,14 @@
 
 alias config='spacebar -m config'
 
+# Determine colors from base16-shell
+BG=$(sed -n -e 's:^color_background="\(..\)/\(..\)/\(..\)".*:0xff\1\2\3:p' ~/.base16_theme)
+FG=$(sed -n -e 's:^color_foreground="\(..\)/\(..\)/\(..\)".*:0xff\1\2\3:p' ~/.base16_theme)
+
 # General
 config position               top
-config background_color       0xff1a1b26
-config foreground_color       0xffa8a8a8
+config background_color       $BG
+config foreground_color       $FG
 config text_font              "Iosevka Nerd Font:Medium:13.0"
 config icon_font              "Iosevka Nerd Font:Medium:13.0"
 config height                 28
