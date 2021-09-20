@@ -10,8 +10,8 @@ FG=$(sed -n -e 's:^color_foreground="\(..\)/\(..\)/\(..\)".*:0xff\1\2\3:p' ~/.ba
 config position               top
 config background_color       $BG
 config foreground_color       $FG
-config text_font              "Iosevka Nerd Font:Medium:13.0"
-config icon_font              "Iosevka Nerd Font:Medium:13.0"
+config text_font              "Iosevka Nerd Font:Medium:14.0"
+config icon_font              "Iosevka Nerd Font:Medium:14.0"
 config height                 28
 config padding_left           15 
 config padding_right          15
