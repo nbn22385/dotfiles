@@ -1,6 +1,6 @@
 # dotfiles
 
-<img src="extras/screenshot.png" alt="screenshot" width="400"/>
+<img src="extras/screenshot.png" alt="screenshot" width="800"/>
 
 ## Installation
 
