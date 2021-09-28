@@ -76,10 +76,6 @@ nnoremap J mzJ`z
 " Yank to the end of line
 nnoremap Y y$
 
-" Tab navigation in normal mode
-nnoremap <Tab> gt
-nnoremap <S-Tab> gT
-
 " +/- -> Increment/decrement numbers in normal or visual mode
 nnoremap + <C-a>
 nnoremap - <C-x>
