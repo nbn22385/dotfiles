@@ -2,7 +2,7 @@
 function! PackInit() abort
   packadd minpac
   call minpac#init()
-  call minpac#add('k-takata/minpac', {'type': 'opt'})          " Plugin manager " 
+  call minpac#add('k-takata/minpac', {'type': 'opt'})          " Plugin manager 
   call minpac#add('christoomey/vim-tmux-navigator')            " Navigation between tmux panes and vim splits
   call minpac#add('fnune/base16-vim')                          " Base16 themes ($HOME/.vim/after/plugin/base16.vim)
   call minpac#add('junegunn/fzf')                              " Fuzzy finder ($HOME/.vim/after/plugin/fzf.vim)
@@ -15,15 +15,6 @@ function! PackInit() abort
   call minpac#add('tpope/vim-obsession')                       " Continuously updated session files
   call minpac#add('tpope/vim-surround')                        " Add, change, delete surroundings in pairs
   call minpac#add('wellle/targets.vim')                        " More text objects
-  " Inactive plugins {{{
-  " call minpac#add('jackguo380/vim-lsp-cxx-highlight', {'type': 'opt'}) " Syntax highlighting for C++
-  " call minpac#add('daviesjamie/vim-base16-lightline')
-  " call minpac#add('itchyny/lightline.vim')
-  " call minpac#add('josa42/vim-lightline-coc') 
-  " call minpac#add('ilyachur/cmake4vim') " CMake commands ($HOME/.vim/plugin/cmake4vim.vim)
-  " call minpac#add('tpope/vim-dispatch') " Asynchronous build jobs
-  " call minpac#add('airblade/vim-rooter') " Automatically change to file's project directory
-  " }}}
 endfunction
 
 command! PackClean  call PackInit() | call minpac#clean()
@@ -112,22 +103,6 @@ nmap <silent> [Q :cfirst<CR>zz
 nmap <silent> ]q :cnext<CR>zz
 nmap <silent> [q :cprevious<CR>zz
 nmap <silent> ]Q :clast<CR>zz
-
-" <CTRL>h/j/k/l -> Switch between buffers 
-" NOTE: superseded by vim-tmux-navigator
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-l> <C-w>l
-
-" Next/previous search matches centered and open folds
-" NOTE: superceded by vim-slash
-" noremap n nzvzz
-" noremap N Nzvzz
-
-" Turn off search highlighting
-" NOTE: superceded by vim-slash
-" nnoremap <silent> <Leader>/ :let @/ = ""<esc>
 
 " Exit insert mode faster
 inoremap <esc> <esc>l
@@ -256,17 +231,17 @@ set wildignorecase               " Case-insensitive completion of commands, file
 set wildmenu                     " Enhanced command-line completion
 set wildmode=longest:full,full   " Wildmenu completion mode
 
+" Cursor shape
+let &t_SI = "\e[6 q"             " INSERT mode - beam cursor
+let &t_EI = "\e[2 q"             " NORMAL mode - block cursor
+let &t_SR = "\e[4 q"             " REPLACE mode - underline cursor
+
 " Persistent undo
 set undodir=/tmp/.vim-undo
 if !isdirectory(&undodir)
   call mkdir(&undodir, "p", 0700)
 endif
 set undofile
-
-" Cursor shape
-let &t_SI = "\e[6 q"             " INSERT mode - beam cursor
-let &t_EI = "\e[2 q"             " NORMAL mode - block cursor
-let &t_SR = "\e[4 q"             " REPLACE mode - underline cursor
 
 " Yank to system clipboard, X11 support
 if has('clipboard')
