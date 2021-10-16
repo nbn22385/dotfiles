@@ -24,7 +24,7 @@ let g:modecolors = {
       \ 's'      : '%#WildMenu#',
       \ 'S'      : '%#WildMenu#',
       \ "\<C-S>" : '%#WildMenu#',
-      \ 'R'      : '%#Error#',
+      \ 'R'      : '%#StatusLineRed#',
       \ 'Rv'     : '%#Error#',
       \ 'c'      : '%#StatusLineGreen#',
       \ 'cv'     : '%#MatchParen#',
