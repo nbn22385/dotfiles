@@ -26,8 +26,8 @@ if g:loaded_fzf
   " [Rg] search hidden files
   command! -bang -nargs=* Rg
         \ call fzf#vim#grep(
-        \   'rg --hidden --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
-        \   fzf#vim#with_preview(), <bang>0)
+        \   'rg --hidden --line-number --color=always --smart-case --glob "!{.git,node_modules}" -- '
+        \   .shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
 
   "==============================================================================
   " Mappings
