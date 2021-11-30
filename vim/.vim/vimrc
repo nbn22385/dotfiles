@@ -213,7 +213,8 @@ set autoindent                   " Indent according to previous line
 set expandtab                    " Use spaces instead of tabs
 set fillchars+=vert:\│,fold:\    " Vertical split and fold separators
 set matchpairs+=<:>              " Add angle brackets to list of matching pairs
-set nowrap                       " Do not automatically wrap on load
+set nojoinspaces                 " Don't add 2 spaces after sentences when joining lines
+set nowrap                       " Don't automatically wrap long lines to the window
 set number                       " Show line numbers
 set shiftround                   " >> indents to next multiple of 'shiftwidth'
 set shiftwidth=2                 " >> indents by 2 spaces
