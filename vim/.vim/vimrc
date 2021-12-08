@@ -212,7 +212,9 @@ set termguicolors                " Use 24-bit colors
 syntax on                        " Enable syntax highlighting
 set autoindent                   " Indent according to previous line
 set expandtab                    " Use spaces instead of tabs
-set fillchars+=vert:\│,fold:\    " Vertical split and fold separators
+set fillchars+=vert:\│           " Vertical split separator
+set fillchars+=fold:\            " Closed fold indicator
+set fillchars+=eob:\             " End of buffer character
 set matchpairs+=<:>              " Add angle brackets to list of matching pairs
 set nojoinspaces                 " Don't add 2 spaces after sentences when joining lines
 set nowrap                       " Don't automatically wrap long lines to the window
