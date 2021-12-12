@@ -1,67 +1,67 @@
-if 1
-
+"==============================================================================
+" Set statusline (with filetype overrides)
+"------------------------------------------------------------------------------
 set statusline=%!ActiveStatus()
 
-" Highlight groups that blend with StatusLine
-" FoldColumn (blue)
-" TablineSel (green)
-" Todo (orange)
-" StatusLineRed
-" StatusLineYellow
-" StatusLineGreen
-" StatusLineCyan 
-" StatusLineBlue 
-" StatusLineMagenta
+augroup status
+  autocmd!
+  autocmd WinEnter,BufEnter,SessionLoadPost,FileChangedShellPost * call GetStatusline()
+augroup END
 
-let g:modecolors = {
-      \ 'n'      : '%#StatusLineBlue#',
-      \ 'i'      : '%#StatusLineYellow#',
-      \ 'v'      : '%#StatusLineMagenta#',
-      \ 'V'      : '%#StatusLineMagenta#',
-      \ "\<C-V>" : '%#StatusLineMagenta#',
-      \ 't'      : '%#StatusLineGreen#',
-      \ 'no'     : '%#DiffChange#',
-      \ 's'      : '%#WildMenu#',
-      \ 'S'      : '%#WildMenu#',
-      \ "\<C-S>" : '%#WildMenu#',
-      \ 'R'      : '%#StatusLineRed#',
-      \ 'Rv'     : '%#Error#',
-      \ 'c'      : '%#StatusLineGreen#',
-      \ 'cv'     : '%#MatchParen#',
-      \ 'ce'     : '%#MatchParen#',
-      \ 'r'      : '%#Todo#',
-      \ 'rm'     : '%#Todo#',
-      \ 'r?'     : '%#Todo#',
-      \ '!'      : '%#IncSearch#',
-      \ 'ic'     : '%#DiffChange#',
-      \ 'Rc'     : '%#DiffChange#'}
+function! GetStatusline() abort
+  let l:current = winnr()
+  for win in range(1, winnr('$'))
+    let l:filetype = getwinvar(win, '&filetype')
+    call setwinvar(win, '&statusline', 
+          \ l:filetype ==# 'coc-explorer' ? ' ' :
+          \ l:filetype =~# '^fugitive' ? l:filetype :
+          \ l:filetype ==# 'minimap' ? ' ' : 
+          \ win == l:current ? ActiveStatus() : InactiveStatus())
+  endfor
+endfunction
 
-let g:currentmode = {
-      \ 'n'      : 'N',
-      \ 'i'      : 'I',
-      \ 'v'      : 'V',
-      \ 'V'      : 'L',
-      \ "\<C-V>" : 'B',
-      \ 't'      : 'T',
-      \ 'no'     : 'N·Operator Pending',
-      \ 's'      : 'Select',
-      \ 'S'      : 'S·Line',
-      \ "\<C-S>" : 'S·Block',
-      \ 'R'      : 'R',
-      \ 'Rv'     : 'V·Replace',
-      \ 'c'      : 'CMD',
-      \ 'cv'     : 'Vim Ex',
-      \ 'ce'     : 'Ex',
-      \ 'r'      : 'Prompt',
-      \ 'rm'     : 'more',
-      \ 'r?'     : 'Confirm',
-      \ '!'      : 'Shell'}
+"==============================================================================
+" Active layout
+"------------------------------------------------------------------------------
+function! ActiveStatus() abort
+  let s =get(g:modecolors, mode(), '%#StatusLine#') " - section 0
+  let s.=' %{CurrentMode()} %<'        "   mode
+  let s.='%#StatusLine#'               " - section 1
+  let s.=' %f'                         "   filename
+  let s.='%{ReadOnlyStatus()}'         "   readonly flag
+  let s.='%#TabLineSel#'               " - section 2
+  let s.='%{ModifiedStatus()}'         "   modified flag
+  let s.='%#StatusLine#'               " - section 3 
+  let s.='%='                          "   blank space
+  let s.='%#Todo#%{SpellStatus()}'     "   spell checking status
+  let s.='%#StatusLine#'               " - section 4
+  let s.=' %3l:%c  %-p%% '             "   lineinfo, percent
+  let s.='%#Todo#%{SessionStatus()}'   "   session status
+  let s.='%#StatusLineMagenta#'        " - section 5
+  let s.='%{CurrentBranch()}'          "   git branch
+  let s.='%#StatusLine#'               " - section 6
+  let l:coc_result = CocErrors()       "   coc diagnostic info
+  let s.= 
+        \ (l:coc_result['total'] > 0 ? '%#StatusLineRed#' : '%#StatusLineGreen#') 
+        \ . l:coc_result['str']
+  return s
+endfunction
 
-let g:cmdtypes = {
-      \ ':'      : '',
-      \ '/'      : '',
-      \ '?'      : ''}
+"==============================================================================
+" Inactive layout
+"------------------------------------------------------------------------------
+function! InactiveStatus() abort
+  let s='%#StatusLineNC#    '          " - section 0
+  let s.='%f'                          "   filename
+  let s.='%{ReadOnlyStatus()}'         "   readonly flag
+  let s.='%{ModifiedStatus()}'         "   modified flag
+  let s.='%='                          " - section 1
+  return s
+endfunction
 
+"==============================================================================
+" Helper functions
+"------------------------------------------------------------------------------
 function! CurrentMode() abort
   let l:cmd = getcmdtype()
   if l:cmd == ''
@@ -125,50 +125,61 @@ function! SpellStatus() abort
   return &spell ? 'SPELL' : ''
 endfunction
 
-function! ActiveStatus() abort
-  let s =get(g:modecolors, mode(), '') " - section 0
-  let s.=' %{CurrentMode()} %<'        "   mode
-  let s.='%#StatusLine#'               " - section 1
-  let s.=' %f'                         "   filename
-  let s.='%{ReadOnlyStatus()}'         "   readonly flag
-  let s.='%#TabLineSel#'               " - section 2
-  let s.='%{ModifiedStatus()}'         "   modified flag
-  let s.='%#StatusLine#'               " - section 3 
-  let s.='%='                          "   blank space
-  let s.='%#Todo#%{SpellStatus()}'     "   spell checking status
-  let s.='%#StatusLine#'               " - section 4
-  let s.=' %3l:%c  %-p%% '             "   lineinfo, percent
-  let s.='%#Todo#%{SessionStatus()}'   "   session status
-  let s.='%#StatusLineMagenta#'        " - section 5
-  let s.='%{CurrentBranch()}'          "   git branch
-  let s.='%#StatusLine#'               " - section 6
-  let l:coc_result = CocErrors()       "   coc diagnostic info
-  let s.= 
-        \ (l:coc_result['total'] > 0 ? '%#StatusLineRed#' : '%#StatusLineGreen#') 
-        \ . l:coc_result['str']
-  return s
-endfunction
+"==============================================================================
+" Mode to color mappings
+"------------------------------------------------------------------------------
+let g:modecolors = {
+      \ 'n'      : '%#StatusLineBlue#',
+      \ 'i'      : '%#StatusLineYellow#',
+      \ 'v'      : '%#StatusLineMagenta#',
+      \ 'V'      : '%#StatusLineMagenta#',
+      \ "\<C-V>" : '%#StatusLineMagenta#',
+      \ 't'      : '%#StatusLineGreen#',
+      \ 'no'     : '%#DiffChange#',
+      \ 's'      : '%#WildMenu#',
+      \ 'S'      : '%#WildMenu#',
+      \ "\<C-S>" : '%#WildMenu#',
+      \ 'R'      : '%#StatusLineRed#',
+      \ 'Rv'     : '%#Error#',
+      \ 'c'      : '%#StatusLineGreen#',
+      \ 'cv'     : '%#MatchParen#',
+      \ 'ce'     : '%#MatchParen#',
+      \ 'r'      : '%#Todo#',
+      \ 'rm'     : '%#Todo#',
+      \ 'r?'     : '%#Todo#',
+      \ '!'      : '%#IncSearch#',
+      \ 'ic'     : '%#DiffChange#',
+      \ 'Rc'     : '%#DiffChange#'}
 
-function! InactiveStatus() abort
-  let s='%#StatusLineNC#    '          " - section 0
-  let s.='%f'                          "   filename
-  let s.='%{ReadOnlyStatus()}'         "   readonly flag
-  let s.='%{ModifiedStatus()}'         "   modified flag
-  let s.='%='                          " - section 1
-  let s.='%{CurrentBranch()}'          "   git branch
-  return s
-endfunction
+"==============================================================================
+" Mode to modestring mappings
+"------------------------------------------------------------------------------
+let g:currentmode = {
+      \ 'n'      : 'N',
+      \ 'i'      : 'I',
+      \ 'v'      : 'V',
+      \ 'V'      : 'L',
+      \ "\<C-V>" : 'B',
+      \ 't'      : 'T',
+      \ 'no'     : 'N·Operator Pending',
+      \ 's'      : 'Select',
+      \ 'S'      : 'S·Line',
+      \ "\<C-S>" : 'S·Block',
+      \ 'R'      : 'R',
+      \ 'Rv'     : 'V·Replace',
+      \ 'c'      : 'CMD',
+      \ 'cv'     : 'Vim Ex',
+      \ 'ce'     : 'Ex',
+      \ 'r'      : 'Prompt',
+      \ 'rm'     : 'more',
+      \ 'r?'     : 'Confirm',
+      \ '!'      : 'Shell'}
 
-augroup status
-  autocmd!
-  autocmd BufEnter,WinEnter * setlocal statusline=%!ActiveStatus()
-  autocmd BufLeave,WinLeave * setlocal statusline=%!InactiveStatus()
-augroup END
+"==============================================================================
+" Command to icon mappings
+"------------------------------------------------------------------------------
+let g:cmdtypes = {
+      \ ':'      : '',
+      \ '/'      : '',
+      \ '?'      : ''}
 
-endif
-
-" resources
-" https://github.com/protesilaos/dotfiles/blob/master/vim/.vim/vimrc_modules/protline.vimrc
-" https://www.reddit.com/r/vim/comments/6b7b08/my_custom_statusline/
-" https://hackernoon.com/the-last-statusline-for-vim-a613048959b2
-" https://github.com/sunaku/vim-modusline/blob/master/plugin/modusline.vim
