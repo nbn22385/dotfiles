@@ -1,14 +1,12 @@
 "==============================================================================
 " Set statusline (with filetype overrides)
 "------------------------------------------------------------------------------
-set statusline=%!ActiveStatus()
-
-augroup status
+augroup statusline
   autocmd!
-  autocmd WinEnter,BufEnter,SessionLoadPost,FileChangedShellPost * call GetStatusline()
+  autocmd WinEnter,BufEnter,SessionLoadPost,FileChangedShellPost * call SetStatusline()
 augroup END
 
-function! GetStatusline() abort
+function! SetStatusline() abort
   let l:current = winnr()
   for win in range(1, winnr('$'))
     let l:filetype = getwinvar(win, '&filetype')
