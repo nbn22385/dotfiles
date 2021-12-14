@@ -55,11 +55,15 @@
   "diagnostic.warningSign": "‼",
 
   // explorer
-  "explorer.file.root.template": "[icon & 1] PROJECT ([root])",
-  "explorer.file.showHiddenFiles": true,
+  "explorer.file.root.template": "[icon] [root] ([fullpath])",
+  "explorer.file.hiddenRules": {
+    "filenames": [".git", ".DS_Store", "node_modules"],
+    "patternMatches": [] // show all other hidden files
+  },
   "explorer.git.enable": true,
+  "explorer.git.showIgnored" : false,
   "explorer.icon.enableNerdfont": true,
-  "explorer.width": 30,
+  "explorer.width": 35,
   "explorer.sources": [
     {
       "name": "file",
