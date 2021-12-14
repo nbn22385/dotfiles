@@ -128,7 +128,7 @@ export LS_COLORS="ow=01;36"
 export TZ='America/New_York'
 
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
-export FZF_DEFAULT_OPTS='--height 40% --layout reverse --info inline --border'
+export FZF_DEFAULT_OPTS='--height 40% --layout reverse --info inline --border --pointer "▶"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS='--preview "bat --color=always --line-range :500 {}"'
 export FZF_ALT_C_COMMAND='fd --type d . --color=never'

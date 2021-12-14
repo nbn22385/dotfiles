@@ -9,7 +9,7 @@ if g:loaded_fzf
 
   " Use floating window if supported
   if v:version >= 802
-    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.7, 'border': 'sharp'} }
+    let g:fzf_layout = { 'window': { 'width': 1.0, 'height': 0.4, 'border': 'sharp', 'yoffset': 1, 'relative': v:true} }
   else
     let g:fzf_layout = { 'window': '10new' }
   endif
@@ -66,12 +66,13 @@ if g:loaded_fzf
         \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
         \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
         \ 'hl+':     ['fg', 'Statement'],
-        \ 'info':    ['fg', 'PreProc'],
-        \ 'border':  ['fg', 'StatusLine'],
-        \ 'prompt':  ['fg', 'Conditional'],
-        \ 'pointer': ['fg', 'Exception'],
+        \ 'gutter':  ['bg', 'Normal'],
+        \ 'pointer': ['fg', 'String'],
         \ 'marker':  ['fg', 'Keyword'],
+        \ 'border':  ['fg', 'StatusLine'],
+        \ 'header':  ['fg', 'Comment'],
+        \ 'info':    ['fg', 'PreProc'],
         \ 'spinner': ['fg', 'Label'],
-        \ 'header':  ['fg', 'Comment'] }
+        \ 'prompt':  ['fg', 'Conditional']}
 
 endif
