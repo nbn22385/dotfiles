@@ -3,7 +3,9 @@
 "------------------------------------------------------------------------------
 augroup statusline
   autocmd!
-  autocmd WinEnter,BufEnter,SessionLoadPost,FileChangedShellPost * call SetStatusline()
+  autocmd WinEnter,BufEnter,SessionLoadPost,FileChangedShellPost * 
+        \ call SetStatusline()
+  autocmd User CocExplorerOpenPre * call SetStatusline()
 augroup END
 
 function! SetStatusline() abort
@@ -38,10 +40,7 @@ function! ActiveStatus() abort
   let s.='%#StatusLineMagenta#'        " - section 5
   let s.='%{CurrentBranch()}'          "   git branch
   let s.='%#StatusLine#'               " - section 6
-  let l:coc_result = CocErrors()       "   coc diagnostic info
-  let s.= 
-        \ (l:coc_result['total'] > 0 ? '%#StatusLineRed#' : '%#StatusLineGreen#') 
-        \ . l:coc_result['str']
+  let s.=CocErrors()                   "   coc diagnostic info
   return s
 endfunction
 
@@ -63,7 +62,8 @@ endfunction
 function! CurrentMode() abort
   let l:cmd = getcmdtype()
   if l:cmd == ''
-    return toupper(get(g:currentmode, mode(), '???')) . (&paste == 1 ? '-PASTE' : '')
+    return toupper(get(g:currentmode, mode(), '???')) 
+          \ . (&paste == 1 ? '-PASTE' : '')
   else
     return get(g:cmdtypes, l:cmd, '')
   endif
@@ -75,7 +75,8 @@ function! CurrentBranch() abort
   endif
   if exists('g:loaded_fugitive')
     let l:branch = fugitive#head()
-    return fugitive#head() !=? '' ? (winwidth(0) < 80 ? '  ' . l:branch[0:15] . ' ' : '  ' . l:branch . ' ') : ''
+    return l:branch !=? '' ? (winwidth(0) < 80 ? '  ' . l:branch[0:15] . ' ' : 
+          \ '  ' . l:branch . ' ') : ''
   else
     return ''
   endif
@@ -85,17 +86,14 @@ function! CocErrors() abort
   if exists('b:coc_diagnostic_info')
     let l:errors = get(b:coc_diagnostic_info, 'error', 0)
     let l:warnings = get(b:coc_diagnostic_info, 'warning', 0)
-    let l:total = l:errors + l:warnings
-    if l:total > 0
-      return {'total' : l:total,
-            \ 'str': ' ' . (l:errors != 0 ? '×' . string(l:errors) . ' ' : '') 
-            \        . (l:warnings != 0 ? '•' . string(l:warnings) . ' ' : '')
-            \ }
+    if (l:errors + l:warnings) > 0
+      return ' ' . (l:errors != 0 ? '%#StatusLineRed#' . '×' . string(l:errors) . ' ' : '') 
+            \    . (l:warnings != 0 ? '%#StatusLineYellow#' . '•' . string(l:warnings) . ' ' : '')
     else
-      return {'total': l:total, 'str': '  '}
+      return '%#StatusLineGreen#  '
     endif
   else
-    return {'total': -1, 'str': ''}
+    return ''
   endif
 endfunction
 
