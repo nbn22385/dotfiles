@@ -62,7 +62,7 @@ sketchybar -m --default                     \
   --set one associated_space=1              \
     associated_display=1                    \
     icon=                                  \
-    icon.highlight_color=0xff8fbcbb         \
+    icon.highlight_color=0xff88c0d0         \
     click_script="yabai -m space --focus 1" \
   --add space two left                      \
   --set two associated_display=1            \
@@ -74,13 +74,13 @@ sketchybar -m --default                     \
   --set three associated_display=1          \
     associated_space=3                      \
     icon=                                  \
-    icon.highlight_color=0xff81a1c1         \
+    icon.highlight_color=0xff88c0d0         \
     click_script="yabai -m space --focus 3" \
   --add space four left                     \
   --set four associated_display=1           \
     associated_space=4                      \
     icon=                                  \
-    icon.highlight_color=0xff5e81ac         \
+    icon.highlight_color=0xff88c0d0         \
     click_script="yabai -m space --focus 4"
 
 # Right Items

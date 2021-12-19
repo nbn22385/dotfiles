@@ -9,6 +9,9 @@ temp="${temp// /}"
 
 # add more conditions here as appropriate
 case "${condition}" in
+  "clear")
+    icon=""
+    ;;
   "sunny")
     icon=""
     ;;

@@ -3,9 +3,7 @@
 "------------------------------------------------------------------------------
 augroup statusline
   autocmd!
-  autocmd WinEnter,BufEnter,SessionLoadPost,FileChangedShellPost * 
-        \ call SetStatusline()
-  autocmd User CocExplorerOpenPre * call SetStatusline()
+  autocmd BufEnter,BufWinEnter,WinEnter * call SetStatusline()
 augroup END
 
 function! SetStatusline() abort
@@ -15,8 +13,7 @@ function! SetStatusline() abort
     call setwinvar(win, '&statusline', 
           \ l:filetype ==# 'coc-explorer' ? ' ' :
           \ l:filetype =~# '^fugitive' ? l:filetype :
-          \ l:filetype ==# 'minimap' ? ' ' : 
-          \ win == l:current ? ActiveStatus() : InactiveStatus())
+          \ win == l:current ? '%!ActiveStatus()' : '%!InactiveStatus()')
   endfor
 endfunction
 
@@ -40,7 +37,7 @@ function! ActiveStatus() abort
   let s.='%#StatusLineMagenta#'        " - section 5
   let s.='%{CurrentBranch()}'          "   git branch
   let s.='%#StatusLine#'               " - section 6
-  let s.=CocErrors()                   "   coc diagnostic info
+  let s.=CocStatus()                   "   coc diagnostic info
   return s
 endfunction
 
@@ -82,19 +79,18 @@ function! CurrentBranch() abort
   endif
 endfunction
 
-function! CocErrors() abort
-  if exists('b:coc_diagnostic_info')
-    let l:errors = get(b:coc_diagnostic_info, 'error', 0)
-    let l:warnings = get(b:coc_diagnostic_info, 'warning', 0)
-    if (l:errors + l:warnings) > 0
-      return ' ' . (l:errors != 0 ? '%#StatusLineRed#' . '×' . string(l:errors) . ' ' : '') 
-            \    . (l:warnings != 0 ? '%#StatusLineYellow#' . '•' . string(l:warnings) . ' ' : '')
-    else
-      return '%#StatusLineGreen#  '
-    endif
-  else
-    return ''
+function! CocStatus() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, '%#StatusLineRed#×' . info['error'])
   endif
+  if get(info, 'warning', 0)
+    call add(msgs, '%#StatusLineYellow#•' . info['warning'])
+  endif
+  if empty(msgs) | return '%#StatusLineGreen#  ' | endif
+  return ' ' . join(msgs, ' ') . ' '
 endfunction
 
 function! ModifiedStatus() abort
