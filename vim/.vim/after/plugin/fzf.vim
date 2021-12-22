@@ -2,8 +2,6 @@ if g:loaded_fzf
   "==============================================================================
   " General config
   "------------------------------------------------------------------------------
-  " Empty value to disable preview window altogether
-  " let g:fzf_preview_window = ''
   " Preview window on the right side, hidden by default, ctrl-p to toggle
   let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-p']
 
