@@ -215,6 +215,7 @@ set expandtab                    " Use spaces instead of tabs
 set fillchars+=vert:\│           " Vertical split separator
 set fillchars+=fold:\            " Closed fold indicator
 set fillchars+=eob:\             " End of buffer character
+set listchars=tab:▸\ ,trail:·    " Characters to show in 'list' mode
 set matchpairs+=<:>              " Add angle brackets to list of matching pairs
 set nojoinspaces                 " Don't add 2 spaces after sentences when joining lines
 set nowrap                       " Don't automatically wrap long lines to the window
