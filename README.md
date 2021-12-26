@@ -4,4 +4,4 @@
 
 ## Installation
 
-See the [wiki](https://github.com/nbn22385/dotfiles/wiki) for instal details.
+See the [wiki](https://github.com/nbn22385/dotfiles/wiki) for installation details.
