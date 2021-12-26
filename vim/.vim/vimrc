@@ -58,6 +58,9 @@ noremap <Leader><Right> :vertical resize +3<CR>
 noremap <Leader><Up>    :resize +3<CR>
 noremap <Leader><Down>  :resize -3<CR>
 
+" Toggle between alternate files
+nnoremap <Backspace> <C-^>
+
 " Add relative vertical movements to the jumplist
 nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
 nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
