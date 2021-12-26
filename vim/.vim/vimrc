@@ -78,8 +78,8 @@ nnoremap Y y$
 " +/- -> Increment/decrement numbers in normal or visual mode
 nnoremap + <C-a>
 nnoremap - <C-x>
-vnoremap + g<C-a>gv
-vnoremap - g<C-x>gv
+xnoremap + g<C-a>gv
+xnoremap - g<C-x>gv
 
 " <CTRL-W>h/j/k/l -> Move windows left/up/down/right
 nnoremap <C-w>j <C-w>J
@@ -206,10 +206,11 @@ set noshowmode                   " Don't show current mode in command-line
 set nrformats=                   " Only recognize decimal numbers for increment/decrement
 set pastetoggle=<F2>             " Toggle paste mode on/off
 set scrolloff=5                  " Show at least 5 lines above and below the cursor
-set shortmess=aFIT               " Customize vim messages
+set shortmess=acFIT              " Customize vim messages
 set showcmd                      " Show already typed keys when more are expected
 set spelllang=en_us              " Set language for spell checking
 set termguicolors                " Use 24-bit colors
+set updatetime=300               " Shorter CursorHold delay
 
 " Editing
 syntax on                        " Enable syntax highlighting
@@ -225,6 +226,7 @@ set nowrap                       " Don't automatically wrap long lines to the wi
 set number                       " Show line numbers
 set shiftround                   " >> indents to next multiple of 'shiftwidth'
 set shiftwidth=2                 " >> indents by 2 spaces
+set signcolumn=yes               " Always show the signcolumn
 set softtabstop=2                " Tab key indents by 2 spaces
 set splitbelow splitright        " Open new split panes to right and bottom
 set textwidth=0                  " Disable maximum text width
