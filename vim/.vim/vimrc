@@ -40,8 +40,8 @@ nnoremap <Leader>gf ^f/gf
 nnoremap <Leader>h :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " Open new line and stay in normal mode
-nnoremap <Leader>o o<esc>
-nnoremap <Leader>O O<esc>
+nnoremap <Leader>o o<Esc>
+nnoremap <Leader>O O<Esc>
 
 " Use wildmenu to quickly switch buffers
 nnoremap <Leader><Tab> :buffer<Space><Tab>
@@ -75,6 +75,9 @@ nnoremap J mzJ`z
 " Yank to the end of line
 nnoremap Y y$
 
+" Disable vim's exit message when pressing C-c
+nnoremap <C-c> <silent> <C-c>
+
 " +/- -> Increment/decrement numbers in normal or visual mode
 nnoremap + <C-a>
 nnoremap - <C-x>
@@ -86,9 +89,6 @@ nnoremap <C-w>j <C-w>J
 nnoremap <C-w>k <C-w>K
 nnoremap <C-w>h <C-w>H
 nnoremap <C-w>l <C-w>L
-
-" Disable vim's exit message when pressing C-c
-nnoremap <C-c> <silent> <C-c>
 
 " Navigate buffers
 nmap <silent> [B :bfirst<CR>
@@ -109,9 +109,9 @@ nmap <silent> [q :cprevious<CR>zz
 nmap <silent> ]Q :clast<CR>zz
 
 " Exit insert mode faster
-inoremap <esc> <esc>l
-inoremap kj <esc>l
-inoremap <C-c> <esc>l
+inoremap <Esc> <Esc>l
+inoremap kj <Esc>l
+inoremap <C-c> <Esc>l
 
 " Fix arrow keys in insert mode
 inoremap <silent> <Esc>OA <Up>
@@ -127,15 +127,21 @@ inoremap <C-k> <C-o>k
 inoremap <C-^> <C-o><C-^>
 
 " Command line begin/end line
-cnoremap <c-a> <home>
-cnoremap <c-e> <end>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
 
 " Navigate through partial search matches with Tab/S-Tab
-cnoremap <expr> <Tab> getcmdtype() =~ '[/?]' ? "<c-g>" : "<Tab>"
+cnoremap <expr> <Tab> getcmdtype() =~ '[/?]' ? "<C-g>" : "<Tab>"
 cnoremap <expr> <S-Tab> getcmdtype() =~ '[/?]' ? "<c-t>" : "<S-Tab>"
 
 " Apply last edit to visual selection
 vnoremap . :norm .<CR>
+
+" Don't overwrite paste buffer when pasting over visual selection
+xnoremap p "_dP
+
+" Replace all occurrences of visual selection
+xnoremap <Leader>h y:%s/\<<C-r>0\>//g<Left><Left>
 
 " }}}
 
