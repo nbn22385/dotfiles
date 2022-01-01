@@ -54,23 +54,4 @@ if g:loaded_fzf
 
   let $FZF_DEFAULT_OPTS .= ' --bind ctrl-a:select-all'
 
-  "==============================================================================
-  " Custom colors
-  "------------------------------------------------------------------------------
-  let g:fzf_colors = {
-        \ 'fg':      ['fg', 'Normal'],
-        \ 'bg':      ['bg', 'Normal'],
-        \ 'hl':      ['fg', 'Comment'],
-        \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-        \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-        \ 'hl+':     ['fg', 'Statement'],
-        \ 'gutter':  ['bg', 'Normal'],
-        \ 'pointer': ['fg', 'String'],
-        \ 'marker':  ['fg', 'Keyword'],
-        \ 'border':  ['fg', 'StatusLine'],
-        \ 'header':  ['fg', 'Comment'],
-        \ 'info':    ['fg', 'PreProc'],
-        \ 'spinner': ['fg', 'Label'],
-        \ 'prompt':  ['fg', 'Conditional']}
-
 endif
