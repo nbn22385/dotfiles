@@ -32,7 +32,7 @@ function! ActiveStatus() abort
   let s.='%='                          "   blank space
   let s.='%#Todo#%{SpellStatus()}'     "   spell checking status
   let s.='%#StatusLine#'               " - section 4
-  let s.=' %3l:%c  %-p%% '             "   lineinfo, percent
+  let s.=' %3l:%c  %-p%% %{Bars()} '   "   lineinfo, percent
   let s.='%#Todo#%{SessionStatus()}'   "   session status
   let s.='%#StatusLineMagenta#'        " - section 5
   let s.='%{CurrentBranch()}'          "   git branch
@@ -115,6 +115,15 @@ endfunction
 
 function! SpellStatus() abort
   return &spell ? 'SPELL' : ''
+endfunction
+
+function! Bars() abort
+  let l:current_line = line('.')
+  let l:total_lines = line('$')
+  let l:chars = [ '', '█', '▇', '▆', '▅', '▄', '▃', '▂', '▁']
+  let l:line_ratio = 1.0 * l:current_line / l:total_lines
+  let l:index = float2nr(ceil(l:line_ratio * (len(chars)-1)))
+  return chars[l:index]
 endfunction
 
 "==============================================================================
