@@ -1,37 +1,17 @@
 #!/bin/bash
 
 # MacOS support
-if [ -x "$(command -v brew)" ]; then
+if [[ $OSTYPE == 'darwin'* ]]; then
+  # Install Homebrew if necessary
+  command -v brew >/dev/null 2>&1 \
+    || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
   echo "Installing dependencies using homebrew"
-  # Make sure we’re using the latest Homebrew
   brew update
-  # Upgrade any already-installed formulae
-  brew upgrade
-  # Install dependencies
-  brew install                    \
-    bash                          \
-    bat                           \
-    cmake                         \
-    llvm                          \
-    fd                            \
-    fzf                           \
-    pandoc                        \
-    ripgrep                       \
-    skhd                          \
-    starship                      \
-    stow                          \
-    tmux                          \
-    vim --with-override-system-vi \
-    yabai
-  # Install casks
-  brew cask install               \
-    basictex
-  # Remove outdated versions from the cellar.
-  brew cleanup
-fi
+  brew bundle --file "extras/Brewfile"
 
 # Ubuntu support
-if [ -x "$(command -v apt)" ]; then
+elif [ -x "$(command -v apt)" ]; then
   echo "Installing dependencies using apt"
   apt-get update && apt-get install -y \
     cmake   \
@@ -68,4 +48,7 @@ if [ -x "$(command -v apt)" ]; then
     --slave   /usr/bin/clangd                clangd                /usr/bin/clangd-${clang_version} \
     --slave   /usr/bin/clang-tidy            clang-tidy            /usr/bin/clang-tidy-${clang_version} \
     --slave   /usr/bin/lldb                  lldb                  /usr/bin/lldb-${clang_version}
+
+else
+  echo "No supported package manager was found. Not installing dependencies."
 fi
