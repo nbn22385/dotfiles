@@ -10,6 +10,11 @@ if [[ $OSTYPE == 'darwin'* ]]; then
   brew update
   brew bundle --file "extras/Brewfile"
 
+  # VSCodium extensions
+  codium --install-extension ms-vscode.cpptools
+  codium --install-extension ulwlu.elly
+  codium --install-extension xaver.clang-format
+
 # Ubuntu support
 elif [ -x "$(command -v apt)" ]; then
   echo "Installing dependencies using apt"
