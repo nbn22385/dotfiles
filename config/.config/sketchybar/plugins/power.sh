@@ -10,7 +10,7 @@ YELLOW=0xFFebcb8b
 if [[ $CHARGING != "" ]]; then
   ICON=""
   sketchybar -m --set battery \
-    icon.color=$YELLOW \
+    icon.color=$GREEN \
     icon=$ICON \
     label=$(printf "${BATT_PERCENT}%%")
       exit 0
@@ -24,9 +24,10 @@ case ${BATT_PERCENT} in
   6[0-9]) ICON="" && COLOR=$ORANGE;;
   5[0-9]) ICON="" && COLOR=$ORANGE;;
   4[0-9]) ICON="" && COLOR=$ORANGE;;
-  3[0-9]) ICON="" && COLOR=$RED;;
+  3[0-9]) ICON="" && COLOR=$ORANGE;;
   2[0-9]) ICON="" && COLOR=$RED;;
-  1[0-9]) ICON="" && COLOR=$RED;;
+  1[0-9]) ICON="" && COLOR=$RED;;
+  [0-9]) ICON="" && COLOR=$RED;;
   *) ICON=""
 esac
 
