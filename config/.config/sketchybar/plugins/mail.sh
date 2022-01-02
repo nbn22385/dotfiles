@@ -11,6 +11,6 @@ if [ $RUNNING == 0 ]; then
     sketchybar -m --set $NAME label="" icon=
   fi
 else
-  sketchybar -m --set $NAME label=
+  sketchybar -m --set $NAME label="" icon=
 fi
 
