@@ -15,14 +15,15 @@ if exists("+showtabline")
       " let s .= '%' . i . 'T'
       " let s .= '%#TabLineFill# ' " spacer
 
-      " Set the active/inactive tab colors
-      let s .= (i == t ? '%#Normal#' : '%#Tabline#')
-
       " padding before tab contents
-      let s .= '  '
+      let s .= (i == t ? '%#TabLineSel#▌ ' : '%#Tabline#  ')
+      " let s .= ' '
+
+      " Set the active/inactive tab colors
+      let s .= (i == t ? '%#TabLineSel#' : '%#Tabline#')
 
       " Show the tab number as a superscript
-      " let s .="%{GetSuperscript(".i.")} "
+      let s .="%{GetSuperscript(".i.")} "
 
       let bufnr = buflist[winnr - 1]
       let file = bufname(bufnr)
@@ -67,6 +68,7 @@ if exists("+showtabline")
       " endif
 
       " padding after tab contents
+      " let s .= (i == t ? '%#TabLineSel#  ' : '  ')
       let s .= '  '
 
       let i = i + 1
