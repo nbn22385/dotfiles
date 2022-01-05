@@ -144,7 +144,7 @@ export FZF_ALT_C_OPTS='--preview "tree -C {} | head -100"'
 # cd into a directory selected via fzf
 fzf_change_directory() {
   local directory=$(
-  fd --type d | \
+  fd --type d --hidden --exclude ".git" | \
     fzf --query="$1" --no-multi --select-1 --exit-0 \
     --preview 'tree -C {} | head -100'
   )
