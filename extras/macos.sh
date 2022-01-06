@@ -265,7 +265,7 @@ defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock tilesize -int 32
 
 # Set the magnified size of Dock items to 48 pixels
-defaults write com.apple.dock largesize -int 48
+defaults write com.apple.dock largesize -int 64
 
 # Change minimize/maximize window effect
 defaults write com.apple.dock mineffect -string "scale"
@@ -307,7 +307,7 @@ defaults write com.apple.dock expose-group-by-app -bool false
 defaults write com.apple.dock mru-spaces -bool false
 
 # Displays have separate Spaces
-defaults write com.apple.spaces spans-displays -bool true
+defaults write com.apple.spaces spans-displays -bool false
 
 # Remove the auto-hiding Dock delay
 # defaults write com.apple.dock autohide-delay -float 0
