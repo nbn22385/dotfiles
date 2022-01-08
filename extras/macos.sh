@@ -11,13 +11,12 @@ osascript -e 'tell application "System Preferences" to quit'
 # Ask for the administrator password upfront
 sudo -v
 
-# Keep-alive: update existing `sudo` time stamp until `osx` has finished
+# Keep-alive: update existing `sudo` time stamp until script has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 ###############################################################################
-# General UI/UX                                                               #
+echo "[+] General UI/UX"                                                      #
 ###############################################################################
-echo "[+] General UI/UX"
 
 # Set computer name (as done via System Preferences → Sharing)
 echo "Enter your machine name: "
@@ -31,7 +30,7 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.serve
 # sudo nvram SystemAudioVolume=" "
 
 # Set sidebar icon size to small
-defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
 
 # Show scrollbars when scrolling only
 defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
@@ -70,6 +69,13 @@ defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 # Set Help Viewer windows to non-floating mode
 defaults write com.apple.helpviewer DevMode -bool true
 
+# Reveal IP address, hostname, OS version, etc. when clicking the clock
+# in the login window
+sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+
+# Disable Notification Center and remove the menu bar icon
+# launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+
 # Disable automatic capitalization as it’s annoying when typing code
 defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
 
@@ -86,9 +92,8 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 ###############################################################################
-# Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
+echo "[+] Trackpad, mouse, keyboard, Bluetooth accessories, and input"        #
 ###############################################################################
-echo "[+] Trackpad, mouse, keyboard, accessories"
 
 # Trackpad: disable tap to click for this user and for the login screen
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool false
@@ -119,9 +124,8 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 # sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
 
 ###############################################################################
-# Energy saving                                                               #
+echo "[+] Energy saving"                                                      #
 ###############################################################################
-echo "[+] Energy saving"
 
 # Enable lid wakeup
 sudo pmset -a lidwake 1
@@ -139,9 +143,8 @@ sudo pmset -c sleep 0
 # sudo pmset -a standbydelay 86400
 
 ###############################################################################
-# Screen                                                                      #
+echo "[+] Screen"                                                             #
 ###############################################################################
-echo "[+] Screen"
 
 # Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
@@ -164,9 +167,8 @@ defaults write NSGlobalDomain AppleFontSmoothing -int 1
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
 ###############################################################################
-# Finder                                                                      #
+echo "[+] Finder"                                                             #
 ###############################################################################
-echo "[+] Finder"
 
 # Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
 # defaults write com.apple.finder QuitMenuItem -bool true
@@ -248,9 +250,8 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
   Privileges -bool true
 
 ###############################################################################
-# Dock, Dashboard, and hot corners                                            #
+echo "Dock, Dashboard, and hot corners"                                       #
 ###############################################################################
-echo "[+] Dock, Dashboard, and hot corners"
 
 # Enable highlight hover effect for the grid view of a stack (Dock)
 defaults write com.apple.dock mouse-over-hilite-stack -bool true
@@ -357,10 +358,17 @@ find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -dele
 # defaults write com.apple.dock wvous-bl-corner -int 5
 # defaults write com.apple.dock wvous-bl-modifier -int 0
 
+
 ###############################################################################
-# Terminal & iTerm 2                                                          #
+echo "[+] Menu Bar"                                                           #
 ###############################################################################
-echo "[+] Terminal"
+
+# Set menu bar digital clock format
+defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d HH:mm"
+
+###############################################################################
+echo "[+] Terminal and iTerm2"                                                #
+###############################################################################
 
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4
@@ -379,9 +387,8 @@ defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 defaults write com.googlecode.iterm2 DisableWindowSizeSnap -integer 1
 
 ###############################################################################
-# Activity Monitor                                                            #
+echo "[+] Activity Monitor"                                                   #
 ###############################################################################
-echo "[+] Activity Monitor"
 
 # Show the main window when launching Activity Monitor
 defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
@@ -394,18 +401,17 @@ defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
 ###############################################################################
-# App Store Updates                                                           #
+echo "[+] App Store Updates"                                                  #
 ###############################################################################
-echo "[+] App Store Updates"
 
 # Enable the automatic update check
-# defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 
-# Check for software updates daily, not just once per week
-# defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+# Check for software updates every two weeks
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 14
 
-# Download newly available updates in background
-# defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+# Disable downloading newly available updates in background
+defaults write com.apple.SoftwareUpdate AutomaticDownload -int 0
 
 # Install System data files & security updates
 # defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
@@ -413,16 +419,15 @@ echo "[+] App Store Updates"
 # Automatically download apps purchased on other Macs
 # defaults write com.apple.SoftwareUpdate ConfigDataInstall -int 1
 
-# Turn on app auto-update
-# defaults write com.apple.commerce AutoUpdate -bool true
+# Turn off app auto-update
+defaults write com.apple.commerce AutoUpdate -bool false
 
 # Allow the App Store to reboot machine on macOS updates
 # defaults write com.apple.commerce AutoUpdateRestartRequired -bool true
 
 ###############################################################################
-# TextEdit                                                                    #
+echo "[+] TextEdit"                                                           #
 ###############################################################################
-echo "[+] TextEdit"
 
 # Use plain text mode for new TextEdit documents
 defaults write com.apple.TextEdit RichText -int 0
@@ -432,26 +437,23 @@ defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 
 ###############################################################################
-# Disk Utility                                                                #
+echo "[+] Disk Utility"                                                       #
 ###############################################################################
-echo "[+] Disk Utility"
 
 # Enable the debug menu in Disk Utility
 defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 defaults write com.apple.DiskUtility advanced-image-options -bool true
 
 ###############################################################################
-# Photos                                                                      #
+echo "[+] Photos"                                                             #j
 ###############################################################################
-echo "[+] Photos"
 
 # Prevent Photos from opening automatically when devices are plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 ###############################################################################
-# Rectangle                                                                   #
+echo "[+] Rectangle"                                                          #
 ###############################################################################
-echo "[+] Rectangle"
 
 # Set margins
 defaults write com.knollsoft.Rectangle snapEdgeMarginTop -int 6
@@ -466,9 +468,8 @@ defaults write com.knollsoft.Rectangle screenEdgeGapLeft -int 0
 defaults write com.knollsoft.Rectangle screenEdgeGapRight -int 0
 
 ###############################################################################
-# Kill affected applications                                                  #
+echo "[+] Kill affected applications"                                         #
 ###############################################################################
-echo "[+] Kill affected applications"
 
 for app in \
   "Activity Monitor" \
