@@ -55,7 +55,7 @@
   "diagnostic.warningSign": "‼",
 
   // explorer
-  "explorer.file.child.template": "[git | 2] [selection | clip | 1] [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][modified][readonly] [linkIcon & 1][link growRight 1 omitCenter 5]",
+  "explorer.file.child.template": "[git | 2] [selection | clip | 1] [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][modified][readonly] [link growRight 1 omitCenter 5]",
   "explorer.file.root.template": "[icon] [root] ([fullpath])",
   "explorer.file.hiddenRules": {
     "filenames": [".git", ".DS_Store", "node_modules"],
