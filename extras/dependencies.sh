@@ -11,9 +11,10 @@ if [[ $OSTYPE == 'darwin'* ]]; then
   brew bundle --file "extras/Brewfile"
 
   # VSCodium extensions
-  codium --install-extension ms-vscode.cpptools
-  codium --install-extension ulwlu.elly
-  codium --install-extension xaver.clang-format
+  codium                                   \
+    --install-extension ms-vscode.cpptools \
+    --install-extension ulwlu.elly         \
+    --install-extension xaver.clang-format
 
 # Ubuntu support
 elif [ -x "$(command -v apt)" ]; then
@@ -39,20 +40,20 @@ elif [ -x "$(command -v apt)" ]; then
 
   echo "Installing clang"
   clang_version=12
-  sudo apt install \
-    clang-${clang_version} \
-    clangd-${clang_version} \
+  sudo apt install                \
+    clang-${clang_version}        \
+    clangd-${clang_version}       \
     clang-format-${clang_version} \
-    clang-tidy-${clang_version} \
+    clang-tidy-${clang_version}   \
     lldb-${clang_version}
 
-  sudo update-alternatives \
-    --install /usr/bin/clang                 clang                 /usr/bin/clang-${clang_version} 100 \
-    --slave   /usr/bin/clang++               clang++               /usr/bin/clang++-${clang_version}  \
-    --slave   /usr/bin/clang-format          clang-format          /usr/bin/clang-format-${clang_version} \
-    --slave   /usr/bin/clangd                clangd                /usr/bin/clangd-${clang_version} \
-    --slave   /usr/bin/clang-tidy            clang-tidy            /usr/bin/clang-tidy-${clang_version} \
-    --slave   /usr/bin/lldb                  lldb                  /usr/bin/lldb-${clang_version}
+  sudo update-alternatives                                                              \
+    --install /usr/bin/clang        clang        /usr/bin/clang-${clang_version} 100    \
+    --slave   /usr/bin/clang++      clang++      /usr/bin/clang++-${clang_version}      \
+    --slave   /usr/bin/clang-format clang-format /usr/bin/clang-format-${clang_version} \
+    --slave   /usr/bin/clangd       clangd       /usr/bin/clangd-${clang_version}       \
+    --slave   /usr/bin/clang-tidy   clang-tidy   /usr/bin/clang-tidy-${clang_version}   \
+    --slave   /usr/bin/lldb         lldb         /usr/bin/lldb-${clang_version}
 
 else
   echo "No supported package manager was found. Not installing dependencies."
