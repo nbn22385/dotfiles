@@ -1,4 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+sudo()
+{
+  [[ $EUID = 0 ]] || set -- command sudo "$@"
+  "$@"
+}
 
 # MacOS support
 if [[ $OSTYPE == 'darwin'* ]]; then
@@ -6,7 +12,7 @@ if [[ $OSTYPE == 'darwin'* ]]; then
   command -v brew >/dev/null 2>&1 \
     || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  echo "Installing dependencies using homebrew"
+  echo "[+] Installing dependencies using homebrew"
   brew update
   brew bundle --file "extras/Brewfile"
 
@@ -18,14 +24,16 @@ if [[ $OSTYPE == 'darwin'* ]]; then
 
 # Ubuntu support
 elif [ -x "$(command -v apt)" ]; then
-  echo "Installing dependencies using apt"
-  apt-get update && apt-get install -y \
+
+  echo "[+] Installing dependencies using apt"
+  sudo apt-get update && sudo apt-get install -y \
     cmake   \
     curl    \
     fd-find \
     g++     \
     git     \
     llvm    \
+    stow    \
     tmux    \
     tree    \
     vim     \
@@ -35,10 +43,27 @@ elif [ -x "$(command -v apt)" ]; then
     bat     \
     ripgrep
 
-  echo "Installing nodejs"
-  curl -sL install-node.now.sh | sh
+  # Allow correct execution of bat and fd
+  [[ -x "$(command -v batcat)" ]] && sudo ln -sf $(which batcat) /usr/local/bin/bat 
+  [[ -x "$(command -v fdfind)" ]] && sudo ln -sf $(which fdfind) /usr/local/bin/fd
 
-  echo "Installing clang"
+  echo "[+] Installing fzf"
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf > /dev/null 2>&1
+  ~/.fzf/install --completion --key-bindings --no-update-rc
+
+  echo "[+] Installing lazygit"
+  curl -s https://api.github.com/repos/jesseduffield/lazygit/releases/latest \
+    | jq -r ".assets[] | select(.name | contains(\"Linux_x86_64\")) | .browser_download_url" \
+    | wget --no-check-certificate -i - \
+    && tar -xzf lazygit_*_Linux_x86_64.tar.gz \
+    && sudo cp lazygit /usr/local/bin \
+    && rm lazygit*
+
+  echo "[+] Installing nodejs"
+  curl -fsSL https://deb.nodesource.com/setup_17.x | bash -
+  sudo apt-get install -y nodejs
+
+  echo "[+] Installing clang"
   clang_version=12
   sudo apt install                \
     clang-${clang_version}        \
@@ -56,5 +81,18 @@ elif [ -x "$(command -v apt)" ]; then
     --slave   /usr/bin/lldb         lldb         /usr/bin/lldb-${clang_version}
 
 else
-  echo "No supported package manager was found. Not installing dependencies."
+  echo "[!] No supported package manager was found. Not installing dependencies."
 fi
+
+echo "[+] Installing base16-shell"
+git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell > /dev/null 2>&1
+
+echo "[+] Installing powerlevel10k prompt"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k > /dev/null 2>&1
+
+if [[ 'zsh' != ${SHELL::-3}* ]]
+then
+  echo "[+] Setting zsh as the default shell"
+  chsh -s $(which zsh)
+fi
+

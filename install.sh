@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 STOW_FOLDERS="bash config tmux vim zsh"
 

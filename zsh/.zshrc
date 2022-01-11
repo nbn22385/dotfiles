@@ -49,11 +49,11 @@ else
   compinit -C;
 fi;
 
-# case insensitive path-completion 
+# case insensitive path-completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # partial completion suggestions
-zstyle ':completion:*' list-suffixes expand prefix suffix
+zstyle ':completion:*' list-suffixes expand prefix suffix
 
 # highlight tab completion options
 zstyle ':completion:*' menu select
@@ -61,12 +61,6 @@ zstyle ':completion:*' menu select
 ##########
 # Aliases
 ##########
-
-# create 'bat' symlink if batcat is the executable name (ubuntu)
-[[ -x "$(command -v batcat)" ]] && ln -sf $(which batcat) /usr/local/bin/bat 
-
-# create 'fd' symlink if fdfind is the executable name (ubuntu)
-[[ -x "$(command -v fdfind)" ]] && ln -sf $(which fdfind) /usr/local/bin/fd
 
 # cd aliases
 alias -- -='cd -'
