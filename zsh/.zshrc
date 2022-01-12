@@ -16,14 +16,22 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ################
-# Shell Options
+# Options
 ################
 
-setopt autocd autopushd pushdignoredups
+setopt autocd
+setopt autopushd
+setopt pushdignoredups
 setopt correct
 setopt globdots
 setopt histignoredups
+setopt incappendhistory
+setopt sharehistory
 setopt ignoreeof
+
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=500
+SAVEHIST=500
 
 ##########
 # Keymaps
