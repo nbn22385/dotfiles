@@ -7,12 +7,12 @@
 # for this to work you must configure sudo such that it will be able to run the
 # command without password
 
-sudo yabai --load-sa
-yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-
 alias yc='yabai -m config'
 alias yr='yabai -m rule --add' 
 alias ys='yabai -m signal --add' 
+
+sudo yabai --load-sa
+ys event=dock_did_restart action="sudo yabai --load-sa"
 
 # global settings
 yc layout                    bsp
