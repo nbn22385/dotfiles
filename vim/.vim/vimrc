@@ -7,6 +7,7 @@ function! PackInit() abort
   call minpac#add('fnune/base16-vim')                          " Base16 themes ($HOME/.vim/after/plugin/base16.vim)
   call minpac#add('junegunn/fzf')                              " Fuzzy finder ($HOME/.vim/after/plugin/fzf.vim)
   call minpac#add('junegunn/fzf.vim')                          " Additional commands for working with fzf
+  call minpac#add('junegunn/goyo.vim')                         " Distraction-free writing
   call minpac#add('junegunn/vim-slash')                        " Improved in-buffer search experience
   call minpac#add('machakann/vim-highlightedyank')             " Highlight yanked text
   call minpac#add('neoclide/coc.nvim', {'branch': 'release'})  " LSP support ($HOME/.vim/after/plugin/coc.vim)
