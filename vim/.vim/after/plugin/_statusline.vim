@@ -84,10 +84,10 @@ function! CocStatus() abort
   if empty(info) | return '' | endif
   let msgs = []
   if get(info, 'error', 0)
-    call add(msgs, '%#StatusLineRed#×' . info['error'])
+    call add(msgs, '%#StatusLineRed#× ' . info['error'])
   endif
   if get(info, 'warning', 0)
-    call add(msgs, '%#StatusLineYellow#•' . info['warning'])
+    call add(msgs, '%#StatusLineYellow# ' . info['warning'])
   endif
   if empty(msgs) | return '%#StatusLineGreen#  ' | endif
   return ' ' . join(msgs, ' ') . ' '
