@@ -158,7 +158,7 @@ export FZF_DEFAULT_OPTS="
 fzf_change_directory() {
   local directory=$(
   fd --type d --hidden --exclude ".git" | \
-    fzf --query="$1" --no-multi --select-1 --exit-0 \
+    fzf --prompt="Change directory: " --query="$1" --no-multi --select-1 --exit-0 \
     --preview 'tree -C {} | head -100'
   )
   if [[ -n $directory ]]; then
@@ -168,7 +168,7 @@ fzf_change_directory() {
 
 # edit selected file(s) via fzf
 fzf_find_edit() {
-  local file=$(fzf --query="$1" --select-1 --exit-0)
+  local file=$(fzf --prompt="Edit file(s): " --query="$1" --select-1 --exit-0)
   if [[ -n $file ]]; then
     $EDITOR $(echo $file)
   fi
@@ -177,22 +177,37 @@ fzf_find_edit() {
 # change the base16-shell theme selected via fzf
 fzf_base16_theme() {
   echo "Current theme:" $(grep '  colorscheme' ~/.vimrc_background | sed 's/  colorscheme base16-//g')
-  local theme=$(alias | awk -F'base16_|=' '/base16_/ {print $2}' | fzf --exit-0)
+  local theme=$(alias | awk -F'base16_|=' '/base16_/ {print $2}' | fzf --prompt="Base16 theme: " --exit-0)
   if [[ -n $theme ]]; then
     eval base16_$theme
   fi
 }
 
-# checkout git branch via fzf (https://gist.github.com/junegunn/8b572b8d4b5eddd8b85e5f4d40f17236)
+# checkout git branch via fzf (https://polothy.github.io/post/2019-08-19-fzf-git-checkout)
 fzf_git_checkout_branch() {
   git rev-parse HEAD > /dev/null 2>&1 || return
-  git branch -a --color=always | grep -v '/HEAD\s' | sort |
-    fzf --height 50% --min-height 20 --border --bind ctrl-/:toggle-preview \
-    --ansi --multi --tac --preview-window right:70% \
-    --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1)' |
-    sed 's/^..//' | cut -d' ' -f1 |
-    sed 's#^remotes/##'
-  }
+
+  local branch=$(git branch --color=always --all --sort=-committerdate |
+    grep -v HEAD |
+    fzf --height 50% --ansi --no-multi --preview-window right:65% \
+    --preview 'git log -n 50 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed "s/.* //" <<< {})' |
+    sed "s/.* //"
+  )
+
+  if [[ "$branch" = "" ]]; then
+    echo "No branch selected."
+    return
+  fi
+
+  # If branch name starts with 'remotes/' then it is a remote branch. By
+  # using --track and a remote branch name, it is the same as:
+  # git checkout -b branchName --track origin/branchName
+  if [[ "$branch" = 'remotes/'* ]]; then
+    git checkout --track $branch
+  else
+    git checkout $branch;
+  fi
+}
 
 # create a new directory and enter it
 mcd() {
