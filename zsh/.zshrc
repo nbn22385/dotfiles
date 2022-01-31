@@ -129,12 +129,23 @@ export LC_CTYPE="en_US.UTF-8"
 export LS_COLORS="ow=01;36"
 export TZ='America/New_York'
 
-export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
-export FZF_DEFAULT_OPTS='--height 40% --layout reverse --info inline --border --pointer "▶" --marker "✓" --color=gutter:-1'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_OPTS='--preview "bat --color=always --line-range :500 {}"'
 export FZF_ALT_C_COMMAND='fd --type d . --color=never'
 export FZF_ALT_C_OPTS='--preview "tree -C {} | head -100"'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS='--preview "bat --color=always --line-range :500 {}"'
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
+export FZF_DEFAULT_OPTS="
+  --bind='ctrl-p:toggle-preview'
+  --border=sharp
+  --color=gutter:-1
+  --height=40%
+  --info=inline 
+  --layout=reverse
+  --marker='✓'
+  --multi
+  --pointer='▶'
+  --preview='bat --color=always --line-range :500 {}'
+  --preview-window=hidden"
 
 # Fzf shell support
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -155,14 +166,11 @@ fzf_change_directory() {
   fi
 }
 
-# edit a file selected via fzf
+# edit selected file(s) via fzf
 fzf_find_edit() {
-  local file=$(
-  fzf --query="$1" --no-multi --select-1 --exit-0 \
-    --preview 'bat --color=always --line-range :500 {}'
-  )
+  local file=$(fzf --query="$1" --select-1 --exit-0)
   if [[ -n $file ]]; then
-    $EDITOR "$file"
+    $EDITOR $(echo $file)
   fi
 }
 
