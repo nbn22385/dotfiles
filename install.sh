@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-STOW_FOLDERS="bash config tmux vim zsh"
+STOW_FOLDERS="config tmux vim zsh"
 
 if [ "$1" = "--install-dependencies" ]; then ./extras/dependencies.sh; fi
 
