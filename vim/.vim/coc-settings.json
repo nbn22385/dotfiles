@@ -1,10 +1,6 @@
 {
   // general settings
-  "coc.preferences.formatOnSaveFiletypes": [
-    "cpp",
-    "vim"
-  ],
-  "coc.preferences.semanticTokensHighlights": false,
+  "coc.preferences.formatOnSaveFiletypes": ["cpp", "vim"],
 
   // "http.proxy": "http://proxy-abc.your.domain.com:80",
   "http.proxyStrictSSL": false,
@@ -46,7 +42,6 @@
     "-clang-tidy=0", "-background-index=0"
   ],
   "clangd.compilationDatabasePath": "build",
-  "clangd.semanticHighlighting": false,
 
   // diagnostic
   "diagnostic.errorSign": "×",
@@ -73,16 +68,16 @@
   ],
 
   // git
-  "git.addedSign.text": "▎",
   "git.addedSign.hlGroup": "CocDiffAdd",
-  "git.changedSign.text": "▎",
-  "git.changedSign.hlGroup": "CocDiffChange", 
-  "git.removedSign.text": "▌",
-  "git.removedSign.hlGroup": "CocDiffDelete",
-  "git.changeRemovedSign.text": "▌",
+  "git.addedSign.text": "▎",
   "git.changeRemovedSign.hlGroup": "CocDiffDelete",
-  "git.topRemovedSign.text": "▔",
+  "git.changeRemovedSign.text": "▌",
+  "git.changedSign.hlGroup": "CocDiffChange", 
+  "git.changedSign.text": "▎",
+  "git.removedSign.hlGroup": "CocDiffDelete",
+  "git.removedSign.text": "▌",
   "git.topRemovedSign.hlGroup": "CocDiffDelete",
+  "git.topRemovedSign.text": "▔",
   "git.enableGutters": true,
   "git.realtimeGutters": true,
   "git.branchCharacter": "",
