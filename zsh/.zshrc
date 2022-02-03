@@ -12,7 +12,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 
 autoload -U promptinit; promptinit
 
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+source ~/.powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ################
