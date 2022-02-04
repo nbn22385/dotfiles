@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
 data=$(curl -s 'wttr.in/Orlando?format=%C+|+%t')
+
+if [[ "$data" == *"nknown"* ]]; then
+  exit
+fi
+
 condition=$(echo $data | awk -F '|' '{print $1}' | tr '[:upper:]' '[:lower:]')
 condition="${condition// /}"
 temp=$(echo $data | awk -F '|' '{print $2}')
@@ -18,7 +23,7 @@ case "${condition}" in
   "partlycloudy")
     icon=""
     ;;
-  "lightrain")
+  *"lightrain"*)
     icon=""
     ;;
   "overcast")
