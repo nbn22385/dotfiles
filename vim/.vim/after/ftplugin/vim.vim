@@ -6,3 +6,5 @@ function! CustomFold()
   let fillcharcount = &textwidth - len(line_text) - len(folded_line_num)
   return '▶ ' . line_text . ' ' . repeat('·', fillcharcount) . ' (' . folded_line_num . ' lines)'
 endfunction
+
+scriptencoding utf-8

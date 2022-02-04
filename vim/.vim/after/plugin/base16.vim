@@ -6,7 +6,7 @@ function! s:base16_customize() abort
   call Base16hi('ColorColumn', '', g:base16_gui01, '', g:base16_cterm01, '', '')
   " call Base16hi('Comment', '', '', '', '', 'italic', '')
   " remove an underline from the line number
-  call Base16hi("Cursor", "", "", "", "", "inverse", "")
+  call Base16hi('Cursor', '', '', '', '', 'inverse', '')
   " overrides the cursorline to have no background
   " call Base16hi("CursorLine", "", g:base16_gui00, "", g:base16_cterm00, "", "")
   call Base16hi('CursorLineNr', '','', '','', 'bold', '')

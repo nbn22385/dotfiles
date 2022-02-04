@@ -1,7 +1,7 @@
   " Rename tabs to show tab number.
   " (Based on http://stackoverflow.com/questions/5927952/whats-implementation-of-vims-default-tabline-function)
 
-if exists("+showtabline")
+if exists('+showtabline')
 
   function! MyTabLine()
     let s = ''
@@ -23,20 +23,20 @@ if exists("+showtabline")
       let s .= (i == t ? '%#TabLineSel#' : '%#Tabline#')
 
       " Show the tab number as a superscript
-      let s .="%{GetSuperscript(".i.")} "
+      let s .='%{GetSuperscript('.i.')} '
 
       let bufnr = buflist[winnr - 1]
       let file = bufname(bufnr)
       let buftype = getbufvar(bufnr, '&buftype')
 
-      if buftype == 'help'
+      if buftype ==? 'help'
         let file = 'help:' . fnamemodify(file, ':t:r')
 
-      elseif buftype == 'quickfix'
+      elseif buftype ==? 'quickfix'
         let file = 'quickfix'
 
-      elseif buftype == 'nofile'
-        if file =~ '\/.'
+      elseif buftype ==? 'nofile'
+        if file =~? '\/.'
           let file = substitute(file, '.*\/\ze.', '', '')
         endif
 
@@ -45,7 +45,7 @@ if exists("+showtabline")
         let file = pathshorten(fnamemodify(file, ':t'))
       endif
 
-      if file == ''
+      if file ==? ''
         let file = '[No Name]'
       endif
 
@@ -87,9 +87,9 @@ endif " exists("+showtabline")
 
 " Borrowed from taboo.vim: https://github.com/gcmt/taboo.vim/blob/master/plugin/taboo.vim
 function! GetSuperscript(number) abort
-  let unicode_number = ""
+  let unicode_number = '' 
 
-  let small_numbers = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"]
+  let small_numbers = ['⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹']
   let number_str    = string(a:number)
 
   for i in range(0, len(number_str) - 1)
@@ -98,3 +98,5 @@ function! GetSuperscript(number) abort
 
   return unicode_number
 endfunction
+
+scriptencoding utf-8             " Specify character encoding used in this file

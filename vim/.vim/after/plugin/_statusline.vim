@@ -58,7 +58,7 @@ endfunction
 "------------------------------------------------------------------------------
 function! CurrentMode() abort
   let l:cmd = getcmdtype()
-  if l:cmd == ''
+  if l:cmd ==? ''
     return toupper(get(g:currentmode, mode(), '???')) 
           \ . (&paste == 1 ? '-PASTE' : '')
   else
@@ -94,7 +94,7 @@ function! CocStatus() abort
 endfunction
 
 function! ModifiedStatus() abort
-  return &modified == 'nmodified' ? '' : '  '
+  return &modified ==? 'nmodified' ? '' : '  '
 endfunction
 
 function! ReadOnlyStatus() abort
@@ -107,7 +107,7 @@ function! SessionStatus() abort
   endif
   if exists('g:loaded_obsession')
     let l:status = ObsessionStatus('   ', 'OFF')
-    return l:status != 'OFF' ? l:status : ''
+    return l:status !=? 'OFF' ? l:status : ''
   else
     return ''
   endif
@@ -184,3 +184,4 @@ let g:cmdtypes = {
       \ '/'      : '',
       \ '?'      : ''}
 
+scriptencoding utf-8
