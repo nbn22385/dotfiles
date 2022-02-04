@@ -197,7 +197,6 @@ augroup END
 " General
 if !&modeline|set modeline|endif " Enable modeline which may be off by default
 filetype plugin indent on        " Load plugins according to detected filetype
-scriptencoding utf-8             " Specify character encoding used in this file
 set background=dark              " Dark background for dark theme support
 set backspace=indent,eol,start   " Make backspace work as you would expect
 set directory=/tmp//             " Location of the swap file
@@ -218,6 +217,7 @@ set showcmd                      " Show already typed keys when more are expecte
 set spelllang=en_us              " Set language for spell checking
 set termguicolors                " Use 24-bit colors
 set updatetime=300               " Shorter CursorHold delay
+scriptencoding utf-8             " Specify character encoding used in this file
 
 " Editing
 syntax on                        " Enable syntax highlighting
