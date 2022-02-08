@@ -51,7 +51,7 @@ nnoremap <Leader><Tab> :buffer<Space><Tab>
 nnoremap <Leader>= gg=G<C-o><C-o>
 
 " Open lazygit in a new tab
-nnoremap <silent> <Leader>G :tab term ++close lazygit<CR>
+nnoremap <silent> <Leader>G :$tab term ++close lazygit<CR>
 
 " Quicker split resizing
 noremap <Leader><Left>  :vertical resize -3<CR>
