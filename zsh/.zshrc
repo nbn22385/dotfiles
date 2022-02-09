@@ -105,6 +105,9 @@ alias rg='rg --hidden --smart-case --glob "!**/.git/**"'
 
 # tmux aliases
 alias tmux='export SHELL=$(which zsh); tmux -2 -u'
+if [[ $TMUX ]]; then
+  alias clear='clear && tmux clear-history'
+fi
 
 # vim aliases
 alias v='vim'
