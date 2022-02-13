@@ -3,7 +3,6 @@
 echo "[+] Installing dependencies using pkg"
 pkg update && pkg install -y \
   bat      \
-  cmake    \
   curl     \
   fd       \
   fzf      \
