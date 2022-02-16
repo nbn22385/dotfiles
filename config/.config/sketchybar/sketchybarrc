@@ -110,10 +110,15 @@ sketchybar -m --default          \
     script="$PLUGINS/power.sh"   \
     icon=                       \
     icon.color=0xffbf616a        \
+  --add item sound right         \
+  --set sound                    \
+    update_freq=5                \
+    icon.color=0xffd08770        \
+    script="$PLUGINS/sound.sh"   \
   --add item weather right       \
   --set weather                  \
     update_freq=1800             \
-    icon.color=0xffd08770        \
+    icon.color=0xffebcb8b        \
     script="$PLUGINS/weather.sh" \
   --add item mailIndicator right \
   --set mailIndicator            \
