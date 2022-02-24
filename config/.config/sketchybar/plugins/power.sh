@@ -9,11 +9,11 @@ YELLOW=0xFFebcb8b
 
 if [[ $CHARGING != "" ]]; then
   ICON=""
-  sketchybar -m --set battery \
-    icon.color=$GREEN \
+  sketchybar -m --set ${NAME} \
     icon=$ICON \
+    icon.color=$GREEN \
     label=$(printf "${BATT_PERCENT}%%")
-      exit 0
+  exit 0
 fi
 
 case ${BATT_PERCENT} in
@@ -31,7 +31,7 @@ case ${BATT_PERCENT} in
   *) ICON=""
 esac
 
-sketchybar -m --set battery\
-  icon.color=$COLOR \
+sketchybar -m --set ${NAME}\
   icon=$ICON \
+  icon.color=$COLOR \
   label=$(printf "${BATT_PERCENT}%%")
