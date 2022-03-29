@@ -10,12 +10,12 @@ function! PackInit() abort
   call minpac#add('junegunn/goyo.vim')                         " Distraction-free writing
   call minpac#add('junegunn/vim-slash')                        " Improved in-buffer search experience
   call minpac#add('machakann/vim-highlightedyank')             " Highlight yanked text
+  call minpac#add('machakann/vim-sandwich')                    " Operators and textobjects to operate on sandwiched text
   call minpac#add('neoclide/coc.nvim', {'branch': 'release'})  " LSP support ($HOME/.vim/after/plugin/coc.vim)
   call minpac#add('tpope/vim-abolish')                         " Substitute and abbreviate variants of a word
   call minpac#add('tpope/vim-commentary')                      " Code commenting shortcuts
   call minpac#add('tpope/vim-fugitive')                        " Git shortcuts
   call minpac#add('tpope/vim-obsession')                       " Continuously updated session files
-  call minpac#add('tpope/vim-surround')                        " Add, change, delete surroundings in pairs
   call minpac#add('wellle/targets.vim')                        " Additional text objects
 endfunction
 
