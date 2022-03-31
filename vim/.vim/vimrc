@@ -4,14 +4,14 @@ function! PackInit() abort
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})          " Plugin manager 
   call minpac#add('christoomey/vim-tmux-navigator')            " Navigation between tmux panes and vim splits
-  call minpac#add('fnune/base16-vim')                          " Base16 themes ($HOME/.vim/after/plugin/base16.vim)
-  call minpac#add('junegunn/fzf')                              " Fuzzy finder ($HOME/.vim/after/plugin/fzf.vim)
-  call minpac#add('junegunn/fzf.vim')                          " Additional commands for working with fzf
+  call minpac#add('fnune/base16-vim')                          " Base16 themes set by base16-shell
+  call minpac#add('junegunn/fzf')                              " Fuzzy finder integration
+  call minpac#add('junegunn/fzf.vim')                          " Additional commands for fzf
   call minpac#add('junegunn/goyo.vim')                         " Distraction-free writing
   call minpac#add('junegunn/vim-slash')                        " Improved in-buffer search experience
   call minpac#add('machakann/vim-highlightedyank')             " Highlight yanked text
-  call minpac#add('machakann/vim-sandwich')                    " Operators and textobjects to operate on sandwiched text
-  call minpac#add('neoclide/coc.nvim', {'branch': 'release'})  " LSP support ($HOME/.vim/after/plugin/coc.vim)
+  call minpac#add('machakann/vim-sandwich')                    " Operators and text for manipulating sandwiched text
+  call minpac#add('neoclide/coc.nvim', {'branch': 'release'})  " Language Server Protocol client
   call minpac#add('tpope/vim-abolish')                         " Substitute and abbreviate variants of a word
   call minpac#add('tpope/vim-commentary')                      " Code commenting shortcuts
   call minpac#add('tpope/vim-fugitive')                        " Git shortcuts
