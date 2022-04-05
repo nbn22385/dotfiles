@@ -12,3 +12,8 @@ xmap iss <Plug>(textobj-sandwich-auto-i)
 xmap ass <Plug>(textobj-sandwich-auto-a)
 omap iss <Plug>(textobj-sandwich-auto-i)
 omap ass <Plug>(textobj-sandwich-auto-a)
+
+let g:sandwich#recipes += [
+      \ {'buns': ['<', '>']},
+      \ {'buns': ['/* ', ' */']}
+      \ ]
