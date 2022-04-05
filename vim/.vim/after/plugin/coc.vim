@@ -7,7 +7,8 @@ let g:coc_global_extensions = [
       \ 'coc-clangd',
       \ 'coc-explorer',
       \ 'coc-git',
-      \ 'coc-json']
+      \ 'coc-json',
+      \ 'coc-yaml']
 
 "==============================================================================
 " Mappings
