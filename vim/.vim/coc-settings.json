@@ -1,9 +1,12 @@
 {
+  //============================================================================
   // general settings
-  "coc.preferences.formatOnSaveFiletypes": ["cpp", "vim"],
-
+  //----------------------------------------------------------------------------
   // "http.proxy": "http://proxy-abc.your.domain.com:80",
-  "http.proxyStrictSSL": false,
+  // "http.proxyStrictSSL": false,
+
+  "coc.preferences.formatOnSaveFiletypes": ["cpp", "vim"],
+  "semanticTokens.filetypes": ["cpp"],
   "suggest.autoTrigger": "none",
   "suggest.enablePreview": false,
   "suggest.disableMenu": true,
@@ -37,19 +40,25 @@
     "default": "\uf29c"
   },
 
+  //============================================================================
   // clangd
+  //----------------------------------------------------------------------------
   "clangd.arguments": [
     "-clang-tidy=0", "-background-index=0"
   ],
   "clangd.compilationDatabasePath": "build",
 
+  //----------------------------------------------------------------------------
   // diagnostic
+  //----------------------------------------------------------------------------
   "diagnostic.errorSign": "×",
   "diagnostic.hintSign": " ",
   "diagnostic.infoSign": "",
   "diagnostic.warningSign": "",
 
+  //----------------------------------------------------------------------------
   // explorer
+  //----------------------------------------------------------------------------
   "explorer.file.child.template": "[git | 2] [selection | clip | 1] [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][modified][readonly] [link growRight 1 omitCenter 5]",
   "explorer.file.root.template": "[icon] [root] ([fullpath])",
   "explorer.file.hiddenRules": {
@@ -67,7 +76,9 @@
     }
   ],
 
+  //----------------------------------------------------------------------------
   // git
+  //----------------------------------------------------------------------------
   "git.addedSign.hlGroup": "CocDiffAdd",
   "git.addedSign.text": "▎",
   "git.changeRemovedSign.hlGroup": "CocDiffDelete",
@@ -84,6 +95,16 @@
   "git.changedDecorator": "",
   "git.conflictedDecorator": "",
   "git.stagedDecorator": "",
-  "git.untrackedDecorator": ""
+  "git.untrackedDecorator": "",
+
+  //----------------------------------------------------------------------------
+  // yaml
+  //----------------------------------------------------------------------------
+  "yaml.format.enable": true,
+  "yaml.validate": true,
+  "yaml.schemas": {
+    "https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json": "*.gitlab-ci.yml",
+    "kubernetes": "/*.yaml"
+  }
 }
 // vim:ft=jsonc
