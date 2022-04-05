@@ -77,6 +77,8 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 
 # ls aliases
+[[ $(ls --help 2>&1 | grep -q -- --color) ]] && lscolor="--color=auto" || lscolor="-G"
+alias ls='ls $lscolor'
 alias l='ls -lFh'       # long list, classify, human readable
 alias la='ls -lAFh'     # long list, almost all, classify, human readable
 alias lr='ls -tRFh'     # newest first, recursive, classify, human readable
