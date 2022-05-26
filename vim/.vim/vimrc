@@ -63,8 +63,8 @@ noremap <Leader><Down>  :resize -3<CR>
 nnoremap <Backspace> <C-^>
 
 " Add relative vertical movements to the jumplist
-nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
-nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
+nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'gj'
+nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'gk'
 
 " Change operations are directed to the black hole register
 nnoremap c "_c
