@@ -12,6 +12,7 @@ function! PackInit() abort
   call minpac#add('machakann/vim-highlightedyank')             " Highlight yanked text
   call minpac#add('machakann/vim-sandwich')                    " Operators and text for manipulating sandwiched text
   call minpac#add('neoclide/coc.nvim', {'branch': 'release'})  " Language Server Protocol client
+  call minpac#add('ojroques/vim-oscyank')                      " Copy to system clipboard using the ANSI OSC52 sequence
   call minpac#add('tpope/vim-abolish')                         " Substitute and abbreviate variants of a word
   call minpac#add('tpope/vim-commentary')                      " Code commenting shortcuts
   call minpac#add('tpope/vim-fugitive')                        " Git shortcuts
