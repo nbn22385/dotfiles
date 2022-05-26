@@ -71,7 +71,7 @@ function! CurrentBranch() abort
     return ''
   endif
   if exists('g:loaded_fugitive')
-    let l:branch = fugitive#head()
+    let l:branch = FugitiveHead()
     return l:branch !=? '' ? (winwidth(0) < 80 ? '  ' . l:branch[0:15] . ' ' : 
           \ '  ' . l:branch . ' ') : ''
   else
