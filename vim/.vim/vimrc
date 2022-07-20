@@ -3,8 +3,8 @@ function! PackInit() abort
   packadd minpac
   call minpac#init()
   call minpac#add('k-takata/minpac', {'type': 'opt'})          " Plugin manager 
+  call minpac#add('base16-project/base16-vim')                 " Base16 themes set by base16-shell
   call minpac#add('christoomey/vim-tmux-navigator')            " Navigation between tmux panes and vim splits
-  call minpac#add('fnune/base16-vim')                          " Base16 themes set by base16-shell
   call minpac#add('junegunn/fzf')                              " Fuzzy finder integration
   call minpac#add('junegunn/fzf.vim')                          " Additional commands for fzf
   call minpac#add('junegunn/goyo.vim')                         " Distraction-free writing
