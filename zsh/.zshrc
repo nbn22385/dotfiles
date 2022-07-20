@@ -2,9 +2,10 @@
 # Base16 Shell
 ###############
 
-BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-  eval "$("$BASE16_SHELL/profile_helper.sh")"
+BASE16_SHELL_PATH="$HOME/.config/base16-shell"
+[ -n "$PS1" ] && \
+  [ -s "$BASE16_SHELL_PATH/profile_helper.sh" ] && \
+  source "$BASE16_SHELL_PATH/profile_helper.sh"
 
 #########
 # Prompt
@@ -180,9 +181,10 @@ fzf_find_edit() {
 
 # change the base16-shell theme selected via fzf
 fzf_base16_theme() {
-  echo "Current theme:" $(grep '  colorscheme' ~/.vimrc_background | sed 's/  colorscheme base16-//g')
-  local theme=$(alias | awk -F'base16_|=' '/base16_/ {print $2}' | fzf --prompt="Base16 theme: " --exit-0)
+  echo "Current theme:" $BASE16_THEME
+  local theme=$(alias | awk -F'base16_|=' '/^base16_/ {print $2}' | fzf --prompt="Base16 theme: " --exit-0)
   if [[ -n $theme ]]; then
+    echo "Theme set to:" $theme
     eval base16_$theme
   fi
 }
