@@ -4,6 +4,7 @@
 augroup statusline
   autocmd!
   autocmd BufEnter,BufWinEnter,WinEnter * call SetStatusline()
+  autocmd User CocExplorerOpenPre setlocal statusline=%#NonText#
 augroup END
 
 function! SetStatusline() abort
@@ -11,7 +12,7 @@ function! SetStatusline() abort
   for win in range(1, winnr('$'))
     let l:filetype = getwinvar(win, '&filetype')
     call setwinvar(win, '&statusline', 
-          \ l:filetype ==# 'coc-explorer' ? ' ' :
+          \ l:filetype ==# 'qf' ? '%!QuickFixStatus()' :
           \ l:filetype =~# '^fugitive' ? l:filetype :
           \ win == l:current ? '%!ActiveStatus()' : '%!InactiveStatus()')
   endfor
@@ -50,6 +51,17 @@ function! InactiveStatus() abort
   let s.='%{ReadOnlyStatus()}'         "   readonly flag
   let s.='%{ModifiedStatus()}'         "   modified flag
   let s.='%='                          " - section 1
+  return s
+endfunction
+
+"==============================================================================
+" QuickFix layout
+"------------------------------------------------------------------------------
+function! QuickFixStatus() abort
+  let s='%#StatusLineBlue#'
+  let s=' Quickfix List '
+  let s.= "[%l/" . len(getqflist()) . "]"
+  let s.=' %{Bars()} '
   return s
 endfunction
 
@@ -136,21 +148,21 @@ let g:modecolors = {
       \ 'V'      : '%#StatusLineMagenta#',
       \ "\<C-V>" : '%#StatusLineMagenta#',
       \ 't'      : '%#StatusLineGreen#',
-      \ 'no'     : '%#DiffChange#',
-      \ 's'      : '%#WildMenu#',
-      \ 'S'      : '%#WildMenu#',
-      \ "\<C-S>" : '%#WildMenu#',
+      \ 'no'     : '%#StatusLineWhite#',
+      \ 's'      : '%#StatusLineWhite#',
+      \ 'S'      : '%#StatusLineWhite#',
+      \ "\<C-S>" : '%#StatusLineWhite#',
       \ 'R'      : '%#StatusLineRed#',
-      \ 'Rv'     : '%#Error#',
+      \ 'Rv'     : '%#StatusLineRed#',
       \ 'c'      : '%#StatusLineGreen#',
-      \ 'cv'     : '%#MatchParen#',
-      \ 'ce'     : '%#MatchParen#',
-      \ 'r'      : '%#Todo#',
-      \ 'rm'     : '%#Todo#',
-      \ 'r?'     : '%#Todo#',
-      \ '!'      : '%#IncSearch#',
-      \ 'ic'     : '%#DiffChange#',
-      \ 'Rc'     : '%#DiffChange#'}
+      \ 'cv'     : '%#StatusLineWhite#',
+      \ 'ce'     : '%#StatusLineWhite#',
+      \ 'r'      : '%#StatusLineYellow#',
+      \ 'rm'     : '%#StatusLineYellow#',
+      \ 'r?'     : '%#StatusLineYellow#',
+      \ '!'      : '%#StatusLineOrange#',
+      \ 'ic'     : '%#StatusLineWhite#',
+      \ 'Rc'     : '%#StatusLineWhite#'}
 
 "==============================================================================
 " Mode to modestring mappings
