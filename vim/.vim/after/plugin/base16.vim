@@ -1,19 +1,4 @@
 "==============================================================================
-" Colorscheme
-"------------------------------------------------------------------------------
-" Load the colorscheme that was set by base16-shell
-if exists('$BASE16_THEME')
-      \ && (!exists('g:colors_name')
-      \ || g:colors_name != 'base16-$BASE16_THEME')
-  colorscheme base16-$BASE16_THEME
-endif
-
-augroup OnChangeColorscheme
-  autocmd!
-  autocmd VimEnter,ColorScheme * call s:base16_customize()
-augroup END
-
-"==============================================================================
 " Highlight group overrides
 "------------------------------------------------------------------------------
 " Use better colors for CoC
@@ -73,3 +58,18 @@ function! s:base16_customize() abort
   " call Base16hi('CocErrorSign', g:base16_gui08, '', g:base16_cterm08, '', '', '')
   " call Base16hi('CocWarningSign', g:base16_gui09, '', g:base16_cterm09, '', '', '')
 endfunction
+
+"==============================================================================
+" Colorscheme
+"------------------------------------------------------------------------------
+augroup OnChangeColorscheme
+  autocmd!
+  autocmd ColorScheme * call s:base16_customize()
+augroup END
+
+" Load the colorscheme that was set by base16-shell
+if exists('$BASE16_THEME')
+      \ && (!exists('g:colors_name')
+      \ || g:colors_name != 'base16-$BASE16_THEME')
+  colorscheme base16-$BASE16_THEME
+endif
