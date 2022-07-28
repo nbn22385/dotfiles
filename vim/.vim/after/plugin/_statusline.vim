@@ -4,7 +4,6 @@
 augroup statusline
   autocmd!
   autocmd BufEnter,BufWinEnter,WinEnter * call SetStatusline()
-  autocmd User CocExplorerOpenPre setlocal statusline=%#NonText#
 augroup END
 
 function! SetStatusline() abort
@@ -12,6 +11,7 @@ function! SetStatusline() abort
   for win in range(1, winnr('$'))
     let l:filetype = getwinvar(win, '&filetype')
     call setwinvar(win, '&statusline', 
+          \ l:filetype ==# 'coc-explorer' ? ' ' :
           \ l:filetype ==# 'qf' ? '%!QuickFixStatus()' :
           \ l:filetype =~# '^fugitive' ? l:filetype :
           \ win == l:current ? '%!ActiveStatus()' : '%!InactiveStatus()')
