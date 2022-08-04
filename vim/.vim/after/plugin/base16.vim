@@ -1,22 +1,4 @@
 "==============================================================================
-" Highlight group overrides
-"------------------------------------------------------------------------------
-" Use better colors for CoC
-hi! link CocDiffAdd         DiffAdded
-hi! link CocDiffChange      DiffLine
-hi! link CocDiffDelete      DiffRemoved
-hi! link CocErrorHighlight  Underlined
-
-" Make folds more visible
-hi! link Folded             StatusLineNC
-
-" Remove the background and underline from the cursor line
-hi! CursorLine              ctermbg=NONE guibg=NONE
-
-" Remove bold from the cursor line number
-hi! CursorLineNr            cterm=NONE
-
-"==============================================================================
 " Base16 highlight group customization
 "==============================================================================
 function! s:base16_customize() abort
@@ -73,3 +55,21 @@ if exists('$BASE16_THEME')
       \ || g:colors_name != 'base16-$BASE16_THEME')
   colorscheme base16-$BASE16_THEME
 endif
+
+"==============================================================================
+" Highlight group overrides
+"------------------------------------------------------------------------------
+" Use better colors for CoC
+hi! link CocDiffAdd         DiffAdded
+hi! link CocDiffChange      DiffLine
+hi! link CocDiffDelete      DiffRemoved
+hi! link CocErrorHighlight  Underlined
+
+" Make folds more visible
+hi! link Folded             StatusLineNC
+
+" Remove the background and underline from the cursor line
+hi! CursorLine              ctermbg=NONE guibg=NONE
+
+" Remove bold from the cursor line number
+hi! CursorLineNr            cterm=NONE
