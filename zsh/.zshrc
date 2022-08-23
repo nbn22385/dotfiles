@@ -45,6 +45,7 @@ bindkey "^E" vi-end-of-line
 bindkey '^R' history-incremental-search-backward
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
+bindkey "ç" fzf-cd-widget
 
 #############
 # Completion
@@ -134,13 +135,9 @@ export LC_CTYPE="en_US.UTF-8"
 export LS_COLORS="ow=01;36"
 export TZ='America/New_York'
 
-export FZF_ALT_C_COMMAND='fd --type d . --color=never'
-export FZF_ALT_C_OPTS='--preview "tree -C {} | head -100"'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_OPTS='--preview "bat --color=always --line-range :500 {}"'
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
 export FZF_DEFAULT_OPTS="
-  --bind='ctrl-p:toggle-preview'
+  --bind='ctrl-d:toggle-preview'
   --border=sharp
   --color=gutter:-1
   --height=40%
@@ -151,6 +148,11 @@ export FZF_DEFAULT_OPTS="
   --pointer='▶'
   --preview='bat --color=always --line-range :500 {}'
   --preview-window=hidden"
+export FZF_ALT_C_COMMAND='fd --type d . --color=never'
+export FZF_ALT_C_OPTS='--preview "tree -C {} | head -100"'
+export FZF_CTRL_R_OPTS="--preview 'echo {}'"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS='--select-1 --exit-0'
 
 # Fzf shell support
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
