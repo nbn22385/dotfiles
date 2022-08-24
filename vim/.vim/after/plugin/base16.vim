@@ -1,3 +1,4 @@
+if &runtimepath=~'base16-vim'
 "==============================================================================
 " Base16 highlight group customization
 "==============================================================================
@@ -73,3 +74,4 @@ hi! CursorLine              ctermbg=NONE guibg=NONE
 
 " Remove bold from the cursor line number
 hi! CursorLineNr            cterm=NONE
+endif
