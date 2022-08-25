@@ -10,8 +10,4 @@ if ! type stow > /dev/null; then echo "ERROR: gnu 'stow' package not installed" 
 # First unstow then stow the symlinks
 stow --no-folding --restow --target="$HOME" $STOW_FOLDERS 2>&1 | grep -v "BUG in find_stowed_path"
 
-# Install vim plugins
-git clone --quiet https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac > /dev/null 2>&1
-vim -n +PackUpdateAndQuit
-
 echo "Done setting up dotfiles."
