@@ -32,24 +32,28 @@ elif [ -x "$(command -v apt)" ]; then
     fd-find \
     g++     \
     git     \
+    jq      \
     llvm    \
     stow    \
     tmux    \
     tree    \
     vim     \
+    wget    \
     zsh
 
   sudo apt install -y -o Dpkg::Options::="--force-overwrite" \
     bat     \
     ripgrep
 
-  # Allow correct execution of bat and fd
-  [[ -x "$(command -v batcat)" ]] && sudo ln -sf $(which batcat) /usr/local/bin/bat 
-  [[ -x "$(command -v fdfind)" ]] && sudo ln -sf $(which fdfind) /usr/local/bin/fd
+  # Allow correct execution of bat and fd on older Ubuntu versions
+  if [[ $(lsb_release -rs) -lt "22.04" ]]; then
+    [[ -x "$(command -v batcat)" ]] && sudo ln -sf $(which batcat) /usr/local/bin/bat 
+    [[ -x "$(command -v fdfind)" ]] && sudo ln -sf $(which fdfind) /usr/local/bin/fd
+  fi
 
   echo "[+] Installing fzf"
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf > /dev/null 2>&1
-  ~/.fzf/install --completion --key-bindings --no-update-rc
+  git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf > /dev/null 2>&1
+  $HOME/.fzf/install --completion --key-bindings --no-update-rc
 
   echo "[+] Installing lazygit"
   curl -s https://api.github.com/repos/jesseduffield/lazygit/releases/latest \
@@ -60,7 +64,7 @@ elif [ -x "$(command -v apt)" ]; then
     && rm lazygit*
 
   echo "[+] Installing nodejs"
-  curl -fsSL https://deb.nodesource.com/setup_17.x | bash -
+  curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
   sudo apt-get install -y nodejs
 
   echo "[+] Installing clang"
@@ -85,10 +89,10 @@ else
 fi
 
 echo "[+] Installing base16-shell"
-git clone https://github.com/fnune/base16-shell.git ~/.config/base16-shell > /dev/null 2>&1
+git clone https://github.com/base16-project/base16-shell.git $HOME/.config/base16-shell > /dev/null 2>&1
 
 echo "[+] Installing powerlevel10k prompt"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k > /dev/null 2>&1
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.powerlevel10k > /dev/null 2>&1
 
 if [[ 'zsh' != ${SHELL::-3}* ]]
 then
