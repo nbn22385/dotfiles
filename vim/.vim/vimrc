@@ -1,29 +1,34 @@
 " {{{ Plugins
-function! PackInit() abort
-  packadd minpac
-  call minpac#init()
-  call minpac#add('k-takata/minpac', {'type': 'opt'})          " Plugin manager 
-  call minpac#add('base16-project/base16-vim')                 " Base16 themes set by base16-shell
-  call minpac#add('christoomey/vim-tmux-navigator')            " Navigation between tmux panes and vim splits
-  call minpac#add('junegunn/fzf')                              " Fuzzy finder integration
-  call minpac#add('junegunn/fzf.vim')                          " Additional commands for fzf
-  call minpac#add('junegunn/goyo.vim')                         " Distraction-free writing
-  call minpac#add('junegunn/vim-slash')                        " Improved in-buffer search experience
-  call minpac#add('machakann/vim-highlightedyank')             " Highlight yanked text
-  call minpac#add('machakann/vim-sandwich')                    " Operators and text for manipulating sandwiched text
-  call minpac#add('neoclide/coc.nvim', {'branch': 'release'})  " Language Server Protocol client
-  call minpac#add('ojroques/vim-oscyank')                      " Copy to system clipboard using the ANSI OSC52 sequence
-  call minpac#add('tpope/vim-abolish')                         " Substitute and abbreviate variants of a word
-  call minpac#add('tpope/vim-commentary')                      " Code commenting shortcuts
-  call minpac#add('tpope/vim-fugitive')                        " Git shortcuts
-  call minpac#add('tpope/vim-obsession')                       " Continuously updated session files
-  call minpac#add('wellle/targets.vim')                        " Additional text objects
-endfunction
+" {{{ Install plugin manager on initial startup
+if !isdirectory(expand('$HOME/.vim/pack/minpac'))
+  silent execute '!git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac'
+  silent execute '!curl -fkLo ~/.vim/autoload/plugpac.vim --create-dirs https://raw.githubusercontent.com/bennyyip/plugpac.vim/master/plugpac.vim'
+  autocmd VimEnter * PackInstall
+endif
+" }}}
 
-command! PackClean  call PackInit() | call minpac#clean()
-command! PackStatus call PackInit() | call minpac#status()
-command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
-command! PackUpdateAndQuit call PackInit() | call minpac#update('', {'do': 'qall'})
+call plugpac#begin()
+
+Pack 'k-takata/minpac', {'type': 'opt'}
+Pack 'base16-project/base16-vim'                 " Colorschemes set by base16-shell
+Pack 'christoomey/vim-tmux-navigator'            " Navigation between tmux panes and vim splits
+Pack 'junegunn/fzf'                              " Fuzzy finder integration
+Pack 'junegunn/fzf.vim'                          " Additional commands for fzf
+Pack 'junegunn/goyo.vim'                         " Distraction-free writing
+Pack 'junegunn/vim-slash'                        " Improved in-buffer search experience
+Pack 'machakann/vim-highlightedyank'             " Highlight yanked text
+Pack 'machakann/vim-sandwich'                    " Operators and text for manipulating sandwiched text
+Pack 'neoclide/coc.nvim', {'branch': 'release'}  " Language Server Protocol client
+Pack 'ojroques/vim-oscyank'                      " Copy to system clipboard using the ANSI OSC52 sequence
+Pack 'pearofducks/ansible-vim'                   " Syntax plugin for Ansible 2.x
+Pack 'tpope/vim-abolish'                         " Substitute and abbreviate variants of a word
+Pack 'tpope/vim-commentary'                      " Code commenting shortcuts
+Pack 'tpope/vim-fugitive'                        " Git shortcuts
+Pack 'tpope/vim-obsession'                       " Continuously updated session files
+Pack 'wellle/targets.vim'                        " Additional text objects
+
+call plugpac#end()
+
 " }}}
 
 " {{{ Mappings
