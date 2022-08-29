@@ -8,9 +8,8 @@
   "coc.preferences.formatOnSaveFiletypes": ["cpp", "vim"],
   "semanticTokens.filetypes": ["cpp"],
   "suggest.autoTrigger": "none",
-  "suggest.enablePreview": false,
-  "suggest.disableMenu": true,
   "suggest.noselect": false,
+  "suggest.virtualText": true,
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
     "variable": "\ue79b",
