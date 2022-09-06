@@ -4,7 +4,6 @@ if &runtimepath=~'base16-vim'
 "==============================================================================
 function! s:base16_customize() abort
   " Usage: call Base16hi(group, guifg, guibg, ctermfg, ctermbg, attr, guisp)
-  " custom highlight groups used in _statusline.vim
   call Base16hi('StatusLineWhite',   g:base16_gui05, g:base16_gui01, g:base16_cterm02, g:base16_cterm01, '', '')
   call Base16hi('StatusLineRed',     g:base16_gui08, g:base16_gui01, g:base16_cterm08, g:base16_cterm01, '', '')
   call Base16hi('StatusLineOrange',  g:base16_gui09, g:base16_gui01, g:base16_cterm09, g:base16_cterm01, '', '')
@@ -45,4 +44,5 @@ hi! CursorLine              ctermbg=NONE guibg=NONE
 
 " Remove bold from the cursor line number
 hi! CursorLineNr            cterm=NONE
+
 endif
