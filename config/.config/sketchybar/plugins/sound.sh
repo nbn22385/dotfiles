@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-VOLUME=$(osascript -e "get volume settings" | cut -d " " -d ":" -f2 | cut -d "," -f1)
-MUTED=$(osascript -e "get volume settings" | grep "muted:true")
+VOLUME=$(osascript -e "output volume of (get volume settings)")
+MUTED=$(osascript -e "output muted of (get volume settings)")
 
-if [[ $MUTED != "" ]]; then
+if [[ $MUTED != "false" ]]; then
   ICON="ﱝ"
 else
   case ${VOLUME} in
