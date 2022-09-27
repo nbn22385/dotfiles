@@ -229,9 +229,11 @@ scriptencoding utf-8             " Specify character encoding used in this file
 syntax on                        " Enable syntax highlighting
 set autoindent                   " Indent according to previous line
 set expandtab                    " Use spaces instead of tabs
-set fillchars+=vert:\│           " Vertical split separator
-set fillchars+=fold:\            " Closed fold indicator
-set fillchars+=eob:\             " End of buffer character
+set fillchars+=eob:\             " Empty lines below the end of a buffer
+set fillchars+=fold:\            " Filling 'foldtext'
+set fillchars+=foldopen:\┬       " Mark the beginning of a fold
+set fillchars+=foldsep:\│        " Open fold middle character
+set fillchars+=vert:\│           " Vertical separators
 set listchars=tab:▸\ ,trail:·    " Characters to show in 'list' mode
 set matchpairs+=<:>              " Add angle brackets to list of matching pairs
 set nojoinspaces                 " Don't add 2 spaces after sentences when joining lines
