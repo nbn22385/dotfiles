@@ -1,3 +1,4 @@
+if &runtimepath=~'vim-sandwich'
 " Disable default mappings to remove delay for 's' key
 let g:sandwich_no_default_key_mappings = 1
 
@@ -15,3 +16,5 @@ let g:sandwich#recipes += [
       \ {'buns': ['<', '>']},
       \ {'buns': ['/* ', ' */']}
       \ ]
+
+endif
