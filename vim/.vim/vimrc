@@ -244,6 +244,7 @@ set shiftwidth=2                 " >> indents by 2 spaces
 set signcolumn=yes               " Always show the signcolumn
 set softtabstop=2                " Tab key indents by 2 spaces
 set splitbelow splitright        " Open new split panes to right and bottom
+set tabstop=2                    " Number of spaces that a <Tab> counts for
 set textwidth=0                  " Disable maximum text width
 
 " Searching
