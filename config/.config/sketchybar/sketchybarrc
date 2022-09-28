@@ -122,6 +122,10 @@ sketchybar --default             \
     update_freq=1800             \
     icon.color=0xffebcb8b        \
     script="$PLUGINS/weather.sh" \
+  --add item wifi right          \
+  --set wifi                     \
+    script="$PLUGINS/wifi.sh"    \
+    update_freq=5                \
   --add item mailIndicator right \
   --set mailIndicator            \
     update_freq=30               \
@@ -133,7 +137,7 @@ sketchybar --default             \
 sketchybar --add event window_focus \
               --add event title_change
 
-sketchybar --add item title center                          \
+sketchybar --add item title left                          \
               --set title script="$PLUGINS/window_title.sh" \
               --subscribe                                   \
                 title window_focus front_app_switched space_change title_change

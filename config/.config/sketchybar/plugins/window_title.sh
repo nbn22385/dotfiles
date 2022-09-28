@@ -5,7 +5,7 @@ WINDOW_TITLE=$(yabai -m query --windows --window | jq -r '.title')
 
 # Truncate a long window title
 if [[ ${#WINDOW_TITLE} -gt 70 ]]; then
-  WINDOW_TITLE=$(echo "$WINDOW_TITLE" | cut -c 1-50)…
+  WINDOW_TITLE=$(echo "$WINDOW_TITLE" | cut -c 1-64)…
 fi
  
 # If both app and window title are available, use a separator
