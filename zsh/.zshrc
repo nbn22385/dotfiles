@@ -141,6 +141,7 @@ export FZF_DEFAULT_OPTS="
   --border=sharp
   --color=gutter:-1
   --height=40%
+  --history='$HOME/.fzf_history'
   --info=inline 
   --layout=reverse
   --marker='✓'
