@@ -3,7 +3,13 @@ if &runtimepath=~'fzf.vim'
   " General config
   "------------------------------------------------------------------------------
   " Preview window on the right side, hidden by default, ctrl-p to toggle
-  let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-p']
+  let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-d']
+
+  " Enable per-command history
+  " - History files will be stored in the specified directory
+  " - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
+  "   'previous-history' instead of 'down' and 'up'.
+  let g:fzf_history_dir = '~/.local/share/fzf-history'
 
   " Use floating window if supported
   if v:version >= 802

@@ -6,9 +6,8 @@
   // "http.proxyStrictSSL": false,
 
   "coc.preferences.formatOnSaveFiletypes": ["cpp", "vim"],
-  "semanticTokens.filetypes": ["cpp"],
+  "semanticTokens.enable": true,
   "suggest.autoTrigger": "none",
-  "suggest.noselect": false,
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
     "variable": "\ue79b",
@@ -41,9 +40,7 @@
   //============================================================================
   // clangd
   //----------------------------------------------------------------------------
-  "clangd.arguments": [
-    "-clang-tidy=0", "-background-index=0"
-  ],
+  "clangd.arguments": ["-clang-tidy=0", "-background-index=0"],
   "clangd.compilationDatabasePath": "build",
 
   //----------------------------------------------------------------------------
