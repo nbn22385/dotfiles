@@ -157,7 +157,7 @@ augroup Vimrc
   autocmd!
 
   " Save modified buffer during idle after 'updatetime' has elapsed (default 4 sec)
-  autocmd CursorHoldI,CursorHold * silent! :update
+  autocmd CursorHold,CursorHoldI * silent! update
 
   " Equalize splits when Vim is resized
   autocmd VimResized * wincmd =
