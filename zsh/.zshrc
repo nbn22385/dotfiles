@@ -42,10 +42,15 @@ bindkey -v
 bindkey -v "kj" vi-cmd-mode
 bindkey "^A" vi-beginning-of-line
 bindkey "^E" vi-end-of-line
-bindkey '^R' history-incremental-search-backward
-bindkey "^[[A" history-beginning-search-backward
-bindkey "^[[B" history-beginning-search-forward
+bindkey "^R" history-incremental-search-backward
 bindkey "ç" fzf-cd-widget
+
+# customize up/down arrow history behavior https://superuser.com/a/585004
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^[[A" history-beginning-search-backward-end
+bindkey "^[[B" history-beginning-search-backward-end
 
 #############
 # Completion
