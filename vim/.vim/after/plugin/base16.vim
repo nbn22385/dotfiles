@@ -23,8 +23,8 @@ augroup OnChangeColorscheme
 augroup END
 
 " Load the colorscheme that was set by base16-shell
-if filereadable(expand("$HOME/.config/base16-project/set_theme.vim"))
-  source $HOME/.config/base16-project/set_theme.vim
+if filereadable(expand("$HOME/.config/tinted-theming/set_theme.vim"))
+  source $HOME/.config/tinted-theming/set_theme.vim
 endif
 
 "==============================================================================
