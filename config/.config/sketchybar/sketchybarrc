@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
 # Determine colors from base16-shell
-# BG=$(sed -n -e 's:^color_background="\(..\)/\(..\)/\(..\)".*:0xff\1\2\3:p' ~/.base16_theme)
-# FG=$(sed -n -e 's:^color_foreground="\(..\)/\(..\)/\(..\)".*:0xff\1\2\3:p' ~/.base16_theme)
-BG=$(sed -n -e 's:^color_background="\(..\)/\(..\)/\(..\)".*:0xff\1\2\3:p' ~/.config/base16-project/base16_shell_theme)
-FG=$(sed -n -e 's:^color_foreground="\(..\)/\(..\)/\(..\)".*:0xff\1\2\3:p' ~/.config/base16-project/base16_shell_theme)
+BG=$(sed -n -e 's:^color_background="\(..\)/\(..\)/\(..\)".*:0xff\1\2\3:p' ~/.config/tinted-theming/base16_shell_theme)
+FG=$(sed -n -e 's:^color_foreground="\(..\)/\(..\)/\(..\)".*:0xff\1\2\3:p' ~/.config/tinted-theming/base16_shell_theme)
 
 PLUGINS="$HOME/.config/sketchybar/plugins"
 
