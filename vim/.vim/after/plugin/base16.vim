@@ -40,7 +40,7 @@ hi! link CocErrorHighlight  Underlined
 hi! link Folded             StatusLineNC
 
 " Remove the background and underline from the cursor line
-hi! CursorLine              ctermbg=NONE guibg=NONE
+" hi! CursorLine              ctermbg=NONE guibg=NONE
 
 " Remove bold from the cursor line number
 hi! CursorLineNr            cterm=NONE
