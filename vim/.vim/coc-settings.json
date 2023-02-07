@@ -5,8 +5,11 @@
   // "http.proxy": "http://proxy-abc.your.domain.com:80",
   // "http.proxyStrictSSL": false,
 
-  "coc.preferences.formatOnSaveFiletypes": ["cpp", "vim"],
-  "semanticTokens.enable": true,
+  "[cpp][vim]": {
+    "coc.preferences.formatOnSave": false,
+    "inlayHint.enable": false,
+    "semanticTokens.enable": true
+  },
   "suggest.autoTrigger": "none",
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
