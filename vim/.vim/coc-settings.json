@@ -7,9 +7,9 @@
 
   "[cpp][vim]": {
     "coc.preferences.formatOnSave": false,
-    "inlayHint.enable": false,
     "semanticTokens.enable": true
   },
+  "inlayHint.enable": false,
   "suggest.autoTrigger": "none",
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
