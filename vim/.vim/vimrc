@@ -10,7 +10,6 @@ endif
 call plugpac#begin()
 
 Pack 'k-takata/minpac', {'type': 'opt'}
-Pack 'base16-project/base16-vim'                 " Colorschemes set by base16-shell
 Pack 'christoomey/vim-tmux-navigator'            " Navigation between tmux panes and vim splits
 Pack 'junegunn/fzf'                              " Fuzzy finder integration
 Pack 'junegunn/fzf.vim'                          " Additional commands for fzf
@@ -21,6 +20,7 @@ Pack 'machakann/vim-sandwich'                    " Operators and text for manipu
 Pack 'neoclide/coc.nvim', {'branch': 'release'}  " Language Server Protocol client
 Pack 'ojroques/vim-oscyank'                      " Copy to system clipboard using the ANSI OSC52 sequence
 Pack 'pearofducks/ansible-vim'                   " Syntax plugin for Ansible 2.x
+Pack 'tinted-theming/base16-vim'                 " Colorschemes set by base16-shell
 Pack 'tpope/vim-abolish'                         " Substitute and abbreviate variants of a word
 Pack 'tpope/vim-commentary'                      " Code commenting shortcuts
 Pack 'tpope/vim-fugitive'                        " Git shortcuts
