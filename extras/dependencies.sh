@@ -27,6 +27,7 @@ elif [ -x "$(command -v apt)" ]; then
 
   echo "[+] Installing dependencies using apt"
   sudo apt-get update && sudo apt-get install -y \
+    acpi    \
     cmake   \
     curl    \
     fd-find \
@@ -89,7 +90,7 @@ else
 fi
 
 echo "[+] Installing base16-shell"
-git clone https://github.com/base16-project/base16-shell.git $HOME/.config/base16-shell > /dev/null 2>&1
+git clone https://github.com/tinted-theming/base16-shell.git $HOME/.config/base16-shell > /dev/null 2>&1
 
 echo "[+] Installing powerlevel10k prompt"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.powerlevel10k > /dev/null 2>&1
