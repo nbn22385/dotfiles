@@ -41,15 +41,11 @@ yc window_gap                4
 # yc --space 1 layout          float
 
 # rules
-yr app=Firefox               space=1 # manage=off
-yr app=Alacritty             space=2
-yr app=iTerm                 space=2
-yr app=Mail                  space=3
-yr app=Spark                 space=3 
-yr app=Telegram              space=3
-yr app=Reeder                space=4
+yr app=Firefox               space=^1 # manage=off
+yr app=Alacritty             space=^2
+yr app=iTerm                 space=^2
+yr app=Mail                  space=^3
 yr app=Finder                manage=off
-yr app=MacPass               manage=off
 yr app=Transmission          manage=off
 yr app=Spotify               manage=off
 yr app="System Preferences"  manage=off
