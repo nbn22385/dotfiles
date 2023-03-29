@@ -45,4 +45,7 @@ hi! link Folded             StatusLineNC
 " Remove bold from the cursor line number
 hi! CursorLineNr            cterm=NONE
 
+" Fix background on comments
+hi! Comment cterm=NONE
+
 endif
