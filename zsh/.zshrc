@@ -106,6 +106,7 @@ alias gcmsg='git commit -m'
 alias glog='git log --oneline --decorate --graph'
 alias gdt='git difftool'
 alias gdu='git diff ..@{upstream}'
+alias gw='fzf_worktree'
 alias lg='lazygit'
 
 # ripgrep aliases
@@ -138,6 +139,7 @@ export EDITOR='vim'
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export LS_COLORS="ow=01;36"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export TZ='America/New_York'
 
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
@@ -190,10 +192,31 @@ fzf_find_edit() {
 # change the base16-shell theme selected via fzf
 fzf_base16_theme() {
   echo "Current theme:" $BASE16_THEME
-  local theme=$(alias | awk -F'base16_|=' '/^base16_/ {print $2}' | fzf --prompt="Base16 theme: " --exit-0)
+  local theme=$(
+  alias | 
+    awk -F'base16_|=' '/^base16_/ {print $2}' | 
+    fzf --prompt="Base16 theme: " --query="$1" --exit-0
+  )
   if [[ -n $theme ]]; then
     echo "Theme set to:" $theme
     eval base16_$theme
+  fi
+}
+
+# change git worktree via fzf (https://peppe.rs/posts/curing_a_case_of_git-UX)
+fzf_worktree() {
+  set -o pipefail
+  local worktree=$(
+  git worktree list |
+    fzf --preview='git log --oneline -n10 {2}' --query="$1" --exit-0 |
+    awk '{print $1}'
+  )
+  if [[ -n $worktree ]]; then
+    if [ "$worktree" = $(pwd) ]; then
+      echo "Git worktree already set to '$worktree'"
+    else
+      cd $worktree && echo "Changed git worktree to '$worktree'"
+    fi
   fi
 }
 
