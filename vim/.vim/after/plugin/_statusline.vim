@@ -51,6 +51,7 @@ function! InactiveStatus() abort
   let s.='%{ReadOnlyStatus()}'         "   readonly flag
   let s.='%{ModifiedStatus()}'         "   modified flag
   let s.='%='                          " - section 1
+  let s.='%{CurrentBranch()}'          "   git branch
   return s
 endfunction
 
