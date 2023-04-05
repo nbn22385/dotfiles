@@ -4,6 +4,7 @@ if &runtimepath=~'base16-vim'
 "==============================================================================
 function! s:base16_customize() abort
   " Usage: call Base16hi(group, guifg, guibg, ctermfg, ctermbg, attr, guisp)
+  call Base16hi('Comment',           g:base16_gui03, '',             g:base16_cterm03, '', 'NONE', '')
   call Base16hi('StatusLineWhite',   g:base16_gui05, g:base16_gui01, g:base16_cterm02, g:base16_cterm01, '', '')
   call Base16hi('StatusLineRed',     g:base16_gui08, g:base16_gui01, g:base16_cterm08, g:base16_cterm01, '', '')
   call Base16hi('StatusLineOrange',  g:base16_gui09, g:base16_gui01, g:base16_cterm09, g:base16_cterm01, '', '')
@@ -44,8 +45,5 @@ hi! link Folded             StatusLineNC
 
 " Remove bold from the cursor line number
 hi! CursorLineNr            cterm=NONE
-
-" Fix background on comments
-hi! Comment cterm=NONE
 
 endif
