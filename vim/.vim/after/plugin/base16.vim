@@ -37,4 +37,13 @@ hi! link CocDiffChange      DiffLine
 hi! link CocDiffDelete      DiffRemoved
 hi! link CocErrorHighlight  Underlined
 
+" Make folds more visible
+" hi! link Folded             StatusLineNC
+
+" Remove the background and underline from the cursor line
+" hi! CursorLine              ctermbg=NONE guibg=NONE
+
+" Remove bold from the cursor line number
+hi! CursorLineNr            cterm=NONE
+
 endif
