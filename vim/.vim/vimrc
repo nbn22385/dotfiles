@@ -18,7 +18,7 @@ Pack 'junegunn/vim-slash'                        " Improved in-buffer search exp
 Pack 'machakann/vim-highlightedyank'             " Highlight yanked text
 Pack 'machakann/vim-sandwich'                    " Operators and text for manipulating sandwiched text
 Pack 'neoclide/coc.nvim', {'branch': 'release'}  " Language Server Protocol client
-Pack 'ojroques/vim-oscyank', {'rev': 'v1.0.0'}   " Copy to system clipboard using the ANSI OSC52 sequence
+Pack 'ojroques/vim-oscyank'                      " Copy to system clipboard using the ANSI OSC52 sequence
 Pack 'pearofducks/ansible-vim'                   " Syntax plugin for Ansible 2.x
 Pack 'tinted-theming/base16-vim'                 " Colorschemes set by base16-shell
 Pack 'tpope/vim-abolish'                         " Substitute and abbreviate variants of a word
