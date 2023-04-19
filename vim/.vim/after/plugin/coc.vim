@@ -25,6 +25,7 @@ nmap <silent> [g <Plug>(coc-git-prevchunk)
 nmap <silent> ]g <Plug>(coc-git-nextchunk)
 
 " LSP-related remaps
+nmap <silent> <LocalLeader>ga <Plug>(coc-codeaction-line)
 nmap <silent> <LocalLeader>gd <Plug>(coc-definition)
 nmap <silent> <LocalLeader>gi <Plug>(coc-implementation)
 nmap <silent> <LocalLeader>gq <Plug>(coc-format)
