@@ -9,6 +9,7 @@
     "coc.preferences.formatOnSave": false,
     "semanticTokens.enable": true
   },
+  "hover.floatConfig": { "border": true },
   "inlayHint.enable": false,
   "suggest.autoTrigger": "none",
   "suggest.completionItemKindLabels": {
