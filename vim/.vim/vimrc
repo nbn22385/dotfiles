@@ -15,6 +15,7 @@ Pack 'junegunn/fzf'                              " Fuzzy finder integration
 Pack 'junegunn/fzf.vim'                          " Additional commands for fzf
 Pack 'junegunn/goyo.vim'                         " Distraction-free writing
 Pack 'junegunn/vim-slash'                        " Improved in-buffer search experience
+Pack 'lervag/wiki.vim'                           " Manages a personal wiki of markdown files
 Pack 'machakann/vim-highlightedyank'             " Highlight yanked text
 Pack 'machakann/vim-sandwich'                    " Operators and text for manipulating sandwiched text
 Pack 'neoclide/coc.nvim', {'branch': 'release'}  " Language Server Protocol client
