@@ -4,7 +4,7 @@
 BG=$(sed -n -e 's:^color_background="\(..\)/\(..\)/\(..\)".*:0xff\1\2\3:p' ~/.config/tinted-theming/base16_shell_theme)
 FG=$(sed -n -e 's:^color_foreground="\(..\)/\(..\)/\(..\)".*:0xff\1\2\3:p' ~/.config/tinted-theming/base16_shell_theme)
 
-PLUGINS="$HOME/.config/sketchybar/plugins"
+PLUGINS="$CONFIG_DIR/plugins"
 
 # Bar
 sketchybar --bar     \
