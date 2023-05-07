@@ -6,7 +6,7 @@ COUNT=0
 if [ $RUNNING == 0 ]; then
   COUNT=$(osascript -e 'tell application "Mail" to return the unread count of inbox')
   if [ $COUNT != "0" ]; then
-    sketchybar -m --set $NAME label="$COUNT" icon=
+    sketchybar -m --set $NAME label="$COUNT" icon=󰇮
   else
     sketchybar -m --set $NAME label="" icon=
   fi
