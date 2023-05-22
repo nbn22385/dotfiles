@@ -102,7 +102,7 @@ function! CocStatus() abort
   if get(info, 'warning', 0)
     call add(msgs, '%#StatusLineYellow# ' . info['warning'])
   endif
-  if empty(msgs) | return '%#StatusLineGreen#  ' | endif
+  if empty(msgs) | return '%#StatusLineGreen# 󰄬 ' | endif
   return ' ' . join(msgs, ' ') . ' '
 endfunction
 
@@ -194,7 +194,7 @@ let g:currentmode = {
 "------------------------------------------------------------------------------
 let g:cmdtypes = {
       \ ':'      : '',
-      \ '/'      : '',
-      \ '?'      : ''}
+      \ '/'      : '󰁅',
+      \ '?'      : '󰁝'}
 
 scriptencoding utf-8
