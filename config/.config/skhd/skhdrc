@@ -149,15 +149,16 @@ alt + shift - tab : yabai -m space --focus prev || yabai -m space --focus last
 # ctrl + alt - h : yabai -m window --insert west
 
 # toggle window zoom
-alt - z : yabai -m window --toggle zoom-parent
-alt - f : yabai -m window --toggle native-fullscreen
+alt - z : yabai -m window --toggle zoom-parent; sketchybar --trigger window_focus
+alt - f : yabai -m window --toggle native-fullscreen; sketchybar --trigger window_focus
 
 # toggle window split type
 alt - e : yabai -m window --toggle split
 
 # float / unfloat window and center on screen
 alt - t : yabai -m window --toggle float;\
-          yabai -m window --grid 6:6:1:1:4:4
+          yabai -m window --grid 6:6:1:1:4:4;\
+          sketchybar --trigger window_focus
 
 # toggle sticky(+float), topmost, border and picture-in-picture
 # alt - p : yabai -m window --toggle sticky;\
