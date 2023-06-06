@@ -30,12 +30,12 @@ yc mouse_action1             move
 yc mouse_action2             resize
 
 # padding settings
-yc external_bar              all:28:0 
-yc top_padding               4
-yc bottom_padding            4
-yc left_padding              4
-yc right_padding             4
-yc window_gap                4
+yc external_bar              all:29:0 
+yc top_padding               2
+yc bottom_padding            2
+yc left_padding              2
+yc right_padding             2
+yc window_gap                2
 
 # space-specific settings
 # yc --space 1 layout          float
@@ -52,5 +52,8 @@ yr app=Spotify               manage=off
 yr app="System Preferences"  manage=off
 
 # sketchybar events
-ys event=window_focused action="sketchybar -m --trigger window_focus &> /dev/null"
-ys event=window_title_changed action="sketchybar -m --trigger title_change &> /dev/null"
+# ys event=window_focused action="sketchybar -m --trigger window_focus &> /dev/null"
+# ys event=window_title_changed action="sketchybar -m --trigger title_change &> /dev/null"
+ys event=window_focused action="sketchybar --trigger window_focus"
+ys event=window_created action="sketchybar --trigger windows_on_spaces"
+ys event=window_destroyed action="sketchybar --trigger windows_on_spaces"

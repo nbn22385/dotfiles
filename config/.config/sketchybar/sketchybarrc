@@ -1,146 +1,85 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-# Determine colors from base16-shell
-BG=$(sed -n -e 's:^color_background="\(..\)/\(..\)/\(..\)".*:0xff\1\2\3:p' ~/.config/tinted-theming/base16_shell_theme)
-FG=$(sed -n -e 's:^color_foreground="\(..\)/\(..\)/\(..\)".*:0xff\1\2\3:p' ~/.config/tinted-theming/base16_shell_theme)
+source "$CONFIG_DIR/colors.sh" # Loads all defined colors
+source "$CONFIG_DIR/icons.sh" # Loads all defined icons
 
-PLUGINS="$CONFIG_DIR/plugins"
+ITEM_DIR="$CONFIG_DIR/items" # Directory where the items are configured
+PLUGIN_DIR="$CONFIG_DIR/plugins" # Directory where all the plugin scripts are stored
 
-# Bar
-sketchybar --bar     \
-  position=top       \
-  height=35          \
-  margin=4           \
-  y_offset=-35       \
-  corner_radius=10   \
-  border_width=0     \
-  border_color=$BG   \
-  blur_radius=0      \
-  padding_left=16    \
-  padding_right=16   \
-  color=$BG          \
-  display=all        \
-  hidden=off         \
-  topmost=off        \
-  font_smoothing=off \
+FONT="SF Pro" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
+PADDINGS=2 # All paddings use this value (icon, label, background)
+
+# Setting up and starting the helper process
+# HELPER=git.felix.helper
+# killall helper
+# (cd $CONFIG_DIR/helper && make)
+# $CONFIG_DIR/helper/helper $HELPER > /dev/null 2>&1 &
+
+# Unload the macOS on screen indicator overlay for volume change
+launchctl unload -F /System/Library/LaunchAgents/com.apple.OSDUIHelper.plist > /dev/null 2>&1 &
+
+# Setting up the general bar appearance of the bar
+bar=(
+  height=36
+  color=$BAR_COLOR
+  corner_radius=10
+  border_width=0
+  border_color=$BAR_BORDER_COLOR
   shadow=off
+  position=top
+  sticky=on
+  padding_right=10
+  padding_left=10
+  y_offset=-7
+  margin=2
+)
 
-# Global defaults
-sketchybar --default \
-  updates=when_shown \
-  drawing=on         \
-  cache_scripts=on                      
+sketchybar --bar "${bar[@]}"
 
-# Label Defaults
-sketchybar --default                       \
-  label.font="Iosevka Nerd Font:Bold:14.0" \
-  label.color=$FG                          \
-  label.highlight_color=$FG                \
-  label.padding_left=4                     \
-  label.padding_right=4                    \
-  label.y_offset=-2
+# Setting up default values
+defaults=(
+  y_offset=-3 # for all future items
+  updates=when_shown
+  icon.font="$FONT:Bold:13.0"
+  icon.color=$ICON_COLOR
+  icon.padding_left=$PADDINGS
+  icon.padding_right=$PADDINGS
+  label.font="$FONT:Semibold:13.0"
+  label.color=$LABEL_COLOR
+  label.padding_left=$PADDINGS
+  label.padding_right=$PADDINGS
+  padding_right=$PADDINGS
+  padding_left=$PADDINGS
+  background.height=23
+  background.corner_radius=6
+  background.border_width=1
+  popup.background.border_width=2
+  popup.background.corner_radius=9
+  popup.background.border_color=$POPUP_BORDER_COLOR
+  popup.background.color=$POPUP_BACKGROUND_COLOR
+  popup.blur_radius=20
+  popup.background.shadow.drawing=on
+)
 
-# Icon Defaults
-sketchybar --default                      \
-  icon.font="Iosevka Nerd Font:Bold:14.0" \                       
+sketchybar --default "${defaults[@]}"
 
-# Background Defaults
-sketchybar --default          \
-  background.height=32        \
-  background.border_color=$BG \
-  background.border_width=0   \
-  background.corner_radius=0  \
-  background.color=$BG        \
-  background.drawing=off                                       
+# Left
+source "$ITEM_DIR/apple.sh"
+source "$ITEM_DIR/spaces.sh"
+source "$ITEM_DIR/yabai.sh"
+source "$ITEM_DIR/front_app.sh"
 
-# Spaces
-sketchybar --default                        \
-  icon.padding_left=4                       \
-  icon.padding_right=4                      \
-  icon.y_offset=-2                          \
-  --add space one left                      \
-  --set one associated_display=1            \
-    associated_space=1                      \
-    icon=                                  \
-    icon.highlight_color=0xff88c0d0         \
-    click_script="yabai -m space --focus 1" \
-  --add space two left                      \
-  --set two associated_display=1            \
-    associated_space=2                      \
-    icon=                                  \
-    icon.highlight_color=0xff88c0d0         \
-    click_script="yabai -m space --focus 2" \
-  --add space three left                    \
-  --set three associated_display=1          \
-    associated_space=3                      \
-    icon=                                  \
-    icon.highlight_color=0xff88c0d0         \
-    click_script="yabai -m space --focus 3" \
-  --add space four left                     \
-  --set four associated_display=1           \
-    associated_space=4                      \
-    icon=                                  \
-    icon.highlight_color=0xff88c0d0         \
-    click_script="yabai -m space --focus 4"
+# Center
+source "$ITEM_DIR/media.sh"
 
-# Right Items
-sketchybar --default             \
-  label.padding_left=0           \
-  label.padding_right=0          \
-  icon.padding_left=20           \
-  icon.padding_right=8           \
-  icon.y_offset=-2               \
-  --add item clock right         \
-  --set clock                    \
-    update_freq=10               \
-    script="$PLUGINS/clock.sh"   \
-    icon=                       \
-    icon.y_offset=-2             \
-    icon.color=0xff8fbcbb        \
-  --add item date right          \
-  --set date                     \
-    update_freq=100              \
-    script="$PLUGINS/date.sh"    \
-    icon=                       \
-    icon.y_offset=-2             \
-    icon.color=0xffb48ead        \
-  --add item battery right       \
-  --set battery                  \
-    update_freq=3                \
-    script="$PLUGINS/power.sh"   \
-    icon=                       \
-    icon.color=0xffbf616a        \
-  --add item sound right         \
-  --set sound                    \
-    update_freq=5                \
-    icon.color=0xff5e81ac        \
-    script="$PLUGINS/sound.sh"   \
-  --add item weather right       \
-  --set weather                  \
-    update_freq=1800             \
-    icon.color=0xffebcb8b        \
-    script="$PLUGINS/weather.sh" \
-  --add item wifi right          \
-  --set wifi                     \
-    script="$PLUGINS/wifi.sh"    \
-    update_freq=5                \
-  --add item mailIndicator right \
-  --set mailIndicator            \
-    update_freq=30               \
-    icon.color=0xff5e81ac        \
-    script="$PLUGINS/mail.sh"    \
-    click_script="osascript -e 'tell application \"Mail\" to activate'" 
+# Right
+source "$ITEM_DIR/calendar.sh"
+source "$ITEM_DIR/brew.sh"
+source "$ITEM_DIR/wifi.sh"
+source "$ITEM_DIR/battery.sh"
+source "$ITEM_DIR/volume.sh"
 
-# Center Items
-sketchybar --add event window_focus \
-              --add event title_change
+# Forcing all item scripts to run (never do this outside of sketchybarrc)
+sketchybar --update
 
-sketchybar --add item title left                          \
-              --set title script="$PLUGINS/window_title.sh" \
-              --subscribe                                   \
-                title window_focus front_app_switched space_change title_change
-
-# Animate bar startup
-sketchybar --animate tanh 30 --bar y_offset=-7
-
-sketchybar --update && echo "sketchybar configuration loaded.."
+echo "sketchybar configuation loaded.."
