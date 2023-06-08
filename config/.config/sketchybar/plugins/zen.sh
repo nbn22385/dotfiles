@@ -8,6 +8,7 @@ zen_on() {
              --set front_app drawing=off \
              --set separator drawing=off \
              --set volume_icon drawing=off \
+             --set weather drawing=off \
              --set wifi_alias drawing=off
 }
 
@@ -19,6 +20,7 @@ zen_off() {
              --set front_app drawing=on \
              --set separator drawing=on \
              --set volume_icon drawing=on \
+             --set weather drawing=on \
              --set wifi_alias drawing=on
 }
 
