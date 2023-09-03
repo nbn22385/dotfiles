@@ -47,8 +47,10 @@ yr app=iTerm                 space=^2
 yr app=Mail                  space=^3
 yr app=Calculator            manage=off
 yr app=Finder                manage=off
+yr app=Messages              manage=off
 yr app=Transmission          manage=off
 yr app=Spotify               manage=off
+yr app=Stickies              manage=off
 yr app="System Preferences"  manage=off
 
 # sketchybar events
