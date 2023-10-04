@@ -127,10 +127,6 @@ alias vp="cd $HOME/workspaces/\$(ls -lL $HOME/workspaces | grep '^d' | awk '{pri
 alias vimrc='vim ~/.vim/vimrc'
 alias zshrc='${=EDITOR} ${HOME}/.zshrc'
 
-# htpc
-alias openelec='ssh root@192.168.29.140'
-alias wake='wakeonlan -i 192.168.29.255 90:FB:A6:8A:73:42'
-
 ##########
 # Exports
 ##########
