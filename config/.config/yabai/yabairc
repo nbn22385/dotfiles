@@ -45,13 +45,13 @@ yr app=Firefox               space=^1
 yr app=Alacritty             space=^2
 yr app=iTerm                 space=^2
 yr app=Mail                  space=^3
-yr app=Calculator            manage=off
-yr app=Finder                manage=off
-yr app=Messages              manage=off
-yr app=Transmission          manage=off
-yr app=Spotify               manage=off
-yr app=Stickies              manage=off
-yr app="System Preferences"  manage=off
+yr app=Calculator            manage=off layer=below
+yr app=Finder                manage=off layer=below
+yr app=Messages              manage=off layer=below
+yr app=Transmission          manage=off layer=below
+yr app=Spotify               manage=off layer=below
+yr app=Stickies              manage=off layer=below
+yr app="System Preferences"  manage=off layer=below
 
 # sketchybar events
 # ys event=window_focused action="sketchybar -m --trigger window_focus &> /dev/null"
