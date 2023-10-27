@@ -77,7 +77,7 @@ zstyle ':completion:*' menu select
 # Exports
 ##########
 
-export EDITOR='vim'
+export EDITOR='nvim'
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export LS_COLORS="ow=01;36"
@@ -111,13 +111,14 @@ export FZF_CTRL_T_OPTS='--select-1 --exit-0'
 # Aliases
 ##########
 
-# cd aliases
+# cd
 alias -- -='cd -'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias cf='fzf_change_directory'
 
-# ls aliases
+# ls
 (ls --help 2>&1 | grep -q -- --color) && alias ls='ls --color' || alias ls='ls -G'
 alias l='ls -lFh'       # long list, classify, human readable
 alias la='ls -lAFh'     # long list, almost all, classify, human readable
@@ -128,12 +129,10 @@ alias ll='ls -l'        # long list
 alias ldot='ls -ld .*'  # long list, non-recursive
 alias lS='ls -1FSsh'    # 1 file per line, classify, largest size first
 
-# fzf aliases
-alias cf='fzf_change_directory'
-alias vf='fzf_find_edit'
+# base16
 alias btheme='fzf_base16_theme'
 
-# git aliases
+# git
 alias g='_f() { if [[ $# == 0 ]]; then git status -sb; else git "$@"; fi }; _f'
 alias gb='fzf_git_checkout_branch'
 alias gcmsg='git commit -m'
@@ -143,18 +142,25 @@ alias gdu='git diff ..@{upstream}'
 alias gw='fzf_worktree'
 alias lg='lazygit'
 
-# ripgrep aliases
+# ripgrep
 alias rg='rg --hidden --smart-case --glob "!**/.git/**"'
 
-# tmux aliases
+# tmux
 alias tmux='export SHELL=$(which zsh); tmux -2 -u'
 if [[ $TMUX ]]; then
   alias clear='clear && tmux clear-history'
 fi
 
-# vim aliases
+# vim
 alias v=$EDITOR
+alias vf='fzf_find_edit'
 alias vp="cd $HOME/workspaces/\$(ls -lL $HOME/workspaces | grep '^d' | awk '{print \$9}' | fzf) && vim"
+
+# docker
+alias dc='docker compose'
+alias dcl='dc logs'
+alias dcu='dc up'
+alias dcud='dcu -d'
 
 # config file shortcuts
 alias zshrc='${=EDITOR} ${HOME}/.zshrc'
