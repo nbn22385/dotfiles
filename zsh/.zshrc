@@ -95,7 +95,7 @@ export FZF_DEFAULT_OPTS="
   --layout=reverse
   --marker='✓'
   --multi
-  --pointer='▶'
+  --pointer=''
   --preview='bat --color=always --line-range :500 {}'
   --preview-window=hidden"
 export FZF_ALT_C_COMMAND='fd --type d . --color=never'
