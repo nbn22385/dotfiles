@@ -1,5 +1,5 @@
 " close help window
-nnoremap <buffer> <silent> <Leader>h :helpclose<CR>
+nnoremap <buffer> <silent> q <Cmd>helpclose<CR>
 
 " navigate help tags with up/down/enter
 nnoremap <buffer> <silent> <down> :call search('\|\S\{-}\|')<cr>
