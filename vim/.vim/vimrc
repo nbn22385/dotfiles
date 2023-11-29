@@ -14,7 +14,6 @@ Pack 'christoomey/vim-tmux-navigator'            " Navigation between tmux panes
 Pack 'junegunn/fzf'                              " Fuzzy finder integration
 Pack 'junegunn/fzf.vim'                          " Additional commands for fzf
 Pack 'junegunn/goyo.vim'                         " Distraction-free writing
-Pack 'junegunn/vim-slash'                        " Improved in-buffer search experience
 Pack 'lervag/wiki.vim'                           " Manages a personal wiki of markdown files
 Pack 'machakann/vim-highlightedyank'             " Highlight yanked text
 Pack 'machakann/vim-sandwich'                    " Operators and text for manipulating sandwiched text
@@ -47,9 +46,9 @@ nnoremap <Leader>gf ^f/gf
 " Replace all occurrences of word under cursor
 nnoremap <Leader>h :%s/\<<C-r><C-w>\>//g<Left><Left>
 
-" Open new line and stay in normal mode
-nnoremap <Leader>o o<Esc>
-nnoremap <Leader>O O<Esc>
+" Begin a new line above/below the cursor and stay in normal mode
+nnoremap <Leader>O mzO<Esc>`z
+nnoremap <Leader>o mzo<Esc>`z
 
 " Use wildmenu to quickly switch buffers
 nnoremap <Leader><Tab> :buffer<Space><Tab>
@@ -83,8 +82,11 @@ nnoremap J mzJ`z
 " Yank to the end of line
 nnoremap Y y$
 
-" Disable vim's exit message when pressing C-c
-nnoremap <C-c> <silent> <C-c>
+" Disable exit message and clear search highlight
+nnoremap <silent> <C-c> <Cmd>nohlsearch<CR>
+
+" Prevent * from jumping to next search match
+nnoremap * :keepjumps normal! mzg*`z<CR>
 
 " +/- -> Increment/decrement numbers in normal or visual mode
 nnoremap + <C-a>
@@ -250,6 +252,7 @@ set textwidth=0                  " Disable maximum text width
 
 " Searching
 set ignorecase                   " Case insensitive search
+set hlsearch                     " Highlight search matches
 set incsearch                    " Highlight while searching with / or ?
 set path=$PWD/**                 " Find all files under this directory
 set smartcase                    " Case sensitive search when using capital letter
