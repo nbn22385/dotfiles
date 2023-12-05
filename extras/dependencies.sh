@@ -26,7 +26,7 @@ if [[ $OSTYPE == 'darwin'* ]]; then
 elif [ -x "$(command -v apt)" ]; then
 
   echo "[+] Installing dependencies using apt"
-  sudo apt-get update && sudo apt-get install -y \
+  sudo apt update && sudo apt install -y \
     acpi    \
     bat     \
     cmake   \
@@ -43,25 +43,29 @@ elif [ -x "$(command -v apt)" ]; then
     wget    \
     zsh
 
+  # Set up symlinks for bat and fd
+  [[ -x "$(command -v batcat)" ]] && sudo ln -sf $(which batcat) /usr/local/bin/bat
+  [[ -x "$(command -v fdfind)" ]] && sudo ln -sf $(which fdfind) /usr/local/bin/fd
+
   echo "[+] Installing fzf"
   git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf > /dev/null 2>&1
   $HOME/.fzf/install --completion --key-bindings --no-update-rc
 
-	echo "[+] Installing lazygit"
-	LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-	curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-	tar xf lazygit.tar.gz lazygit
-	sudo install lazygit /usr/local/bin && rm lazygit lazygit.tar.gz
+  echo "[+] Installing lazygit"
+  LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+  curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+  tar xf lazygit.tar.gz lazygit
+  sudo install lazygit /usr/local/bin && rm lazygit lazygit.tar.gz
 
-	echo "[+] Installing nodejs"
-	# From https://github.com/nodesource/distributions#installation-instructions
-	sudo apt install -y ca-certificates curl gnupg
-	sudo mkdir -p /etc/apt/keyrings
-	curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-	NODE_MAJOR=20
-	echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+  echo "[+] Installing nodejs"
+  # From https://github.com/nodesource/distributions#installation-instructions
+  sudo apt install -y ca-certificates curl gnupg
+  sudo mkdir -p /etc/apt/keyrings
+  curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+  NODE_MAJOR=20
+  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
   sudo apt -o Acquire::AllowInsecureRepositories=true update
-	sudo apt install -y --allow-unauthenticated nodejs
+  sudo apt install -y --allow-unauthenticated nodejs
 
   echo "[+] Installing clang tools"
   clang_version=15
