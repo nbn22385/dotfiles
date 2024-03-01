@@ -37,8 +37,13 @@ nnoremap <Space> <Nop>
 let mapleader = "\<Space>"
 let maplocalleader = ','
 
+" Toggles for common functionality
+nnoremap \p <Cmd>set paste! paste?<CR>
+nnoremap \r <Cmd>set relativenumber! relativenumber?<CR>
+nnoremap \s <Cmd>set spell! spell?<CR>
+
 " Save a file
-nnoremap <Leader>w :w<CR>
+nnoremap <Leader>w <Cmd>w<CR>
 
 " Go to first file on the line
 nnoremap <Leader>gf ^f/gf
@@ -57,13 +62,13 @@ nnoremap <Leader><Tab> :buffer<Space><Tab>
 nnoremap <Leader>= gg=G<C-o><C-o>
 
 " Open lazygit in a new tab
-nnoremap <silent> <Leader>G :$tab term ++close lazygit<CR>
+nnoremap <silent> <Leader>G <Cmd>$tab term ++close lazygit<CR>
 
 " Quicker split resizing
-noremap <Leader><Left>  :vertical resize -3<CR>
-noremap <Leader><Right> :vertical resize +3<CR>
-noremap <Leader><Up>    :resize +3<CR>
-noremap <Leader><Down>  :resize -3<CR>
+noremap <Leader><Left>  <Cmd>vertical resize -3<CR>
+noremap <Leader><Right> <Cmd>vertical resize +3<CR>
+noremap <Leader><Up>    <Cmd>resize +3<CR>
+noremap <Leader><Down>  <Cmd>resize -3<CR>
 
 " Toggle between alternate files
 nnoremap <Backspace> <C-^>
@@ -86,7 +91,7 @@ nnoremap Y y$
 nnoremap <silent> <C-c> <Cmd>nohlsearch<CR>
 
 " Prevent * from jumping to next search match
-nnoremap * :keepjumps normal! mzg*`z<CR>
+nnoremap * <Cmd>keepjumps normal! mzg*`z<CR>
 
 " +/- -> Increment/decrement numbers in normal or visual mode
 nnoremap + <C-a>
@@ -101,22 +106,22 @@ nnoremap <C-w>h <C-w>H
 nnoremap <C-w>l <C-w>L
 
 " Navigate buffers
-nmap <silent> [B :bfirst<CR>
-nmap <silent> ]b :bnext<CR>
-nmap <silent> [b :bprevious<CR>
-nmap <silent> ]B :blast<CR>
+nmap <silent> [B <Cmd>bfirst<CR>
+nmap <silent> ]b <Cmd>bnext<CR>
+nmap <silent> [b <Cmd>bprevious<CR>
+nmap <silent> ]B <Cmd>blast<CR>
 
 " Navigate location list entries
-nmap <silent> [L :lfirst<CR>zz
-nmap <silent> ]l :lnext<CR>zz
-nmap <silent> [l :lprevious<CR>zz
-nmap <silent> ]L :llast<CR>zz
+nmap <silent> [L <Cmd>lfirst<CR>zz
+nmap <silent> ]l <Cmd>lnext<CR>zz
+nmap <silent> [l <Cmd>lprevious<CR>zz
+nmap <silent> ]L <Cmd>llast<CR>zz
 
 " Navigate quickfix list entries
-nmap <silent> [Q :cfirst<CR>zz
-nmap <silent> ]q :cnext<CR>zz
-nmap <silent> [q :cprevious<CR>zz
-nmap <silent> ]Q :clast<CR>zz
+nmap <silent> [Q <Cmd>cfirst<CR>zz
+nmap <silent> ]q <Cmd>cnext<CR>zz
+nmap <silent> [q <Cmd>cprevious<CR>zz
+nmap <silent> ]Q <Cmd>clast<CR>zz
 
 " Exit insert mode faster
 inoremap <Esc> <Esc>l
@@ -145,7 +150,7 @@ cnoremap <expr> <Tab> getcmdtype() =~ '[/?]' ? "<C-g>" : "<Tab>"
 cnoremap <expr> <S-Tab> getcmdtype() =~ '[/?]' ? "<c-t>" : "<S-Tab>"
 
 " Apply last edit to visual selection
-vnoremap . :norm .<CR>
+vnoremap . <Cmd>norm .<CR>
 
 " Don't overwrite paste buffer when pasting over visual selection
 xnoremap p "_dP
