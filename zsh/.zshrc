@@ -77,7 +77,7 @@ zstyle ':completion:*' menu select
 # Exports
 ##########
 
-export EDITOR='nvim'
+export EDITOR='vim'
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export LS_COLORS="ow=01;36"
