@@ -31,7 +31,7 @@ function! ActiveStatus() abort
   let s.='%{ModifiedStatus()}'         "   modified flag
   let s.='%#StatusLine#'               " - section 3 
   let s.='%='                          "   blank space
-  let s.='%#Todo#%{SpellStatus()}'     "   spell checking status
+  let s.='%#DiffAdd#%{SpellStatus()}'  "   spell checking status
   let s.='%#StatusLine#'               " - section 4
   let s.=' %3l:%c  %-p%% %{Bars()} '   "   lineinfo, percent
   let s.='%#Todo#%{SessionStatus()}'   "   session status
@@ -46,12 +46,13 @@ endfunction
 " Inactive layout
 "------------------------------------------------------------------------------
 function! InactiveStatus() abort
-  let s='%#StatusLineNC#    '          " - section 0
-  let s.='%f'                          "   filename
-  let s.='%{ReadOnlyStatus()}'         "   readonly flag
-  let s.='%{ModifiedStatus()}'         "   modified flag
-  let s.='%='                          " - section 1
-  let s.='%{CurrentBranch()}'          "   git branch
+  let s='%#StatusLineNC#    '               " - section 0
+  let s.='%f'                               "   filename
+  let s.='%{ReadOnlyStatus()}'              "   readonly flag
+  let s.='%{ModifiedStatus()}'              "   modified flag
+  let s.='%='                               " - section 1
+  let s.='%#StatusLineNC#%{SpellStatus()} ' "   spell checking status
+  let s.='%{CurrentBranch()}'               "   git branch
   return s
 endfunction
 
