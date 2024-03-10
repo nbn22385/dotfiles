@@ -9,8 +9,7 @@
     "coc.preferences.formatOnSave": false,
     "semanticTokens.enable": true
   },
-  "hover.floatConfig": { "border": true },
-  "inlayHint.enable": false,
+  "floatFactory.floatConfig": { "border": true },
   "suggest.autoTrigger": "none",
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
@@ -47,7 +46,7 @@
   "clangd.arguments": ["-clang-tidy=0", "-background-index=0"],
   "clangd.compilationDatabasePath": "build",
 
-  //----------------------------------------------------------------------------
+  //============================================================================
   // diagnostic
   //----------------------------------------------------------------------------
   "diagnostic.errorSign": "×",
@@ -55,7 +54,14 @@
   "diagnostic.infoSign": "",
   "diagnostic.warningSign": "",
 
+  //============================================================================
+  // inlay hints
   //----------------------------------------------------------------------------
+  "inlayHint.enable": false,
+  "inlayHint.display": false,
+  "inlayHint.enableParameter": false,
+
+  //============================================================================
   // explorer
   //----------------------------------------------------------------------------
   "explorer.file.child.template": "[git | 2] [selection | clip | 1] [indent][icon | 1] [diagnosticError & 1][filename omitCenter 1][modified][readonly] [link growRight 1 omitCenter 5]",
@@ -95,7 +101,6 @@
   "git.conflictedDecorator": "",
   "git.stagedDecorator": "",
   "git.untrackedDecorator": "",
-
 
   //----------------------------------------------------------------------------
   // snippets
