@@ -33,17 +33,23 @@ if &runtimepath=~'fzf.vim'
         \   'rg --hidden --line-number --color=always --smart-case --glob "!{.git,node_modules}" -- '
         \   .shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
 
+  " [Helptags] add a prompt
+  command! -bar -bang Helptags
+        \ call fzf#vim#helptags(
+        \   fzf#vim#with_preview({ 'options': ["--prompt=Help> "], 'placeholder': "--tag {2}:{3}:{4}" }), <bang>0)
+
   "==============================================================================
   " Mappings
   "------------------------------------------------------------------------------
   nnoremap <silent> <expr> <leader>f 
-        \ (len(system('git rev-parse')) ? ':Files' : ':GFiles')."\<cr>"
-  nnoremap <silent> <leader>B :Buffers<cr>
-  nnoremap <silent> <leader>C :Colors<cr>
-  nnoremap <silent> <leader>F :Files<cr>
-  nnoremap <silent> <leader>H :History<cr>
-  nnoremap <silent> <leader>R :Rg<cr>
-  nnoremap <silent> <leader>T :Tags<cr>
+        \ (len(system('git rev-parse')) ? '<Cmd>Files' : '<Cmd>GFiles')."\<CR>"
+  nnoremap <silent> <leader>B <Cmd>Buffers<CR>
+  nnoremap <silent> <leader>C <Cmd>Colors<CR>
+  nnoremap <silent> <leader>F <Cmd>Files<CR>
+  nnoremap <silent> <leader>H <Cmd>Helptags<CR>
+  nnoremap <silent> <leader>R <Cmd>Rg<CR>
+  nnoremap <silent> <leader>T <Cmd>Tags<CR>
+  nnoremap <silent> <leader>Y <Cmd>History<CR>
 
   " CTRL-A CTRL-Q to select all and build quickfix list
   function! s:build_quickfix_list(lines)
