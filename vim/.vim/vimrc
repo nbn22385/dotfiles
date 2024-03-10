@@ -120,7 +120,6 @@ nmap <silent> [q <Cmd>cprevious<CR>zz
 nmap <silent> ]Q <Cmd>clast<CR>zz
 
 " Exit insert mode faster
-inoremap <Esc> <Esc>l
 inoremap kj <Esc>l
 inoremap <C-c> <Esc>l
 
