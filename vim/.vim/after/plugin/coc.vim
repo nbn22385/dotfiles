@@ -15,19 +15,21 @@ let g:coc_global_extensions = [
 " Mappings
 "------------------------------------------------------------------------------
 " Toggle coc-explorer
-nmap <silent> <Leader>e :CocCommand explorer<CR>
+nmap <silent> <Leader>e <Cmd>CocCommand explorer<CR>
 
 " Navigate diagnostics
 nmap <silent> [d <Plug>(coc-diagnostic-prev)
 nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
-" Navigate hunks of current buffer
+" Git
 nmap <silent> [g <Plug>(coc-git-prevchunk)
 nmap <silent> ]g <Plug>(coc-git-nextchunk)
+nmap <silent> gcu <Cmd>CocCommand git.chunkUndo<CR>
 
-" LSP-related remaps
+" LSP
 nmap <silent> <LocalLeader>ga <Plug>(coc-codeaction-line)
 nmap <silent> <LocalLeader>gd <Plug>(coc-definition)
+nmap <silent> <LocalLeader>gD <Plug>(coc-declaration)
 nmap <silent> <LocalLeader>gi <Plug>(coc-implementation)
 nmap <silent> <LocalLeader>gq <Plug>(coc-format)
 nmap <silent> <LocalLeader>gr <Plug>(coc-references)
@@ -35,11 +37,11 @@ nmap <silent> <LocalLeader>gx <Plug>(coc-fix-current)
 nmap <silent> <LocalLeader>rn <Plug>(coc-rename)
 
 " Use tab for trigger completion with characters ahead and navigate.
-inoremap <silent><expr> <TAB>
+inoremap <silent><expr> <Tab>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <expr><S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice.
@@ -52,7 +54,7 @@ function! CheckBackspace() abort
 endfunction
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call ShowDocumentation()<CR>
+nnoremap <silent> K <Cmd>call ShowDocumentation()<CR>
 
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
