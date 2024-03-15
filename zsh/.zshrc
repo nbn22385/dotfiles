@@ -140,7 +140,6 @@ alias glog='git log --oneline --decorate --graph'
 alias gdt='git difftool'
 alias gdu='git diff ..@{upstream}'
 alias gw='fzf_worktree'
-alias lazygit='lazygit_common_config'
 alias lg='lazygit'
 
 # ripgrep
@@ -253,15 +252,6 @@ fzf_git_checkout_branch() {
 # create a new directory and enter it
 mcd() {
   mkdir -p "$@" && cd "$_";
-}
-
-# Use a common config location for lazygit on MacOS/Linux
-lazygit_common_config() {
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    lazygit --use-config-dir $HOME/.config/lazygit
-  else
-    lazygit
-  fi
 }
 
 #################
