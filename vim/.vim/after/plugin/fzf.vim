@@ -41,15 +41,15 @@ if &runtimepath=~'fzf.vim'
   "==============================================================================
   " Mappings
   "------------------------------------------------------------------------------
-  nnoremap <silent> <expr> <leader>f 
+  nnoremap <expr> <leader>f 
         \ (len(system('git rev-parse')) ? '<Cmd>Files' : '<Cmd>GFiles')."\<CR>"
-  nnoremap <silent> <leader>B <Cmd>Buffers<CR>
-  nnoremap <silent> <leader>C <Cmd>Colors<CR>
-  nnoremap <silent> <leader>F <Cmd>Files<CR>
-  nnoremap <silent> <leader>H <Cmd>Helptags<CR>
-  nnoremap <silent> <leader>R <Cmd>Rg<CR>
-  nnoremap <silent> <leader>T <Cmd>Tags<CR>
-  nnoremap <silent> <leader>Y <Cmd>History<CR>
+  nnoremap <leader>B <Cmd>Buffers<CR>
+  nnoremap <leader>C <Cmd>Colors<CR>
+  nnoremap <leader>F <Cmd>Files<CR>
+  nnoremap <leader>H <Cmd>Helptags<CR>
+  nnoremap <leader>R <Cmd>Rg<CR>
+  nnoremap <leader>T <Cmd>Tags<CR>
+  nnoremap <leader>Y <Cmd>History<CR>
 
   " CTRL-A CTRL-Q to select all and build quickfix list
   function! s:build_quickfix_list(lines)

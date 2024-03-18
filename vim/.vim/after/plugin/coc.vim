@@ -15,26 +15,26 @@ let g:coc_global_extensions = [
 " Mappings
 "------------------------------------------------------------------------------
 " Toggle coc-explorer
-nmap <silent> <Leader>e <Cmd>CocCommand explorer<CR>
+nmap <Leader>e <Cmd>CocCommand explorer<CR>
 
 " Navigate diagnostics
-nmap <silent> [d <Plug>(coc-diagnostic-prev)
-nmap <silent> ]d <Plug>(coc-diagnostic-next)
+nmap [d <Plug>(coc-diagnostic-prev)
+nmap ]d <Plug>(coc-diagnostic-next)
 
 " Git
-nmap <silent> [g <Plug>(coc-git-prevchunk)
-nmap <silent> ]g <Plug>(coc-git-nextchunk)
-nmap <silent> gcu <Cmd>CocCommand git.chunkUndo<CR>
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+nmap gcu <Cmd>CocCommand git.chunkUndo<CR>
 
 " LSP
-nmap <silent> <LocalLeader>ga <Plug>(coc-codeaction-line)
-nmap <silent> <LocalLeader>gd <Plug>(coc-definition)
-nmap <silent> <LocalLeader>gD <Plug>(coc-declaration)
-nmap <silent> <LocalLeader>gi <Plug>(coc-implementation)
-nmap <silent> <LocalLeader>gq <Plug>(coc-format)
-nmap <silent> <LocalLeader>gr <Plug>(coc-references)
-nmap <silent> <LocalLeader>gx <Plug>(coc-fix-current)
-nmap <silent> <LocalLeader>rn <Plug>(coc-rename)
+nmap <LocalLeader>ga <Plug>(coc-codeaction-line)
+nmap <LocalLeader>gd <Plug>(coc-definition)
+nmap <LocalLeader>gD <Plug>(coc-declaration)
+nmap <LocalLeader>gi <Plug>(coc-implementation)
+nmap <LocalLeader>gq <Plug>(coc-format)
+nmap <LocalLeader>gr <Plug>(coc-references)
+nmap <LocalLeader>gx <Plug>(coc-fix-current)
+nmap <LocalLeader>rn <Plug>(coc-rename)
 
 " Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent><expr> <Tab>
@@ -54,7 +54,7 @@ function! CheckBackspace() abort
 endfunction
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K <Cmd>call ShowDocumentation()<CR>
+nnoremap K <Cmd>call ShowDocumentation()<CR>
 
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
