@@ -58,7 +58,7 @@ nnoremap <Leader><Tab> :buffer<Space><Tab>
 nnoremap <Leader>= gg=G<C-o><C-o>
 
 " Open lazygit in a new tab
-nnoremap <silent> <Leader>G <Cmd>$tab term ++close lazygit<CR>
+nnoremap <Leader>G <Cmd>$tab term ++close lazygit<CR>
 
 " Quicker split resizing
 noremap <Leader><Left>  <Cmd>vertical resize -3<CR>
@@ -84,7 +84,7 @@ nnoremap J mzJ`z
 nnoremap Y y$
 
 " Disable exit message and clear search highlight
-nnoremap <silent> <C-c> <Cmd>nohlsearch<CR>
+nnoremap <C-c> <Cmd>nohlsearch<CR>
 
 " Prevent * from jumping to next search match
 nnoremap * <Cmd>keepjumps normal! mzg*`z<CR>
@@ -102,22 +102,22 @@ nnoremap <C-w>h <C-w>H
 nnoremap <C-w>l <C-w>L
 
 " Navigate buffers
-nmap <silent> [B <Cmd>bfirst<CR>
-nmap <silent> ]b <Cmd>bnext<CR>
-nmap <silent> [b <Cmd>bprevious<CR>
-nmap <silent> ]B <Cmd>blast<CR>
+nmap [B <Cmd>bfirst<CR>
+nmap ]b <Cmd>bnext<CR>
+nmap [b <Cmd>bprevious<CR>
+nmap ]B <Cmd>blast<CR>
 
 " Navigate location list entries
-nmap <silent> [L <Cmd>lfirst<CR>zz
-nmap <silent> ]l <Cmd>lnext<CR>zz
-nmap <silent> [l <Cmd>lprevious<CR>zz
-nmap <silent> ]L <Cmd>llast<CR>zz
+nmap [L <Cmd>lfirst<CR>zz
+nmap ]l <Cmd>lnext<CR>zz
+nmap [l <Cmd>lprevious<CR>zz
+nmap ]L <Cmd>llast<CR>zz
 
 " Navigate quickfix list entries
-nmap <silent> [Q <Cmd>cfirst<CR>zz
-nmap <silent> ]q <Cmd>cnext<CR>zz
-nmap <silent> [q <Cmd>cprevious<CR>zz
-nmap <silent> ]Q <Cmd>clast<CR>zz
+nmap [Q <Cmd>cfirst<CR>zz
+nmap ]q <Cmd>cnext<CR>zz
+nmap [q <Cmd>cprevious<CR>zz
+nmap ]Q <Cmd>clast<CR>zz
 
 " Exit insert mode faster
 inoremap kj <Esc>l
