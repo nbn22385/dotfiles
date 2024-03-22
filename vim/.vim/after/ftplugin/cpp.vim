@@ -36,6 +36,13 @@ setlocal errorformat^=%m\\,\ file\ %f\\,\ line\ %l%.
 " Termdebug
 "------------------------------------------------------------------------------
 packadd termdebug
-let g:termdebug_wide=1
+
+" Customize highlight groups for current position and breakpoints
 hi! link debugPC IncSearch
 hi! link debugBreakpoint Error
+
+let g:termdebug_config = {}
+let g:termdebug_config['sign'] = ''                    " Customize the breakpoint sign
+let g:termdebug_config['variables_window'] = 1          " Show the variables window by default
+let g:termdebug_config['variables_window_height'] = 15  " Set the variables window height
+let g:termdebug_config['wide'] = 1                      " Use a vertical split without changing 'columns'
