@@ -3,12 +3,17 @@ gui:
     branchColors: {}
     scrollHeight: 2
     scrollPastBottom: true
+    scrollOffMargin: 2
+    scrollOffBehavior: margin
     mouseEvents: true
     skipDiscardChangeWarning: false
     skipStashWarning: false
+    skipNoStagedFilesWarning: false
+    skipRewordInEditorWarning: false
     sidePanelWidth: 0.3333
     expandFocusedSidePanel: false
     mainPanelSplitMode: flexible
+    enlargedSideViewLocation: left
     language: auto
     timeFormat: 02 Jan 06
     shortTimeFormat: 3:04PM
@@ -25,44 +30,47 @@ gui:
             - blue
         selectedLineBgColor:
             - blue
-        selectedRangeBgColor:
+        cherryPickedCommitFgColor:
             - blue
         cherryPickedCommitBgColor:
             - cyan
-        cherryPickedCommitFgColor:
+        markedBaseCommitFgColor:
             - blue
         markedBaseCommitBgColor:
             - yellow
-        markedBaseCommitFgColor:
-            - blue
         unstagedChangesColor:
             - red
         defaultFgColor:
             - default
     commitLength:
         show: true
-    skipNoStagedFilesWarning: false
     showListFooter: true
     showFileTree: true
     showRandomTip: false
     showCommandLog: true
-    showBottomLine: false
+    showBottomLine: true
+    showPanelJumps: true
     showIcons: false
-    nerdFontsVersion: "3"
+    nerdFontsVersion: ""
+    showFileIcons: false
     showBranchCommitHash: false
     commandLogSize: 2
     splitDiff: auto
-    skipRewordInEditorWarning: false
     windowSize: "normal"
     border: single
     animateExplosion: true
+    portraitMode: auto
+    filterMode: substring
 git:
     paging:
         colorArg: always
         pager: ""
         useConfig: false
+        externalDiffCommand: ""
     commit:
         signOff: false
+        autoWrapCommitMessage: true
+        autoWrapWidth: 72
     merging:
         manualCommit: false
         args: ""
@@ -81,9 +89,9 @@ git:
     parseEmoji: false
     log:
         order: topo-order
-        showGraph: when-maximised
+        showGraph: always
         showWholeGraph: false
-    diffContextSize: 3
+    truncateCopiedCommitHashesTo: 12
 update:
     method: prompt
     days: 14
@@ -109,6 +117,9 @@ keybinding:
         scrollRight: L
         gotoTop: <
         gotoBottom: '>'
+        toggleRangeSelect: v
+        rangeSelectDown: <s-down>
+        rangeSelectUp: <s-up>
         prevBlock: <left>
         nextBlock: <right>
         prevBlock-alt: h
@@ -124,7 +135,7 @@ keybinding:
         nextMatch: "n"
         prevMatch: "N"
         startSearch: /
-        optionMenu: ""
+        optionMenu: <disabled>
         optionMenu-alt1: '?'
         select: <space>
         goInto: <enter>
@@ -162,6 +173,7 @@ keybinding:
         toggleWhitespaceInDiffView: <c-w>
         increaseContextInDiffView: '}'
         decreaseContextInDiffView: '{'
+        openDiffTool: <c-t>
     status:
         checkForUpdate: u
         recentRepos: <enter>
@@ -171,6 +183,8 @@ keybinding:
         commitChangesWithoutHook: w
         amendLastCommit: A
         commitChangesWithEditor: C
+        findBaseCommitForFixup: <c-f>
+        confirmDiscard: x
         ignoreFile: i
         refreshFiles: r
         stashAllChanges: s
@@ -181,6 +195,7 @@ keybinding:
         toggleTreeView: '`'
         openMergeTool: M
         openStatusFilter: <c-b>
+        copyFileInfoToClipboard: "y"
     branches:
         createPullRequest: o
         viewPullRequestOptions: O
@@ -196,6 +211,7 @@ keybinding:
         pushTag: P
         setUpstream: u
         fetchRemote: f
+        sortOrder: s
     worktrees:
         viewWorktreeOptions: w
     commits:
@@ -212,9 +228,8 @@ keybinding:
         resetCommitAuthor: a
         pickCommit: p
         revertCommit: t
-        cherryPickCopy: c
-        cherryPickCopyRange: C
-        pasteCommits: v
+        cherryPickCopy: C
+        pasteCommits: V
         markCommitAsBaseForRebase: B
         tagCommit: T
         checkoutCommit: <space>
@@ -223,14 +238,17 @@ keybinding:
         openLogMenu: <c-l>
         openInBrowser: o
         viewBisectOptions: b
+        startInteractiveRebase: i
+    amendAttribute:
+        resetAuthor: a
+        setAuthor: A
+        addCoAuthor: c
     stash:
         popStash: g
         renameStash: r
     commitFiles:
         checkoutCommitFile: c
     main:
-        toggleDragSelect: v
-        toggleDragSelect-alt: V
         toggleSelectHunk: a
         pickBothHunks: b
         editSelectHunk: E
@@ -238,6 +256,8 @@ keybinding:
         init: i
         update: u
         bulkMenu: b
+    commitMessage:
+        commitMenu: <c-o>
 disableStartupPopups: false
 customCommands: []
 services: {}
