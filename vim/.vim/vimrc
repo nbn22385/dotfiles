@@ -34,9 +34,9 @@ let mapleader = "\<Space>"
 let maplocalleader = ','
 
 " Toggles for common functionality
-nnoremap \p <Cmd>set paste!<CR>
-nnoremap \r <Cmd>windo set relativenumber!<CR>
-nnoremap \s <Cmd>set spell!<CR>
+nnoremap <Bslash>p <Cmd>set paste!<CR>
+nnoremap <Bslash>r <Cmd>windo set relativenumber!<CR>
+nnoremap <Bslash>s <Cmd>set spell!<CR>
 
 " Save a file
 nnoremap <Leader>w <Cmd>w<CR>
