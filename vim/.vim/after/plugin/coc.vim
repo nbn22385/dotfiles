@@ -25,6 +25,8 @@ nmap ]d <Plug>(coc-diagnostic-next)
 nmap [g <Plug>(coc-git-prevchunk)
 nmap ]g <Plug>(coc-git-nextchunk)
 nmap gcu <Cmd>CocCommand git.chunkUndo<CR>
+nmap <localleader>gb <Cmd>let g:coc_git_hide_blame_virtual_text = !get(g:, 'coc_git_hide_blame_virtual_text', 1)<CR>
+let g:coc_git_hide_blame_virtual_text = 1
 
 " LSP
 nmap <LocalLeader>ga <Plug>(coc-codeaction-line)

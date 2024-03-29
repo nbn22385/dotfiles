@@ -101,6 +101,7 @@
   "git.conflictedDecorator": "",
   "git.stagedDecorator": "",
   "git.untrackedDecorator": "",
+  "git.addGBlameToVirtualText": true,
 
   //----------------------------------------------------------------------------
   // snippets

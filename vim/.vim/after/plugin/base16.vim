@@ -34,8 +34,9 @@ endif
 " Highlight group overrides
 "------------------------------------------------------------------------------
 " Use better colors for CoC
-hi! link CocDiffAdd         DiffAdded
-hi! link CocDiffChange      DiffLine
-hi! link CocDiffDelete      DiffRemoved
+hi! link CocCodeLens   Comment
+hi! link CocDiffAdd    DiffAdded
+hi! link CocDiffChange DiffLine
+hi! link CocDiffDelete DiffRemoved
 
 endif
