@@ -297,5 +297,4 @@ endif
 command! -nargs=+ -complete=file Grep
       \ execute 'silent grep! <args>' | redraw! | cwindow
 
-" vim:fdm=marker
 " }}}

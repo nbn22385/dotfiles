@@ -1,3 +1,5 @@
+setlocal foldmethod=marker
+
 setlocal foldtext=CustomFold()
 
 function! CustomFold()
