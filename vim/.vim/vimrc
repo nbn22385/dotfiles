@@ -29,7 +29,7 @@ call plugpac#End()
 " }}}
 
 " {{{ Mappings
-" Set the Leader key to Space
+" Set the <Leader> and <LocalLeader> keys
 nnoremap <Space> <Nop>
 let mapleader = "\<Space>"
 let maplocalleader = ','
@@ -42,14 +42,16 @@ nnoremap <Bslash>s <Cmd>set spell!<CR>
 " Save a file
 nnoremap <Leader>w <Cmd>w<CR>
 
-" Go to first file on the line
+" Attempt to go to the first file on the line
 nnoremap <Leader>gf ^f/gf
 
 " Replace all occurrences of word under cursor
 nnoremap <Leader>h :%s/\<<C-r><C-w>\>//g<Left><Left>
 
-" Begin a new line above/below the cursor and stay in normal mode
+" Insert a blank line above the current line and stay in normal mode
 nnoremap <Leader>O mzO<Esc>`z
+
+" Insert a blank line below the current line and stay in normal mode
 nnoremap <Leader>o mzo<Esc>`z
 
 " Use wildmenu to quickly switch buffers
@@ -90,13 +92,13 @@ nnoremap <C-c> <Cmd>nohlsearch<CR>
 " Prevent * from jumping to next search match
 nnoremap * <Cmd>keepjumps normal! mzg*`z<CR>
 
-" +/- -> Increment/decrement numbers in normal or visual mode
+" Increment/decrement numbers in normal or visual mode
 nnoremap + <C-a>
 nnoremap - <C-x>
 xnoremap + g<C-a>gv
 xnoremap - g<C-x>gv
 
-" <CTRL-W>h/j/k/l -> Move windows left/up/down/right
+" Move windows left/up/down/right
 nnoremap <C-w>j <C-w>J
 nnoremap <C-w>k <C-w>K
 nnoremap <C-w>h <C-w>H
@@ -186,9 +188,9 @@ augroup Vimrc
   let s:clip = '/mnt/c/Windows/System32/clip.exe'
   if executable(s:clip)
     autocmd TextYankPost * 
-        \ if v:event.operator ==# 'y' | 
-        \   call system(s:clip, @0) | 
-        \ endif
+          \ if v:event.operator ==# 'y' | 
+          \   call system(s:clip, @0) | 
+          \ endif
   endif
 
 augroup END
