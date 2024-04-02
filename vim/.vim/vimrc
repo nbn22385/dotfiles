@@ -15,6 +15,7 @@ Pack 'junegunn/fzf'                              " Fuzzy finder integration
 Pack 'junegunn/fzf.vim'                          " Additional commands for fzf
 Pack 'machakann/vim-highlightedyank'             " Highlight yanked text
 Pack 'machakann/vim-sandwich'                    " Operators and text for manipulating sandwiched text
+Pack 'markonm/traces.vim'                        " Highlight and preview patterns and ranges for Ex commands
 Pack 'neoclide/coc.nvim', {'branch': 'release'}  " Language Server Protocol client
 Pack 'ojroques/vim-oscyank'                      " Copy to system clipboard using the ANSI OSC53 sequence
 Pack 'tinted-theming/base16-vim'                 " Colorschemes set by base16-shell
