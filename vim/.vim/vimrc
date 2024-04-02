@@ -124,12 +124,6 @@ nmap ]Q <Cmd>clast<CR>zz
 inoremap kj <Esc>l
 inoremap <C-c> <Esc>l
 
-" Fix arrow keys in insert mode
-inoremap <silent> <Esc>OA <Up>
-inoremap <silent> <Esc>OB <Down>
-inoremap <silent> <Esc>OC <Right>
-inoremap <silent> <Esc>OD <Left>
-
 " Movement in insert mode
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
