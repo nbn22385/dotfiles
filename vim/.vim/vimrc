@@ -139,9 +139,6 @@ cnoremap <C-e> <End>
 cnoremap <expr> <Tab> getcmdtype() =~ '[/?]' ? "<C-g>" : "<Tab>"
 cnoremap <expr> <S-Tab> getcmdtype() =~ '[/?]' ? "<c-t>" : "<S-Tab>"
 
-" Apply last edit to visual selection
-vnoremap . <Cmd>norm .<CR>
-
 " Don't overwrite paste buffer when pasting over visual selection
 xnoremap p "_dP
 
