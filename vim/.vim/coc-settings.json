@@ -43,16 +43,31 @@
   //============================================================================
   // clangd
   //----------------------------------------------------------------------------
-  "clangd.arguments": ["-clang-tidy=0", "-background-index=0"],
-  "clangd.compilationDatabasePath": "build",
+  "clangd.arguments": [
+    "--all-scopes-completion",
+    "--background-index",
+    "--background-index-priority=background",
+    "--clang-tidy",
+    "--compile-commands-dir=${workspaceFolder}",
+    "--completion-style=detailed",
+    "--header-insertion-decorators",
+    "--header-insertion=iwyu",
+    "--log=error",
+    "--pch-storage=memory",
+    "-j=4"
+  ],
 
   //============================================================================
   // diagnostic
   //----------------------------------------------------------------------------
-  "diagnostic.errorSign": "×",
+  "diagnostic.errorSign": "",
   "diagnostic.hintSign": " ",
   "diagnostic.infoSign": "",
-  "diagnostic.warningSign": "",
+  "diagnostic.warningSign": "",
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextCurrentLineOnly": false,
+  "diagnostic.virtualTextFormat": " %message",
+  "diagnostic.virtualTextLimitInOneLine": 3,
 
   //============================================================================
   // inlay hints
