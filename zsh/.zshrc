@@ -259,6 +259,7 @@ mcd() {
 #################
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
+  export HOMEBREW_NO_ANALYTICS=1
   export PATH="/usr/local/sbin:$PATH"
   export PATH="/usr/local/opt/llvm/bin:$PATH"
   export LDFLAGS="-L/usr/local/opt/llvm/lib"
