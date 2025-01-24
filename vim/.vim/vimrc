@@ -92,6 +92,17 @@ nnoremap <C-c> <Cmd>nohlsearch<CR>
 " Prevent * from jumping to next search match
 nnoremap * <Cmd>keepjumps normal! mzg*`z<CR>
 
+" Better indenting
+nnoremap <Tab> >>_
+nnoremap <S-Tab> <<_
+nnoremap > >>_
+nnoremap < <<_
+inoremap <S-Tab> <C-D>
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+vnoremap > >gv
+vnoremap < <gv
+
 " Increment/decrement numbers in normal or visual mode
 nnoremap + <C-a>
 nnoremap - <C-x>
