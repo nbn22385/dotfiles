@@ -56,7 +56,7 @@ gui:
     showBranchCommitHash: false
     commandLogSize: 2
     splitDiff: auto
-    windowSize: "normal"
+    screenMode: "normal"
     border: single
     animateExplosion: true
     portraitMode: auto
