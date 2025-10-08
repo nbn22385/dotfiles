@@ -29,10 +29,8 @@ elif [ -x "$(command -v apt)" ]; then
   sudo apt update && sudo apt install -y \
     acpi    \
     bat     \
-    cmake   \
     curl    \
     fd-find \
-    g++     \
     git     \
     jq      \
     ripgrep \
@@ -57,32 +55,15 @@ elif [ -x "$(command -v apt)" ]; then
   tar xf lazygit.tar.gz lazygit
   sudo install lazygit /usr/local/bin && rm lazygit lazygit.tar.gz
 
-  echo "[+] Installing nodejs"
-  # From https://github.com/nodesource/distributions#installation-instructions
-  sudo apt install -y ca-certificates curl gnupg
-  sudo mkdir -p /etc/apt/keyrings
-  curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-  NODE_MAJOR=20
-  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
-  sudo apt -o Acquire::AllowInsecureRepositories=true update
-  sudo apt install -y --allow-unauthenticated nodejs
-
-  echo "[+] Installing clang tools"
-  clang_version=15
-  sudo apt install -y             \
-    clang-${clang_version}        \
-    clangd-${clang_version}       \
-    clang-format-${clang_version} \
-    clang-tidy-${clang_version}   \
-    lldb-${clang_version}
-
-  sudo update-alternatives                                                              \
-    --install /usr/bin/clang        clang        /usr/bin/clang-${clang_version} 100    \
-    --slave   /usr/bin/clang++      clang++      /usr/bin/clang++-${clang_version}      \
-    --slave   /usr/bin/clang-format clang-format /usr/bin/clang-format-${clang_version} \
-    --slave   /usr/bin/clangd       clangd       /usr/bin/clangd-${clang_version}       \
-    --slave   /usr/bin/clang-tidy   clang-tidy   /usr/bin/clang-tidy-${clang_version}   \
-    --slave   /usr/bin/lldb         lldb         /usr/bin/lldb-${clang_version}
+  echo "[+] Installing neovim"
+  curl -kLO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
+  chmod u+x nvim-linux-x86_64.appimage
+  ./nvim-linux-x86_64.appimage --appimage-extract
+  rm nvim-linux-x86_64.appimage
+  # Exposing nvim globally.
+  sudo mv squashfs-root /
+  sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
+  git clone https://github.com/nbn22385/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 
 else
   echo "[!] No supported package manager was found. Not installing dependencies."
